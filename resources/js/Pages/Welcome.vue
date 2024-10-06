@@ -47,10 +47,10 @@ function handleImageError() {
                 </header>
 
                 <div class="flex gap-10 justify-center lg:justify-end">
-                    <a target="_blank" href="https://x.com/luxuria_auto1"><img src="/x.svg" class="w-10" alt=""></a>
-                    <a target="_blank" href="https://www.facebook.com/profile.php?id=61559406996757"><img src="/fb.svg" class="w-10" alt=""></a>
-                    <a target="_blank" href="https://www.instagram.com/Luxuria_uk"><img src="/instagram.svg" class="w-10" alt=""></a>
-                    <a target="_blank" href="https://www.tiktok.com/Luxuria_uk"><img src="/tiktok.svg" class="w-8" alt=""></a>
+                    <!--<a target="_blank" href="https://x.com/luxuria_uae"><img src="/x.svg" class="w-10" alt=""></a>-->
+                    <!--<a target="_blank" href="https://www.facebook.com/profile.php?id=61559406996757"><img src="/fb.svg" class="w-10" alt=""></a>-->
+                    <a target="_blank" href="https://www.instagram.com/luxuria_uae"><img src="/instagram.svg" class="w-10" alt=""></a>
+                    <!--<a target="_blank" href="https://www.tiktok.com/luxuria_uae"><img src="/tiktok.svg" class="w-8" alt=""></a>-->
                 </div>
 
                 <main class="mt-6">
@@ -65,26 +65,24 @@ function handleImageError() {
                             </p>
                             <div class="flex flex-col lg:flex-row gap-2 mt-10">
                                 <div>
-                                    <a target="_blank" href="https://www.instagram.com/Luxuria_uk" class="hover:bg-yellow-800 hover:text-white bg-yellow-600 text-black px-2 rounded text-bold text-2xl">
+                                    <a target="_blank" href="https://www.instagram.com/luxuria_uae" class="hover:bg-yellow-800 hover:text-white bg-yellow-600 text-black px-2 rounded text-bold text-2xl">
                                         Visit us today
                                     </a>
                                 </div>
-                                <div>
-                                    <a :href="route('cars.index')" class="hover:bg-yellow-800 hover:text-white bg-yellow-600 text-black px-2 rounded text-bold text-2xl">
-                                        Browse the finest collection
-                                    </a>
-                                </div>
+                                <!--<div>-->
+                                <!--    <a :href="route('cars.index')" class="hover:bg-yellow-800 hover:text-white bg-yellow-600 text-black px-2 rounded text-bold text-2xl">-->
+                                <!--        Browse the finest collection-->
+                                <!--    </a>-->
+                                <!--</div>-->
                             </div>
 
                             <!--<p class="mt-10">* Open from Monday to Fri 9AM to 6PM</p>-->
-                            <p class="mt-10">* For more information on what we offer our clients contact us on: +44 1524 488800</p>
-                            <p>* For immediate requests, please reach us at info@luxuria-auto.co.uk</p>
+                            <p class="mt-10">* For more information on what we offer our clients contact us on: +971 5427 00030</p>
+                            <p>* For immediate requests, please reach us at info@rentluxuria.com</p>
                         </div>
                         <div class="absolute inset-0 bg-black bg-opacity-50" />
-                        <!-- autplay  a video -->
-                        <!--/5309354-hd_1920_1080_25fps.mp4-->
                         <video
-                            src="/luxuria_1.mp4"
+                            src="/5309354-hd_1920_1080_25fps.mp4"
                             autoplay
                             loop
                             muted
@@ -94,138 +92,11 @@ function handleImageError() {
                     </div>
 
                     <div class="mt-20">
-                        <h2 class="text-5xl text-white font-bold text-center lg:text-left">Bespoke Services</h2>
-
-                        <div class="grid sm:grid-cols-1 lg:grid-cols-4 gap-6 mt-5 text-center">
-                            <div class="text-black bg-gray-200 p-5 rounded">
-                                <h2 class="font-bold text-2xl">Vehicle Sales</h2>
-                                <p>Offering an elite collection of luxury, sports and supercars, both modern and classic.</p>
-                            </div>
-                            <div class="text-black bg-gray-200 p-5 rounded">
-                                <h2 class="font-bold text-2xl">Sourcing</h2>
-                                <p>Expert service for sourcing rare and exclusive luxury cars globally.</p>
-                            </div>
-                            <div class="text-black bg-gray-200 p-5 rounded">
-                                <h2 class="font-bold text-2xl">Consignment services</h2>
-                                <p>Professional service for sale or return of high-end luxury cars.</p>
-                            </div>
-                            <div class="text-black bg-gray-200 p-5 rounded">
-                                <h2 class="font-bold text-2xl">Collection & Return</h2>
-                                <p>Exclusive service for luxury car collection and return with precision.</p>
-                            </div>
-                        </div>
+                        <h2 class="text-5xl text-white font-bold text-center">Coming soon</h2>
                     </div>
 
                 </main>
             </div>
         </div>
-
-        <div>
-            <div class="flex flex-col items-center justify-center px-6">
-                <h2 class="text-6xl mt-10">
-                    Crafting Luxury Experiences Every Mile
-                </h2>
-                <p class="mt-5">Be up to date with our latest news and services. Join the network of elite members.</p>
-                <!-- signup to newsletter button -->
-                <div class="mt-5">
-                    <newsletter-signup></newsletter-signup>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="relative w-full bg-white py-10 mt-20">
-            <div class="flex flex-col items-center justify-center text-black">
-                <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <h2 class="text-5xl mt-10 text-center lg:text-left">Upcoming Events ~</h2>
-
-                    <div class="mt-5 opacity-25">
-                        <p class="my-5">Past events</p>
-                        <event-record day="17"
-                                  month="Aug"
-                                  title="Showroom Grand Opening 2024"
-                                  description="Join us for the grand opening of our new showroom. We will be showcasing the latest, rare, and elite selection of vehicles."
-                                  link="https://www.instagram.com/p/C9j4a77MC8Y/"
-                        >
-                        </event-record>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="relative w-full bg-white py-10">
-            <div class="flex flex-col items-center justify-center text-white py-10"
-                 style="background-image: url('/car_images/corvette.jpg');background-size: cover;background-position: center">
-                <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <h2 class="text-5xl mt-10 text-center lg:text-left">Take a forward step now.</h2>
-                    <p class="mt-2 text-3xl text-center lg:text-left">Enjoy a carefully handpicked collection from the Luxuria World.</p>
-                    <div class="mt-5 flex-row lg:flex gap-10 justify-center">
-                        <!--<a href="#">-->
-                        <!--    <div class="bg-white text-black flex justify-center items-center align-bottom my-5"-->
-                        <!--         style="background-image:url('/car_images/garage.jpg');background-size: cover;background-position: center"-->
-                        <!--    >-->
-                        <!--        <div class="p-20">-->
-                        <!--            <h2 class="bg-black text-white px-2">Wallpapers</h2>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</a>-->
-
-                        <div class="relative bg-black rounded-lg overflow-hidden">
-                            <a :href="route('cars.index')">
-                                 <video
-                                    src="/car_images/ghost.mp4"
-                                    autoplay
-                                    loop
-                                    muted
-                                    playsinline
-                                    class="absolute inset-0 object-cover transition duration-300 opacity-75"
-                                />
-                                <div class="w-full h-full align-items-center justify-center items-center flex text-center">
-                                    <h2 class="w-[400px] mt-10 pt-10 lg:mt-0 bg-black" style="min-height: 150px;">
-                                        Showroom
-                                    </h2>
-                                </div>
-                            </a>
-                        </div>
-                        <!--<a href="#">-->
-                        <!--    <div class="bg-white text-black flex justify-center items-center align-bottom my-5"-->
-                        <!--         style="background-image:url('/car_images/range.png');background-size: cover;background-position: center"-->
-                        <!--    >-->
-                        <!--        <div class="p-20">-->
-                        <!--            <h2 class="bg-black text-white px-2">Showroom</h2>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</a>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <contact-us></contact-us>
-
-        <footer class="p-10 lg:p-20 text-xs text-black dark:text-white/70" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'">
-            <div class="flex gap-20 justify-center">
-                <div>
-                    <h3 class="font-bold">Navigation</h3>
-                    <ul class="list-disc">
-                        <li class="ml-3 mt-1"><a :href="route('home')">Home</a></li>
-                        <li class="ml-3 mt-1"><a :href="route('cars.index')">Cars</a></li>
-                        <li class="ml-3 mt-1"><a :href="route('sell-your-car.index')">Sell Your Car</a></li>
-                        <li class="ml-3 mt-1"><a :href="route('about.index')">About</a></li>
-                        <li class="ml-3 mt-1"><a :href="route('testimonials.index')">Testimonials</a></li>
-                        <li class="ml-3 mt-1"><a :href="route('financing.index')">Financing</a></li>
-                        <li class="ml-3 mt-1"><a :href="route('appointments.create')">Appointment</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold">Headquarter</h3>
-                    <img src="/luxuria_logo_text_white.png" class="my-2" style="max-width:100px" alt="">
-                    <p>Unit 5a Keer Park, Carnforth, Lancashire</p>
-                    <p>+44 1524 488800</p>
-                    <p>info@luxuria-auto.co.uk</p>
-                </div>
-            </div>
-            <p class="mt-10 text-center">Copyright © Luxuria 2024.</p>
-        </footer>
     </div>
 </template>

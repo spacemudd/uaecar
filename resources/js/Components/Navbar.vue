@@ -27,42 +27,42 @@ export default {
                         >
                             Home
                         </Link>
-                        <Link
+                        <!--<Link-->
 
-                            :href="route('cars.index')"
-                            class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"
-                        >
-                            Cars
-                        </Link>
-                        <Link
-                            :href="route('sell-your-car.index')"
-                            class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"
-                        >
-                            Sell Your Car
-                        </Link>
-                        <Link
-                            :href="route('about.index')"
-                            class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            :href="route('testimonials.index')"
-                            class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"
-                        >
-                            Testimonials
-                        </Link>
-                        <Link
-                            :href="route('financing.index')"
-                            class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"
-                        >
-                            Financing
-                        </Link>
-                        <Link
-                            :href="route('appointments.create')"
-                            class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"
-                        >
-                            Appointment
-                        </Link>
+                        <!--    :href="route('cars.index')"-->
+                        <!--    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"-->
+                        <!--&gt;-->
+                        <!--    Cars-->
+                        <!--</Link>-->
+                        <!--<Link-->
+                        <!--    :href="route('sell-your-car.index')"-->
+                        <!--    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"-->
+                        <!--&gt;-->
+                        <!--    Sell Your Car-->
+                        <!--</Link>-->
+                        <!--<Link-->
+                        <!--    :href="route('about.index')"-->
+                        <!--    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"-->
+                        <!--&gt;-->
+                        <!--    About-->
+                        <!--</Link>-->
+                        <!--<Link-->
+                        <!--    :href="route('testimonials.index')"-->
+                        <!--    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"-->
+                        <!--&gt;-->
+                        <!--    Testimonials-->
+                        <!--</Link>-->
+                        <!--<Link-->
+                        <!--    :href="route('financing.index')"-->
+                        <!--    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"-->
+                        <!--&gt;-->
+                        <!--    Financing-->
+                        <!--</Link>-->
+                        <!--<Link-->
+                        <!--    :href="route('appointments.create')"-->
+                        <!--    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-white hover:text-white/80 focus-visible:ring-white"-->
+                        <!--&gt;-->
+                        <!--    Appointment-->
+                        <!--</Link>-->
                     </nav>
 </template>
