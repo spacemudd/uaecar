@@ -187,8 +187,6 @@
             </div>
         </div>
         </footer>
-    
-
         <a href="https://wa.me/your_number" class="whatsapp-button" target="_blank">
           <img src="{{ asset('front/img/whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" />
         </a>

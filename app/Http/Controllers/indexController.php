@@ -15,4 +15,10 @@ class indexController extends Controller
         $cars = Car::all(); // Fetch all cars from the database
         return view("front.pages.index", compact("cars"));
     }
+
+    public function showForm($carId){
+        
+        $car = Car::find($carId);
+        return view("front.pages.form", compact('car'));
+    }
 }

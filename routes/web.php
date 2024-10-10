@@ -12,6 +12,7 @@ use App\Http\Controllers\SellYourCarController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\Webhooks\AutoTraderReceiverController;
 use App\Http\Controllers\WhyUsController;
+use App\Http\Controllers\FormController;
 use App\Models\Car;
 use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
@@ -70,8 +71,9 @@ Route::get('/about', function () {
 
     
 Route::get('/car/{id}', [CarsController::class, 'show'])->name('cars.show');
-
-
+Route::get('form/{id}',[indexController::class, 'showForm'])->name('form');
+Route::post('form/submit', [FormController::class, 'submit'])->name('form.submit');
+Route::get('/submission-status', [FormController::class, 'submissionStatus'])->name('submission.status');
 
 Route::middleware([
     'auth:sanctum',

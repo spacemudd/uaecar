@@ -115,8 +115,7 @@
                                 <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
                             </div>
                             <div class="button-group mt-3">
-                                <a href="#" class="btn btn-primary">Reserve</a>
-                                <a href="#" class="btn btn-success">WhatsApp</a>
+                            <a href="{{ route('form', ['id' => $car->id]) }}" class="btn btn-primary reserve-button">Reserve</a>                            <a href="#" class="btn btn-success">WhatsApp</a>
                             </div>
                         </div>
                         <div class="curv-butn icon-bg">
@@ -284,5 +283,9 @@
             </div>
         </div>
     </div>
+
+
+   
+
 
 @endsection
