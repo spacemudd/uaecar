@@ -52,4 +52,12 @@ class Car extends Model implements HasMedia
         }
         return '£'.number_format($this->price, 2);
     }
+
+
+    public function images()
+    {
+        return $this->hasMany(CarImage::class);
+    }
+
+
 }

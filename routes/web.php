@@ -4,6 +4,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\indexController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SellYourCarController;
@@ -16,21 +18,31 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/car/{id}', function() {
-   return Car::find(request()->id);
-});
+// Route::get('/car/{id}', function() {
+//    return Car::find(request()->id);
+// });
 
-Route::get('aa', function() {
-    $car = app()->make(AutoTraderService::class)->stock()['results'][0];
+// Route::get('aa', function() {
+//     $car = app()->make(AutoTraderService::class)->stock()['results'][0];
 
-    return $car['media']['images'];
-});
+//     return $car['media']['images'];
+// });
 
-Route::get('bb', function() {
-    return Car::first()->at_data;
-});
+// Route::get('bb', function() {
+//     return Car::first()->at_data;
+// });
 
-Route::put('webhooks/autotrader', [AutoTraderReceiverController::class, 'index']);
+// Route::put('webhooks/autotrader', [AutoTraderReceiverController::class, 'index']);
+
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// })->name('home');
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -40,6 +52,26 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
+
+
+
+Route::get('/home', function () {
+    return view('front.pages.home');
+    })->name('home');
+
+
+Route::get('/index',[indexController::class, 'showData'])->name('index');
+
+
+Route::get('/about', function () {
+        return view('front.pages.about');
+        })->name('about');
+
+
+    
+Route::get('/car/{id}', [CarsController::class, 'show'])->name('cars.show');
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -51,8 +83,6 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/cars', [CarsController::class, 'index'])->name('cars.index');
-Route::get('/cars/{id}', [CarsController::class, 'show'])->name('cars.show');
 
 Route::get('/appointments/success', [AppointmentsController::class, 'success'])->name('appointments.success');
 Route::post('/appointments', [AppointmentsController::class, 'store'])->name('appointments.store');
@@ -67,7 +97,7 @@ Route::get('sell-your-car', [SellYourCarController::class, 'index'])->name('sell
 // todo
 Route::get('why-us', [WhyUsController::class, 'index'])->name('why-us.index');
 
-Route::get('about', [AboutController::class, 'index'])->name('about.index');
+// Route::get('about', [AboutController::class, 'index'])->name('about.index');
 
 Route::get('/testimonials', [TestimonialsController::class, 'index'])->name('testimonials.index');
 
