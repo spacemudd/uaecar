@@ -1,63 +1,34 @@
 <?php
 
 namespace App\Models;
+use App\Models\CarImage;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Car extends Model implements HasMedia
+class Car extends Model
 {
     use HasFactory;
-    use InteractsWithMedia;
-
-    protected $casts = [
-        'at_data' => 'json',
-    ];
 
     protected $fillable = [
-        'description',
-        'description2',
-        'long_description',
-        'year',
-        'engine_size',
-        'mileage',
+        'car_name',
+        'seats',
+        'gear',
+        'bags',
         'price',
-        'fuel_type',
-        'registration',
-        'owners',
-        'emission_class',
-        'at_stock_id',
-        'at_advertiserAdvert',
-        'at_make',
-        'at_model',
-        'at_derivative',
-        'at_description',
-        'at_description2',
-        'at_published',
-        'at_total_price',
-        'at_last_synced',
-        'at_data',
+        'car_picture',
+        'doors',
+        'air_condition',
+        'age',
+        'description',
     ];
 
-    protected $appends = [
-        'price_human',
-    ];
-
-    public function getPriceHumanAttribute()
-    {
-        if ($this->at_data['data'] ?? false) {
-            return '£'.number_format($this->at_data['data']['adverts']['retailAdverts']['totalPrice']['amountGBP'] ?? $this->price, 2);
-        }
-        return '£'.number_format($this->price, 2);
-    }
-
-
-    public function images()
+    /**
+     * Get the images for the car.
+     */
+    public function gallery(): HasMany
     {
         return $this->hasMany(CarImage::class);
     }
-
-
 }

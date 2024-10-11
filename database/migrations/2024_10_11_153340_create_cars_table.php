@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('car_name');   // For car name
-            $table->integer('seats');     // Number of seats
-            $table->string('gear');       // Gear type
-            $table->integer('bags');      // Number of bags
-            $table->string('pictures');    // Image path or URL for the car's picture
-            $table->string('car_picture'); // Additional car picture path or URL
-            $table->timestamps(); 
-
+            $table->string('car_name');
+            $table->integer('seats');
+            $table->string('gear');
+            $table->integer('bags');
+            $table->decimal('price', 10, 2);
+            $table->string('car_picture');
+            $table->integer('doors');
+            $table->boolean('air_condition')->default(false);
+            $table->integer('age');
+            $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\Webhooks\AutoTraderReceiverController;
 use App\Http\Controllers\WhyUsController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\CompanyController;
 use App\Models\Car;
 use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
@@ -56,22 +57,10 @@ Route::get('/', function () {
 
 
 
-Route::get('/home', function () {
-    return view('front.pages.home');
-    })->name('home');
-
-
 Route::get('/index',[indexController::class, 'showData'])->name('index');
-
-
-Route::get('/about', function () {
-        return view('front.pages.about');
-        })->name('about');
-
-
+Route::get('/contact-us', [CompanyController::class, 'showContact'])->name('contact');
     
 Route::get('/car/{id}', [CarsController::class, 'show'])->name('cars.show');
-Route::get('form/{id}',[indexController::class, 'showForm'])->name('form');
 Route::post('form/submit', [FormController::class, 'submit'])->name('form.submit');
 Route::get('/submission-status', [FormController::class, 'submissionStatus'])->name('submission.status');
 
@@ -99,7 +88,7 @@ Route::get('sell-your-car', [SellYourCarController::class, 'index'])->name('sell
 // todo
 Route::get('why-us', [WhyUsController::class, 'index'])->name('why-us.index');
 
-Route::get('about', [AboutController::class, 'index'])->name('about');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/testimonials', [TestimonialsController::class, 'index'])->name('testimonials.index');
 

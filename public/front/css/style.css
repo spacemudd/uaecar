@@ -5218,9 +5218,9 @@ height: 100% !important;
     display: block;
     width: 100%;
     font-size: 14px;
-    color: white;
+    color: black;
     padding: 15px 20px;
-    background: black;
+    background: white;
     border: none;
     box-shadow: none;
     border-radius: 30px;
@@ -5228,7 +5228,7 @@ height: 100% !important;
 }
 .input1_inner input::placeholder {
     font-size: 14px;
-    color: white;
+    color: black;
      !important;
 }
 .input1_inner input:focus {
@@ -5260,7 +5260,7 @@ height: 100% !important;
 }
 .select2 {
     width: 100%;
-    background: black;
+    background: white;
     margin-bottom: 15px;
 /*    border: 1px solid transparent;*/
     border-radius: 30px;
@@ -5288,7 +5288,7 @@ height: 100% !important;
     font-size: 14px;
     line-height: 28px;
     padding: 15px 20px;
-    color: white;
+    color: black;
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     display: none;

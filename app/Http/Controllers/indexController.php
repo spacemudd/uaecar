@@ -16,9 +16,4 @@ class indexController extends Controller
         return view("front.pages.index", compact("cars"));
     }
 
-    public function showForm($carId){
-        
-        $car = Car::find($carId);
-        return view("front.pages.form", compact('car'));
-    }
 }

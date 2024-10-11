@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
+
 </head>
 <body>
     
@@ -17,7 +18,7 @@
         <div class="container">
             <!-- Logo -->
             <div class="">
-                <a class="logo" href="index.html"> <img src="{{ asset('front/img/white-logo.png') }}" class="logo-img" alt=""> </a>
+                <a class="logo" href="{{ route('index') }}"> <img src="{{ asset('front/img/white-logo.png') }}" class="logo-img" alt=""> </a>
                 <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
             </div>
             <!-- Button -->
@@ -59,7 +60,7 @@
                     </li>
                 
              
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
 
                 </ul>
                 <div class="navbar-right">
@@ -93,7 +94,7 @@
                                     </div>
                                     <div class="footer-contact-link-content">
                                         <h6>Call us</h6>
-                                        <p>+971 52-333-4444</p>
+                                        <p>+971 54-270-0030</p>
                                     </div>
                                 </div>
                                 <div class="footer-contact-links-divider"></div>
@@ -103,7 +104,7 @@
                                     </div>
                                     <div class="footer-contact-link-content">
                                         <h6>Write to us</h6>
-                                        <p>info@renax.com</p>
+                                        <p>info@rentluxuria.com</p>
                                     </div>
                                 </div>
                                 <div class="footer-contact-links-divider"></div>
@@ -113,7 +114,7 @@
                                     </div>
                                     <div class="footer-contact-link-content">
                                         <h6>Address</h6>
-                                        <p>Dubai, Water Tower, Office 123</p>
+                                        <p>Al Rashidiya 3 - Ajman - United Arab Emirates</p>
                                     </div>
                                 </div>
                             </div>
@@ -133,9 +134,9 @@
                                 <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
                                 <div class="social-icons">
                                     <ul class="list-inline">
-                                        <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                                        <li><a href="https://wa.me/00971542700030"><i class="fa-brands fa-whatsapp"></i></a></li>
+                                        <li><a href="https://www.facebook.com/profile.php?id=61566173455254&mibextid=JRoKGi"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                        <li><a href="https://www.instagram.com/luxuria_uae?igsh=MTYwNDNwcW9vNDV1Zw=="><i class="fa-brands fa-instagram"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -149,7 +150,7 @@
                                 <li><a href="{{ route('index') }}">Home</a></li>
                                 <li><a href="{{ route('about') }}">About</a></li>
                                 <li><a href="car-types.html">Cars Types</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -178,7 +179,7 @@
             </div>
         </div>
         </footer>
-        <a href="https://wa.me/your_number" class="whatsapp-button" target="_blank">
+        <a href="https://wa.me/00971542700030" class="whatsapp-button" target="_blank">
           <img src="{{ asset('front/img/whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" />
         </a>
     <!-- jQuery -->
@@ -198,5 +199,9 @@
     <script src="{{ asset('front/js/datepicker.js') }}"></script>
     <script src="{{ asset('front/js/YouTubePopUp.js') }}"></script>
     <script src="{{ asset('front/js/custom.js') }}"></script>
+    <!-- Include CSS for Select2 -->
+
+
+
 </body>
 </html>

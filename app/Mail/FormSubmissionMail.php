@@ -19,9 +19,7 @@ class FormSubmissionMail extends Mailable
 
     public function build()
     {
-        return $this
-            ->subject('New Car Booking Request')
-            ->view('emails.form_submission')
-            ->with('data', $this->data);
+        return $this->subject('New Booking Request')
+                    ->view('emails.form-submition'); // Create this Blade view
     }
 }
