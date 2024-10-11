@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
+    
 
 </head>
 <body>
@@ -30,7 +31,7 @@
 
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
             
-                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
+                    <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Grid <i class="ti-angle-right"></i></span></a>
                                 <ul class="dropdown-menu">
@@ -57,7 +58,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                 
              
                 <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
@@ -149,7 +150,7 @@
                             <ul>
                                 <li><a href="{{ route('index') }}">Home</a></li>
                                 <li><a href="{{ route('about') }}">About</a></li>
-                                <li><a href="car-types.html">Cars Types</a></li>
+                                <!-- <li><a href="car-types.html">Cars Types</a></li> -->
                                 <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>
                         </div>
@@ -200,6 +201,11 @@
     <script src="{{ asset('front/js/YouTubePopUp.js') }}"></script>
     <script src="{{ asset('front/js/custom.js') }}"></script>
     <!-- Include CSS for Select2 -->
+<!-- Include SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Optionally include the other SweetAlert (if you need both) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 

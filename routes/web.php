@@ -62,6 +62,8 @@ Route::get('/contact-us', [CompanyController::class, 'showContact'])->name('cont
     
 Route::get('/car/{id}', [CarsController::class, 'show'])->name('cars.show');
 Route::post('form/submit', [FormController::class, 'submit'])->name('form.submit');
+Route::post('form/contact', [FormController::class, 'sendContactEmail'])->name('form.contact');
+
 Route::get('/submission-status', [FormController::class, 'submissionStatus'])->name('submission.status');
 
 Route::middleware([

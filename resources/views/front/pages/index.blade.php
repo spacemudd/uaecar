@@ -1,6 +1,6 @@
 <!-- resources/views/home.blade.php -->
 @extends('front.layouts.master')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @section('content')
     <!-- Preloader -->
     <div class="preloader-bg"></div>
@@ -245,7 +245,6 @@
                                     </div>
                                 </form>
 
-
                                     </div>
                                 </div>
                             </div>
@@ -365,9 +364,20 @@
         </div>
     </div>
 
-
+<!-- Check for session message outside the modal loop -->
+@if (Session::has('message'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: "{{ Session::get('message') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     $(document).ready(function() {
         $('.select2').select2({

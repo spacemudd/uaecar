@@ -62,7 +62,9 @@
                 <div class="col-lg-6 col-md-12 mb-30">
                     <div class="form-box">
                         <h5>Get in touch</h5>
-                        <form method="post" class="contact__form" action="mail.php">
+                        <form method="post" class="contact__form" action="{{ route('form.contact') }}">
+
+                        @csrf 
                             <!-- form message -->
                             <div class="row">
                                 <div class="col-12">
@@ -93,6 +95,7 @@
                         </form>
                     </div>
                 </div>
+                
                 <!-- Map -->
                 <div class="col-lg-5 offset-lg-1 col-md-12">
                     <h5>Location</h5>
