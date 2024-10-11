@@ -99,7 +99,7 @@ Route::get('sell-your-car', [SellYourCarController::class, 'index'])->name('sell
 // todo
 Route::get('why-us', [WhyUsController::class, 'index'])->name('why-us.index');
 
-// Route::get('about', [AboutController::class, 'index'])->name('about.index');
+Route::get('about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/testimonials', [TestimonialsController::class, 'index'])->name('testimonials.index');
 

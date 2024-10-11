@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
 </head>
 <body>
+    
 <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Logo -->
@@ -24,18 +25,9 @@
             <!-- Menu -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown"> <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Home <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="index.html" class="dropdown-item"><span>Slider 01</span></a></li>
-                            <li><a href="index5.html" class="dropdown-item"><span>Slider 02</span></a></li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Onepage <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="onepage-slider.html" class="dropdown-item"><span>Slider 01</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
             
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
                         <ul class="dropdown-menu">
@@ -154,10 +146,9 @@
                         <div class="widget clearfix usful-links">
                             <h3 class="widget-title">Quick Links</h3>
                             <ul>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="cars.html">Cars</a></li>
-                                <li><a href="car-types.html">Car Types</a></li>
-                                <li><a href="team.html">Team</a></li>
+                                <li><a href="{{ route('index') }}">Home</a></li>
+                                <li><a href="{{ route('about') }}">About</a></li>
+                                <li><a href="car-types.html">Cars Types</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </div>

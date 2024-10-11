@@ -9,129 +9,8 @@
             <div class="preloader-position loader"> <span></span> </div>
         </div>
     </div>
-    <!-- Progress scroll totop -->
-    <div class="progress-wrap cursor-pointer">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-        </svg>
-    </div>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <!-- Logo -->
-            <div class="logo-wrapper">
-                <a class="logo" href="index.html"> <img src="{{ asset('front/img/white-logo.png') }}" class="logo-img" alt=""> </a>
-                <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
-            </div>
-            <!-- Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span> </button>
-            <!-- Menu -->
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Home <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="index.html" class="dropdown-item"><span>Slider 01</span></a></li>
-                            <li><a href="index5.html" class="dropdown-item"><span>Slider 02</span></a></li>
-                            <li><a href="index2.html" class="dropdown-item"><span>Image 01</span></a></li>
-                            <li><a href="index7.html" class="dropdown-item"><span>Image 02</span></a></li>
-                            <li><a href="index3.html" class="dropdown-item"><span>Video</span></a></li>
-                            <li><a href="index4.html" class="dropdown-item"><span>Slideshow</span></a></li>
-                            <li><a href="index6.html" class="dropdown-item"><span>Grid Background</span></a></li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Onepage <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="onepage-slider.html" class="dropdown-item"><span>Slider 01</span></a></li>
-                                    <li><a href="onepage-slider2.html" class="dropdown-item"><span>Slider 02</span></a></li>
-                                    <li><a href="onepage-image.html" class="dropdown-item"><span>Image 01</span></a></li>
-                                    <li><a href="onepage-image2.html" class="dropdown-item"><span>Image 02</span></a></li>
-                                    <li><a href="onepage-video.html" class="dropdown-item"><span>Video</span></a></li>
-                                    <li><a href="onepage-slideshow.html" class="dropdown-item"><span>Slideshow</span></a></li>
-                                    <li><a href="onepage-grid-background.html" class="dropdown-item"><span>Grid Background</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Services <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="services.html" class="dropdown-item"><span>Services 01</span></a></li>
-                            <li><a href="services2.html" class="dropdown-item"><span>Services 02</span></a></li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Service Details <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="service-details.html" class="dropdown-item"><span>Service Details 01</span></a></li>
-                                    <li><a href="service-details2.html" class="dropdown-item"><span>Service Details 02</span></a></li>
-                                    <li><a href="service-details3.html" class="dropdown-item"><span>Service Details 03</span></a></li>
-                                    <li><a href="service-details4.html" class="dropdown-item"><span>Service Details 04</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown"> <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Grid <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="cars.html" class="dropdown-item"><span>Car Grid 01</span></a></li>
-                                    <li><a href="cars2.html" class="dropdown-item"><span>Car Grid 02</span></a></li>
-                                    <li><a href="cars3.html" class="dropdown-item"><span>Car Grid 03</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="cars4.html" class="dropdown-item"><span>Car Listing</span></a></li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Types <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="car-types.html" class="dropdown-item"><span>Car Types 01</span></a></li>
-                                    <li><a href="car-types2.html" class="dropdown-item"><span>Car Types 02</span></a></li>
-                                    <li><a href="car-types3.html" class="dropdown-item"><span>Car Types 03</span></a></li>
-                                    <li><a href="car-types4.html" class="dropdown-item"><span>Car Types 04</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item active dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Details <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="car-details.html" class="dropdown-item"><span>Car Details 01</span></a></li>
-                                    <li><a href="car-details2.html" class="dropdown-item active"><span>Car Details 02</span></a></li>
-                                    <li><a href="car-details3.html" class="dropdown-item"><span>Car Details 03</span></a></li>
-                                    <li><a href="car-details4.html" class="dropdown-item"><span>Car Details 04</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Pages <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="team.html" class="dropdown-item"><span>Team</span></a></li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Image Gallery <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="gallery-image.html" class="dropdown-item"><span>Image Gallery Grid</span></a></li>
-                                    <li><a href="gallery-image2.html" class="dropdown-item"><span>Image Gallery Masonry</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="gallery-video.html" class="dropdown-item"><span>Video Gallery</span></a></li>
-                            <li><a href="price.html" class="dropdown-item"><span>Pricing</span></a></li>
-                            <li><a href="faq.html" class="dropdown-item"><span>FAQ</span></a></li>
-                            <li><a href="testiominals.html" class="dropdown-item"><span>Testiominals</span></a></li>
-                            <li><a href="team-single.html" class="dropdown-item"><span>Team Single</span></a></li>
-                            <li><a href="404.html" class="dropdown-item"><span>404 Page</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Blog <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="blog.html" class="dropdown-item"><span>Blog Grid 01</span></a></li>
-                            <li><a href="blog2.html" class="dropdown-item"><span>Blog Grid 02</span></a></li>
-                            <li><a href="blog3.html" class="dropdown-item"><span>Blog List</span></a></li>
-                            <li><a href="post.html" class="dropdown-item"><span>Post Single</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
-                <div class="navbar-right">
-                    <div class="wrap">
-                        <div class="icon"> <i class="flaticon-phone-call"></i> </div>
-                        <div class="text">
-                            <p>Need help?</p>
-                            <h5><a href="tel:8551004444">855 100 4444</a></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+
+
     <!-- Header Inner Slider -->
     <header class="header slider">
         <div class="owl-carousel owl-theme">
@@ -276,26 +155,26 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="sidebar-car">
                         <div class="title">
-                            <h4>$600 <span>/ rent per day</span></h4>
+                            <h4>AED {{ $car->price }} <span>/ rent per day</span></h4>
                         </div>
                         <div class="item">
                             <div class="features"><span><i class="omfi-door"></i> Doors</span>
-                                <p>4</p>
+                                <p>{{ $car->doors}}</p>
                             </div>
                             <div class="features"><span><i class="omfi-passengers"></i> Passengers</span>
-                                <p>5</p>
+                                <p>{{ $car->passengers }}</p>
                             </div>
                             <div class="features"><span><i class="omfi-transmission"></i> Transmission</span>
-                                <p>Auto</p>
+                                <p>{{ $car->gear }}</p>
                             </div>
                             <div class="features"><span><i class="omfi-luggage"></i> Luggage</span>
-                                <p>2 Bags</p>
+                                <p>2 {{ $car->bags }}</p>
                             </div>
                             <div class="features"><span><i class="omfi-condition"></i> Air Condition</span>
-                                <p>Yes</p>
+                                <p>{{$car->air_condition}}</p>
                             </div>
                             <div class="features"><span><i class="omfi-age"></i> Age</span>
-                                <p>25</p>
+                                <p>{{ $car->apache_get_modules }}</p>
                             </div>
                             <div class="btn-double mt-30" data-grouptype="&amp;"> <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a> <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a> </div>
                         </div>
@@ -304,55 +183,7 @@
             </div>
         </div>
     </section>
-    <!-- Lets Talk -->
-    <section class="lets-talk bg-img bg-fixed section-padding" data-overlay-dark="5" data-background="img/slider/3.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h6>Rent Your Car</h6>
-                    <h5>Interested in Renting?</h5>
-                    <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Clients -->
-    <section class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="owl-carousel owl-theme">
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/1.png" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/2.png" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/3.png" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/4.png" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/5.png" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/6.png" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/7.png" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="img/clients/8.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer -->
-    
+
     <!-- RentNow Popup -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

@@ -9,6 +9,6 @@ class AboutController extends Controller
 {
     public function index()
     {
-        return Inertia::render('About/Index');
+        return view('front.pages.about');
     }
 }

@@ -97,55 +97,8 @@
                 </div>
             </div> -->
         </div>
-    </header>
-    <!-- Cars List -->
-    <section class="cars2 section-padding">
-    <div class="container">
-        <div class="row">
-            @foreach($cars as $car)
-                <div class="col-md-4 mb-30">
-                    <div class="item"> 
-                        <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
-                        <div class="bottom-fade"></div>
-                        <div class="title">
-                            <h4>{{ $car->car_name }}</h4> <!-- Display the car name -->
-                            <div class="details">
-                                <span><i class="omfi-door"></i> {{ $car->seats }} Seats</span>
-                                <span><i class="omfi-transmission"></i> {{ $car->gear }}</span>
-                                <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
-                            </div>
-                            <div class="button-group mt-3">
-                            <a href="{{ route('form', ['id' => $car->id]) }}" class="btn btn-primary reserve-button">Reserve</a>                            <a href="#" class="btn btn-success">WhatsApp</a>
-                            </div>
-                        </div>
-                        <div class="curv-butn icon-bg">
-                            <a href="{{ route('cars.show', $car->id) }}" class="vid">
-                                <div class="icon"> 
-                                    <i class="icon-show"><span>${{ $car->price }}<br><i>day</i></span></i>
-                                    <i class="ti-arrow-top-right icon-hidden"></i> 
-                                </div>
-                            </a>
-                            <div class="br-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#ffffff"></path>
-                                </svg>
-                            </div>
-                            <div class="br-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#ffffff"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
 
-
-
-    <!-- Clients -->
+          <!-- Clients -->
     <section class="clients">
         <div class="container">
             <div class="row">
@@ -180,6 +133,127 @@
             </div>
         </div>
     </section>
+    </header>
+
+    
+    <!-- Cars List -->
+    <section class="cars2 section-padding">
+    <div class="container">
+        <div class="row">
+            @foreach($cars as $car)
+                <div class="col-md-4 mb-30">
+                    <div class="item"> 
+                        <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
+                        <div class="bottom-fade"></div>
+                        <div class="title">
+                            <h4>{{ $car->car_name }}</h4>
+                            <div class="details">
+                                <span><i class="omfi-door"></i> {{ $car->seats }} Seats</span>
+                                <span><i class="omfi-transmission"></i> {{ $car->gear }}</span>
+                                <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
+                            </div>
+                            <div class="button-group mt-3">
+                                <button type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
+                                    Book Now
+                                </button>
+                                <a href="#" class="btn btn-success">WhatsApp</a>
+                            </div>
+                        </div>
+                        <div class="curv-butn icon-bg">
+                            <a href="{{ route('cars.show', $car->id) }}" class="vid">
+                                <div class="icon"> 
+                                    <i class="icon-show"><span>AED {{ $car->price }}<br><i>day</i></span></i>
+                                    <i class="ti-arrow-top-right icon-hidden"></i> 
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Modal for Each Car -->
+                <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="bookingModalLabel{{ $car->id }}">Booking Form for {{ $car->car_name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="booking-box">
+                                    <div class="booking-inner clearfix">
+                                        <form method="post" action="#0" class="form1 contact__form clearfix">
+                                            <!-- form message -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
+                                                </div>
+                                            </div>
+                                            <!-- form elements -->
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <input name="name" type="text" placeholder="Full Name *" required>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <input name="email" type="email" placeholder="Email *" required>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <input name="phone" type="text" placeholder="Phone *" required>
+                                                </div>
+                                               
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="select1_wrapper">
+                                                        <label>Pick Up City</label>
+                                                        <div class="select1_inner">
+                                                            <select class="select2 select" style="width: 100%">
+                                                                <option value="0">Pick Up City</option>
+                                                                <option value="1">Dubai</option>
+                                                                <option value="2">Abu Dhabi</option>
+                                                                <option value="3">Sharjah</option>
+                                                                <option value="4">Alain</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="input1_wrapper">
+                                                        <label>Pick Up Date</label>
+                                                        <div class="input1_inner">
+                                                            <input type="text" class="form-control input datepicker" placeholder="Pick Up Date" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="input1_wrapper">
+                                                        <label>Return Date</label>
+                                                        <div class="input1_inner">
+                                                            <input type="text" class="form-control input datepicker" placeholder="Return Date">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 form-group">
+                                                    <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <button type="submit" class="booking-button mt-15">Rent Now</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+
+
+
+  
 
     <!-- RentNow Popup -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
