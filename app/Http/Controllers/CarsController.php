@@ -19,8 +19,9 @@ class CarsController extends Controller
 
     public function show($id)
     {
-        $car = Car::findOrFail($id);
-        $images = $car->images; // هذا يعتمد على إعداد العلاقات في نموذج Car
+        
+        $car = Car::with('gallery')->findOrFail($id); // Use 'gallery' instead of 'CarImage'
+        $images = $car->gallery; // Get the related images
         return view('front.pages.cars.carDetails', compact('car', 'images'));
     }
 

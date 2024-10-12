@@ -2713,6 +2713,7 @@ font-family: 'Outfit', sans-serif;
 .cars2 .item .curv-butn .icon i {
     font-weight: 300;
     font-style: normal;
+    margin-top: 1px;
     
 }
 .cars2 .item .curv-butn .icon i span {
@@ -3191,7 +3192,7 @@ font-family: 'Outfit', sans-serif;
     padding: 0;
     background: #f2f2f2;
     border-radius: 20px;
-    margin-top: -225px;
+    margin-top: -3px;
     z-index: 9;
 }
 .car-details .sidebar-car .title {
@@ -7094,7 +7095,8 @@ height: 100% !important;
     z-index: 1000; /* Ensure it appears above other elements */
 }
 
-/* .whatsapp-button img {
-    width: 70%; /* Adjust size of the icon */
-    height: auto; /* Maintain aspect ratio */
-} */
+
+.img-fluid02{
+    width: 88%;
+    height: 550px;
+}

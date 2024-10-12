@@ -32,51 +32,89 @@
                     <div class="content">
                         <div class="section-subtitle">LUXURIA</div>
                         <div class="section-title">We Are More Than <span>A Car Rental Company</span></div>
-                        <p>Car repair quisque sodales dui ut varius vestibulum drana tortor turpis porttiton tellus eu euismod nisl massa nutodio in the miss volume place urna lacinia eros nunta urna mauris vehicula rutrum in the miss on volume interdum.</p>
-                        <p class="mb-30">Lorem ipsum potenti fringilla pretium ipsum non blandit vivamus eget nisi non mi iaculis iaculis imperie quiseros sevin elentesque habitant farmen.</p>
-
-                        <ul class="list-unstyled list mb-30">
-                            <li>
-                                <div class="list-icon"> <span class="ti-check"></span> </div>
-                                <div class="list-text">
-                                    <p>We offer multiple services</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="list-icon"> <span class="ti-check"></span> </div>
-                                <div class="list-text">
-                                    <p>Multiple car repair locations</p>
-                                </div>
-                            </li>
-                        </ul>
+                        <p style="font-size: 15px;">At Luxuria Rent a Car, we are driven to understand our clients'
+                        varied needs and provide a tailored range of car rental
+                        solutions. Our team of experienced
+                        professionals and enthusiastic individuals committed to
+                        delivering a smooth experience
+                        for our clients.
+                        We stand for all-encompassing rental support. Our services
+                        include 24-hour roadside
+                        assistance, breakdown support, comprehensive rental car
+                        insurance, and prompt access
+                        to on-site fleet coordinators and technicians for vehicle issues,
+                        accident reporting,
+                        replacements, and maintenance</p>
                     </div>
                 </div>
                 <div class="col-md-5 offset-md-1">
                     <div class="item">
-                        <img src="{{ asset('front/img/about.jpg') }}" class="img-fluid" alt="">
-                        <div class="curv-butn icon-bg">
-                            <a href="https://youtu.be/1LxcTt1adfY" class="vid">
-                                <div class="icon"> <i class="ti-control-play"></i> </div>
-                            </a>
-                            <div class="br-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#ffffff"></path>
-                                </svg>
-                            </div>
-                            <div class="br-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#ffffff"></path>
-                                </svg>
-                            </div>
-                        </div>
+                        <img src="{{ asset('front/img/cars/about2.png') }}" class="img-fluid" alt="">
+                       
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+
+    <section class="about section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="content">
+                        <div class="section-title"><span>Our Vision</span></div>
+                        <p style="font-size: 15px;">Luxuria Rent a Car aims to be a trailblazer in the
+                        UAE car rental industry,
+                        representing the pinnacle of high-quality vehicle rentals. With
+                        our sights set on an expansive nationwide network and an
+                        unwavering commitment to innovation and excellence, we strive
+                        to deliver an unmatched rental experience. Safety Rent a Car is
+                        determined to set the benchmark and become the gold standard
+                        in the regional car rental market through our continuous pursuit
+                        of perfection.</p>
+                    </div>
+                </div>
+                <div class="col-md-5 offset-md-1">
+                    <div class="item">
+                        <img src="{{ asset('front/img/cars/about03.png') }}" class="img-fluid" alt="">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="about section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="content">
+                    <div class="section-title"><span>WHY CHOOSE US?</span></div>
+                    <p style="font-size: 15px;">
+                        <strong>Customer-Centric Service:</strong> Personalized, attentive service to meet your unique needs. <br>
+                        <strong>Diverse Quality Fleet:</strong> A wide range of well-maintained vehicles from economy to luxury. <br>
+                        <strong>Flexible Rental Plans:</strong> Customizable options to fit your schedule and requirements. <br>
+                        <strong>Transparent Pricing:</strong> Competitive rates with no hidden fees for budget-friendly choices. <br>
+                        <strong>Safety and 24/7 Support:</strong> Regularly maintained vehicles and around-the-clock roadside assistance. <br>
+                        <strong>Convenient Booking & Locations:</strong> Easy online reservations and strategically located branches for effortless pick-up and drop-off.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-5 offset-md-1">
+                    <div class="item">
+                        <img src="{{ asset('front/img/cars/about2.png') }}" class="img-fluid" alt="">
+                       
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+
+
     <!-- Testimonials -->
-    <section class="testimonials section-padding mt-15">
+    <!-- <section class="testimonials section-padding mt-15">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-30">
@@ -215,7 +253,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- divider line -->
     <div class="line-vr-section"></div>
 
@@ -226,7 +264,9 @@
                 <div class="col-md-12 text-center">
                     <h6>Rent Your Car</h6>
                     <h5>Interested in Renting?</h5>
-                    <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a>
+                    <p>Don't hesitate and send us a message.</p> 
+                    <a href="https://wa.me/00971542700030" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> 
+                    <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a> -->
                 </div>
             </div>
         </div>

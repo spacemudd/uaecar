@@ -9,7 +9,10 @@ class CarImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['car_id', 'image_url'];
+    protected $fillable = ['car_id', 'image_path']; // Update field name to match your table
+    
+    // Specify the table name explicitly if needed
+    protected $table = 'car_gallery';
 
     public function car()
     {

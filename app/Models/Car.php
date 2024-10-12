@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-use App\Models\CarImage;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +28,7 @@ class Car extends Model
      */
     public function gallery(): HasMany
     {
-        return $this->hasMany(CarImage::class);
+        // Specify the table name if it doesn't follow the plural convention
+        return $this->hasMany(CarImage::class, 'car_id');
     }
 }
