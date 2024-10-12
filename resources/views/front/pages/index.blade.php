@@ -152,7 +152,7 @@
                                 <button style="background-color: orange; border: 2px solid orange;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
                                     Book Now
                                 </button>
-                                <a style="background:red;" href="https://wa.me/00971542700030" class="btn btn-success">WhatsApp</a>
+                                <a style="background:#25D366;" href="https://wa.me/00971542700030" class="btn btn-success">WhatsApp</a>
                             </div>
                         </div>
                         <div class="curv-butn icon-bg">
