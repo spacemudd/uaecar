@@ -7100,3 +7100,14 @@ height: 100% !important;
     width: 88%;
     height: 550px;
 }
+
+.section-title {
+    white-space: nowrap; /* Prevents wrapping for the title and paragraph */
+}
+
+.section-title h2,
+.section-title p {
+    display: inline; /* Make sure both elements are displayed inline */
+    margin: 0; /* Remove default margins */
+}
+

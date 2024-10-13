@@ -1,7 +1,6 @@
 @extends('front.layouts.master')
 
 @section('content')
-    <!-- Preloader -->
     <div class="preloader-bg"></div>
     <div id="preloader">
         <div id="preloader-status">
@@ -9,14 +8,12 @@
         </div>
     </div>
 
-    <!-- Header Inner Slider -->
     <header class="header slider">
         <div class="owl-carousel owl-theme">
             <div class="text-center item bg-img" data-overlay-dark="4" data-background="{{ asset('front/img/slider/1.jpg') }}"></div>
         </div>
     </header>
 
-    <!-- Details -->
     <section class="car-details section-padding">
         <div class="container">
             <div class="row">
@@ -31,7 +28,7 @@
                             <h3>Image Gallery</h3>
                             <div class="row gallery-items mb-60">
                                 @foreach($car->gallery as $image)
-                                    <div class="col-md-4 gallery-masonry-wrapper single-item cardio">
+                                    <div class="col-4 gallery-masonry-wrapper single-item cardio">
                                         <a href="{{ asset($image->image_path) }}" title="" class="gallery-masonry-item-img-link img-zoom">
                                             <div class="gallery-box">
                                                 <div class="gallery-img">
@@ -46,9 +43,18 @@
                             <h3>General Information</h3>
                             <p class="mb-30">{{ $car->description }}</p>
                             <ul class="list-unstyled list">
-                                <li><div class="list-icon"><span class="ti-check"></span></div><div class="list-text"><p>24/7 Roadside Assistance</p></div></li>
-                                <li><div class="list-icon"><span class="ti-check"></span></div><div class="list-text"><p>Free Cancellation & Return</p></div></li>
-                                <li><div class="list-icon"><span class="ti-check"></span></div><div class="list-text"><p>Rent Now Pay When You Arrive</p></div></li>
+                                <li>
+                                    <div class="list-icon"><span class="ti-check"></span></div>
+                                    <div class="list-text"><p>24/7 Roadside Assistance</p></div>
+                                </li>
+                                <li>
+                                    <div class="list-icon"><span class="ti-check"></span></div>
+                                    <div class="list-text"><p>Free Cancellation & Return</p></div>
+                                </li>
+                                <li>
+                                    <div class="list-icon"><span class="ti-check"></span></div>
+                                    <div class="list-text"><p>Rent Now Pay When You Arrive</p></div>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -57,29 +63,26 @@
                         <p>No images available for this car.</p>
                     @endif
 
-                  
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <ul class="accordion-box clearfix">
                                 <!-- FAQs Here -->
-                                <!-- Similar structure as in your original code -->
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sidebar -->
                 <div class="col-lg-4 col-md-12">
                     <div class="sidebar-car">
                         <div class="title">
                             <h4>AED {{ $car->price }} <span>/ rent per day</span></h4>
                         </div>
                         <div class="item">
-                            <div class="features"><span><i class="omfi-door"></i> Doors</span><p>{{ $car->doors}}</p></div>
+                            <div class="features"><span><i class="omfi-door"></i> Doors</span><p>{{ $car->doors }}</p></div>
                             <div class="features"><span><i class="omfi-passengers"></i> Passengers</span><p>{{ $car->seats }}</p></div>
                             <div class="features"><span><i class="omfi-transmission"></i> Transmission</span><p>{{ $car->gear }}</p></div>
                             <div class="features"><span><i class="omfi-luggage"></i> Luggage</span><p>2 {{ $car->bags }}</p></div>
-                            <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{$car->air_condition}}</p></div>
+                            <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{ $car->air_condition }}</p></div>
                             <div class="features"><span><i class="omfi-age"></i> Age</span><p>{{ $car->age }}</p></div>
                             <div class="btn-double mt-30" data-grouptype="&amp;">
                                 <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
@@ -92,7 +95,6 @@
         </div>
     </section>
 
-    <!-- RentNow Popup -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -104,7 +106,7 @@
                     <div class="booking-box">
                         <div class="booking-inner clearfix">
                             <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix">
-                                @csrf <!-- Add CSRF token for security -->
+                                @csrf
                                 <input type="hidden" name="car_id" value="{{ $car->id }}">
                                 
                                 <div class="row">
@@ -115,7 +117,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <label>Car Name</label>
-                                            <input name="carName" type="text" class="form-control" value="{{ $car->car_name }}" readonly>
+                                        <input name="carName" type="text" class="form-control" value="{{ $car->car_name }}" readonly>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <label>Car ID</label>
@@ -166,7 +168,6 @@
                                     <div class="col-lg-12 col-md-12">
                                         <input type="hidden" name="daily_car_price" value="{{ $car->price }}">
                                     </div>
-
                                     <div class="col-lg-12 col-md-12">
                                         <button type="submit" class="booking-button mt-15">Rent Now</button>
                                     </div>
@@ -179,4 +180,3 @@
         </div>
     </div>
 @endsection
-    
