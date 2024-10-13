@@ -46,20 +46,20 @@ use Inertia\Inertia;
 // })->name('home');
 
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+//Route::get('/', function () {
+//    return Inertia::render('Welcome', [
+//        'canLogin' => Route::has('login'),
+//        'canRegister' => Route::has('register'),
+//        'laravelVersion' => Application::VERSION,
+//        'phpVersion' => PHP_VERSION,
+//    ]);
+//})->name('home');
 
 
 
-Route::get('/index',[indexController::class, 'showData'])->name('index');
+Route::get('/',[indexController::class, 'showData'])->name('index');
 Route::get('/contact-us', [CompanyController::class, 'showContact'])->name('contact');
-    
+
 Route::get('/car/{id}', [CarsController::class, 'show'])->name('cars.show');
 Route::post('form/submit', [FormController::class, 'submit'])->name('form.submit');
 Route::post('form/contact', [FormController::class, 'sendContactEmail'])->name('form.contact');
