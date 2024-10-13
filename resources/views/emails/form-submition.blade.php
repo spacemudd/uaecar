@@ -4,6 +4,7 @@
     <title>New Booking Request</title>
 </head>
 <body>
+    <!-- <img src="{{ asset('front/img/header.png') }}" alt="Header Image" style="width: 100%; height: auto;"> -->
     <h1>New Booking Request</h1>
 
     <h3>Customer Information</h3>
