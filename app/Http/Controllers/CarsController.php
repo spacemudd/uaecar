@@ -9,19 +9,13 @@ use Inertia\Inertia;
 
 class CarsController extends Controller
 {
-    // public function index()
-    // {
-    //     $cars = Car::with('media')->where('at_published', 'PUBLISHED')->get();
-    //     return Inertia::render('Cars/Index', [
-    //         'cars' => $cars,
-    //     ]);
-    // }
+
 
     public function show($id)
     {
         
-        $car = Car::with('gallery')->findOrFail($id); // Use 'gallery' instead of 'CarImage'
-        $images = $car->gallery; // Get the related images
+        $car = Car::with('gallery')->findOrFail($id); 
+        $images = $car->gallery;
         return view('front.pages.cars.carDetails', compact('car', 'images'));
     }
 

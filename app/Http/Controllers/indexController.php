@@ -12,7 +12,7 @@ class indexController extends Controller
 
     public function showData()
     {
-        $cars = Car::all(); // Fetch all cars from the database
+        $cars = Car::all(); 
         return view("front.pages.index", compact("cars"));
     }
 

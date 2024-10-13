@@ -57,11 +57,7 @@
                         <p>No images available for this car.</p>
                     @endif
 
-                    <!-- <div class="row">
-                        <div class="col-md-12">
-                            <h3>Rental Conditions</h3>
-                        </div>
-                    </div> -->
+                  
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <ul class="accordion-box clearfix">
@@ -118,6 +114,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
+                                        <label>Car Name</label>
+                                            <input name="carName" type="text" class="form-control" value="{{ $car->car_name }}" readonly>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Car ID</label>
+                                        <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
                                         <input name="name" type="text" placeholder="Full Name *" required>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
@@ -160,6 +164,10 @@
                                         <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
+                                        <input type="hidden" name="daily_car_price" value="{{ $car->price }}">
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12">
                                         <button type="submit" class="booking-button mt-15">Rent Now</button>
                                     </div>
                                 </div>
@@ -171,3 +179,4 @@
         </div>
     </div>
 @endsection
+    

@@ -23,12 +23,9 @@ class Car extends Model
         'description',
     ];
 
-    /**
-     * Get the images for the car.
-     */
+
     public function gallery(): HasMany
     {
-        // Specify the table name if it doesn't follow the plural convention
         return $this->hasMany(CarImage::class, 'car_id');
     }
 }
