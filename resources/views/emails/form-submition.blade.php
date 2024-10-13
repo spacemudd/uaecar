@@ -5,6 +5,8 @@
 </head>
 <body>
     <h1>New Booking Request</h1>
+
+    <h3>Customer Information</h3>
     <p><strong>Name:</strong> {{ $data['name'] }}</p>
     <p><strong>Email:</strong> {{ $data['email'] }}</p>
     <p><strong>Phone:</strong> {{ $data['phone'] }}</p>
@@ -13,6 +15,10 @@
     <p><strong>Return Date:</strong> {{ $data['return_date'] }}</p>
     <p><strong>Message:</strong> {{ $data['message'] }}</p>
 
-
+    <h3>Car Booked Information</h3>
+    <p><strong>Car id: #</strong> {{ $data['carID'] }}</p>
+    <p><strong>Car:</strong> {{ $data['carName'] }}</p>
+    <p><strong>Car Daily Price: {{ $data['daily_car_price'] }}</strong></p>
+    <p>For more details, visit the car's page: <a href="{{ $carDetailsUrl }}">{{ $carDetailsUrl }}</a></p>
 </body>
 </html>

@@ -16,24 +16,28 @@ class FormController extends Controller
     {
         // Validate the incoming request data
         $validatedData = $request->validate([
+            'carID' => 'required|integer',
+            'carName' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|string|max:20',
             'pickup_city' => 'required|string',
             'pickup_date' => 'required|date',
-            'return_date' => 'required|date|after:pickup_date',
-            'message' => 'nullable|string',
+            'return_date' => 'required|date',
+            'message' => 'nullable|string|max:500',
+            'daily_car_price' => 'required|string|max:255'
         ]);
 
-        //   $car = Car::find($validatedData['car_id']);
-        //   $validatedData['car_name'] = $car ? $car->name : 'Unknown Car';
+        $car = Car::find($validatedData['carID']);
+
+        $carDetailsUrl = route('cars.show', ['id' => $car->id]);
 
         // Send the email
-        Mail::to('abdelrahmanyouseff@gmail.com')->send(new FormSubmissionMail($validatedData));
+        Mail::to('abdelrahmanyouseff@gmail.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
 
         // Return a response
         return redirect()->back()->with('message', 'Your booking has been successfully submitted!');
-        }
+    }
 
 
 

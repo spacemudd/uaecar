@@ -11,15 +11,20 @@ class FormSubmissionMail extends Mailable
     use Queueable, SerializesModels;
 
     public $data;
+    public $carDetailsUrl;
 
-    public function __construct($data)
+    public function __construct($data, $carDetailsUrl)
     {
         $this->data = $data;
+        $this->carDetailsUrl = $carDetailsUrl;
     }
 
     public function build()
     {
-        return $this->subject('New Booking Request')
-                    ->view('emails.form-submition'); // Create this Blade view
+        return $this->view('emails.form-submition')
+                    ->with([
+                        'data' => $this->data,
+                        'carDetailsUrl' => $this->carDetailsUrl,
+                    ]);
     }
 }
