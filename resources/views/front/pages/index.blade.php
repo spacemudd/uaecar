@@ -47,7 +47,7 @@
             <div class="row">
                 @foreach($cars as $car)
                     <div class="col-md-4 mb-30">
-                        <div class="item"> 
+                        <div class="item">
                             <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
                             <div class="bottom-fade"></div>
                             <div class="title">
@@ -58,19 +58,17 @@
                                     <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
                                 </div>
                                 <div class="button-group mt-3">
-                                    <button style="background-color: orange; border: 2px solid orange;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
-                                        Book Now
+                                    <button style="background-color: black; color: white; border: 2px solid white;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
+                                        Reserve Now
                                     </button>
-                                    <a style="background:#25D366;" 
-                                       class="btn btn-success"
-                                       onclick="sendWhatsAppMessage('{{$car->car_name}}')">WhatsApp</a>
+                                    <a style="background:#018834;border: 2px solid white;margin-left:2px;" href="https://wa.me/00971542700030" class="btn btn-success">WhatsApp</a>
                                 </div>
                             </div>
                             <div class="curv-butn icon-bg">
                                 <a href="{{ route('cars.show', $car->id) }}" class="vid">
-                                    <div class="icon"> 
+                                    <div class="icon">
                                         <i class="icon-show"><span>AED {{ $car->price }}<br><i>day</i></span></i>
-                                        <i class="ti-arrow-top-right icon-hidden"></i> 
+                                        <i class="ti-arrow-top-right icon-hidden"></i>
                                     </div>
                                 </a>
                             </div>
