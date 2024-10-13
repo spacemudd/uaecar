@@ -81,7 +81,7 @@
                             <div class="features"><span><i class="omfi-door"></i> Doors</span><p>{{ $car->doors }}</p></div>
                             <div class="features"><span><i class="omfi-passengers"></i> Passengers</span><p>{{ $car->seats }}</p></div>
                             <div class="features"><span><i class="omfi-transmission"></i> Transmission</span><p>{{ $car->gear }}</p></div>
-                            <div class="features"><span><i class="omfi-luggage"></i> Luggage</span><p>2 {{ $car->bags }}</p></div>
+                            <div class="features"><span><i class="omfi-luggage"></i> Luggage</span><p>{{ $car->bags }}</p></div>
                             <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{ $car->air_condition }}</p></div>
                             <div class="features"><span><i class="omfi-age"></i> Age</span><p>{{ $car->age }}</p></div>
                             <div class="btn-double mt-30" data-grouptype="&amp;">
