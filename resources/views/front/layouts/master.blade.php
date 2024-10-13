@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
-    
+
 
 </head>
 <body>
-    
+
 <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Logo -->
@@ -30,7 +30,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
-            
+
                     <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Grid <i class="ti-angle-right"></i></span></a>
@@ -59,8 +59,8 @@
                             </li>
                         </ul>
                     </li> -->
-                
-             
+
+
                 <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
 
                 </ul>
@@ -69,7 +69,7 @@
                         <div class="icon"> <i class="flaticon-phone-call"></i> </div>
                         <div class="text">
                             <p>Need help?</p>
-                            <h5><a href="tel:8551004444">05 4270 0030</a></h5>
+                            <h5><a href="tel:+971542700030">05 4270 0030</a></h5>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
     @yield('content')
 
 
-    
+
         <!-- Footer -->
         <footer class="footer clearfix">
         <div class="container">
