@@ -44,6 +44,17 @@
     <!-- Cars List -->
     <section class="cars2 section-padding">
         <div class="container">
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="section-title">
+                        <h2>Our Cars</h2>
+                        <p>Choose the car that fits your needs</p>
+                    </div>
+                </div>
+
+            </div>
+
             <div class="row">
                 @foreach($cars as $car)
                     <div class="col-md-4 mb-30">
