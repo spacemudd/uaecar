@@ -184,12 +184,5 @@
             document.getElementById('car_id').value = carId;
             // Optionally, open the booking form/modal here if needed
         }
-
-        function sendWhatsAppMessage(carName) {
-        const message = `Hello, I am interested in ${carName}`;
-        const phoneNumber = '00971542700030';
-        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.location.href = url;
-    }
     </script>
 @endsection
