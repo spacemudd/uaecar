@@ -61,7 +61,9 @@
                                     <button style="background-color: orange; border: 2px solid orange;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
                                         Book Now
                                     </button>
-                                    <a style="background:#25D366;" href="https://wa.me/00971542700030" class="btn btn-success">WhatsApp</a>
+                                    <a style="background:#25D366;" 
+                                       class="btn btn-success"
+                                       onclick="sendWhatsAppMessage('{{$car->car_name}}')">WhatsApp</a>
                                 </div>
                             </div>
                             <div class="curv-butn icon-bg">
@@ -173,5 +175,12 @@
             document.getElementById('car_id').value = carId;
             // Optionally, open the booking form/modal here if needed
         }
+
+        function sendWhatsAppMessage(carName) {
+        const message = `Hello, I am interested in ${carName}`;
+        const phoneNumber = '00971542700030';
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.location.href = url;
+    }
     </script>
 @endsection
