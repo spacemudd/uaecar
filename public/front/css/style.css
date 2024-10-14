@@ -7111,3 +7111,21 @@ height: 100% !important;
     margin: 0; /* Remove default margins */
 }
 
+.cars2 img {
+    width: 100%; /* Adjust width as needed (e.g., 90% of the parent container) */
+    height: 300px; /* Set a fixed height */
+    object-fit: cover; /* Maintain aspect ratio */
+    margin: 0 auto; /* Center the image horizontally */
+    display: block; /* Ensure the image behaves like a block element */
+}
+
+.item-image {
+    width: 50%;  /* Adjust percentage as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image horizontally if needed */
+}
+
+.grayscale {
+    filter: grayscale(100%);
+}

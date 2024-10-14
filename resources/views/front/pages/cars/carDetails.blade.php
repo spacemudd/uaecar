@@ -20,7 +20,6 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="row mb-60">
                         <div class="col-md-12">
-                            <h1>{{ $car->car_name }}</h1>
                             <div class="car-image mb-30">
                                 <img src="{{ asset($car->car_picture) }}" class="img-fluid02" alt="{{ $car->car_name }}">
                             </div>
@@ -45,7 +44,7 @@
                             <ul class="list-unstyled list">
                                 <li>
                                     <div class="list-icon"><span class="ti-check"></span></div>
-                                    <div class="list-text"><p>24/7 Roadside Assistance</p></div>
+                                    <div class="list-text"><p><span>Daily Cost: </span>{{ $car->price }}</p></div>
                                 </li>
                                 <li>
                                     <div class="list-icon"><span class="ti-check"></span></div>
@@ -75,15 +74,18 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="sidebar-car">
                         <div class="title">
-                            <h4>AED {{ $car->price }} <span>/ rent per day</span></h4>
+                            <h4>AED {{ $car->price }} <span>/ Rent Per Day</span></h4>
                         </div>
                         <div class="item">
+                            <h3>{{ $car->car_name . ' ' . $car->model }}</h3>
+
                             <div class="features"><span><i class="omfi-door"></i> Doors</span><p>{{ $car->doors }}</p></div>
                             <div class="features"><span><i class="omfi-passengers"></i> Passengers</span><p>{{ $car->seats }}</p></div>
                             <div class="features"><span><i class="omfi-transmission"></i> Transmission</span><p>{{ $car->gear }}</p></div>
-                            <div class="features"><span><i class="omfi-luggage"></i> Luggage</span><p>{{ $car->bags }}</p></div>
-                            <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{ $car->air_condition }}</p></div>
-                            <div class="features"><span><i class="omfi-age"></i> Age</span><p>{{ $car->age }}</p></div>
+                            <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{ $car->air_condition == 1 ? 'Yes' : 'Not' }}</p></div>
+                            <div class="features"><span><i class="omfi-age"></i> Year</span><p>{{ $car->year }}</p></div>
+                            <div class="features"><span><i class="omfi-folder"></i> Color</span><p>{{ $car->color }}</p></div>
+
                             <div class="btn-double mt-30" data-grouptype="&amp;">
                                 <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
                                 <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
