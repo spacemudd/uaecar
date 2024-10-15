@@ -42,7 +42,7 @@
     </header>
 
     <section class="cars2 section-padding">
-    <div class="container">
+    <div class="aha">
         <div class="row">
             <div class="col-4">
                 <div class="section-title">
@@ -54,12 +54,16 @@
 
         <div class="row">
             @foreach($cars as $car)
-                <div class="col-md-4 mb-30">
+                <!-- Change from col-md-4 to col-md-3 to make 4 columns per row -->
+                <div class="col-md-3 mb-30">
                     <div class="item" style="position: relative;">
                         <!-- Apply grayscale for "Arrive Soon" cars -->
                         <img src="{{ asset($car->car_picture) }}" class="img-fluid {{ $car->status == 'Arrive Soon' ? 'grayscale' : '' }}" alt="">
-                        <div class="bottom-fade"></div>
-                        <span style="position: absolute; top: 16px; left: 16px; background-color: green; color:white; padding: 5px; border-radius: 5px;">
+                        <!-- <div class="bottom-fade"></div> -->
+
+                        <!-- Status Box with conditional classes for colors -->
+                        <span style="position: absolute; top: 16px; left: 16px; padding: 5px; border-radius: 5px; color: white;"
+                              class="{{ $car->status == 'Booked' ? 'bg-danger' : ($car->status == 'Available' ? 'bg-success' : 'bg-warning') }}">
                             <i class="omfi-status"></i>
                             {{ 
                                 $car->status == 'Booked' ? 'Booked' : 

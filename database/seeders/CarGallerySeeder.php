@@ -11,13 +11,38 @@ class CarGallerySeeder extends Seeder
     {
         // Sample data to seed
         $galleries = [
-            ['car_id' => 1, 'image_path' => 'front/img/cars/01.jpg'],
-            ['car_id' => 1, 'image_path' => 'images/cars/02.jpg'],
-            ['car_id' => 3, 'image_path' => 'images/cars/05.jpg'],
-            ['car_id' => 2, 'image_path' => 'images/cars/03.jpg'],
-            ['car_id' => 2, 'image_path' => 'images/cars/04_2.jpg'],
-            ['car_id' => 3, 'image_path' => 'images/cars/05.jpg'],
-            ['car_id' => 3, 'image_path' => 'images/cars/05.jpg'],
+            ['car_id' => 75, 'image_path' => 'front/img/cars/01.jpg'],
+            ['car_id' => 75, 'image_path' => 'front/img/cars/02.jpg'],
+            ['car_id' => 75, 'image_path' => 'front/img/cars/05.jpg'],
+            ['car_id' => 76, 'image_path' => 'front/img/cars/03.jpg'],
+            ['car_id' => 76, 'image_path' => 'front/img/cars/02.jpg'],
+            ['car_id' => 76, 'image_path' => 'front/img/cars/05.jpg'],
+            ['car_id' => 77, 'image_path' => 'front/img/cars/06.jpg'],
+            ['car_id' => 77, 'image_path' => 'front/img/cars/01.jpg'],
+            ['car_id' => 77, 'image_path' => 'front/img/cars/02.jpg'],
+            ['car_id' => 78, 'image_path' => 'front/img/cars/03.jpg'],
+            ['car_id' => 78, 'image_path' => 'front/img/cars/04.jpg'],
+            ['car_id' => 78, 'image_path' => 'front/img/cars/05.jpg'],
+            ['car_id' => 79, 'image_path' => 'front/img/cars/06.jpg'],
+            ['car_id' => 79, 'image_path' => 'front/img/cars/01.jpg'],
+            ['car_id' => 79, 'image_path' => 'front/img/cars/02.jpg'],
+            ['car_id' => 80, 'image_path' => 'front/img/cars/03.jpg'],
+            ['car_id' => 80, 'image_path' => 'front/img/cars/04.jpg'],
+            ['car_id' => 80, 'image_path' => 'front/img/cars/05.jpg'],
+            ['car_id' => 81, 'image_path' => 'front/img/cars/06.jpg'],
+            ['car_id' => 81, 'image_path' => 'front/img/cars/01.jpg'],
+            ['car_id' => 81, 'image_path' => 'front/img/cars/02.jpg'],
+            ['car_id' => 82, 'image_path' => 'front/img/cars/03.jpg'],
+            ['car_id' => 82, 'image_path' => 'front/img/cars/04.jpg'],
+            ['car_id' => 82, 'image_path' => 'front/img/cars/05.jpg'],
+            ['car_id' => 83, 'image_path' => 'front/img/cars/06.jpg'],
+            ['car_id' => 83, 'image_path' => 'front/img/cars/01.jpg'],
+            ['car_id' => 83, 'image_path' => 'front/img/cars/02.jpg'],
+            ['car_id' => 84, 'image_path' => 'front/img/cars/03.jpg'],
+            ['car_id' => 84, 'image_path' => 'front/img/cars/04.jpg'],
+
+
+
 
             // Add more entries as needed
         ];
