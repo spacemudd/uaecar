@@ -79,7 +79,7 @@
                         <div class="item">
                             <h3>{{ $car->car_name . ' ' . $car->model }}</h3>
 
-                            <div class="features"><span><i class="omfi-door"></i> Doors</span><p>{{ $car->doors }}</p></div>
+                            <!-- <div class="features"><span><i class="omfi-door"></i> Doors</span><p>{{ $car->doors }}</p></div> -->
                             <div class="features"><span><i class="omfi-passengers"></i> Passengers</span><p>{{ $car->seats }}</p></div>
                             <div class="features"><span><i class="omfi-transmission"></i> Transmission</span><p>{{ $car->gear }}</p></div>
                             <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{ $car->air_condition == 1 ? 'Yes' : 'Not' }}</p></div>
