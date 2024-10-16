@@ -20,15 +20,15 @@ class CarImageSeeder extends Seeder
             // Generate random images for each car
             CarImage::create([
                 'car_id' => $car->id,
-                'image_url' => '/front/img/cars/' . $car->id . '01.jpg', // Replace with your image URLs
+                'image_path' => '/front/img/cars/' . $car->id . '01.jpg', // Replace with your image URLs
             ]);
             CarImage::create([
                 'car_id' => $car->id,
-                'image_url' => '/front/img/cars/' . $car->id . '02.jpg',
+                'image_path' => '/front/img/cars/' . $car->id . '02.jpg',
             ]);
             CarImage::create([
                 'car_id' => $car->id,
-                'image_url' => '/front/img/cars/' . $car->id . '03.jpg',
+                'image_path' => '/front/img/cars/' . $car->id . '03.jpg',
             ]);
         }
     }
