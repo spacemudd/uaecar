@@ -44,7 +44,7 @@ class CarsTableSeeder extends Seeder
         // ]);
 
          // Delete rows with IDs from 20 to 30
-         Car::where('id', [18, 17])->delete();
+         Car::where('id', 17)->delete();
           
     
 }
