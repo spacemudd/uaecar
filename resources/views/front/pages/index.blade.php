@@ -1,4 +1,3 @@
-<!-- resources/views/home.blade.php -->
 @extends('front.layouts.master')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -24,7 +23,7 @@
         </div>
 
         <!-- Clients -->
-        <section class="clients">
+        <!-- <section class="clients">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
@@ -38,65 +37,45 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
     </header>
 
     <section class="cars2 section-padding">
-    <div class="aha">
-        <div class="row">
-            <div class="col-4">
-                <div class="section-title">
-                    <h2>Our Cars</h2><br>
-                    <p>Choose the car that fits your needs</p>
+        <div class="aha">
+            <div class="row">
+                <div class="col-4">
+                    <div class="section-title">
+                        <h2>Our Cars</h2><br>
+                        <p>Choose the car that fits your needs</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            @foreach($cars as $car)
-                <!-- Change from col-md-4 to col-md-3 to make 4 columns per row -->
-                <div class="col-md-3 mb-30">
-                    <div class="item" style="position: relative;">
-                        <!-- Apply grayscale for "Arrive Soon" cars -->
-                        <img src="{{ asset($car->car_picture) }}" class="img-fluid {{ $car->status == 'Arrive Soon' ? 'grayscale' : '' }}" alt="">
-                        <!-- <div class="bottom-fade"></div> -->
+            <div class="row">
+                @foreach($cars as $car)
+                    <!-- Change from col-md-4 to col-md-3 to make 4 columns per row -->
+                    <div class="col-md-3 mb-30">
+                        <div class="item" style="position: relative;">
+                            <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
 
-                        <!-- Status Box with conditional classes for colors -->
-                        <span style="position: absolute; top: 16px; left: 16px; padding: 5px; border-radius: 5px; color: white;"
-                              class="{{ $car->status == 'Booked' ? 'bg-danger' : ($car->status == 'Available' ? 'bg-success' : 'bg-warning') }}">
-                            <i class="omfi-status"></i>
-                            {{ 
-                                $car->status == 'Booked' ? 'Booked' : 
-                                ($car->status == 'Arrive Soon' ? 'Arrive Soon' : 'Available') 
-                            }}
-                        </span>
-
-                        <div class="title">
-                            <h4>{{ $car->car_name . ' ' . $car->model }}</h4>
-                            <div class="details">
-                                <span><i class="omfi-door"></i> {{ $car->seats }} Seats</span>
-                                <span><i class="omfi-transmission"></i> {{ $car->gear }}</span>
-                                <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
-                            </div>
-                            
-                            <!-- Disable buttons if status is "Arrive Soon" -->
-                            @if($car->status != 'Arrive Soon')
+                            <div class="title">
+                                <h4>{{ $car->car_name . ' ' . $car->model }}</h4>
+                                <div class="details">
+                                    <span><i class="omfi-door"></i> {{ $car->seats }} Seats</span>
+                                    <span><i class="omfi-transmission"></i> {{ $car->gear }}</span>
+                                    <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
+                                </div>
+                                
+                                <!-- Always show Reserve and WhatsApp buttons -->
                                 <div class="button-group mt-3">
-                                    <button style="background-color: black; color: white; border: 2px solid white;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
+                                    <button style="background-color: black; color: white; border: 2px solid black;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
                                         Reserve Now
                                     </button>
-                                    <a style="background:#018834;border: 2px solid white;margin-left:2px;" href="https://wa.me/00971542700030?text={{ urlencode("Hello. I am interested in the: ".$car->car_name) }}" class="btn btn-success">WhatsApp</a>
+                                    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" href="https://wa.me/00971542700030?text={{ urlencode("Hello. I am interested in the: ".$car->car_name) }}" class="btn btn-success">WhatsApp</a>
                                 </div>
-                            @else
-                                <!-- Placeholder to replace buttons for "Arrive Soon" cars -->
-                                <div class="button-group mt-3">
-                                    <button class="btn btn-secondary" disabled>Not Available</button>
-                                </div>
-                            @endif
-                        </div>
+                            </div>
 
-                        <!-- Only show the price button if the car is available -->
-                        @if($car->status != 'Arrive Soon')
+                            <!-- Always show the price button -->
                             <div class="curv-butn icon-bg">
                                 <a href="{{ route('cars.show', $car->id) }}" class="vid">
                                     <div class="icon">
@@ -105,16 +84,99 @@
                                     </div>
                                 </a>
                             </div>
-                        @endif
+                        </div>
                     </div>
-                </div>
-            @endforeach
+
+                    <!-- Modal for each car -->
+                    <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="bookingModalLabel{{ $car->id }}">Booking Form for {{ $car->car_name }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="booking-box">
+                                        <div class="booking-inner clearfix">
+                                            <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix">
+                                                @csrf
+                                                <input type="hidden" name="car_id" value="{{ $car->id }}">
+                                                
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <label>Car Name</label>
+                                                        <input name="carName" type="text" class="form-control" value="{{ $car->car_name }}" readonly>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <label>Car ID</label>
+                                                        <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <input name="name" type="text" placeholder="Full Name *" required>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <input name="email" type="email" placeholder="Email *" required>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <input name="phone" type="text" placeholder="Phone *" required>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="select1_wrapper">
+                                                            <label>Pick Up Location</label>
+                                                            <div class="select1_inner">
+                                                                <select name="pickup_city" class="select2 select" style="width: 100%" required>
+                                                                    <option value="" disabled selected>Select a City</option>
+                                                                    <option value="Dubai">Dubai</option>
+                                                                    <option value="Abu Dhabi">Abu Dhabi</option>
+                                                                    <option value="Sharjah">Sharjah</option>
+                                                                    <option value="Alain">Alain</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="input1_wrapper">
+                                                            <label>Pick Up Date</label>
+                                                            <div class="input1_inner">
+                                                                <input name="pickup_date" type="text" class="form-control input datepicker" placeholder="Pick Up Date" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="input1_wrapper">
+                                                            <label>Return Date</label>
+                                                            <div class="input1_inner">
+                                                                <input name="return_date" type="text" class="form-control input datepicker" placeholder="Return Date" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 form-group">
+                                                        <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <input type="hidden" name="daily_car_price" value="{{ $car->price }}">
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <button type="submit" class="booking-button mt-15">Rent Now</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal -->
+                @endforeach
+            </div>
         </div>
-    </div>
-</section>
-
-
-
+    </section>
 
     <script>
         $(document).ready(function() {
@@ -127,5 +189,7 @@
             document.getElementById('car_id').value = carId;
             // Optionally, open the booking form/modal here if needed
         }
+   
+
     </script>
 @endsection

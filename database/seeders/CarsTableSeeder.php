@@ -7,45 +7,275 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Car;
 class CarsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+        $cars = [
+            [
+                'node_id' => '22-12',
+                'car_name' => 'Toyota',
+                'seats' => 15, 
+                'gear' => 'Automatic',
+                'price_daily' => 400,
+                'price_weekly' => 2400,
+                'price_monthly' => 8000,
+                'car_picture' => 'https://example.com/images/toyota_camry.jpg',
+                'doors' => 4,
+                'description' => 'The Toyota Hiace 2025 is a versatile van designed for both passenger transport and cargo. It seats 9 to 15 passengers and features 4 to 5 doors, including sliding side doors and rear access. Available with both manual and automatic transmissions, it offers a choice of diesel or gasoline engines. The Hiace is known for its spacious interior, reliability, and multiple configurations, making it ideal for commercial use. Safety features include airbags and stability control, with modern amenities like a touchscreen infotainment system and ample luggage capacity.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'B-78694',
+                'make' => 'Toyota',
+                'model' => 'Hiace',
+                'year' => 2025,
+                'color' => 'White',
+                'categories' => 'null',
+                'status' => 'available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'JTGHN9CP5S6028137'
+            ],
+            [
+                'node_id' => '159-13',
+                'car_name' => 'Infiniti',
+                'seats' => 5,
+                'gear' => 'Automatic',
+                'price_daily' => 250,
+                'price_weekly' => 1450,
+                'price_monthly' => 5000,
+                'car_picture' => 'https://example.com/images/honda_civic.jpg',
+                'doors' => 5,
+                'description' => 'The Infiniti QX50 2021 is a luxury compact SUV with seating for 5 passengers and a spacious cargo area capable of holding 7 to 9 bags. It features 5 doors, including a rear liftgate for easy access to the luggage area. Known for its elegant design, advanced technology, and comfortable ride, the QX50 blends performance with luxury, making it ideal for families and daily commuting.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-52203',
+                'make' => 'Infiniti',
+                'model' => 'QX50',
+                'year' => 2021,
+                'color' => 'Dark Gray',
+                'categories' => 'Compact',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => '3PCAJ5BB1MF108423'
+            ],
+            [
+                'node_id' => '17-7',
+                'car_name' => 'Honda',
+                'seats' => 8,
+                'gear' => 'Automatic',
+                'price_daily' => 250,
+                'price_weekly' => 1500,
+                'price_monthly' => 4500,
+                'car_picture' => 'https://example.com/images/ford_explorer.jpg',
+                'doors' => 5,
+                'description' => 'The Honda Odyssey 2020 is a family-friendly minivan offering seating for 7 to 8 passengers and a flexible cargo area that can fit 5 to 6 bags with all seats in use. It has 5 doors, including sliding doors for easy access and a rear liftgate for loading luggage. The Odyssey is known for its comfort, advanced safety features, and spacious interior, making it a popular choice for families and long road trips.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-52271',
+                'make' => 'Honda',
+                'model' => 'Odyssey',
+                'year' => 2020,
+                'color' => 'Gray',
+                'categories' => 'null',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => '5FNRL6H55LB049850'
+            ],
+            [
+                'node_id' => '15-5',
+                'car_name' => 'Nissan',
+                'seats' => 5,
+                'gear' => 'Automatic',
+                'price_daily' => 70,
+                'price_weekly' => 420,
+                'price_monthly' => 1400,
+                'car_picture' => 'https://example.com/images/chevrolet_bolt.jpg',
+                'doors' => 5,
+                'description' => 'The Nissan Sunny 2020 is a compact sedan designed for practicality and comfort, featuring 5 seats and a trunk that holds 3 to 4 bags. With 4 doors, including spacious rear access, it offers a comfortable ride for both drivers and passengers. Known for its fuel efficiency and reliability, the Sunny is an excellent choice for urban commuting and everyday use.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'B-48806',
+                'make' => 'Nissan',
+                'model' => 'Sunny',
+                'year' => 2020,
+                'color' => 'White',
+                'categories' => 'Electric',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'MDHBN7AD7LG722534'
+            ],
+            [
+                'node_id' => '18-8',
+                'car_name' => 'Hyundai',
+                'seats' => 5,
+                'gear' => 'Automatic',
+                'price_daily' => 120,
+                'price_weekly' => 720,
+                'price_monthly' => 2800,
+                'car_picture' => 'https://example.com/images/hyundai_sonata.jpg',
+                'doors' => 5,
+                'description' => 'The Hyundai Sonata 2021 is a stylish midsize sedan that offers 5 seats and a spacious trunk capable of holding 4 to 5 bags. With its 4-door configuration, the Sonata provides easy access for passengers and their belongings. Known for its sleek design, advanced technology features, and a comfortable ride, the Sonata is an excellent choice for those seeking a reliable and modern vehicle for daily commuting and long drives.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'B-69415',
+                'make' => 'Hyundai',
+                'model' => 'Sonata',
+                'year' => 2021,
+                'color' => 'Gray',
+                'categories' => 'Sedan',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'KMHL64JA9MA165650'
+            ],
+            [
+                'node_id' => '18-8',
+                'car_name' => 'Hyundai',
+                'seats' => 5,
+                'gear' => 'Automatic',
+                'price_daily' => 200,
+                'price_weekly' => 1200,
+                'price_monthly' => 4200,
+                'car_picture' => 'https://example.com/images/hyundai_sonata.jpg',
+                'doors' => 5,
+                'description' => 'The Hyundai Santa Fe 2023 is a versatile midsize SUV offering 5 seats and a generous cargo space that can hold 4 to 5 bags. With its 5-door design, including a rear liftgate for easy access to the cargo area, the Santa Fe combines practicality with a modern aesthetic. Known for its comfortable interior, advanced safety features, and a smooth ride, the Santa Fe is an excellent option for families and adventure seekers alike.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-50943',
+                'make' => 'Hyundai',
+                'model' => 'Santa Fe',
+                'year' => 2023,
+                'color' => 'Black',
+                'categories' => 'Sedan',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => '5NMS5DAL6PH501348'
+            ],
+            [
+                'node_id' => '20-10',
+                'car_name' => 'Mitsubishi',
+                'seats' => 7,
+                'gear' => 'Automatic',
+                'price_daily' => 200,
+                'price_weekly' => 1200,
+                'price_monthly' => 4200,
+                'car_picture' => 'https://example.com/images/hyundai_sonata.jpg',
+                'doors' => 5,
+                'description' => 'The Hyundai Santa Fe 2023 is a versatile midsize SUV offering 5 seats and a generous cargo space that can hold 4 to 5 bags. With its 5-door design, including a rear liftgate for easy access to the cargo area, the Santa Fe combines practicality with a modern aesthetic. Known for its comfortable interior, advanced safety features, and a smooth ride, the Santa Fe is an excellent option for families and adventure seekers alike.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-50943',
+                'make' => 'Mitsubishi',
+                'model' => 'Outlander',
+                'year' => 2024,
+                'color' => 'Red',
+                'categories' => 'Sedan',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'JA4J4VA85RZ010990'
+            ],
+            [
+                'node_id' => '21-11',
+                'car_name' => 'BMW',
+                'seats' => 4,
+                'gear' => 'Automatic',
+                'price_daily' => 220,
+                'price_weekly' => 1300,
+                'price_monthly' => 4000,
+                'car_picture' => 'https://example.com/images/hyundai_sonata.jpg',
+                'doors' => 2,
+                'description' => 'The BMW 228i 2021 is a stylish and sporty coupe that offers 4 seats and a trunk capacity of 2 to 3 bags, making it suitable for short trips and weekend getaways. With its 2-door design, the 228i combines performance and luxury, featuring a powerful engine, agile handling, and a well-appointed interior. Known for its dynamic driving experience and premium features, the 228i is an excellent choice for enthusiasts looking for a compact luxury coupe.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-52270',
+                'make' => 'BMW',
+                'model' => '228i',
+                'year' => 2021,
+                'color' => 'Black',
+                'categories' => 'Sedan',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'WBA53AK03M7J02001'
+            ],
+            [
+                'node_id' => '13-3',
+                'car_name' => 'Kia',
+                'seats' => 5,
+                'gear' => 'Automatic',
+                'price_daily' => 85,
+                'price_weekly' => 500,
+                'price_monthly' => 1850,
+                'car_picture' => 'https://example.com/images/hyundai_sonata.jpg',
+                'doors' => 4,
+                'description' => 'The Kia Cerato 2020 is a compact sedan that offers 5 seats and a trunk space capable of holding 3 to 4 bags, making it a practical choice for everyday use. With its 4-door configuration, the Cerato provides easy access for passengers and their belongings. Known for its stylish design, reliable performance, and a range of modern features, the Cerato is an excellent option for those seeking a well-rounded and affordable sedan for urban commuting and family trips.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-58379',
+                'make' => 'Kia',
+                'model' => 'Cerato',
+                'year' => 2020,
+                'color' => 'Gray',
+                'categories' => 'Sedan',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'KNAF24169L5863981'
+            ],
+            [
+                'node_id' => '13-3',
+                'car_name' => 'Kia',
+                'seats' => 5,
+                'gear' => 'Automatic',
+                'price_daily' => 85,
+                'price_weekly' => 500,
+                'price_monthly' => 1850,
+                'car_picture' => 'https://example.com/images/hyundai_sonata.jpg',
+                'doors' => 4,
+                'description' => 'The Kia Cerato 2020 is a compact sedan that offers 5 seats and a trunk space capable of holding 3 to 4 bags, making it a practical choice for everyday use. With its 4-door configuration, the Cerato provides easy access for passengers and their belongings. Known for its stylish design, reliable performance, and a range of modern features, the Cerato is an excellent option for those seeking a well-rounded and affordable sedan for urban commuting and family trips.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-50943',
+                'make' => 'Kia',
+                'model' => 'Cerato',
+                'year' => 2020,
+                'color' => 'Gray',
+                'categories' => 'Sedan',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'KNAF24169L5863981'
+            ],
+            [
+                'node_id' => '16-6',
+                'car_name' => 'Hyundai',
+                'seats' => 5,
+                'gear' => 'Automatic',
+                'price_daily' => 100,
+                'price_weekly' => 595,
+                'price_monthly' => 2000,
+                'car_picture' => 'https://example.com/images/hyundai_sonata.jpg',
+                'doors' => 5,
+                'description' => 'The Hyundai Venue 2021 is a compact SUV designed for urban driving, offering 5 seats and a versatile cargo area that can fit 2 to 3 bags. With its 5-door layout, including a rear liftgate for easy access to the trunk, the Venue is practical for daily use. Known for its stylish design, advanced technology features, and efficient performance, the Venue is an excellent choice for those seeking a small, maneuverable SUV that is perfect for city living.',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'plate_number' => 'A-53169',
+                'make' => 'Hyundai',
+                'model' => 'Venue',
+                'year' => 2021,
+                'color' => 'Silver',
+                'categories' => 'Sedan',
+                'status' => 'Available',
+                'expected_return_date' => null,
+                'upcoming_reservation' => null,
+                'chassis_number' => 'KMHRC8A39MU079121'
+            ],
+        ];
 
-        // Car::where('plate_number', 'A-52271')->update([
-        //     'car_picture' => 'front/img/cars/HondaOdyssey2020_1.png'
-        // ]);
-
-        // Car::where('plate_number', 'B-48806')->update([
-        //     'car_picture' => 'front/img/cars/nissansunny1.png'
-        // ]);
-        
-        // Car::where('plate_number', 'B-69415')->update([
-        //     'car_picture' => 'front/img/cars/Hyundai Sonata.png'
-        // ]);
-
-        // Car::where('plate_number', 'A-50943')->update([
-        //     'car_picture' => 'front/img/cars/Santa_Fe_Hybrid.png'
-        // ]);
-
-        // Car::where('plate_number', 'A-52240')->update([
-        //     'car_picture' => 'front/img/cars/mitsubishi_outlander_-small-15752.png'
-        // ]);
-
-        // Car::where('plate_number', 'A-52270')->update([
-        //     'car_picture' => 'front/img/cars/bmw228i.png'
-        // ]);
-
-        // Car::where('plate_number', 'A-53169')->update([
-        //     'car_picture' => 'front/img/cars/Hyundai Venue.png'
-        // ]);
-
-         // Delete rows with IDs from 20 to 30
-         Car::where('id', 17)->delete();
-          
-    
-}
+        DB::table('cars')->insert($cars);
+    }
 }

@@ -12,31 +12,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->id();
-            $table->string('car_name');
-            $table->integer('seats');
-            $table->string('gear');
-            $table->decimal('price', 10, 2);
-            $table->string('car_picture');
-            $table->integer('doors');
-            $table->boolean('air_condition')->default(false);
-            $table->text('description')->nullable();
-            $table->string('plate_number')->nullable();
-            $table->string('make')->nullable();
-            $table->string('model')->nullable();
-            $table->year('year')->nullable();
-            $table->string('color')->nullable();
-            $table->string('categories')->nullable();
-            $table->string('current_location')->nullable();
-            $table->string('status')->nullable();
-            $table->date('expected_return_date')->nullable();
-            $table->string('upcoming_reservation')->nullable();
-            $table->date('latest_return_date')->nullable();
-            $table->integer('odometer')->nullable();
-            $table->string('chassis_number')->nullable();
-            $table->date('license_expiry_date')->nullable();
-            $table->date('insurance_expiry_date')->nullable();
-            $table->timestamps();
+            $table->id(); // Auto-incrementing ID
+            $table->string('node_id')->nullable(); // Node ID
+            $table->string('car_name'); // Car name
+            $table->integer('seats'); // Number of seats
+            $table->string('gear'); // Gear type
+            $table->decimal('price_daily', 10, 2); // Price
+            $table->decimal('price_weekly', 10, 2);
+            $table->decimal('price_monthly', 10, 2);  
+            $table->string('car_picture')->nullable(); // Picture URL
+            $table->integer('doors'); // Number of doors
+            $table->text('description')->nullable(); // Description
+            $table->timestamps(); // Created at & Updated at
+            $table->string('plate_number')->nullable(); // Plate number
+            $table->string('make')->nullable(); // Car make
+            $table->string('model')->nullable(); // Car model
+            $table->year('year'); // Manufacturing year
+            $table->string('color')->nullable(); // Car color
+            $table->string('categories')->nullable(); // Categories
+            $table->string('status')->nullable(); // Status
+            $table->date('expected_return_date')->nullable(); // Expected return date
+            $table->date('upcoming_reservation')->nullable(); // Upcoming reservation
+            $table->string('chassis_number')->nullable(); // Chassis number
         });
     }
 
