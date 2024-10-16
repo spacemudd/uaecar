@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('car_name');
             $table->integer('seats');
             $table->string('gear');
-            $table->integer('bags');
             $table->decimal('price', 10, 2);
             $table->string('car_picture');
             $table->integer('doors');
