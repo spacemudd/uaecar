@@ -44,7 +44,7 @@
                             <ul class="list-unstyled list">
                                 <li>
                                     <div class="list-icon"><span class="ti-check"></span></div>
-                                    <div class="list-text"><p><span>Daily Cost: </span>{{ $car->price }}</p></div>
+                                    <div class="list-text"><p><span>Daily Cost: </span>{{ $car->price_daily }}</p></div>
                                 </li>
                                 <li>
                                     <div class="list-icon"><span class="ti-check"></span></div>
@@ -74,7 +74,7 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="sidebar-car">
                         <div class="title">
-                            <h4>AED {{ $car->price }} <span>/ Rent Per Day</span></h4>
+                            <h4>AED {{ $car->price_daily }} <span>/ Rent Per Day</span></h4>
                         </div>
                         <div class="item">
                             <h3>{{ $car->car_name . ' ' . $car->model }}</h3>
@@ -168,7 +168,7 @@
                                         <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
-                                        <input type="hidden" name="daily_car_price" value="{{ $car->price }}">
+                                        <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <button type="submit" class="booking-button mt-15">Rent Now</button>

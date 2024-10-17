@@ -79,7 +79,7 @@
                             <div class="curv-butn icon-bg">
                                 <a href="{{ route('cars.show', $car->id) }}" class="vid">
                                     <div class="icon">
-                                        <i class="icon-show"><span>AED {{ $car->price }}<br><i>day</i></span></i>
+                                        <i class="icon-show"><span>AED {{ $car->price_daily }}<br><i>day</i></span></i>
                                         <i class="ti-arrow-top-right icon-hidden"></i>
                                     </div>
                                 </a>
@@ -159,7 +159,7 @@
                                                         <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
-                                                        <input type="hidden" name="daily_car_price" value="{{ $car->price }}">
+                                                        <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <button type="submit" class="booking-button mt-15">Rent Now</button>
