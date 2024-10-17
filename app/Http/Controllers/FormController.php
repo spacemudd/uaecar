@@ -33,7 +33,7 @@ class FormController extends Controller
         $carDetailsUrl = route('cars.show', ['id' => $car->id]);
         Mail::to('abdelrahmanyouseff@gmail.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
 
-        return redirect()->back()->with('message', 'Your booking has been successfully submitted!');
+        return response()->json(['success' => true]);
     }
 
     public function sendContactEmail(Request $request)

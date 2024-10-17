@@ -1,6 +1,43 @@
 @extends('front.layouts.master')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+
+<script>
+$(document).ready(function() {
+    $('.contact__form').on('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        const form = $(this); // Reference the current form
+        console.log('Form action URL:', form.attr('action')); // Log the form action URL
+
+        $.ajax({
+            url: form.attr('action'), // The form action URL
+            type: 'POST',
+            data: form.serialize(), // Serialize the form data
+            success: function(response) {
+                console.log('AJAX response:', response); // Log the response
+                if (response.success) {
+                    swal("Thank You for Your Request!", "Your request has been successfully submitted, and our team will review it shortly. We will contact you as soon as possible to confirm your booking.", "success").then(() => {
+                        // Reset the form fields
+                        form[0].reset();
+                        // Close the modal
+                        form.closest('.modal').modal('hide');
+                    });
+                } else {
+                    swal("Error!", "There was a problem with your request.", "error");
+                }
+            },
+            error: function(xhr) {
+                console.error(xhr); // Log the error response
+                swal("Error!", "There was a problem with your request. Please try again.", "error");
+            }
+        });
+    });
+});
+</script>
+
 
 @section('content')
     <!-- Preloader -->
@@ -21,23 +58,6 @@
                 </video>
             </div>
         </div>
-
-        <!-- Clients -->
-        <!-- <section class="clients">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="owl-carousel owl-theme">
-                            @foreach(range(1, 8) as $index)
-                                <div class="clients-logo">
-                                    <a href="#0"><img src="{{ asset("front/img/clients/$index.png") }}" alt=""></a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
     </header>
 
     <section class="cars2 section-padding">
@@ -53,11 +73,9 @@
 
             <div class="row">
                 @foreach($cars as $car)
-                    <!-- Change from col-md-4 to col-md-3 to make 4 columns per row -->
                     <div class="col-md-3 mb-30">
                         <div class="item" style="position: relative;">
                             <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
-
                             <div class="title">
                                 <h4>{{ $car->car_name . ' ' . $car->model }}</h4>
                                 <div class="details">
@@ -66,16 +84,16 @@
                                     <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
                                 </div>
                                 
-                                <!-- Always show Reserve and WhatsApp buttons -->
                                 <div class="button-group mt-3">
                                     <button style="background-color: black; color: white; border: 2px solid black;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
                                         Reserve Now
                                     </button>
-                                    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" href="https://wa.me/00971542700030?text={{ urlencode("Hello. I am interested in the: ".$car->car_name) }}" class="btn btn-success">WhatsApp</a>
+                                    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
+                                    href="https://wa.me/00971542700030?text={{ urlencode("Hello. I am interested in the: " . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
+                                    class="btn btn-success">WhatsApp</a>
                                 </div>
                             </div>
 
-                            <!-- Always show the price button -->
                             <div class="curv-butn icon-bg">
                                 <a href="{{ route('cars.show', $car->id) }}" class="vid">
                                     <div class="icon">
@@ -87,7 +105,6 @@
                         </div>
                     </div>
 
-                    <!-- Modal for each car -->
                     <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -98,7 +115,7 @@
                                 <div class="modal-body">
                                     <div class="booking-box">
                                         <div class="booking-inner clearfix">
-                                            <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix">
+                                            <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix" id="bookingForm">
                                                 @csrf
                                                 <input type="hidden" name="car_id" value="{{ $car->id }}">
                                                 
@@ -172,24 +189,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Modal -->
                 @endforeach
             </div>
         </div>
     </section>
 
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2({
-                minimumResultsForSearch: Infinity // Optional: hides search box
-            });
-        });
 
-        function setCarId(carId) {
-            document.getElementById('car_id').value = carId;
-            // Optionally, open the booking form/modal here if needed
-        }
-   
 
-    </script>
 @endsection

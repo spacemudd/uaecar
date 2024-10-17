@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
 
-
 </head>
 <body>
 
