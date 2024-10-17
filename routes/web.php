@@ -14,6 +14,7 @@ use App\Http\Controllers\Webhooks\AutoTraderReceiverController;
 use App\Http\Controllers\WhyUsController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\back\adminDashboardController;
 use App\Models\Car;
 use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
@@ -106,3 +107,9 @@ Route::post('/admin/cars/{id}/upload', [\App\Http\Controllers\Admin\CarsControll
 
 Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 
+
+
+
+///ADMIN ROUTES
+
+Route::get('/admin/dashboard', [adminDashboardController::class, 'index']);
