@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('car_name'); // Car name
             $table->integer('seats'); // Number of seats
             $table->string('gear'); // Gear type
-            $table->decimal('price_daily', 10, 2); // Price
+            $table->decimal('price_daily'); // Price
             $table->decimal('price_weekly', 10, 2);
             $table->decimal('price_monthly', 10, 2);  
             $table->string('car_picture')->nullable(); // Picture URL
