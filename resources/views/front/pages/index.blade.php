@@ -84,14 +84,18 @@ $(document).ready(function() {
                                     <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
                                 </div>
                                 
-                                <div class="button-group mt-3">
-                                    <button style="background-color: black; color: white; border: 2px solid black;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
-                                        Reserve Now
-                                    </button>
-                                    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
-                                    href="https://wa.me/00971542700030?text={{ urlencode("Hello. I am interested in the: " . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
-                                    class="btn btn-success">WhatsApp</a>
-                                </div>
+                                <div class="button-group mt-3 d-flex justify-content-start align-items-center flex-wrap">
+    <button style="background-color: black; color: white; border: 2px solid black;" 
+        type="button" class="btn btn-primary reserve-button">
+        Reserve Now
+    </button>
+    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
+        href="https://wa.me/00971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
+        class="btn btn-success">
+        WhatsApp
+    </a>
+</div>
+
                             </div>
 
                             <div class="curv-butn icon-bg">

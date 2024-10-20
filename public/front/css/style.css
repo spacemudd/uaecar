@@ -742,7 +742,7 @@ hr {
 }
 .navbar .navbar-nav .nav-link {
     font-family: 'Outfit', sans-serif;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 300;
     color: #fff;
     margin: 1px;
@@ -843,7 +843,7 @@ hr {
     padding: 0;
 }
 .logo-img {
-    width: 250px;
+    width: 350px;
     text-align: center;
 }
 .dropdown .nav-link i {
@@ -1330,7 +1330,102 @@ hr {
     .slider-fade .owl-theme .owl-nav {
         display: none;
     }
+    
 }
+
+@media (min-width: 768px) and (max-width: 1807px) 
+{
+
+    .col-md-3{
+        width: 50%;
+    }
+    .button-group {
+        display: flex; /* Make sure buttons are aligned in a row */
+        justify-content: space-between; /* Spread the buttons evenly */
+        align-items: center; /* Vertically center the buttons */
+        gap: 10px; /* Space between buttons */
+    }
+
+    /* Ensure buttons don't grow or shrink unexpectedly */
+    .button-group button {
+        flex: 0 1 auto;
+        width: auto; /* Ensure buttons don't stretch unnaturally */
+        min-width: 100px; /* Set a minimum width if necessary */
+    }
+}
+
+@media (min-width: 758px) and (max-width: 1758px) {
+    .navbar {
+        padding: 0 20px; /* Adjust navbar padding */
+    }
+    
+    .navbar .container {
+        max-width: 1400px; /* Limit container width on larger screens */
+        margin: 0 auto;
+    }
+    
+    .navbar .dropdown-menu {
+        width: 180px; /* Adjust dropdown width for better alignment */
+        padding: 10px 15px;
+    }
+
+    .navbar .nav-link {
+        margin-left: 15px; /* Add space between nav items */
+    }
+
+    .navbar .dropdown-menu .dropdown-item {
+        padding: 0 10px; /* Adjust padding inside dropdown items */
+    }
+}
+
+@media (min-width: 758px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-nav {
+        display: flex;
+        gap: 15px; /* Add consistent space between nav items */
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    
+    .button-group .btn {
+        flex-grow: 1;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .navbar .container {
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1758px) {
+    .navbar .container {
+        max-width: 85%; /* Limit the width on large screens */
+    }
+    
+    .navbar .dropdown-menu {
+        width: 200px;
+    }
+
+    .navbar .nav-link {
+        padding: 10px 15px;
+    }
+}
+
+
+
 
 
 /* ======= Slider style (Inner Page Slider) ======= */
@@ -2607,7 +2702,7 @@ font-family: 'Outfit', sans-serif;
 /* ======= Cars 2 style ======= */
 .cars2 {
     position: relative;
-    margin-top: -7%;
+    margin-top: 0%;
 }
 .cars2 .item {
     position: relative;
@@ -6562,8 +6657,10 @@ height: 100% !important;
     background-color: #1b1b1b;
 }
 .footer-logo {
-    width: 250px;
-    margin-bottom: 15px;
+    width: 400px;
+    margin-bottom: -149px;
+    margin-top: -194px;
+    margin-left: -84px;
 }
 .footer-logo h2 {
     font-family: 'Outfit', sans-serif;

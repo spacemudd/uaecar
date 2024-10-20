@@ -1,5 +1,45 @@
 @extends('front.layouts.master')
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+
+<script>
+$(document).ready(function() {
+    $('.contact__form').on('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        const form = $(this); // Reference the current form
+        console.log('Form action URL:', form.attr('action')); // Log the form action URL
+
+        $.ajax({
+            url: form.attr('action'), // The form action URL
+            type: 'POST',
+            data: form.serialize(), // Serialize the form data
+            success: function(response) {
+                console.log('AJAX response:', response); // Log the response
+                if (response.success) {
+                    swal("Thank You for Your Request!", "Your request has been successfully submitted, and our team will review it shortly. We will contact you as soon as possible to confirm your booking.", "success").then(() => {
+                        // Reset the form fields
+                        form[0].reset();
+                        // Close the modal
+                        form.closest('.modal').modal('hide');
+                    });
+                } else {
+                    swal("Error!", "There was a problem with your request.", "error");
+                }
+            },
+            error: function(xhr) {
+                console.error(xhr); // Log the error response
+                swal("Error!", "There was a problem with your request. Please try again.", "error");
+            }
+        });
+    });
+});
+</script>
+
+
 @section('content')
     <div class="preloader-bg"></div>
     <div id="preloader">
