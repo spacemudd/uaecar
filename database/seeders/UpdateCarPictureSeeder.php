@@ -15,10 +15,6 @@ class UpdateCarPictureSeeder extends Seeder
     public function run(): void
     {
 
-        Schema::table('cars', function (Blueprint $table) {
-            // Change the column type to integer
-            $table->integer('price_daily')->change();
-        });
 
 
         // DB::table('cars')

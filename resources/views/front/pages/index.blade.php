@@ -89,7 +89,7 @@ $(document).ready(function() {
                                         Reserve Now
                                     </button>
                                     <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
-                                    href="https://wa.me/00971542700030?text={{ urlencode("Hello. I am interested in the: " . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
+                                    href="https://wa.me/971542700030?text={{ urlencode("Hello. I am interested in the: " . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
                                     class="btn btn-success">WhatsApp</a>
                                 </div>
                             </div>

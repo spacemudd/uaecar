@@ -134,7 +134,7 @@
                                 <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
                                 <div class="social-icons">
                                     <ul class="list-inline">
-                                        <li><a href="https://wa.me/00971542700030"><i class="fa-brands fa-whatsapp"></i></a></li>
+                                        <li><a href="https://wa.me/971542700030"><i class="fa-brands fa-whatsapp"></i></a></li>
                                         <li><a href="https://www.facebook.com/profile.php?id=61566173455254&mibextid=JRoKGi"><i class="fa-brands fa-facebook-f"></i></a></li>
                                         <li><a href="https://www.instagram.com/luxuria_uae?igsh=MTYwNDNwcW9vNDV1Zw=="><i class="fa-brands fa-instagram"></i></a></li>
                                     </ul>
@@ -179,7 +179,7 @@
             </div>
         </div>
         </footer>
-        <a href="https://wa.me/00971542700030" class="whatsapp-button" target="_blank">
+        <a href="https://wa.me/971542700030" class="whatsapp-button" target="_blank">
           <img src="{{ asset('front/img/whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" />
         </a>
     <!-- jQuery -->
