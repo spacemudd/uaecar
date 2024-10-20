@@ -37,13 +37,6 @@ return [
 
     'mailers' => [
 
-        'mailgun' => [
-        'transport' => 'mailgun',
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'), // Default is api.mailgun.net
-    ],
-
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
@@ -116,8 +109,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@rentluxuria.com'),
-        'name' => env('MAIL_FROM_NAME', 'Rent Luxuria'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
 ];

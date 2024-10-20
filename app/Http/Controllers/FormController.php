@@ -31,7 +31,7 @@ class FormController extends Controller
         ]);
 
         $carDetailsUrl = route('cars.show', ['id' => $car->id]);
-        Mail::to('info@rentluxuria.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
+        Mail::to('abdelrahmanyouseff@gmail.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
 
         return response()->json(['success' => true]);
     }
