@@ -799,6 +799,7 @@ hr {
 }
 .nav-scroll .logo-img {
     width: 130px;
+
 }
 .nav-scroll .logo-img {
     margin-bottom: 0px;
@@ -843,7 +844,7 @@ hr {
     padding: 0;
 }
 .logo-img {
-    width: 350px;
+    width: 350px !important;
     text-align: center;
 }
 .dropdown .nav-link i {

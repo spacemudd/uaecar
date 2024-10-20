@@ -60,7 +60,7 @@ $(document).ready(function() {
         </div>
     </header>
 
-    <section class="cars2 section-padding">
+    <section class="cars2 section-padding my-0 py-0">
         <div class="aha">
             <div class="row">
                 <div class="col-4">
@@ -73,7 +73,7 @@ $(document).ready(function() {
 
             <div class="row">
                 @foreach($cars as $car)
-                    <div class="col-md-3 mb-30">
+                    <div class="  mb-30 col-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="item" style="position: relative;">
                             <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
                             <div class="title">
@@ -96,6 +96,7 @@ $(document).ready(function() {
 
                             <div class="curv-butn icon-bg">
                                 <a href="{{ route('cars.show', $car->id) }}" class="vid">
+
                                     <div class="icon">
                                         <i class="icon-show"><span>AED {{ $car->price_daily }}<br><i>day</i></span></i>
                                         <i class="ti-arrow-top-right icon-hidden"></i>
