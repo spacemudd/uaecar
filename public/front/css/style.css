@@ -844,7 +844,7 @@ hr {
     padding: 0;
 }
 .logo-img {
-    width: 300px !important;
+    width: 300px;
     text-align: center;
 }
 .dropdown .nav-link i {
