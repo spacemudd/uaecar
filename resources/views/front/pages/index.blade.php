@@ -73,7 +73,7 @@ $(document).ready(function() {
 
             <div class="row">
                 @foreach($cars as $car)
-                    <div class="  mb-30 col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="  mb-30 col-12 col-sm-6 col-md-6 col-lg-4">
                         <div class="item" style="position: relative;">
                             <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
                             <div class="title">
