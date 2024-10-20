@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         //]);
 
         // $this->call(ArrivedSoonCar::class);
-        $this->call(DeleteCarsSeeder::class);
+        $this->call(UpdateCarPictureSeeder::class);
 
         // $this->call(CarGallerySeeder::class);
         // $this->call(CarImageSeeder::class);
