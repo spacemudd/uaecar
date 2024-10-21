@@ -108,7 +108,7 @@ $(document).ready(function() {
                         </div>
                     </div> -->
 
-                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="col-12 col-md-6 col-lg-3 mb-3">
     <a href="{{ route('cars.show', $car->id) }}" class="card-link" style="text-decoration: none;">
         <div class="card custom-card" style="width: 100%;">
             <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image">
