@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="section-title">
-                        <h2>Our Cars</h2>
+                        <h2>Our Cars</h2><br>
                         <p>Choose the car that fits your needs</p>
                     </div>
                 </div>
