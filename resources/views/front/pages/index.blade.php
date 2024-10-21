@@ -130,10 +130,11 @@ $(document).ready(function() {
                             onclick="openBookingModal(event);">
                         Book Now
                     </button>
-                    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
+                    <a>" 
                         href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
                         class="btn btn-success ms-auto">
-                        <i class="fa-brands fa-whatsapp custom-whatsapp-icon"></i>
+                        <i class="fa-brands fa-whatsapp custom-whatsap
+                        p-icon"></i>
                     </a>
                 </div>
             </div>
