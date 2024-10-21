@@ -18,7 +18,7 @@
         <div class="container">
             <!-- Logo -->
             <div class="logo-container" style="position: absolute; top:140%; transform:translateY(-50%)">
-                <a href="{{ route('index') }}"> <img src="{{ asset('front/img/white-logo.png') }}" class="logo-img" alt=""> </a>
+                <a href="{{ route('index') }}"> <img src="{{ asset('front/img/white-logo.png') }}" class="logo-img" alt="" style="width: 35%; text-align:center;"> </a>
                 <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
             </div>
             <!-- Button -->
