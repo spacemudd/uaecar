@@ -5,39 +5,38 @@
 <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
 
 <script>
-$(document).ready(function() {
-    $('.contact__form').on('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission
+    $(document).ready(function() {
+        $('.contact__form').on('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
 
-        const form = $(this); // Reference the current form
-        console.log('Form action URL:', form.attr('action')); // Log the form action URL
+            const form = $(this); // Reference the current form
+            console.log('Form action URL:', form.attr('action')); // Log the form action URL
 
-        $.ajax({
-            url: form.attr('action'), // The form action URL
-            type: 'POST',
-            data: form.serialize(), // Serialize the form data
-            success: function(response) {
-                console.log('AJAX response:', response); // Log the response
-                if (response.success) {
-                    swal("Thank You for Your Request!", "Your request has been successfully submitted, and our team will review it shortly. We will contact you as soon as possible to confirm your booking.", "success").then(() => {
-                        // Reset the form fields
-                        form[0].reset();
-                        // Close the modal
-                        form.closest('.modal').modal('hide');
-                    });
-                } else {
-                    swal("Error!", "There was a problem with your request.", "error");
+            $.ajax({
+                url: form.attr('action'), // The form action URL
+                type: 'POST',
+                data: form.serialize(), // Serialize the form data
+                success: function(response) {
+                    console.log('AJAX response:', response); // Log the response
+                    if (response.success) {
+                        swal("Thank You for Your Request!", "Your request has been successfully submitted, and our team will review it shortly. We will contact you as soon as possible to confirm your booking.", "success").then(() => {
+                            // Reset the form fields
+                            form[0].reset();
+                            // Close the modal
+                            form.closest('.modal').modal('hide');
+                        });
+                    } else {
+                        swal("Error!", "There was a problem with your request.", "error");
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr); // Log the error response
+                    swal("Error!", "There was a problem with your request. Please try again.", "error");
                 }
-            },
-            error: function(xhr) {
-                console.error(xhr); // Log the error response
-                swal("Error!", "There was a problem with your request. Please try again.", "error");
-            }
+            });
         });
     });
-});
 </script>
-
 
 @section('content')
     <!-- Preloader -->
@@ -65,7 +64,7 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-4">
                     <div class="section-title">
-                        <h2>Our Cars</h2><br>
+                        <h2>Our Cars</h2>
                         <p>Choose the car that fits your needs</p>
                     </div>
                 </div>
@@ -73,85 +72,33 @@ $(document).ready(function() {
 
             <div class="row">
                 @foreach($cars as $car)
-                    <!-- <div class="  mb-30 col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="item" style="position: relative;">
-                            <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
-                            <div class="title">
-                                <h4>{{ $car->car_name . ' ' . $car->model }}</h4>
-                                <div class="details">
-                                    <span><i class="omfi-door"></i> {{ $car->seats }} Seats</span>
-                                    <span><i class="omfi-transmission"></i> {{ $car->gear }}</span>
-                                    <span><i class="omfi-luggage"></i> {{ $car->bags }} Bags</span>
-                                </div>
-                                
-                                <div class="button-group mt-3">
-                                    <button style="background-color: black; color: white; border: 2px solid black;" type="button" class="btn btn-primary reserve-button" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
-                                        Reserve Now
-                                    </button>
-                                    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
-                                    href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
-                                    class="btn btn-success">
-                                    <i class="fa-brands fa-whatsapp custom-whatsapp-icon"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="curv-butn icon-bg">
-                                <a href="{{ route('cars.show', $car->id) }}" class="vid">
-
-                                    <div class="icon">
-                                        <i class="icon-show"><span>AED {{ $car->price_daily }}<br><i>day</i></span></i>
-                                        <i class="ti-arrow-top-right icon-hidden"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div> -->
-
                     <div class="col-12 col-md-6 col-lg-3 mb-3">
-    <a href="{{ route('cars.show', $car->id) }}" class="card-link" style="text-decoration: none;">
-        <div class="card custom-card" style="width: 100%;">
-            <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image">
-            <div class="card-body">
-                <h5 class="card-title custome-car-name">{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h5>
-                <!-- <div class="details">
-                    <span><i class="omfi-door"></i> {{ $car->seats }} Seats</span>
-                    <span><i class="omfi-color"></i> {{ $car->color }}</span>
-                    <span><i class="omfi-door"></i> {{ $car->doors }} Door</span>
-                </div>  -->
-                <h5 class="card-title mt-3">{{ $car->price_daily}} AED / Day</h5>
-                
-                <div class="button-group mt-3 d-flex justify-content-between">
-                    <button style="background-color: #09a5f9; color: white; border: 2px solid #09a5f9;" 
-                            type="button" 
-                            class="btn btn-primary reserve-button" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#bookingModal{{ $car->id }}"
-                            onclick="openBookingModal(event);">
-                        Book Now
-                    </button>
+                        <a href="{{ route('cars.show', $car->id) }}" class="card-link" style="text-decoration: none;">
+                            <div class="card custom-card" style="width: 100%;">
+                                <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image">
+                                <div class="card-body">
+                                    <h5 class="card-title custome-car-name">{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h5>
+                                    <h5 class="card-title mt-3">{{ $car->price_daily }} AED / Day</h5>
+                                    
+                                    <div class="button-group mt-3 d-flex justify-content-between">
+                                        <button style="background-color: #09a5f9; color: white; border: 2px solid #09a5f9;" 
+                                                type="button" 
+                                                class="btn btn-primary reserve-button" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#bookingModal{{ $car->id }}"
+                                                onclick="openBookingModal(event);">
+                                            Book Now
+                                        </button>
 
-
-                    <a href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
-           class="ms-auto">
-            <img src="{{ asset('front/img/whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" style="width: 42px; height:auto; margin: 0;" />
-        </a>
-
-
-                    <!-- <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
-                        href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
-                        class="btn btn-success ms-auto">
-                        <i class="fa-brands fa-whatsapp custom-whatsap
-                        p-icon"></i>
-                    </a> -->
-                </div>
-            </div>
-        </div>
-    </a>
-</div>
-
-
-
+                                        <a href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
+                                           class="ms-auto">
+                                            <img src="{{ asset('front/img/whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" style="width: 42px; height:auto; margin: 0;" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -234,6 +181,9 @@ $(document).ready(function() {
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -241,13 +191,4 @@ $(document).ready(function() {
             </div>
         </div>
     </section>
-
-    <script>
-    function openBookingModal(event) {
-        event.stopPropagation(); // Prevents the click event from bubbling up
-        event.preventDefault(); // Prevents the default action (if any)
-        // You can also add any other logic you need here for opening the modal
-    }
-</script>
-
 @endsection

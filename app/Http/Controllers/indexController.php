@@ -12,7 +12,7 @@ class indexController extends Controller
 
     public function showData()
     {
-        $cars = Car::all(); 
+        $cars = Car::orderBy('price_daily', 'desc')->get();
         return view("front.pages.index", compact("cars"));
     }
 
