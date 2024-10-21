@@ -73,7 +73,7 @@ $(document).ready(function() {
 
             <div class="row">
                 @foreach($cars as $car)
-                    <div class="  mb-30 col-12 col-sm-6 col-md-6 col-lg-4">
+                    <!-- <div class="  mb-30 col-12 col-sm-6 col-md-6 col-lg-4">
                         <div class="item" style="position: relative;">
                             <img src="{{ asset($car->car_picture) }}" class="img-fluid" alt="">
                             <div class="title">
@@ -89,8 +89,10 @@ $(document).ready(function() {
                                         Reserve Now
                                     </button>
                                     <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
-                                    href="https://wa.me/971542700030?text={{ urlencode("Hello. I am interested in the: " . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
-                                    class="btn btn-success">WhatsApp</a>
+                                    href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
+                                    class="btn btn-success">
+                                    <i class="fa-brands fa-whatsapp custom-whatsapp-icon"></i>
+                                    </a>
                                 </div>
                             </div>
 
@@ -104,7 +106,43 @@ $(document).ready(function() {
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+    <a href="{{ route('cars.show', $car->id) }}" class="card-link" style="text-decoration: none;">
+        <div class="card custom-card" style="width: 100%;">
+            <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image">
+            <div class="card-body">
+                <h5 class="card-title custome-car-name">{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h5>
+                <!-- <div class="details">
+                    <span><i class="omfi-door"></i> {{ $car->seats }} Seats</span>
+                    <span><i class="omfi-color"></i> {{ $car->color }}</span>
+                    <span><i class="omfi-door"></i> {{ $car->doors }} Door</span>
+                </div>  -->
+                <h5 class="card-title mt-3">{{ $car->price_daily}} AED / Day</h5>
+                
+                <div class="button-group mt-3 d-flex justify-content-between">
+                    <button style="background-color: #09a5f9; color: white; border: 2px solid #09a5f9;" 
+                            type="button" 
+                            class="btn btn-primary reserve-button" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#bookingModal{{ $car->id }}"
+                            onclick="openBookingModal(event);">
+                        Book Now
+                    </button>
+                    <a style="background:#018834;border: 2px solid #018834;margin-left:2px;" 
+                        href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
+                        class="btn btn-success ms-auto">
+                        <i class="fa-brands fa-whatsapp custom-whatsapp-icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
 
                     <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -195,6 +233,12 @@ $(document).ready(function() {
         </div>
     </section>
 
-
+    <script>
+    function openBookingModal(event) {
+        event.stopPropagation(); // Prevents the click event from bubbling up
+        event.preventDefault(); // Prevents the default action (if any)
+        // You can also add any other logic you need here for opening the modal
+    }
+</script>
 
 @endsection

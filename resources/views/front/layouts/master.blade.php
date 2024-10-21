@@ -17,7 +17,7 @@
 <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Logo -->
-            <div class="">
+            <div class="logo-container">
                 <a href="{{ route('index') }}"> <img src="{{ asset('front/img/white-logo.png') }}" class="logo-img" alt=""> </a>
                 <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
             </div>
