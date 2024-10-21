@@ -72,7 +72,7 @@
 
             <div class="row">
                 @foreach($cars as $car)
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <div class="col-12 col-md-4 col-lg-3 mb-3">
                         <a href="{{ route('cars.show', $car->id) }}" class="card-link" style="text-decoration: none;">
                             <div class="card custom-card" style="width: 100%;">
                                 <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image">
