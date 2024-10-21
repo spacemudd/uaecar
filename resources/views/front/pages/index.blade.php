@@ -75,7 +75,7 @@
                     <div class="col-12 col-md-4 col-lg-3 mb-3">
                         <a href="{{ route('cars.show', $car->id) }}" class="card-link" style="text-decoration: none;">
                             <div class="card custom-card" style="width: 100%;">
-                                <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image">
+                                <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image" style="object-fit: contain;">
                                 <div class="card-body">
                                     <h5 class="card-title custome-car-name" style="font-weight: 300;">{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h5>
                                     <h5 class="card-title mt-3">{{ $car->price_daily }} AED / Day</h5>
