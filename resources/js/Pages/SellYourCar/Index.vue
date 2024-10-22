@@ -57,7 +57,7 @@ function handleImageError() {
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex lg:justify-left lg:col-span-1">
                         <a href="/">
-                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/luxuria_logo_text_white.png" />
+                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/Kaiadmin_logo_text_white.png" />
                         </a>
                     </div>
 
@@ -99,7 +99,7 @@ function handleImageError() {
                             Sell Your Car
                         </h2>
                         <p class="mt-5 text-2xl">
-                            At Luxuria we are prolific buyers of the world’s finest supercars, performance cars and luxury SUVs.
+                            At Kaiadmin we are prolific buyers of the world’s finest supercars, performance cars and luxury SUVs.
                         </p>
                         <p class="mt-5">
                             We specialise in exceptionally high specification, low mileage examples as well as the latest and

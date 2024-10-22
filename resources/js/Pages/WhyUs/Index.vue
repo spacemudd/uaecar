@@ -35,7 +35,7 @@ function handleImageError() {
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex lg:justify-left lg:col-span-2">
                         <a href="/">
-                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/luxuria_logo_text_white.png" />
+                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/Kaiadmin_logo_text_white.png" />
                         </a>
                     </div>
 
@@ -91,7 +91,7 @@ function handleImageError() {
                      style="background-image: url('/car_images/corvette.jpg');background-size: cover;background-position: center">
                     <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <h2 class="text-5xl my-10 text-center lg:text-left">Why Us</h2>
-                        <p class="mt-2 text-3xl text-center lg:text-left">Enjoy an exquisite experience with Luxuria Auto.</p>
+                        <p class="mt-2 text-3xl text-center lg:text-left">Enjoy an exquisite experience with Kaiadmin Auto.</p>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@ function handleImageError() {
                                 <p class="mt-10 text-center lg:text-left">
                                     Unit 5a Keer Park, Carnforth, Lancashire<br/>
                                     +44 1524 488800<br/>
-                                    info@luxuria-auto.co.uk
+                                    info@Kaiadmin-auto.co.uk
                                 </p>
                             </div>
                         </div>

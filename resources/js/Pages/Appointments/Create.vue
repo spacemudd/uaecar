@@ -54,7 +54,7 @@ function handleImageError() {
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex lg:justify-left lg:col-span-1">
                         <a href="/">
-                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/luxuria_logo_text_white.png" />
+                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/Kaiadmin_logo_text_white.png" />
                         </a>
                     </div>
 
@@ -145,7 +145,7 @@ function handleImageError() {
                     <p class="mt-10 text-center lg:text-left">
                         Unit 5a Keer Park, Carnforth, Lancashire<br/>
                         +44 1524 488800<br/>
-                        info@luxuria-auto.co.uk
+                        info@Kaiadmin-auto.co.uk
                     </p>
                 </div>
             </div>
