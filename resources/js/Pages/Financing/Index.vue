@@ -37,7 +37,7 @@ function handleImageError() {
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex lg:justify-left lg:col-span-1">
                         <a href="/">
-                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/luxuria_logo_text_white.png" />
+                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/Kaiadmin_logo_text_white.png" />
                         </a>
                     </div>
 
@@ -120,7 +120,7 @@ function handleImageError() {
                             </div>
                             <div class="border border-2 p-2 text-center">
                                 <h2 class="font-bold">Email</h2>
-                                <p>info@luxuria-auto.co.uk</p>
+                                <p>info@Kaiadmin-auto.co.uk</p>
                                 <p>For detailed and complete answers.</p>
                             </div>
                         </div>

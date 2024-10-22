@@ -30,7 +30,7 @@
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item"> <span class="icon omfi-envelope"></span>
                         <h5>Email us</h5>
-                        <p>info@rentluxuria.com</p> <i class="numb omfi-envelope"></i>
+                        <p>info@rentKaiadmin.com</p> <i class="numb omfi-envelope"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">

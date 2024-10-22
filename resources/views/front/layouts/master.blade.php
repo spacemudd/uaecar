@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>LUXURIA</title>
+    <title>Luxuria Rental Car</title>
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="footer-contact-link-content">
                                         <h6>Write to us</h6>
-                                        <p>info@rentluxuria.com</p>
+                                        <p>info@rentaluxuria.com</p>
                                     </div>
                                 </div>
                                 <div class="footer-contact-links-divider"></div>
@@ -173,7 +173,7 @@
             <div class="bottom-footer-text">
                 <div class="row copyright">
                     <div class="col-md-12">
-                        <p class="mb-0">&copy;2024 <a href="#">Luxuria</a>. All rights reserved.</p>
+                        <p class="mb-0">&copy;2024 <a href="#">Luxuria Rental Car</a>. All rights reserved.</p>
                     </div>
                 </div>
             </div>

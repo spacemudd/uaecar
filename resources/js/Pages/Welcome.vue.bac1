@@ -40,17 +40,17 @@ function handleImageError() {
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex lg:justify-left lg:col-span-1">
                         <a href="/">
-                            <img id="background" class="max-w-[150px] lg:max-w-[200px]" src="/luxuria_logo_text_white.png" />
+                            <img id="background" class="max-w-[150px] lg:max-w-[200px]" src="/Kaiadmin_logo_text_white.png" />
                         </a>
                     </div>
                     <navbar></navbar>
                 </header>
 
                 <div class="flex gap-10 justify-center lg:justify-end">
-                    <!--<a target="_blank" href="https://x.com/luxuria_uae"><img src="/x.svg" class="w-10" alt=""></a>-->
+                    <!--<a target="_blank" href="https://x.com/Kaiadmin_uae"><img src="/x.svg" class="w-10" alt=""></a>-->
                     <!--<a target="_blank" href="https://www.facebook.com/profile.php?id=61559406996757"><img src="/fb.svg" class="w-10" alt=""></a>-->
-                    <a target="_blank" href="https://www.instagram.com/luxuria_uae"><img src="/instagram.svg" class="w-10" alt=""></a>
-                    <!--<a target="_blank" href="https://www.tiktok.com/luxuria_uae"><img src="/tiktok.svg" class="w-8" alt=""></a>-->
+                    <a target="_blank" href="https://www.instagram.com/Kaiadmin_uae"><img src="/instagram.svg" class="w-10" alt=""></a>
+                    <!--<a target="_blank" href="https://www.tiktok.com/Kaiadmin_uae"><img src="/tiktok.svg" class="w-8" alt=""></a>-->
                 </div>
 
                 <main class="mt-6">
@@ -65,7 +65,7 @@ function handleImageError() {
                             </p>
                             <div class="flex flex-col lg:flex-row gap-2 mt-10">
                                 <div>
-                                    <a target="_blank" href="https://www.instagram.com/luxuria_uae" class="hover:bg-yellow-800 hover:text-white bg-yellow-600 text-black px-2 rounded text-bold text-2xl">
+                                    <a target="_blank" href="https://www.instagram.com/Kaiadmin_uae" class="hover:bg-yellow-800 hover:text-white bg-yellow-600 text-black px-2 rounded text-bold text-2xl">
                                         Visit us today
                                     </a>
                                 </div>
@@ -78,7 +78,7 @@ function handleImageError() {
 
                             <!--<p class="mt-10">* Open from Monday to Fri 9AM to 6PM</p>-->
                             <p class="mt-10">* For more information on what we offer our clients contact us on: +971 5427 00030</p>
-                            <p>* For immediate requests, please reach us at info@rentluxuria.com</p>
+                            <p>* For immediate requests, please reach us at info@rentKaiadmin.com</p>
                         </div>
                         <div class="absolute inset-0 bg-black bg-opacity-50" />
                         <video

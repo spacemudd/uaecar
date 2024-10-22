@@ -37,7 +37,7 @@ function handleImageError() {
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex lg:justify-left lg:col-span-1">
                         <a href="/">
-                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/luxuria_logo_text_white.png" />
+                            <img id="background" class="max-w-[100px] lg:max-w-[200px]" src="/Kaiadmin_logo_text_white.png" />
                         </a>
                     </div>
 
@@ -78,7 +78,7 @@ function handleImageError() {
                      style="background-image: url('/car_images/corvette.jpg');background-size: cover;background-position: center">
                     <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <h2 class="text-5xl my-10 text-center lg:text-left">About</h2>
-                        <p class="mt-2 text-3xl text-center lg:text-left">Enjoy an exquisite experience with Luxuria Auto.</p>
+                        <p class="mt-2 text-3xl text-center lg:text-left">Enjoy an exquisite experience with Kaiadmin Auto.</p>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@ function handleImageError() {
                                     Highly professional and passionate team
                                 </h2>
                                 <p class="mt-10 text-center lg:text-left">
-                                    At Luxuria Auto, we prioritise our clients' needs and interests, ensuring they receive unparalleled attention and service. Our team of professionals is dedicated to providing an exceptional experience. Our exquisite collection of exotic vehicles invites you to select something unique and distinctive, perfectly suited to your style. Discover a world of luxury and excitement with our prestigious automotive showcase, one of the finest in the industry. Embark on your journey with us today.
+                                    At Kaiadmin Auto, we prioritise our clients' needs and interests, ensuring they receive unparalleled attention and service. Our team of professionals is dedicated to providing an exceptional experience. Our exquisite collection of exotic vehicles invites you to select something unique and distinctive, perfectly suited to your style. Discover a world of luxury and excitement with our prestigious automotive showcase, one of the finest in the industry. Embark on your journey with us today.
                                 </p>
                             </div>
                             <div class="col-span-3 flex justify-center items-center">

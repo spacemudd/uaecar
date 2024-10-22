@@ -22,7 +22,7 @@ defineProps({
 </script>
 
 <template>
-    <PublicLayout title="Rent Luxuria Auto">
+    <PublicLayout title="Rent Kaiadmin Auto">
         ??
     </PublicLayout>
 </template>

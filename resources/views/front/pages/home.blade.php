@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <title>LUXURIA RENTAL CAR</title>
+        <title>Kaiadmin RENTAL CAR</title>
         <link rel="shortcut icon" href="{{ asset('front/img/favicon.png') }}" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
         <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />

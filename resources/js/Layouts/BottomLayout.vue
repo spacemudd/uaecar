@@ -49,7 +49,7 @@ export default {
              style="background-image: url('/car_images/corvette.jpg');background-size: cover;background-position: center">
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <h2 class="text-5xl mt-10 text-center lg:text-left">Gallery</h2>
-                <p class="mt-2 text-3xl text-center lg:text-left">Enjoy a carefully handpicked collection of photos and merch from Luxuria World.</p>
+                <p class="mt-2 text-3xl text-center lg:text-left">Enjoy a carefully handpicked collection of photos and merch from Kaiadmin World.</p>
                 <div class="mt-5 flex-row lg:flex gap-10 justify-center">
                     <a href="#">
                         <div class="bg-white text-black flex justify-center items-center align-bottom my-5"
@@ -120,7 +120,7 @@ export default {
                         <p class="mt-10" style="font-family: 'Times New Roman', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'">
                             Unit 5a Keer Park, Carnforth, Lancashire<br/>
                             +44 1524 488800<br/>
-                            info@luxuria-auto.co.uk
+                            info@Kaiadmin-auto.co.uk
                         </p>
                     </div>
                 </div>
@@ -147,9 +147,9 @@ export default {
                 <h3 class="font-bold">Headquarter</h3>
                 <p>Unit 5a Keer Park, Carnforth, Lancashire</p>
                 <p>+44 1524 488800</p>
-                <p>info@luxuria-auto.co.uk</p>
+                <p>info@Kaiadmin-auto.co.uk</p>
             </div>
         </div>
-        <p class="mt-10 text-center">Copyright © Luxuria 2024.</p>
+        <p class="mt-10 text-center">Copyright © Kaiadmin 2024.</p>
     </footer>
 </template>
