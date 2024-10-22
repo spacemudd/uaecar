@@ -110,8 +110,8 @@ Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 
 
 
-///ADMIN ROUTES
+///ADMIN ROUTES//
 
 Route::get('/admin/dashboard', [adminDashboardController::class, 'index']);
 Route::get('/admin/form', [adminDashboardController::class, 'addCars'])->name('admin.form');
-Route::get('/admin/carlist', [adminDashboardController::class, 'showCarList'])->name('admin.carlist');
+Route::get('/admin/carlist', [adminDashboardController::class, 'showCarList'])->name('admin.carlist'); //
