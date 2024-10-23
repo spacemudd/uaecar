@@ -117,14 +117,31 @@ $(document).ready(function() {
                             <h4>AED {{ $car->price_daily }} <span>/ Rent Per Day</span></h4>
                         </div>
                         <div class="item">
-                            <h3>{{ $car->car_name . ' ' . $car->model }}</h3>
+                            <h3>{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h3>
+                            <div class="d-flex justify-content-between">
+                            <div class="d-flex features "><span><i class="omfi-door"></i>{{ $car->doors }} Doors</span></div>
+                            <div class="d-flex features"><span><i class="omfi-passengers"></i>Fits {{ $car->seats }} Passengers</span></div>
+                            <div class="d-flex features"><span><i class="omfi-door"></i> {{ $car->delivery ? 'Free' : 'No' }} Delivery</span></div>
 
-                            <!-- <div class="features"><span><i class="omfi-door"></i> Doors</span><p>{{ $car->doors }}</p></div> -->
-                            <div class="features"><span><i class="omfi-passengers"></i> Passengers</span><p>{{ $car->seats }}</p></div>
-                            <div class="features"><span><i class="omfi-transmission"></i> Transmission</span><p>{{ $car->gear }}</p></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                            <div class="d-flex features"><span><i class="omfi-door"></i>Daily {{ $car->price_daily }} AED</span></div>
+                            <div class="d-flex features"><span><i class="omfi-door"></i>Weekly {{ $car->price_weekly }} AED</span></div>
+                            <div class="d-flex features"><span><i class="omfi-door"></i>Monthly {{ $car->price_monthly }} AED</span></div>
+
+                            </div>
+                           
+                            <div class="features"><span><i class="omfi-transmission"></i> {{ $car->gear }}</span></div>
                             <!-- <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{ $car->air_condition == 1 ? 'Yes' : 'Not' }}</p></div> -->
-                            <div class="features"><span><i class="omfi-age"></i> Year</span><p>{{ $car->year }}</p></div>
-                            <div class="features"><span><i class="omfi-folder"></i> Color</span><p>{{ $car->color }}</p></div>
+                            <!-- <div class="features"><span><i class="omfi-age"></i> Year</span><p>{{ $car->year }}</p></div> -->
+                            <!-- <div class="features"><span><i class="omfi-folder"></i> Color</span><p>{{ $car->color }}</p></div> -->
+                           
+                            <div class="features">
+    <span><i class="omfi-door"></i>Kilo Daily {{ $car->kilo_daily }}</span>
+    <small>Plus 1 Dirham for each extra kilo</small>
+</div>
+                            <div class="features"><span><i class="omfi-door"></i>Kilo Monthly {{ $car->kilo_monthly }}</span><p></p></div>
+
 
                             <div class="btn-double mt-30" data-grouptype="&amp;">
                                 <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>

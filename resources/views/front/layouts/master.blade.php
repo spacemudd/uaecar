@@ -16,53 +16,57 @@
 
 <nav class="navbar navbar-expand-lg">
         <div class="container">
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+        </button>
+
             <!-- Logo -->
-            <div class="logo-container" style="position: absolute; top:140%; transform:translateY(-50%); left:0%">
-                <a href="{{ route('index') }}"> <img src="{{ asset('front/img/white-logo.png') }}" class="logo-img" alt="" style="width: 35%; text-align:center;"> </a>
+               <!-- <div>
+                    <a href="{{ route('index') }}"> <img src="{{ asset('front/img/white-logo.png') }}" alt="" class="bg-secondary pt-3 mt-3  my-logo" > </a>
+
+               </div> -->
                 <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
-            </div>
             <!-- Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span> </button>
             <!-- Menu -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
 
-                    <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Grid <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="cars.html" class="dropdown-item"><span>Car Grid 01</span></a></li>
-                                    <li><a href="cars2.html" class="dropdown-item"><span>Car Grid 02</span></a></li>
-                                    <li><a href="cars3.html" class="dropdown-item"><span>Car Grid 03</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="cars4.html" class="dropdown-item"><span>Car Listing</span></a></li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Types <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="car-types.html" class="dropdown-item"><span>Car Types 01</span></a></li>
-                                    <li><a href="car-types2.html" class="dropdown-item"><span>Car Types 02</span></a></li>
-                                    <li><a href="car-types3.html" class="dropdown-item"><span>Car Types 03</span></a></li>
-                                    <li><a href="car-types4.html" class="dropdown-item"><span>Car Types 04</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Details <i class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="car-details.html" class="dropdown-item"><span>Car Details 01</span></a></li>
-                                    <li><a href="car-details2.html" class="dropdown-item"><span>Car Details 02</span></a></li>
-                                    <li><a href="car-details3.html" class="dropdown-item"><span>Car Details 03</span></a></li>
-                                    <li><a href="car-details4.html" class="dropdown-item"><span>Car Details 04</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li> -->
+                        <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Grid <i class="ti-angle-right"></i></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cars.html" class="dropdown-item"><span>Car Grid 01</span></a></li>
+                                        <li><a href="cars2.html" class="dropdown-item"><span>Car Grid 02</span></a></li>
+                                        <li><a href="cars3.html" class="dropdown-item"><span>Car Grid 03</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="cars4.html" class="dropdown-item"><span>Car Listing</span></a></li>
+                                <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Types <i class="ti-angle-right"></i></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="car-types.html" class="dropdown-item"><span>Car Types 01</span></a></li>
+                                        <li><a href="car-types2.html" class="dropdown-item"><span>Car Types 02</span></a></li>
+                                        <li><a href="car-types3.html" class="dropdown-item"><span>Car Types 03</span></a></li>
+                                        <li><a href="car-types4.html" class="dropdown-item"><span>Car Types 04</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Details <i class="ti-angle-right"></i></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="car-details.html" class="dropdown-item"><span>Car Details 01</span></a></li>
+                                        <li><a href="car-details2.html" class="dropdown-item"><span>Car Details 02</span></a></li>
+                                        <li><a href="car-details3.html" class="dropdown-item"><span>Car Details 03</span></a></li>
+                                        <li><a href="car-details4.html" class="dropdown-item"><span>Car Details 04</span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li> -->
 
 
-                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                 </ul>
+
                 <div class="navbar-right">
                     <div class="wrap">
                         <div class="icon"> <i class="flaticon-phone-call"></i> </div>
@@ -72,9 +76,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-    </nav>
+</nav>
     @yield('content')
 
 
@@ -183,6 +188,13 @@
           <img src="{{ asset('front/img/whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" />
         </a>
     <!-- jQuery -->
+
+    <!-- Bootstrap CSS -->
+
+<!-- Bootstrap JavaScript (with Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
     <script src="{{ asset('front/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('front/js/jquery-migrate-3.4.1.min.js') }}"></script>
     <script src="{{ asset('front/js/modernizr-2.6.2.min.js') }}"></script>

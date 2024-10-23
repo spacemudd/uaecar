@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h6>Kaiadmin</h6>
+                        <h6>LUXURIA</h6>
                         <h1>About <span>Us</span></h1>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="content">
-                        <div class="section-subtitle">Kaiadmin</div>
+                        <div class="section-subtitle">LUXURIA</div>
                         <div class="section-title">We Are More Than <span>A Car Rental Company</span></div>
                         <p style="font-size: 15px;">At Kaiadmin Rent a Car, we are driven to understand our clients'
                         varied needs and provide a tailored range of car rental

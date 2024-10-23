@@ -11,16 +11,23 @@ class Car extends Model
     use HasFactory;
 
     protected $fillable = [
+        'node_id',
         'car_name',
+        'car_model',
+        'car_model_year',
+        'plate_number',
+        'categories',
         'seats',
-        'gear',
-        'bags',
-        'price',
-        'car_picture',
         'doors',
-        'air_condition',
-        'age',
-        'description',
+        'price_daily',
+        'price_weekly',
+        'price_monthly',
+        'car_transmission',
+        'car_description',
+        'chassis_number',
+        'color',
+        'car_image',
+        'car_gallery',
     ];
 
 

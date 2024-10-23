@@ -34,6 +34,7 @@ return new class extends Migration
             $table->date('expected_return_date')->nullable(); // Expected return date
             $table->date('upcoming_reservation')->nullable(); // Upcoming reservation
             $table->string('chassis_number')->nullable(); // Chassis number
+
         });
     }
 

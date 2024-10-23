@@ -112,6 +112,7 @@ Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 
 ///ADMIN ROUTES//
 
-Route::get('/admin/dashboard', [adminDashboardController::class, 'index']);
-Route::get('/admin/form', [adminDashboardController::class, 'addCars'])->name('admin.form');
+Route::get('/admin/dashboard', [adminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/add-new-car', [adminDashboardController::class, 'addCars'])->name('admin.form');
 Route::get('/admin/carlist', [adminDashboardController::class, 'showCarList'])->name('admin.carlist'); //
+Route::post('admin/cars/store', [CarsController::class, 'store'])->name('cars.store');

@@ -4,6 +4,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('.contact__form').on('submit', function(e) {
@@ -59,6 +65,53 @@
         </div>
     </header>
 
+
+    <section class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="owl-carousel owl-theme">
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/1.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/2.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/3.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/4.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/5.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/6.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/7.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/8.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/9.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/10.png') }}" alt=""></a>
+                        </div>
+                        <div class="clients-logo">
+                            <a href="#0"><img src="{{ asset('front/img/clients/11.png') }}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     <section class="cars2 section-padding my-0 py-0">
         <div class="aha">
             <div class="row">
@@ -72,33 +125,57 @@
 
             <div class="row">
                 @foreach($cars as $car)
-                    <div class="col-12 col-md-4 col-lg-3 mb-3">
-                        <a href="{{ route('cars.show', $car->id) }}" class="card-link" style="text-decoration: none;">
-                            <div class="card custom-card" style="width: 100%;">
-                                <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image" style="object-fit: contain; height:auto;">
-                                <div class="card-body">
-                                    <h5 class="card-title custome-car-name" style="font-weight: 300; font-size:20px;">{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h5>
-                                    <h5 class="card-title mt-3">{{ $car->price_daily }} AED / Day</h5>
-                                    
-                                    <div class="button-group mt-3 d-flex justify-content-between">
-                                        <button style="background-color: #09a5f9; color: white; border: 2px solid #09a5f9;" 
-                                                type="button" 
-                                                class="btn btn-primary reserve-button" 
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#bookingModal{{ $car->id }}"
-                                                onclick="openBookingModal(event);">
-                                            Book Now
-                                        </button>
+ 
 
-                                        <a href="https://wa.me/971542700030?text={{ urlencode('Hello. I am interested in the: ' . $car->car_name . ' ' . $car->model . '. See the image here: ' . asset($car->car_picture)) }}" 
-                                           class="ms-auto">
-                                            <img src="{{ asset('front/img/whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" style="width: 42px; height:auto; margin: 0;" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                <a href="{{ route('cars.show', $car->id) }}" class="card3" style="text-decoration: none;">
+    <span class="px-3 py-2" style="display: inline-block;">
+        <h3 class="car_name" style="display: inline-block; margin: 0;">{{ $car->car_name . ' ' . $car->model}}</h3> 
+        <br>
+        <h4 class="car_name" style="display:inline-block; margin:0;">{{ $car->year }}</h4>
+        <!-- <span class="car_mini_text" style="display: inline-block;">or similar</span> -->
+    </span>
+    <div>   
+        
+        <!-- <p class="px-3">Mini Sedan Automatic</p> -->
+    </div>
+   
+    <div class="span-group px-3">
+        <span>{{$car->seats . ' Seats' }}</span>
+        <span>{{$car->doors . ' Doors'}}</span>
+        <span>Automatic</span>
+    </div>
+    <div>
+        <img src="{{ $car->car_picture }}" alt="">
+    </div>
+
+    <div class="d-flex mt-3">
+        <div>
+            <span class="px-3 py-2" style="display: inline-block;">
+                <span style="display: inline-block;">*</span>
+                <p class="car_name" style="display: inline-block; margin: 0;">1,000 kilometers included</p> 
+            </span>
+            
+            <span class="px-3 " style="display: inline-block;">
+                <h5 class="car_name" style="display: inline-block; margin: 0;">AED {{ $car->price_daily }} /day </h5> 
+                <span class="text-secondary" style="display: inline-block;"> SAR 518.19 total</span>
+                <button style="background-color: #767676; color: white; border: 2px solid #767676;" 
+                type="button" 
+                class="btn btn-primary reserve-button py-1 my-2" 
+                data-bs-toggle="modal" 
+                data-bs-target="#bookingModal{{ $car->id }}"
+                onclick="openBookingModal(event);">
+            Book Now
+        </button>
+            </span>
+        </div>
+       
+        <div class="px-3">   
+            <span class="whatsapp-icon">
+                <i class="fab fa-whatsapp"></i>
+            </span>
+        </div>
+    </div>
+</a>
 
                     <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
