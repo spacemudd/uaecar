@@ -1,0 +1,943 @@
+body
+{
+    font-family: "Roboto";
+    cursor: pointer;
+    background-image: url(images/all/Group\ 3230.png);
+}
+/**********************home*************************************/
+   
+    .home-nav .home-link 
+    {
+        text-decoration: underline blue 2px;
+    }
+
+    nav a 
+    {
+        font-family: "Roboto" !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        font-style: normal !important;
+        text-align: right !important;
+        color: #ffffff !important;
+        padding: 0px 20px !important;
+    }
+
+    .dropdown
+    {
+      background-color:#6c6c6c;
+      display: none;
+    }
+    .dropdown-menu
+    {
+      width: 300px !important;
+      background-color: rgba(169, 169, 169, 0.8);
+      padding: 0 !important;
+    }
+    .dropdown-menu li
+    {
+      
+      padding:10px 0 !important;
+    }
+    .dropdown-menu li :hover
+    {
+      background-color: #006bd1 !important;
+    }
+
+   
+    #home
+    {
+       background-image: url(images/home/18\ x\ 12\ Banner.png);
+       background-size: 100% 100% ;
+       background-position: center center;
+       height: 100vh;
+       position: relative;
+    }
+
+    .home-layer
+    {
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(23,23,23,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+    }
+
+
+   .home-layer h1
+   {
+    font-family: "Roboto";
+    font-size: 80px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+   }
+   .home-layer h3
+   {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: "Roboto";
+    padding-bottom: 10px;
+   }
+   .home-layer p
+   {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    width: 50%;
+    margin: auto;
+    padding-bottom: 10px;
+   }
+   
+   
+
+
+   .home-layer .b1
+   {
+    border-color: #f5f5f5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff; 
+    padding: 5px 30px;
+    margin: 0 10px;
+   }
+   .home-layer .b2
+   {
+    border-radius: 3px;
+    background: #006bd1;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+    border:1px solid #006BD1;
+    padding: 5px 30px;
+   }
+  
+   .carousel-indicators
+   {
+    position: unset;
+   }
+   .home-indicators button
+   {
+    background-color: #F5F5F5 !important;
+    padding:1px 0px !important;
+   }
+   .home-indicators .active
+   {
+    background-color:#2489e9 !important;
+    padding: 1px 20px !important;
+   }
+
+   
+
+
+   /***********Our Offer***********/
+   #our-offer h1
+   {
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #171717;
+   }
+   #our-offer h4
+   {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    text-align: center;
+    color: #6c6c6c;
+   }
+   
+   .offer-indicators button
+   {
+    background-color: #707070 !important;
+   }
+   .offer-indicators .active
+   {
+    background-color: #2489e9 !important;
+   }
+   
+
+   /***********about us************/
+   #about-us .about-us-style
+   {
+    opacity: 0.90;
+    background: #2489e9;
+   }
+   #about-us .about-us-content
+   {
+     width:85%;
+   }
+   #about-us .img-style
+   {
+      height: 450px;
+   }
+  
+  
+   
+
+   #about-us h2
+   {
+    font-family: "Roboto";
+    opacity: 0.90;
+    background: #2489e9;
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+   }
+   #about-us p
+   {
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 25px;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+   }
+   #about-us button
+   {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    color: #ffffff;
+    border-color: #f5f5f5;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 3px;
+    background-color: transparent;
+    padding: 5px 50px;
+    
+   }
+
+   /***********Our Fleet**********/
+   .banner-nav
+   {
+    background-image: url(images/all/18\ x\ 12\ Banner.png);
+    background-position: center center;
+    background-size: 100% 100%;
+    height: 25vh;
+    position: relative;
+   }
+   .layer-nav
+   {
+    background-color: rgba(23, 23,23,0.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+   }
+
+   .fleet-nav .fleet-link 
+    {
+        text-decoration: underline blue 2px;
+    }
+
+    
+   #our-fleet h1
+   {
+    font-family: "Roboto";
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #171717;
+   }
+   #our-fleet h4
+   {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    text-align: center;
+    color: #6c6c6c;
+   }
+   #our-fleet .card-body h5
+   {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+   }
+   #our-fleet .card-body .date
+   {
+    border-color: #c0c0c0;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 8px;
+    background: #ffffff;
+    padding:0 20px;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #171717;
+   }
+   #our-fleet .card-body span
+   {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 300;
+    font-style: normal;
+    text-align: left;
+    color: #393939;
+   }
+   #our-fleet .card-footer h5
+   {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    color: #c0c0c0;
+   }
+   #our-fleet .card-footer p
+   {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+   }
+   #our-fleet .card-footer button
+   {
+    border-radius: 3px;
+    background: #006bd1;
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+    border:none;
+    padding: 12px 52px;
+    margin-bottom: 10px;
+   }
+   #our-fleet .card
+   {
+    border-color: #f5f5f5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 9px;
+    background: #ffffff
+   }
+   
+  
+   
+    
+
+   /*******************cars********************************/
+
+   .cars-link
+   {
+    text-decoration: underline blue 2px;
+   }
+   #cars h1
+   {
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+   }
+   #cars h4
+   {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    text-align: center;
+    color: #6c6c6c;
+    text-align: left ;
+   }
+   #cars .card
+   {
+    border-color: #f5f5f5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+    background: #ffffff;
+    padding: 10px;
+   }
+   #cars .small-card
+   {
+    border-radius: 21px !important;
+   }
+   #cars .about-card
+   {
+    border-color: #f5f5f5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 11px;
+    background: #ffffff
+   }
+   #cars .about-card h3
+   {
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    text-align: center;
+    color: #171717;
+   }
+   #cars .about-card p
+   {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    color: #c0c0c0;
+   }
+   #cars .about-card p span
+   {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+   }
+   #cars .about-card  .myPar
+   {
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 20px;
+        font-style: normal;
+        text-align: left;
+        color: #171717;
+   }
+   #cars .about-card  h5
+   {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+   }
+   #cars .about-card  h6
+   {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: left;
+    color: #2489e9;
+   }
+   #cars .about-card button
+   {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+    border-radius: 3px;
+    background: #006bd1;
+    border:none;
+    text-align: center;
+    padding: 10px 0 ;
+    margin-top: 26px;
+   }
+ 
+    .blue-icon
+    {
+     
+        border-radius: 7px;
+        background: #006bd1;
+        width: 47px;
+        height: 47px;;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .blue-icon i
+    {
+        color: #ffffff;
+    }
+      /***************************our news********************************************/
+
+      .news-link
+      {
+        text-decoration: underline blue 2px;
+
+      }
+      #our-news h1
+      {
+        font-family: "Roboto";
+        font-size: 36px;
+        font-weight: bold;
+        font-style: normal;
+        text-align: center;
+        color: #171717;
+      }
+      #our-news h4
+      {
+        font-family: "Roboto";
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22px;
+        font-style: normal;
+        text-align: center;
+        color: #6c6c6c;
+      }
+      #our-news p
+      {
+        font-family: "Roboto";
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 20px;
+        font-style: normal;
+        text-align: left;
+        color: #171717;
+      }
+      #our-news h5
+      {
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        text-align: left;
+        color: #171717;
+      }
+      #our-news h6
+      {
+        font-family: "Alexandria";
+        font-size: 8px;
+        font-weight: normal;
+        line-height: 20px;
+        font-style: normal;
+        text-align: right;
+        color: #0e0e0e;
+      }
+      #our-news .card
+      {
+        border-color: #f5f5f5;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 9px;
+        background: #ffffff;
+      }
+      #our-news button
+      {
+        font-family: "Roboto";
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        text-align: left;
+        color: #ffffff;
+        border-radius: 3px;
+        background: #006bd1;
+        border: none ;
+        text-align: center;
+        width: 50%;
+        margin: auto;
+        padding: 10px 0;
+
+      }
+
+
+
+
+  /************************news datails ***************************/
+
+   #news-inside .my-line
+   {
+     color: #6c6c6c;
+     width: 95%;
+     margin: auto;
+   }
+   #news-inside h2
+   {
+    font-family: "Roboto";
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+   }
+   #news-inside p
+   {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 25px;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+   }
+   #news-inside .date
+   {
+    font-family: "Alexandria";
+    font-size: 8px;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+    text-align: right;
+    color: #2489e9;
+   }
+
+  /***************about*****************************/
+  .about-link
+  {
+   text-decoration: underline blue 2px;
+  }
+
+  #about .blue-square
+  {
+    width: 80%;
+    height: 550px;
+    border-radius: 9px;
+    background: #006bd1;
+    margin: 0px auto;
+    position: relative;
+  }
+  #about img
+  {
+    position: absolute;
+    top:3%;
+    left:4%;
+  }
+  #about h5
+  {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #2489e9;
+  }
+  #about p
+  {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 25px;
+    text-align: left;
+    color: #6c6c6c;
+  }
+  #about h2
+  {
+    font-family: "Roboto";
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+  }
+  #about span
+  {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: normal;
+    text-align: left;
+    color: #006bd1;
+    padding: 5px 10px;
+  }
+  #about i
+  {
+    color: #006bd1;
+    width: 6.9px;
+    height: 5.3px;
+  }
+  #about h4
+  {
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 45px;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+  }
+  #about h4 span
+  {
+    color: #006bd1;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 45px;  
+  }
+  #about .blue-div
+  {
+     background-color: #006bd1;  
+     border-radius: 19px;
+     text-align: center;
+     padding: 10px 5px;
+  }
+  /**********Services****************************/
+  #services h2
+  {
+    font-family: "Roboto";
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+  }
+  #services p
+  {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 25px;
+    text-align: left;
+    color: #6c6c6c;
+  }
+  .our-service h5
+  {
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+  }
+  .our-service p
+  {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 10px;
+    font-style: normal;
+    text-align: left;
+    color: #6c6c6c;
+  }
+  /******************contact************************/
+
+  .contact-link
+   {
+    text-decoration: underline blue 2px;
+   }
+  #contact .white-div
+  {
+    background-color: #FFFFFF;
+    padding: 13px 0 ;
+    border-radius: 5%;
+    border: 1px solid ;
+    border-color: #F5F5F5;
+  }
+  #contact .white-div a
+  {
+    color: #6c6c6c;
+  }
+  #contact .card
+  {
+    border-color: #f5f5f5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 9px;
+    background: #ffffff;
+  }
+  #contact img
+  {
+    border-radius: 9px;
+    border: none;
+  }
+  #contact .blue-circle
+  {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    background-color: #2489e9;
+  }
+  #contact h5
+  {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: normal;
+    text-align: center;
+    color: #171717;
+    padding: 10px 0;
+  }
+  #contact p
+  {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: normal;
+    text-align: center;
+    color: #707070;
+  }
+  #contact h2
+  {
+    font-family: "Roboto";
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+    margin-bottom: 20px;
+  }
+  #contact label
+  {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;  
+    font-style: normal;
+    text-align: left;
+    color: #171717;
+  }
+  #contact input
+  {
+    border-radius: 9px;
+    background: #fcfbfb;
+    border: 0px;
+    margin-bottom: 20px;
+  }
+  #contact textarea
+  {
+    border-radius: 9px;
+    background: #fcfbfb;
+    border: 0px;
+    margin-bottom: 20px;
+  }
+  #contact button
+  {
+    border-radius: 3px;
+    background: #006bd1;
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+    padding: 10px 40px;
+  }
+
+
+   /***********************footer*******************/
+   footer h1
+   {
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #171717;
+   }
+   footer h5
+   {
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    text-align: center;
+    color: #6c6c6c;
+   }
+   .sec-footer
+   {
+        background-image: url(images/footer/2010-mercedes-benz-s.png);
+        background-size: 100% 100% ;
+        background-position: center center;
+        height: 45vh;
+        position: relative;
+   }
+
+    .footer-layer
+   {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(23,23,23,0.7);
+   }
+
+   .sec-footer button
+   {
+     background-color: #006BD1;
+   }
+   .sec-footer h5
+   {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+   }
+   .sec-footer p
+   {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+   }
+   .sec-footer span
+   {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    font-style: normal;
+    text-align: left;
+    color: #ffffff;
+   }
+   footer i,span
+   {
+    font-size: 17px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: right;
+    color: #ffffff;
+   }
+
+
+ /*****************responsive********************/
+
+   @media screen and (max-width:912px) {
+    .navbar-nav
+    {
+        display: none;
+    }
+    .dropdown
+    {
+       display: block;
+    }    
+   }
+
+   @media  screen and (min-width:390px) and (max-width: 912px)  {
+     .sec-footer
+    {
+        height: 100vh;
+    } 
+
+   }
+
+   @media screen and  (max-width:380px) {
+    .sec-footer
+    {
+ 
+      height: 130vh;
+    }
+    
+   }
+   
+   

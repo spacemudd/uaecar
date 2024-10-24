@@ -78,9 +78,10 @@
                                                 <td>
                                                     <!-- Add any actions, like edit or delete -->
                                                     <div class="d-inline-block">
-                                                        <a href="{{ route('admin.cars.show', $car->id) }}" class="btn btn-info" title="Edit">
-                                                            <i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
-                                                        </a>
+                                                    <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-info" title="Edit">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+
                                                         <form action="{{ route('admin.cars.delete', $car->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')

@@ -110,3 +110,7 @@ Route::get('/admin/dashboard', [adminDashboardController::class, 'index'])->name
 Route::get('/admin/add-new-car', [adminDashboardController::class, 'addCars'])->name('admin.form');
 Route::get('/admin/carlist', [adminDashboardController::class, 'showCarList'])->name('admin.carlist'); 
 Route::post('admin/cars/store', [CarsController::class, 'store'])->name('admin.cars.store');
+
+
+Route::get('admin/cars/{id}/edit', [CarsController::class, 'edit'])->name('admin.cars.edit');
+Route::patch('admin/cars/{id}', [CarsController::class, 'update'])->name('admin.cars.update');

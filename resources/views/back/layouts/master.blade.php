@@ -3,10 +3,10 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>LUXURIA DUBAI DASHBOARD</title>
+    <title>LUXURIA DASHBOARD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     
-    <link rel="icon" href="{{ asset('back/assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
 
     <!-- Fonts and Icons -->
     <script src="{{ asset('back/assets/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -100,12 +100,8 @@
                       <a href={{ route('admin.form') }}>
                         <span class="sub-item">Add New Car </span>
                       </a>
-                    </li>
-                    <li>
-                      <a href="components/buttons.html">
-                        <span class="sub-item">Delete Car</span>
-                      </a>
-                    </li>
+                  </li>
+
                     <li>
                       <a href={{ route('admin.carlist') }}>
                         <span class="sub-item">Show Car list</span>
@@ -114,6 +110,14 @@
 
                   </ul>
                 </div>
+              </li>
+
+
+              <li class="nav-item">
+                  <a href="#">
+                      <i class="fas fa-cog"></i>
+                      <p>Settings</p>
+                  </a>
               </li>
             </ul>
           </div>

@@ -15,71 +15,42 @@
 <body>
 
 <nav class="navbar navbar-expand-lg">
-        <div class="container">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="logo-container">
+            <a href="{{ route('index') }}">
+                <img src="{{ asset('front/img/white-logo.png') }}" alt="" class="pt-3 mt-3 my-logo">
+            </a>
+        </div>
+     
+        
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
         </button>
 
-            <!-- Logo -->
-               <!-- <div>
-                    <a href="{{ route('index') }}"> <img src="{{ asset('front/img/white-logo.png') }}" alt="" class="bg-secondary pt-3 mt-3  my-logo" > </a>
+        <!-- Button -->
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+            </ul>
 
-               </div> -->
-                <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
-            <!-- Button -->
-            <!-- Menu -->
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
-
-                        <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Cars <i class="ti-angle-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Grid <i class="ti-angle-right"></i></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="cars.html" class="dropdown-item"><span>Car Grid 01</span></a></li>
-                                        <li><a href="cars2.html" class="dropdown-item"><span>Car Grid 02</span></a></li>
-                                        <li><a href="cars3.html" class="dropdown-item"><span>Car Grid 03</span></a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="cars4.html" class="dropdown-item"><span>Car Listing</span></a></li>
-                                <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Types <i class="ti-angle-right"></i></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="car-types.html" class="dropdown-item"><span>Car Types 01</span></a></li>
-                                        <li><a href="car-types2.html" class="dropdown-item"><span>Car Types 02</span></a></li>
-                                        <li><a href="car-types3.html" class="dropdown-item"><span>Car Types 03</span></a></li>
-                                        <li><a href="car-types4.html" class="dropdown-item"><span>Car Types 04</span></a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu dropdown"> <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" href="#"><span>Car Details <i class="ti-angle-right"></i></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="car-details.html" class="dropdown-item"><span>Car Details 01</span></a></li>
-                                        <li><a href="car-details2.html" class="dropdown-item"><span>Car Details 02</span></a></li>
-                                        <li><a href="car-details3.html" class="dropdown-item"><span>Car Details 03</span></a></li>
-                                        <li><a href="car-details4.html" class="dropdown-item"><span>Car Details 04</span></a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li> -->
-
-
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-                </ul>
-
-                <div class="navbar-right">
-                    <div class="wrap">
-                        <div class="icon"> <i class="flaticon-phone-call"></i> </div>
-                        <div class="text">
-                            <p>Need help?</p>
-                            <h5><a href="tel:+971542700030">05 4270 0030</a></h5>
-                        </div>
+            <div class="navbar-right">
+                <div class="wrap">
+                    <div class="icon"> <i class="flaticon-phone-call"></i> </div>
+                    <div class="text">
+                        <p>Need help?</p>
+                        <h5><a href="tel:+971542700030">05 4270 0030</a></h5>
                     </div>
                 </div>
-
             </div>
         </div>
+    </div>
+    <div class="slogan" style="max-width: 400px;text-align: right;font-size: 1.9rem;color: #fff;margin-top: 17%;margin-right: 6%;">
+            The Right Car for Every Road – Rent Your Way
+        </div>
 </nav>
+
     @yield('content')
 
 

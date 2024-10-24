@@ -859,6 +859,7 @@ hr {
   top: 140%;
   left: 0%;
   transform: translateY(-50%);
+  margin-left: 4%;
 }
 .dropdown .nav-link i {
     padding-left: 0px;
@@ -7212,7 +7213,7 @@ height: 100% !important;
 }
 
 .span-group span{
-    background-color: gray;
+    background-color: #00000078;
     border-radius:25px;
     padding: 2px 10px;
     color: whitesmoke;
@@ -7222,8 +7223,7 @@ height: 100% !important;
     font-size: 50px;
     text-align: center;
     cursor: pointer;
-    margin-top: 125%;
-    margin-left: 37%;
+    margin-top: 143%;
 }
 
 .car_name{

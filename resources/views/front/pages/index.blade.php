@@ -42,7 +42,33 @@
             });
         });
     });
+
+
+    $(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 4000, // الوقت بين الشرائح
+        autoplayHoverPause: false, // استمر في الحركة عند التمرير
+        smartSpeed: 10000, // سرعة الحركة
+        responsive: {
+            0: {
+                items: 1
+            },
+            100: {
+                items: 3
+            },
+            500: {
+                items: 5
+            }
+        }
+    });
+});
+    
 </script>
+
+
 
 @section('content')
     <!-- Preloader -->
@@ -63,6 +89,17 @@
                 </video>
             </div>
         </div>
+        <div class="slogan" style="max-width: 400px; text-align: right; font-size: 0.9rem; color: #fff; margin-top: 10px;">
+            The Right Car for Every Road – Rent Your Way
+        </div>
+
+            <style>
+                @media (max-width: 600px) { /* Adjust the width as needed */
+                    .slogan {
+                        display: none;
+                    }
+                }
+            </style>
     </header>
 
 
@@ -139,7 +176,7 @@
         <!-- <p class="px-3">Mini Sedan Automatic</p> -->
     </div>
    
-    <div class="span-group px-3">
+    <div class="span-group px-3" style="font-size: 12px;">
         <span>{{$car->seats . ' Seats' }}</span>
         <span>{{$car->doors . ' Doors'}}</span>
         <span>Automatic</span>
@@ -151,14 +188,40 @@
     <div class="d-flex mt-3">
         <div>
             <span class="px-3 py-2" style="display: inline-block;">
-                <span style="display: inline-block;">*</span>
-                <p class="car_name" style="display: inline-block; margin: 0;">1,000 kilometers included</p> 
+                <!-- <span style="display: inline-block;">*</span> -->
+                <!-- <p class="car_name" style="display: inline-block; margin: 0;">1,000 kilometers included</p>  -->
             </span>
             
-            <span class="px-3 " style="display: inline-block;">
-                <h5 class="car_name" style="display: inline-block; margin: 0;">AED {{ $car->price_daily }} /day </h5> 
-                <span class="text-secondary" style="display: inline-block;"> SAR 518.19 total</span>
-                <button style="background-color: #767676; color: white; border: 2px solid #767676;" 
+            <div style="margin-left: 65px; margin-top: -59px; display: flex; justify-content: center; align-items: flex-start;">
+    <div style="padding-right: 38px; margin: 0; display: flex; flex-direction: column; align-items: center;">
+        <h5 class="car_name" style="margin: 0;">Daily</h5>
+        <span class="price" style="font-size: 22px;">{{$car->price_daily}} AED</span>
+    </div>
+
+    <div style="padding-right: 40px; margin: 0; display: flex; flex-direction: column; align-items: center;">
+        <h5 class="car_name" style="margin: 0;">Weekly</h5>
+        <span class="price" style="font-size: 22px;">{{$car->price_weekly}} AED</span>
+    </div>
+
+    <div style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+        <h5 class="car_name" style="margin: 0;">Monthly</h5>
+        <span class="price" style="font-size: 22px;">{{$car->price_monthly}} AED</span>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+                <!-- <span class="text-secondary" style="display: inline-block; color: white;"> SAR 518.19 total</span> -->
+                
+            </span>
+            <button style="background-color: #767676; color: white; border: 2px solid #767676; margin: 0 35px 0 22px;" 
                 type="button" 
                 class="btn btn-primary reserve-button py-1 my-2" 
                 data-bs-toggle="modal" 
@@ -166,7 +229,6 @@
                 onclick="openBookingModal(event);">
             Book Now
         </button>
-            </span>
         </div>
        
         <div class="px-3">   

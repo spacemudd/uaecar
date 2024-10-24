@@ -4,6 +4,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+<link rel="stylesheet" href="{{ asset('front/css/car-details/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/car-details/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/car-details/index.css') }}">
+
 
 <script>
 $(document).ready(function() {
@@ -54,105 +58,188 @@ $(document).ready(function() {
         </div>
     </header>
 
-    <section class="car-details section-padding">
+    <section id="cars" class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-12">
-                    <div class="row mb-60">
-                        <div class="col-md-12">
-                            <div class="car-image mb-30">
-                                <img src="{{ asset($car->car_picture) }}" class="img-fluid02" alt="{{ $car->car_name }}">
+            <h1 class="">{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
+            <h4>the Best car in the world is here u can find what u want here in</h4>
+          <div class="row py-3 gy-2">
+            <div class="col-lg-8">
+                <div class="card">
+                    <img src="{{asset($car->car_picture)}}" class="card-img-top" alt="car">
+                    <div class="row gx-1 gy-2 pt-1">
+                        <div class="col-3">
+                            <div class="card p-0 small-card mt-lg-2">
+                                <img src="images/cars/Car 17.png" class="card-img-top" alt="car">
                             </div>
-
-                            <h3>Image Gallery</h3>
-                            <div class="row gallery-items mb-60">
-                                @foreach($car->gallery as $image)
-                                    <div class="col-4 gallery-masonry-wrapper single-item cardio">
-                                        <a href="{{ asset($image->image_path) }}" title="" class="gallery-masonry-item-img-link img-zoom">
-                                            <div class="gallery-box">
-                                                <div class="gallery-img">
-                                                    <img src="{{ asset($image->image_path) }}" class="img-fluid mx-auto d-block" alt="">
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endforeach
+                        </div>         
+                        <div class="col-3">
+                            <div class="card p-0 small-card mt-lg-2">
+                                <img src="images/cars/Car 13 (1).png" class="card-img-top" alt="car">
                             </div>
-
-                            <h3>General Information</h3>
-                            <p class="mb-30">{{ $car->description }}</p>
-                            <ul class="list-unstyled list">
-                                <li>
-                                    <div class="list-icon"><span class="ti-check"></span></div>
-                                    <div class="list-text"><p><span>Daily Cost: </span>{{ $car->price_daily }}</p></div>
-                                </li>
-                                <li>
-                                    <div class="list-icon"><span class="ti-check"></span></div>
-                                    <div class="list-text"><p>Free Cancellation & Return</p></div>
-                                </li>
-                                <li>
-                                    <div class="list-icon"><span class="ti-check"></span></div>
-                                    <div class="list-text"><p>Rent Now Pay When You Arrive</p></div>
-                                </li>
-                            </ul>
-                        </div>
+                        </div>         
+                        <div class="col-3">
+                            <div class="card p-0 small-card mt-lg-2">
+                                <img src="images/cars/Car 11.png" class="card-img-top" alt="car">
+                            </div>
+                        </div>         
+                        <div class="col-3">
+                            <div class="card p-0 small-card mt-lg-2">
+                                <img src="images/cars/Car 09.png" class="card-img-top" alt="car">
+                            </div>
+                        </div>         
                     </div>
-
-                    @if($car->gallery->isEmpty())
-                        <p>No images available for this car.</p>
-                    @endif
-
-                    <div class="row justify-content-center">
-                        <div class="col-md-12">
-                            <ul class="accordion-box clearfix">
-                                <!-- FAQs Here -->
-                            </ul>
-                        </div>
-                    </div>
+                    
+                   
                 </div>
+                <h3>About the Car</h3>
+                <p>{{$car->description}}</p>
+                
+            </div>
 
-                <div class="col-lg-4 col-md-12">
-                    <div class="sidebar-car">
-                        <div class="title">
-                            <h4>AED {{ $car->price_daily }} <span>/ Rent Per Day</span></h4>
+            <div class="col-lg-4">
+                <div class="card about-card py-2">
+                    <div class="card-body">
+                      <h3 class="text-start  my-0">About Car</h3>
+                      <p class="text-end my-0 py-0 pe-1">Daily Cost <span> {{ $car->price_daily }}</span></p>
+                      <div class="progress mt-0" style="height:7px;" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar w-25"></div>
+                      </div>
+                      <p class="myPar py-3 "> P.S. Please note that the limit is 450 kilometers per day and 4,500 kilometers per month. Any additional kilometers will incur a charge of 1 Dirham each.
+                    </p>
+
+                    <div class="row gy-5">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <i class="fa-solid fa-user text-white"></i>
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>{{ $car->seats }} Seats</h5>
+                                 </div>
+                            </div>
+                            
                         </div>
-                        <div class="item">
-                            <h3>{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h3>
-                            <div class="d-flex justify-content-between">
-                            <div class="d-flex features "><span><i class="omfi-door"></i>{{ $car->doors }} Doors</span></div>
-                            <div class="d-flex features"><span><i class="omfi-passengers"></i>Fits {{ $car->seats }} Passengers</span></div>
-                            <div class="d-flex features"><span><i class="omfi-door"></i> {{ $car->delivery ? 'Free' : 'No' }} Delivery</span></div>
-
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <img src="{{ asset('front/img/icons/door.png') }}" alt="icon ">
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>{{ $car->doors }} Doors</h5>                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                            <div class="d-flex features"><span><i class="omfi-door"></i>Daily {{ $car->price_daily }} AED</span></div>
-                            <div class="d-flex features"><span><i class="omfi-door"></i>Weekly {{ $car->price_weekly }} AED</span></div>
-                            <div class="d-flex features"><span><i class="omfi-door"></i>Monthly {{ $car->price_monthly }} AED</span></div>
-
-                            </div>
-                           
-                            <div class="features"><span><i class="omfi-transmission"></i> {{ $car->gear }}</span></div>
-                            <!-- <div class="features"><span><i class="omfi-condition"></i> Air Condition</span><p>{{ $car->air_condition == 1 ? 'Yes' : 'Not' }}</p></div> -->
-                            <!-- <div class="features"><span><i class="omfi-age"></i> Year</span><p>{{ $car->year }}</p></div> -->
-                            <!-- <div class="features"><span><i class="omfi-folder"></i> Color</span><p>{{ $car->color }}</p></div> -->
-                           
-                            <div class="features">
-    <span><i class="omfi-door"></i>Kilo Daily {{ $car->kilo_daily }}</span>
-</div>
-                            <div class="features"><span><i class="omfi-door"></i>Kilo Monthly {{ $car->kilo_monthly }}</span><p></p></div>
-
-
-                            <div class="btn-double mt-30" data-grouptype="&amp;">
-                                <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
-                                <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
-                            </div>
+                            
                         </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <img src="images/cars/Path 2844.png" alt="icon ">
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                    <h5>{{ $car->delivery == 1 ? 'Free' : 'Not Free' }} Delivery</h5>
+
+                                 </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <img src="images/cars/Path 2847.png" alt="icon ">
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>{{ $car->gear }}</h5>                                 </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <img src="images/cars/Path 2842.png" alt="icon ">
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>{{ $car->price_daily }}/Daily</h5>
+                                 </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <img src="images/cars/Path 2842.png" alt="icon ">
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>{{ $car->price_weekly }}/Weekly</h5>
+                                 </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <img src="images/cars/Path 2842.png" alt="icon ">
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>{{ $car->price_monthly }}/Monthly</h5>
+                                 </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <i class="fa-regular fa-calendar-days text-white"></i>
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>{{ $car->year }}</h5>
+                                 </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="blue-icon">
+                                        <img src="images/cars/svgexport-17 (95).png" alt="icon ">
+                                    </div>
+                                </div>    
+                                    <div class="col-8">
+                                        <h5>Engine</h5>
+                                        <h6>1600 cc</h6>
+                                 </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                        <div class="btn-double mt-30" data-grouptype="&amp;">
+                            <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
+                            <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
+                        </div>                    
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
+          </div>
+        </div>
+     </section>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

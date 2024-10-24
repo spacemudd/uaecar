@@ -96,4 +96,33 @@ class CarsController extends Controller
     }
 
 
+    public function edit($id)
+    {
+        $car = Car::findOrFail($id);
+        return view('back.pages.edit', compact('car'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'car_name' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'seats' => 'required|integer',
+            'price_daily' => 'required|numeric',
+            'price_weekly' => 'required|numeric',
+            'price_monthly' => 'required|numeric',
+            'car_picture' => 'nullable|image',
+            'year' => 'required|integer',
+            'plate_number' => 'required|string|max:255',
+            'description' => 'nullable|string',
+
+        ]);
+
+        $car = Car::findOrFail($id);
+        $car->update($request->all());
+
+        return redirect()->route('admin.carlist')->with('success', 'Car details updated successfully!');
+    }
+
 }
