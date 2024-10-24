@@ -8,65 +8,66 @@ use Illuminate\Http\Request;
 
 class CarsController extends Controller
 {
-    public function show($id)
-    {
-        // Load the car with its gallery images
-        $car = Car::with('gallery')->findOrFail($id); 
-        $images = $car->gallery;
-        return view('front.pages.cars.carDetails', compact('car', 'images'));
-    }
-
-    public function destroy($id)
-    {
-        // Find and delete the car by ID
-        Car::findOrFail($id)->delete();
-        return redirect()->route('cars.index')->with('success', 'Car deleted successfully.');
-    }
 
     public function store(Request $request)
     {
-
-        dd($request->all());
-        // Validate the form input
-        $validatedData = $request->validate([
-            'node_id' => 'required|string',
-            'car_name' => 'required|string',
-            'car_model' => 'required|string',
-            'car_model_year' => 'required|integer',
-            'plate_number' => 'required|string',
-            'categories' => 'required|string',
-            'seats' => 'required|integer',
-            'doors' => 'required|integer',
-            'price_daily' => 'required|numeric',
-            'price_weekly' => 'required|numeric',
-            'price_monthly' => 'required|numeric',
-            'car_transmission' => 'required|string',
-            'car_description' => 'required|string',
-            'chassis_number' => 'nullable|string',
-            'color' => 'required|string',
-            'car_image' => 'required|image|mimes:jpg,png,jpeg',
-            'car_gallery.*' => 'image|mimes:jpg,png,jpeg' // Validate each gallery image
+        // Validate the incoming request data
+        $request->validate([
+            'car_name' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'year' => 'required|integer|min:1886|max:' . date('Y'), // Valid range for car year
+            'plate_number' => 'required|string|max:255',
+            'categories' => 'nullable|string|max:255',
+            'seats' => 'required|integer|min:1|max:100', // Adjust max according to your requirements
+            'doors' => 'required|integer|min:1|max:10', // Adjust max according to your requirements
+            'color' => 'required|string|max:50',
+            'car_price_daily' => 'required|numeric',
+            'car_price_weekly' => 'required|numeric',
+            'car_price_monthly' => 'required|numeric',
+            'gear' => 'required|string|max:50',
+            'description' => 'nullable|string',
+            'chassis_number' => 'required|string|max:255',
+            'is_visible' => 'required|boolean',
+            'delivery' => 'required|boolean',
+            'kilo_daily' => 'required|integer',
+            'kilo_monthly' => 'required|integer',
+            'node_system_id' => 'required|integer', // New field validation
+            'car_picture' => 'nullable|image', // Validate image file if provided
         ]);
-
-        // Handle file upload for car_image
-        if ($request->hasFile('car_image')) {
-            $imagePath = $request->file('car_image')->store('car_images', 'public');
-            $validatedData['car_image'] = $imagePath;
+    
+        // Create a new car instance
+        $car = new Car();
+    
+        // Assign request values to the car model
+        $car->car_name = $request->car_name;
+        $car->price_daily = $request->car_price_daily;
+        $car->price_weekly = $request->car_price_weekly;
+        $car->price_monthly = $request->car_price_monthly;
+        $car->model = $request->model;
+        $car->year = $request->year;
+        $car->plate_number = $request->plate_number;
+        $car->categories = $request->categories;
+        $car->seats = $request->seats;
+        $car->doors = $request->doors;
+        $car->color = $request->color;
+        $car->gear = $request->gear;
+        $car->description = $request->description;
+        $car->chassis_number = $request->chassis_number;
+        $car->is_visible = $request->is_visible;
+        $car->delivery = $request->delivery;
+        $car->kilo_daily = $request->kilo_daily;
+        $car->kilo_monthly = $request->kilo_monthly;
+        $car->node_id = $request->node_system_id; // Assign the new field
+    
+        if ($request->hasFile('car_picture')) {
+            $car->car_picture = $request->file('car_picture')->store('pictures');
         }
-
-        // Handle gallery images
-        $galleryImages = [];
-        if ($request->hasFile('car_gallery')) {
-            foreach ($request->file('car_gallery') as $galleryImage) {
-                $galleryImages[] = $galleryImage->store('car_gallery', 'public');
-            }
-            $validatedData['car_gallery'] = json_encode($galleryImages);
-        }
-
-        // Save car to database
-        Car::create($validatedData);
-
-        // Redirect to the cars index with success message
-        return redirect()->route('cars.index')->with('success', 'Car added successfully.');
+    
+        // Save the car to the database
+        $car->save();
+    
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Car added successfully!');
     }
+
 }

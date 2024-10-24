@@ -138,7 +138,6 @@ $(document).ready(function() {
                            
                             <div class="features">
     <span><i class="omfi-door"></i>Kilo Daily {{ $car->kilo_daily }}</span>
-    <small>Plus 1 Dirham for each extra kilo</small>
 </div>
                             <div class="features"><span><i class="omfi-door"></i>Kilo Monthly {{ $car->kilo_monthly }}</span><p></p></div>
 

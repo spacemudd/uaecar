@@ -16,4 +16,10 @@ class indexController extends Controller
         return view("front.pages.index", compact("cars"));
     }
 
+    public function showVisibleCars()
+    {
+        $cars = Car::where('is_visible', true)->orderBy('price_daily', 'desc')->get();
+        return view("front.pages.index", compact("cars"));
+    }
+
 }
