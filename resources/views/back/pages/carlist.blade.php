@@ -1,5 +1,6 @@
 @extends('back.layouts.master')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <div class="wrapper">
     <div class="container">
@@ -65,21 +66,29 @@
                                                 <!-- <td>{{ $car->color }}</td> -->
                                                 <td>{{ $car->plate_number }}</td>
                                                 <td>
-                                                    <form action="{{ route('admin.cars.toggleVisibility', $car->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('PATCH')
+                                                <form action="{{ route('admin.cars.toggleVisibility', $car->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <label>
                                                         <input type="checkbox" onchange="this.form.submit()" {{ $car->is_visible ? 'checked' : '' }}>
-                                                    </form>
-                                                </td>
+                                                        <i class="fas {{ $car->is_visible ? 'fa-eye' : 'fa-eye-slash' }}" title="{{ $car->is_visible ? 'Hide' : 'Show' }}"></i>
+                                                    </label>
+                                                </form>
+                                                                                                </td>
                                                 <td>
                                                     <!-- Add any actions, like edit or delete -->
-                                                    <a href="{{ route('admin.cars.show', $car->id) }}" class="btn btn-info">Edit</a>
-                                                    <form action="{{ route('admin.cars.delete', $car->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-                                                </td>
+                                                    <div class="d-inline-block">
+                                                        <a href="{{ route('admin.cars.show', $car->id) }}" class="btn btn-info" title="Edit">
+                                                            <i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
+                                                        </a>
+                                                        <form action="{{ route('admin.cars.delete', $car->id) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger" title="Delete">
+                                                                <i class="fas fa-trash-alt"></i> <!-- Font Awesome trash icon -->
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                             </tr>
                                         @endforeach
                                     </tbody>
