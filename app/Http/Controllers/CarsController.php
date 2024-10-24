@@ -9,6 +9,31 @@ use Illuminate\Http\Request;
 class CarsController extends Controller
 {
 
+    public function toggleVisibility($id)
+    {
+        $car = Car::findOrFail($id);
+        $car->is_visible = !$car->is_visible;
+        $car->save();
+
+        return redirect()->back()->with('success', 'Car visibility updated successfully.');
+    }
+
+    public function show($id)
+    {
+        // Load the car with its gallery images
+        $car = Car::with('gallery')->findOrFail($id); 
+        $images = $car->gallery;
+        return view('front.pages.cars.carDetails', compact('car', 'images'));
+    }
+
+    public function destroy($id)
+    {
+        // Find and delete the car by ID
+        Car::findOrFail($id)->delete();
+        return redirect()->route('admin.carlist')->with('success', 'Car deleted successfully.');
+    }
+
+
     public function store(Request $request)
     {
         // Validate the incoming request data
@@ -69,5 +94,6 @@ class CarsController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Car added successfully!');
     }
+
 
 }
