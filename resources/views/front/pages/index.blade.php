@@ -198,9 +198,9 @@
         <span class="price" style="font-size: 22px;">{{ number_format($car->price_daily, 0) }} AED</span>
     </div>
 
-    <div style="padding-right: 40px; margin: 0; display: flex; flex-direction: column; align-items: center;">
+    <div style="padding-right: 33px;padding-left: 11%;margin: 0;display: flex;flex-direction: column;align-items: center;padding-bottom: 11%;">
         <h5 class="car_name" style="margin: 0;">Weekly</h5>
-        <span class="price" style="font-size: 22px;">{{ number_format($car->price_weekly, 0) }} AED</span>
+        <span class="price" style="font-size: 22px;">5,000 AED</span>
     </div>
 
     <div style="margin: 0; display: flex; flex-direction: column; align-items: center;">
