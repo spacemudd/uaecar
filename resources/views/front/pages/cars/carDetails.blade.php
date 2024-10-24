@@ -125,7 +125,7 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-4">
                                     <div class="blue-icon">
-                                        <img src="{{ asset('front/img/icons/door.png') }}" alt="icon ">
+                                        <!-- <img src="{{ asset('front/img/icons/door.png') }}" alt="icon "> -->
                                     </div>
                                 </div>    
                                     <div class="col-8">
@@ -137,7 +137,7 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-4">
                                     <div class="blue-icon">
-                                        <img src="images/cars/Path 2844.png" alt="icon ">
+                                        <!-- <img src="images/cars/Path 2844.png" alt="icon "> -->
                                     </div>
                                 </div>    
                                     <div class="col-8">
@@ -151,7 +151,7 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-4">
                                     <div class="blue-icon">
-                                        <img src="images/cars/Path 2847.png" alt="icon ">
+                                        <!-- <img src="images/cars/Path 2847.png" alt="icon "> -->
                                     </div>
                                 </div>    
                                     <div class="col-8">
@@ -163,7 +163,7 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-4">
                                     <div class="blue-icon">
-                                        <img src="images/cars/Path 2842.png" alt="icon ">
+                                        <!-- <img src="images/cars/Path 2842.png" alt="icon "> -->
                                     </div>
                                 </div>    
                                     <div class="col-8">
@@ -177,7 +177,7 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-4">
                                     <div class="blue-icon">
-                                        <img src="images/cars/Path 2842.png" alt="icon ">
+                                        <!-- <img src="images/cars/Path 2842.png" alt="icon "> -->
                                     </div>
                                 </div>    
                                     <div class="col-8">
@@ -191,7 +191,7 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-4">
                                     <div class="blue-icon">
-                                        <img src="images/cars/Path 2842.png" alt="icon ">
+                                        <!-- <img src="images/cars/Path 2842.png" alt="icon "> -->
                                     </div>
                                 </div>    
                                     <div class="col-8">
@@ -218,7 +218,7 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-4">
                                     <div class="blue-icon">
-                                        <img src="images/cars/svgexport-17 (95).png" alt="icon ">
+                                        <!-- <img src="images/cars/svgexport-17 (95).png" alt="icon "> -->
                                     </div>
                                 </div>    
                                     <div class="col-8">
