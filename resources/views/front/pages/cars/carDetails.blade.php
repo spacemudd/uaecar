@@ -180,9 +180,10 @@ $(document).ready(function() {
                                         <!-- <img src="images/cars/Path 2842.png" alt="icon "> -->
                                     </div>
                                 </div>    
-                                    <div class="col-8">
-                                        <h5>{{ $car->price_weekly }}/Weekly</h5>
-                                 </div>
+                                <div class="col-8">
+                                    <h5>{{ number_format($car->price_weekly, 0) }}/Weekly</h5>
+                                </div>
+
                             </div>
                             
                         </div>
@@ -195,7 +196,7 @@ $(document).ready(function() {
                                     </div>
                                 </div>    
                                     <div class="col-8">
-                                        <h5>{{ $car->price_monthly }}/Monthly</h5>
+                                    <h5>{{ number_format($car->price_monthly, 0) }}/Weekly</h5>
                                  </div>
                             </div>
                             
