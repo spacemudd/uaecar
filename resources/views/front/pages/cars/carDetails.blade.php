@@ -65,7 +65,7 @@ $(document).ready(function() {
           <div class="row py-3 gy-2">
             <div class="col-lg-8">
             <div class="card">
-    <!-- Main Car Image -->
+    <!-- Main Car Imagee -->
     <img src="{{ asset($car->car_picture) }}" class="card-img-top" alt="Car Image">
     
     <div class="row gx-1 gy-2 pt-1">
@@ -73,7 +73,7 @@ $(document).ready(function() {
         @foreach($images as $image)
             <div class="col-3">
                 <div class="card p-0 small-card mt-lg-2">
-                    <!-- <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Car Image"> -->
+                    <!-- <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Car Imagee"> -->
                     <img src="{{ asset($image->image_path) }}" class="card-img-top" alt="Car Image">
 
                 </div>
