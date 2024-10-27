@@ -149,7 +149,7 @@
                             <div class="row">
                                 <div class="col-6">
                                    <div class="mb-3 d-flex justify-center">
-                                    <button class="btn btn-light bg-prima mx-auto text-center" data-bs-toggle="modal" 
+                                    <button class="btn btn-light bg-prima mx-auto text-center my-2" data-bs-toggle="modal" 
                                     data-bs-target="#bookingModal{{ $car->id }}">
                                            Book Now
                                        </button>
@@ -158,7 +158,7 @@
 
                                 <div class="col-6">
                                     <div class="mb-3 d-flex justify-center">
-                                        <button class="btn btn-success mx-auto text-center" style="background-color: #25D366; border-color: #25D366;">
+                                        <button class="btn btn-success mx-auto text-center my-2" style="background-color: #25D366; border-color: #25D366;">
                                             <i class="fab fa-whatsapp"></i> WhatsApp
                                         </button>
                                     </div>
