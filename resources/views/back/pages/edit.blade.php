@@ -1,5 +1,6 @@
 @extends('back.layouts.master')
 
+
 @section('content')
 <div class="wrapper">
     <div class="container">
@@ -22,37 +23,37 @@
 
                                 <div class="form-group col-md-6 col-lg-4">
                                     <label for="car_name">Car Name</label>
-                                    <input type="text" name="car_name" class="form-control" value="{{ $car->car_name }}" >
+                                    <input type="text" name="car_name" class="form-control" value="{{ $car->car_name }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="model">Model</label>
-                                    <input type="text" name="model" class="form-control" value="{{ $car->model }}" >
+                                    <input type="text" name="model" class="form-control" value="{{ $car->model }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="seats">Seats</label>
-                                    <input type="number" name="seats" class="form-control" value="{{ $car->seats }}" >
+                                    <input type="number" name="seats" class="form-control" value="{{ $car->seats }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="price_daily">Price Daily (AED)</label>
-                                    <input type="number" name="price_daily" class="form-control" value="{{ $car->price_daily }}" >
+                                    <input type="number" name="price_daily" class="form-control" value="{{ $car->price_daily }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="price_weekly">Price Weekly (AED)</label>
-                                    <input type="number" name="price_weekly" class="form-control" value="{{ $car->price_weekly }}" >
+                                    <input type="number" name="price_weekly" class="form-control" value="{{ $car->price_weekly }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="price_monthly">Price Monthly (AED)</label>
-                                    <input type="number" name="price_monthly" class="form-control" value="{{ $car->price_monthly }}" >
+                                    <input type="number" name="price_monthly" class="form-control" value="{{ $car->price_monthly }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="year">Year</label>
-                                    <input type="number" name="year" class="form-control" value="{{ $car->year }}" >
+                                    <input type="number" name="year" class="form-control" value="{{ $car->year }}">
                                 </div>
 
                                 <div class="form-group">
@@ -60,16 +61,44 @@
                                     <textarea name="description" class="form-control" rows="3">{{ $car->description }}</textarea>
                                 </div>
 
-
                                 <div class="form-group">
                                     <label for="plate_number">Plate Number</label>
-                                    <input type="text" name="plate_number" class="form-control" value="{{ $car->plate_number }}" >
+                                    <input type="text" name="plate_number" class="form-control" value="{{ $car->plate_number }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="car_picture">Car Image</label>
                                     <input type="file" name="car_picture" class="form-control">
+                                    
+                                    <!-- Current car picture display -->
+                                    @if($car->car_picture)
+                                        <div class="mt-2">
+                                            <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Current Car Image" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                                        </div>
+                                    @endif
+
                                 </div>
+
+
+                                <div class="form-group">
+                                <label for="car_picture">Car Pictures</label>
+                                <input type="file" name="car_picture[]" multiple>
+                                    
+                                    <!-- Current car picture display -->
+                                    @if($car->car_picture)
+                                        <div class="mt-2">
+                                            <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Current Car Image" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                                        </div>
+                                    @endif
+
+                                </div>
+
+
+
+
+
+
+                           
 
                                 <button type="submit" class="btn btn-primary">Update Car</button>
                                 <a href="{{ route('admin.cars.index') }}" class="btn btn-secondary">Cancel</a>
@@ -82,3 +111,5 @@
     </div>
 </div>
 @endsection
+
+

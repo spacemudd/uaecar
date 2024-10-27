@@ -61,7 +61,7 @@
                                                 <td>{{ $car->price_daily . ' AED' }}</td>
                                                 <td>{{ $car->price_weekly . ' AED' }}</td>
                                                 <td>{{ $car->price_monthly . ' AED' }}</td>
-                                                <td><img src="{{ asset($car->car_picture) }}" alt="Car Image" style="width: 100px; height: auto;"></td>
+                                                <td><img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Image" style="width: 100px; height: auto;"></td>
                                                 <td>{{ $car->year }}</td>
                                                 <!-- <td>{{ $car->color }}</td> -->
                                                 <td>{{ $car->plate_number }}</td>

@@ -99,12 +99,14 @@ class CarsController extends Controller
     public function edit($id)
     {
         $car = Car::findOrFail($id);
-        return view('back.pages.edit', compact('car'));
+        $images = $car->gallery;
+
+        return view('back.pages.edit', compact('car', 'images'));
     }
 
 
     public function update(Request $request, $id)
-    {
+    {        // Validate the request
         $request->validate([
             'car_name' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -116,13 +118,42 @@ class CarsController extends Controller
             'year' => 'required|integer',
             'plate_number' => 'required|string|max:255',
             'description' => 'nullable|string',
-
         ]);
-
+    
+        // Find the car by ID
         $car = Car::findOrFail($id);
-        $car->update($request->all());
+    
+        // Update car details
+        $car->car_name = $request->car_name;
+        $car->model = $request->model;
+        $car->seats = $request->seats;
+        $car->price_daily = $request->price_daily;
+        $car->price_weekly = $request->price_weekly;
+        $car->price_monthly = $request->price_monthly;
+        $car->year = $request->year;
+        $car->plate_number = $request->plate_number;
+        $car->description = $request->description;
+    
+        // Handle car image upload
+        if ($request->hasFile('car_picture')) {
+            $car->car_picture = $request->file('car_picture')->store('car_images', 'public'); // Store in public disk
+        }
+        
 
-        return redirect()->route('admin.carlist')->with('success', 'Car details updated successfully!');
+        
+
+      
+
+     
+        // Save the car details
+        $car->save();
+    
+
+        
+    
+        // Optionally return a response or redirect
+        return redirect()->route('cars.show', $car->id)->with('success', 'Car updated successfully!');
     }
+    
 
 }

@@ -64,33 +64,21 @@ $(document).ready(function() {
             <h4>the Best car in the world is here u can find what u want here in</h4>
           <div class="row py-3 gy-2">
             <div class="col-lg-8">
-                <div class="card">
-                    <img src="{{asset($car->car_picture)}}" class="card-img-top" alt="car">
-                    <div class="row gx-1 gy-2 pt-1">
-                        <div class="col-3">
-                            <div class="card p-0 small-card mt-lg-2">
-                                <img src="images/cars/Car 17.png" class="card-img-top" alt="car">
-                            </div>
-                        </div>         
-                        <div class="col-3">
-                            <div class="card p-0 small-card mt-lg-2">
-                                <img src="images/cars/Car 13 (1).png" class="card-img-top" alt="car">
-                            </div>
-                        </div>         
-                        <div class="col-3">
-                            <div class="card p-0 small-card mt-lg-2">
-                                <img src="images/cars/Car 11.png" class="card-img-top" alt="car">
-                            </div>
-                        </div>         
-                        <div class="col-3">
-                            <div class="card p-0 small-card mt-lg-2">
-                                <img src="images/cars/Car 09.png" class="card-img-top" alt="car">
-                            </div>
-                        </div>         
-                    </div>
-                    
-                   
+            <div class="card">
+    <!-- Main Car Image -->
+    <img src="{{ asset('storage/' . $car->car_picture) }}" class="card-img-top" alt="Car Image">
+    
+    <div class="row gx-1 gy-2 pt-1">
+        <!-- Gallery Images -->
+        @foreach($images as $image)
+            <div class="col-3">
+                <div class="card p-0 small-card mt-lg-2">
+                    <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Car Image">
                 </div>
+            </div>
+        @endforeach
+    </div>
+</div>
                 <h3>About the Car</h3>
                 <p>{{$car->description}}</p>
                 
@@ -196,7 +184,7 @@ $(document).ready(function() {
                                     </div>
                                 </div>    
                                     <div class="col-8">
-                                    <h5>{{ number_format($car->price_monthly, 0) }}/Weekly</h5>
+                                    <h5>{{ number_format($car->price_monthly, 0) }}/Monthly</h5>
                                  </div>
                             </div>
                             

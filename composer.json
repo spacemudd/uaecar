@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.9",
         "olsgreen/autotrader-api": "dev-psrlog",
         "sentry/sentry-laravel": "^4.8",
-        "spatie/laravel-medialibrary": "^11.8",
+        "spatie/laravel-medialibrary": "^11.9",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

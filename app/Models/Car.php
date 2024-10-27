@@ -29,13 +29,14 @@ class Car extends Model
         'categories', 
         'status', 
         'expected_return_date',
-        'upcoming_reservation',
+        'upcoming_reservation', 
         'chassis_number', 
         'delivery',
         'kilo_daily',
         'kilo_monthly',
         'navigation',
         'is_visible',
+
     ];
 
 
