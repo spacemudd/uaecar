@@ -161,7 +161,7 @@ $(document).ready(function() {
             </div>
         </div>
         <div class="col-8">
-            <h5 class="small">{{ $car->delivery == 1 ? 'Free' : 'Not Free' }} Delivery</h5>
+            <h5 class="small">Free Delivery</h5>
         </div>
     </div>
 </div>
