@@ -134,25 +134,25 @@
                         <div class="row mb-5 gx-2 justify-content-center">
                             <div class="col-4">
                                 <h4 class="text-center text-white">Daily</h4>
-                                <h5 class="text-center text-white fw-light">{{ $car->price_daily }} <span>AED</span></h5>
+                                <h6 class="text-center text-white fw-light">{{ $car->price_daily }} <span>AED</span></h6>
                                 </div>
 
                             <div class="col-4">
                                 <h4 class="text-center text-white">Weekly</h4>
-                                <h5 class="text-center text-white fw-light">{{ $car->price_weekly }} <span>AED</span></h5>
+                                <h6 class="text-center text-white fw-light">{{ $car->price_weekly }} <span>AED</span></h6>
                                 </div>
 
                             <div class="col-4">
                                 <h4 class="text-center text-white">Monthly</h4>
-                                <h5 class="text-center text-white fw-light">{{ $car->price_monthly }} <span>AED</span></h5>
+                                <h6 class="text-center text-white fw-light">{{ $car->price_monthly }} <span>AED</span></h6>
                                 </div>
                             <div class="row">
                                 <div class="col-6">
                                    <div class="mb-3 d-flex justify-center">
-                                    <button class="btn btn-light bg-prima mx-auto text-center my-2" data-bs-toggle="modal" 
-                                    data-bs-target="#bookingModal{{ $car->id }}">
-                                           Book Now
-                                       </button>
+                                   <button class="btn mx-auto text-center my-2" style="background-color: #ffffff63; color: white;" data-bs-toggle="modal" data-bs-target="#bookingModal13">
+    Book Now
+</button>
+
                                     </div>
                                 </div>
 
