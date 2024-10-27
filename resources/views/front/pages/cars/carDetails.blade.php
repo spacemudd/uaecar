@@ -122,7 +122,7 @@ $(document).ready(function() {
                     <div class="card-body">
                         <h3 class="text-start my-0">About Car</h3>
                         <p class="text-end my-0 py-0 pe-1 fw-bold">
-    Daily Cost: <span class="fs-2">{{ $car->price_daily }}</span>
+    Daily Cost: <span class="fs-2">{{ $car->price_daily }} AED </span>
 </p>                        <div class="progress mt-0" style="height:7px;" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar w-25"></div>
                         </div>
