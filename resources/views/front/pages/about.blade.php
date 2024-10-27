@@ -9,19 +9,24 @@
     </div>
 
   
-    <!-- Header Banner -->
-    <section class="banner-header section-padding bg-img" data-overlay-dark="4" data-background="{{ asset('front/img/slider/3.jpg') }}">
-        <div class="v-middle">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h6>LUXURIA</h6>
-                        <h1>About <span>Us</span></h1>
-                    </div>
-                </div>
+    <header class="header">
+        <div class="video-fullscreen-wrap">
+            <div class="video-fullscreen-video" data-overlay-dark="2">
+                <video playsinline autoplay loop muted>
+                    <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
+                    <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
+                </video>
             </div>
         </div>
-    </section>
+
+        <style>
+            @media (max-width: 600px) { /* Adjust the width as needed */
+                .slogan {
+                    display: none;
+                }
+            }
+        </style>
+    </header>
     <!-- divider line -->
     <div class="line-vr-section"></div>
     <!-- About -->

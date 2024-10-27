@@ -11,18 +11,24 @@
     </div>
 
     <!-- Header Banner -->
-    <section class="banner-header middle-height section-padding bg-img" data-overlay-dark="6" data-background="{{ asset('front/img/slider/4.jpg') }}">
-        <div class="v-middle">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h6>Get in touch</h6>
-                        <h1>Contact <span>Us</span></h1>
-                    </div>
-                </div>
+    <header class="header">
+        <div class="video-fullscreen-wrap">
+            <div class="video-fullscreen-video" data-overlay-dark="2">
+                <video playsinline autoplay loop muted>
+                    <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
+                    <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
+                </video>
             </div>
         </div>
-    </section>
+
+        <style>
+            @media (max-width: 600px) { /* Adjust the width as needed */
+                .slogan {
+                    display: none;
+                }
+            }
+        </style>
+    </header>
     <!-- Contact Box -->
     <div class="contact-box">
         <div class="container">
@@ -30,7 +36,7 @@
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item"> <span class="icon omfi-envelope"></span>
                         <h5>Email us</h5>
-                        <p>info@rentKaiadmin.com</p> <i class="numb omfi-envelope"></i>
+                        <p>info@rentluxuria.com</p> <i class="numb omfi-envelope"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
@@ -100,8 +106,7 @@
                 <div class="col-lg-5 offset-lg-1 col-md-12">
                     <h5>Location</h5>
                     <div class="google-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.1963135913634!2d55.4404776!3d25.398238499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f59004d183363%3A0xe710a6e8c7beb81a!2z2KfZhNmF2LHYp9mFINmE2KrYo9is2YrYsSDYp9mE2LPZitin2LHYp9iqIC0gQWwtTWFyYW0gUmVudCBBIENhcg!5e0!3m2!1sen!2ssa!4v1728667291695!5m2!1sen!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                    </div>
-                </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d273.36515892157473!2d55.4403971!3d25.3982346!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f596a8e876377%3A0x26f89404dd87b493!2sLuxuria%20Cars%20Rental!5e1!3m2!1sar!2ssa!4v1730029981917!5m2!1sar!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
             </div>
         </div>
     </section>
