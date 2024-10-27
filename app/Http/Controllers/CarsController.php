@@ -57,7 +57,9 @@ class CarsController extends Controller
             'kilo_daily' => 'required|integer',
             'kilo_monthly' => 'required|integer',
             'node_system_id' => 'required|integer', // New field validation
-            'car_picture' => 'nullable|image', // Validate image file if provided
+            'car_picture' => 'nullable|image',
+            // 'car_gallery.*' => 'nullable|image', // Adjusted to validate multiple images
+            // Validate image file if provided
         ]);
     
         // Create a new car instance
@@ -87,6 +89,8 @@ class CarsController extends Controller
         if ($request->hasFile('car_picture')) {
             $car->car_picture = $request->file('car_picture')->store('pictures');
         }
+
+        
     
         // Save the car to the database
         $car->save();
@@ -140,7 +144,20 @@ class CarsController extends Controller
         }
         
 
-        
+        // if ($request->hasFile('car_gallery')) {
+        //     // Optional: Clear previous gallery images if needed
+    
+        //     foreach ($request->file('car_gallery') as $image) {
+        //         // Store each image and create a new CarImage record
+        //         $path = $image->store('car_images', 'public');
+    
+        //         // Save the image path in the car_gallery table
+        //         CarImage::create([
+        //             'car_id' => $car->id,
+        //             'image_path' => $path,
+        //         ]);
+        //     }
+        // }
 
       
 

@@ -73,7 +73,9 @@ $(document).ready(function() {
         @foreach($images as $image)
             <div class="col-3">
                 <div class="card p-0 small-card mt-lg-2">
-                    <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Car Image">
+                    <!-- <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Car Image"> -->
+                    <img src="{{ asset($image->image_path) }}" class="card-img-top" alt="Car Image">
+
                 </div>
             </div>
         @endforeach

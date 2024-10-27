@@ -128,40 +128,82 @@
                             <span>Automatic</span>
                         </div>
                         <div>
-                            <img src="{{ asset('storage/' . $car->car_picture) }}" alt="">
+                            <img src="{{$car->car_picture) }}" alt="">
                         </div>
-                        <div class="d-flex mt-3">
-                            <div>
-                                <span class="px-3 py-2" style="display: inline-block;">
-                                    <div style="margin-left: 65px; margin-top: -59px; display: flex; justify-content: center; align-items: flex-start;">
-                                        <div style="padding-right: 38px; margin: 0; display: flex; flex-direction: column; align-items: center;">
+
+                        <div class="row mb-5 gx-2 justify-content-center">
+                            <div class="col-4">
+                                <h4 class="text-center text-white">Daily</h4>
+                                <h5 class="text-center text-white fw-light">88 <span>AED</span></h5>
+                                </div>
+
+                            <div class="col-4">
+                                <h4 class="text-center text-white">Weekly</h4>
+                                <h5 class="text-center text-white fw-light">88 <span>AED</span></h5>
+                                </div>
+
+                            <div class="col-4">
+                                <h4 class="text-center text-white">Monthly</h4>
+                                <h5 class="text-center text-white fw-light">88 <span>AED</span></h5>
+                                </div>
+                            <div class="row">
+                                <div class="col-6">
+                                   <div class="mb-3 d-flex justify-center">
+                                    <button class="btn btn-light bg-prima mx-auto text-center" data-bs-toggle="modal" 
+                                    data-bs-target="#bookingModal{{ $car->id }}">
+                                           Book Now
+                                       </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="mb-3 d-flex justify-center">
+                                        <button class="btn btn-success mx-auto text-center" style="background-color: #25D366; border-color: #25D366;">
+                                            <i class="fab fa-whatsapp"></i> WhatsApp
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        
+                        
+
+
+
+
+                        <!-- <div class="d-flex mt-3">
+                            <div class="bg-danger">
+                                    <div class="w-100 mx-auto"  style=" margin-top: -59px; display: flex; justify-content: center; align-items: flex-start;">
+                                        <div style=" display: flex; flex-direction: column; align-items: center;">
                                             <h5 class="car_name" style="margin: 0;">Daily</h5>
                                             <span class="price" style="font-size: 22px;">{{ number_format($car->price_daily, 0) }} AED</span>
                                         </div>
-                                        <div style="padding-right: 33px;padding-left: 11%;margin: 0;display: flex;flex-direction: column;align-items: center;padding-bottom: 11%;">
+                                        <div style="display: flex;flex-direction: column;align-items: center;padding-bottom: 11%;">
                                             <h5 class="car_name" style="margin: 0;">Weekly</h5>
                                             <span class="price" style="font-size: 22px;">5,000 AED</span>
                                         </div>
-                                        <div style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+                                        <div style="display: flex; flex-direction: column; align-items: center;">
                                             <h5 class="car_name" style="margin: 0;">Monthly</h5>
                                             <span class="price" style="font-size: 22px;">{{ number_format($car->price_monthly, 0) }} AED</span>
                                         </div>
                                     </div>
-                                </span>
-                                <button style="background-color: #767676; color: white; border: 2px solid #767676; margin: 0 35px 0 22px;" 
+                           
+                            </div>
+                            <button style="background-color: #767676; color: white; border: 2px solid #767676; margin: 0 35px 0 22px;" 
                                         type="button" 
                                         class="btn btn-primary reserve-button py-1 my-2" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#bookingModal{{ $car->id }}">
                                     Book Now
                                 </button>
-                            </div>
                             <div class="px-3">   
                                 <span class="whatsapp-icon">
                                     <i class="fab fa-whatsapp"></i>
                                 </span>
                             </div>
-                        </div>
+                        </div> -->
                     </a>
 
                     <!-- Booking Modal -->

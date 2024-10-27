@@ -81,17 +81,22 @@
 
 
                                 <div class="form-group">
-                                <label for="car_picture">Car Pictures</label>
-                                <input type="file" name="car_picture[]" multiple>
-                                    
-                                    <!-- Current car picture display -->
-                                    @if($car->car_picture)
-                                        <div class="mt-2">
-                                            <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Current Car Image" style="max-width: 200px; max-height: 150px; object-fit: cover;">
-                                        </div>
-                                    @endif
-
-                                </div>
+    <label for="car_picture">Car Gallery Images</label>
+    <input type="file" name="car_gallery[]" multiple>
+    
+    <!-- Current car pictures display -->
+    <div class="mt-2">
+        @if($images && $images->count() > 0)
+            @foreach($images as $image)
+                <div class="mb-2">
+                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="Current Car Image" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                </div>
+            @endforeach
+        @else
+            <p>No images available.</p>
+        @endif
+    </div>
+</div>
 
 
 
