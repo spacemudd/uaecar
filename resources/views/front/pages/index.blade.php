@@ -128,7 +128,7 @@
                             <span>Automatic</span>
                         </div>
                         <div>
-                            <img src="{{ asset('storage/' . $car->car_picture) }}" alt="">
+                            <img src="{{ asset($car->car_picture) }}" alt="">
                         </div>
 
                         <div class="row mb-5 gx-2 justify-content-center">
