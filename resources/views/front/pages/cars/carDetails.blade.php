@@ -94,7 +94,7 @@ $(document).ready(function() {
             <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('front/img/gallery/Mercedes Benz S500/Le15.jpg') }}" class="d-block w-100" alt="Car Image">
+            <img src="{{ asset($car->car_picture) }}" class="d-block w-100" alt="Car Image">
         </div>
         @foreach($images as $image)
             <div class="carousel-item">
