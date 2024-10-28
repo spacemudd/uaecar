@@ -16,11 +16,11 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container d-flex justify-content-between align-items-center">
-        <div class="logo-container">
-            <a href="{{ route('index') }}">
-                <img src="{{ asset('front/img/white-logo.png') }}" alt="" class="pt-3 mt-3 my-logo">
-            </a>
-        </div>
+    <div class="">
+    <a href="{{ route('index') }}">
+        <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="pt-3 mt-5 my-logo"> <!-- Changed mt-3 to mt-5 -->
+    </a>
+</div>
      
         
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,7 +104,7 @@
                     <!-- about & social icons -->
                     <div class="col-md-4 widget-area">
                         <div class="widget clearfix">
-                            <div class="footer-logo"><img src="{{ asset('front/img/white-logo.png') }}" alt=""></div>
+                            <div class="footer-logo"><img src="{{ asset('front/img/new-logo.png') }}" alt=""></div>
                             <!-- <div class="footer-logo"><h2>CARE<span>X</span></h2></div> -->
                             <div class="widget-text">
                                 <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
