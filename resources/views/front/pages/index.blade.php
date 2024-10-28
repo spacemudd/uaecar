@@ -158,7 +158,7 @@
 
                                 <div class="col-6">
                                     <div class="mb-3 d-flex justify-center">
-                                        <button class="btn btn-success mx-auto text-center my-2" style="background-color: #128c7e; border-color: #25D366;">
+                                        <button class="btn btn-success mx-auto text-center my-2" style="background-color: #128c7e;">
                                             <i class="fab fa-whatsapp"></i> WhatsApp
                                         </button>
                                     </div>
