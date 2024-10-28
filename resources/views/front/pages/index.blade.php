@@ -149,7 +149,7 @@
                             <div class="row">
                                 <div class="col-6">
                                    <div class="mb-3 d-flex justify-center">
-                                   <button class="btn mx-auto text-center my-2" style="background-color: #00000078; color: white;" data-bs-toggle="modal" data-bs-target="#bookingModal13">
+                                   <button class="btn mx-auto text-center my-2" style="background-color: #949494; color: white;" data-bs-toggle="modal" data-bs-target="#bookingModal13">
     Book Now
 </button>
 
