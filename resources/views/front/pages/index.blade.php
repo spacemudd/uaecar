@@ -75,11 +75,6 @@
                     <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
                 </video>
             </div>
-            
-            <div class="slogan text-white">
-                The Right Car for Every Road, Rent Your Way
-            </div>
-            
         </div>
 
         <style>

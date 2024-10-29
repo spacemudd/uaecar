@@ -729,6 +729,8 @@ hr {
     height: 100px;
     border: none;
 }
+
+
 .navbar .container {
     border: none;
 }
@@ -929,6 +931,7 @@ hr {
     position: relative;
     display: flex;
     align-items: center;
+    
 }
 .navbar .navbar-right .wrap {
     position: relative;
@@ -1346,6 +1349,8 @@ hr {
 
 
 /* ======= Slider style (Inner Page Slider) ======= */
+
+
 .slider .owl-item {
     height: 100vh;
     position: relative;
