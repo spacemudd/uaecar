@@ -87,7 +87,7 @@ class CarsController extends Controller
         $car->node_id = $request->node_system_id; // Assign the new field
     
         if ($request->hasFile('car_picture')) {
-            $car->car_picture = $request->file('car_picture')->store('pictures');
+            $car->car_picture = $request->file('car_picture')->store('front/img/cars');
         }
 
         
