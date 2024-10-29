@@ -24,7 +24,7 @@
 
     <div class="md-5">
         <a href="{{ route('index') }}">
-            <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="pt-3 mt-5 my-logo">
+            <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="">
         </a>
     </div>
 
@@ -32,17 +32,12 @@
         The Right Car for Every Road, Rent Your Way
     </div> -->
 
-    
-
-
-
     <div class="container d-flex justify-content-between align-items-center"> 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
     </button>
 
-        <!-- Button -->
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
