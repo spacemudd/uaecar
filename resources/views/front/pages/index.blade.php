@@ -68,12 +68,18 @@
     <!-- Header Video -->
     <header class="header">
         <div class="video-fullscreen-wrap">
+            
             <div class="video-fullscreen-video" data-overlay-dark="2">
                 <video playsinline autoplay loop muted>
                     <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
                     <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
                 </video>
             </div>
+            
+            <div class="slogan text-white">
+                The Right Car for Every Road, Rent Your Way
+            </div>
+            
         </div>
 
         <style>

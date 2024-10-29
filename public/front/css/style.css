@@ -1158,7 +1158,7 @@ hr {
 
 /* ======= Header style ======= */
 .header {
-    height: 48vh;
+    height: 34vh;
     overflow: hidden;
 }
 .header .caption .o-hidden {

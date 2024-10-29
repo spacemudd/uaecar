@@ -11,21 +11,36 @@
     <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
 
+    <style>
+
+
+    </style>
+
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg">
-    <div class="container d-flex justify-content-between align-items-center">
-    <div class="">
-    <a href="{{ route('index') }}">
-        <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="pt-3 mt-5 my-logo"> <!-- Changed mt-3 to mt-5 -->
-    </a>
-</div>
-     
-        
-        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
-        </button>
+
+
+    <div class="md-5">
+        <a href="{{ route('index') }}">
+            <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="pt-3 mt-5 my-logo">
+        </a>
+    </div>
+
+    <!-- <div class="slogan text-white">
+        The Right Car for Every Road, Rent Your Way
+    </div> -->
+
+    
+
+
+
+    <div class="container d-flex justify-content-between align-items-center"> 
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+    </button>
 
         <!-- Button -->
         <div class="collapse navbar-collapse" id="navbar">
@@ -43,13 +58,14 @@
                         <h5><a href="tel:+971542700030">05 4270 0030</a></h5>
                     </div>
                 </div>
-            </div>
+
         </div>
+        </div>
+
     </div>
-    <div class="slogan" style="max-width: 400px;text-align: right;font-size: 1.9rem;color: #fff;margin-top: 17%;margin-right: 6%;">
-            The Right Car for Every Road – Rent Your Way
-        </div>
+
 </nav>
+
 
     @yield('content')
 
