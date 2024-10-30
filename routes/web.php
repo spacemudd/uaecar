@@ -114,3 +114,4 @@ Route::post('admin/cars/store', [CarController::class, 'store'])->name('admin.ca
 
 Route::get('admin/cars/{id}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
 Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
+Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryImage'])->name('admin.cars.gallery.delete');

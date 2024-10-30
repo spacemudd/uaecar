@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\CarImage; // Ensure you have this model for handling car images
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -195,6 +196,18 @@ class CarController extends Controller
         // Optionally return a response or redirect
         return redirect()->route('admin.carlist', $car->id)->with('success', 'Car updated successfully!');
     }
+
+
+    public function deleteGalleryImage($id)
+    {
+        $image = CarImage::findOrFail($id); // Find the image by ID
+        Storage::disk('public')->delete($image->image_path); // Delete the image file from storage
+        $image->delete(); // Delete the record from the database
+    
+        return redirect()->back()->with('success', 'Image deleted successfully.');
+    }
+    
+
     
 
 }

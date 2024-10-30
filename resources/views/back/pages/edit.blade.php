@@ -1,6 +1,5 @@
 @extends('back.layouts.master')
 
-
 @section('content')
 <div class="wrapper">
     <div class="container">
@@ -76,12 +75,10 @@
                                             <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Current Car Image" style="max-width: 200px; max-height: 150px; object-fit: cover;">
                                         </div>
                                     @endif
-
                                 </div>
 
-
                                 <div class="form-group">
-    <label for="car_picture">Car Gallery Images</label>
+    <label for="car_gallery">Car Gallery Images</label>
     <input type="file" name="car_gallery[]" multiple>
     
     <!-- Current car pictures display -->
@@ -90,6 +87,11 @@
             @foreach($images as $image)
                 <div class="mb-2">
                     <img src="{{ asset('storage/' . $image->image_path) }}" alt="Current Car Image" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                    <form action="{{ route('admin.cars.gallery.delete', $image->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
                 </div>
             @endforeach
         @else
@@ -98,12 +100,6 @@
     </div>
 </div>
 
-
-
-
-
-
-                           
 
                                 <button type="submit" class="btn btn-primary">Update Car</button>
                                 <a href="{{ route('admin.carlist') }}" class="btn btn-secondary">Cancel</a>
@@ -116,5 +112,3 @@
     </div>
 </div>
 @endsection
-
-
