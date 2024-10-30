@@ -18,10 +18,10 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center w-100">
+        <div class="d-flex justify-content-between align-items-center">
             <div class="my-logo md-5 text-left">
                 <a href="{{ route('index') }}">
-                    <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="my-logo">
+                    <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="">
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,14 +30,13 @@
         </div>
     </div>
 
-    <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse w-100" id="navbar">
+        <ul class="navbar-nav me-auto w-100 d-flex justify-content-center ">
             <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-        </ul>
 
-        <div class="navbar-right ms-auto d-flex align-items-center">
+            <div class="navbar-right">
             <div class="wrap d-flex align-items-center ms-2">
                 <div class="icon me-2"><i class="flaticon-phone-call"></i></div>
                 <div class="text">
@@ -46,6 +45,9 @@
                 </div>
             </div>
         </div>
+        </ul>
+
+      
     </div>
 </nav>
 

@@ -74,8 +74,12 @@
                     <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
                     <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
                 </video>
+                
             </div>
+
+
         </div>
+
 
         <style>
             @media (max-width: 600px) { /* Adjust the width as needed */
@@ -87,7 +91,7 @@
     </header>
 
     <!-- Clients Section -->
-    <section class="clients">
+    <section class="clients mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -129,7 +133,8 @@
                             <span>Automatic</span>
                         </div>
                         <div>
-                            <img src="{{ asset($car->car_picture) }}" alt="">
+                            <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture">
+
                         </div>
 
                         <div class="row mb-5 gx-2 justify-content-center">

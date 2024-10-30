@@ -106,7 +106,7 @@
                            
 
                                 <button type="submit" class="btn btn-primary">Update Car</button>
-                                <a href="{{ route('admin.cars.index') }}" class="btn btn-secondary">Cancel</a>
+                                <a href="{{ route('admin.carlist') }}" class="btn btn-secondary">Cancel</a>
                             </form>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ use App\Models\Car;
 use App\Models\CarImage; // Ensure you have this model for handling car images
 use Illuminate\Http\Request;
 
-class CarsController extends Controller
+class CarController extends Controller
 {
 
     public function toggleVisibility($id)
@@ -87,7 +87,7 @@ class CarsController extends Controller
         $car->node_id = $request->node_system_id; // Assign the new field
     
         if ($request->hasFile('car_picture')) {
-            $car->car_picture = $request->file('car_picture')->store('front/img/cars');
+            $car->car_picture = $request->file('car_picture')->store('car_images', 'public'); // Store in public disk
         }
 
         
@@ -169,7 +169,7 @@ class CarsController extends Controller
         
     
         // Optionally return a response or redirect
-        return redirect()->route('cars.show', $car->id)->with('success', 'Car updated successfully!');
+        return redirect()->route('admin.carlist', $car->id)->with('success', 'Car updated successfully!');
     }
     
 

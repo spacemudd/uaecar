@@ -7234,3 +7234,9 @@ height: 100% !important;
 .car_mini_text{
     color: white;
 }
+
+@media screen and (max-width: 768px) {
+    .my-logo img{
+        width: 50%;
+    }
+}

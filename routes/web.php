@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AppointmentsController;
-use App\Http\Controllers\CarsController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\FinancingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\indexController;
@@ -61,7 +61,7 @@ use Inertia\Inertia;
 // Public Routes
 Route::get('/', [indexController::class, 'showVisibleCars'])->name('index');
 Route::get('/contact-us', [CompanyController::class, 'showContact'])->name('contact');
-Route::get('/car/{id}', [CarsController::class, 'show'])->name('cars.show');
+Route::get('/car/{id}', [CarController::class, 'show'])->name('cars.show');
 Route::post('form/submit', [FormController::class, 'submit'])->name('form.submit');
 Route::post('form/contact', [FormController::class, 'sendContactEmail'])->name('form.contact');
 Route::get('/submission-status', [FormController::class, 'submissionStatus'])->name('submission.status');
@@ -97,20 +97,20 @@ Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 // });
 
 // Cars Management
-Route::get('/admin/cars', [\App\Http\Controllers\Admin\CarsController::class, 'index'])->name('admin.cars.index');
-Route::get('/admin/cars/{id}', [\App\Http\Controllers\Admin\CarsController::class, 'show'])->name('admin.cars.show');
-Route::post('/admin/cars/{id}/upload', [\App\Http\Controllers\Admin\CarsController::class, 'upload'])->name('admin.cars.upload');
-Route::patch('/admin/cars/{id}/toggle-visibility', [CarsController::class, 'toggleVisibility'])->name('admin.cars.toggleVisibility');
-Route::delete('/admin/cars/{id}', [CarsController::class, 'destroy'])->name('admin.cars.delete');
-Route::post('admin/cars/store', [CarsController::class, 'store'])->name('cars.store');
+// Route::get('/admin/cars', [\App\Http\Controllers\Admin\CarsController::class, 'index'])->name('admin.cars.index');
+// Route::get('/admin/cars/{id}', [\App\Http\Controllers\Admin\CarsController::class, 'show'])->name('admin.cars.show');
+// Route::post('/admin/cars/{id}/upload', [\App\Http\Controllers\Admin\CarsController::class, 'upload'])->name('admin.cars.upload');
+Route::patch('/admin/cars/{id}/toggle-visibility', [CarController::class, 'toggleVisibility'])->name('admin.cars.toggleVisibility');
+Route::delete('/admin/cars/{id}', [CarController::class, 'destroy'])->name('admin.cars.delete');
+Route::post('admin/cars/store', [CarController::class, 'store'])->name('cars.store');
 
 
 
 Route::get('/admin/dashboard', [adminDashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/add-new-car', [adminDashboardController::class, 'addCars'])->name('admin.form');
 Route::get('/admin/carlist', [adminDashboardController::class, 'showCarList'])->name('admin.carlist'); 
-Route::post('admin/cars/store', [CarsController::class, 'store'])->name('admin.cars.store');
+Route::post('admin/cars/store', [CarController::class, 'store'])->name('admin.cars.store');
 
 
-Route::get('admin/cars/{id}/edit', [CarsController::class, 'edit'])->name('admin.cars.edit');
-Route::patch('admin/cars/{id}', [CarsController::class, 'update'])->name('admin.cars.update');
+Route::get('admin/cars/{id}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
+Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
