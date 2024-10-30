@@ -135,6 +135,8 @@ class CarController extends Controller
             'year' => 'required|integer',
             'plate_number' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'car_gallery.*' => 'nullable|image|max:2048', // Validate multiple images
+
         ]);
     
         // Find the car by ID
@@ -179,6 +181,15 @@ class CarController extends Controller
         $car->save();
     
 
+        if($request->hasFile('car_gallery')){
+            foreach($request->file('car_gallery') as $image) {
+                $path = $image->store('car_images', 'public');
+                CarImage::create([
+                    'car_id' => $car->id,
+                    'image_path' => $path,
+                ]);
+            }
+        }
         
     
         // Optionally return a response or redirect
