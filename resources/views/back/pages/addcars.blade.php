@@ -93,10 +93,10 @@
                                 <label for="car_picture">Car Image:</label>
                                 <input type="file" class="form-control" id="car_picture" name="car_picture" accept="image/*" required>
                             </div>
-                            <!-- <div class="form-group col-md-6 col-lg-4">
+                            <div class="form-group col-md-6 col-lg-4">
                                 <label for="car_gallery">Car Gallery:</label>
                                 <input type="file" class="form-control" id="car_gallery" name="car_gallery[]" accept="image/*" multiple>
-                            </div> -->
+                            </div>
 
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="is_visible">Is Visible:</label>

@@ -58,6 +58,8 @@ class CarController extends Controller
             'kilo_monthly' => 'required|integer',
             'node_system_id' => 'required|integer', // New field validation
             'car_picture' => 'nullable|image',
+            'car_gallery.*' => 'nullable|image|max:2048', // Validate multiple images
+
             // 'car_gallery.*' => 'nullable|image', // Adjusted to validate multiple images
             // Validate image file if provided
         ]);
@@ -94,6 +96,17 @@ class CarController extends Controller
     
         // Save the car to the database
         $car->save();
+
+
+        if($request->hasFile('car_gallery')){
+            foreach($request->file('car_gallery') as $image) {
+                $path = $image->store('car_images', 'public');
+                CarImage::create([
+                    'car_id' => $car->id,
+                    'image_path' => $path,
+                ]);
+            }
+        }
     
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Car added successfully!');

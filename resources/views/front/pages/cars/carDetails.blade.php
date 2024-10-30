@@ -100,7 +100,7 @@
         </div>
         @foreach($images as $image)
             <div class="carousel-item">
-                <img src="{{ asset($image->image_path) }}" class="d-block w-100" alt="Car Image">
+                <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100" alt="Car Image">
             </div>
         @endforeach
     </div>
