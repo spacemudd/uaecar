@@ -199,14 +199,13 @@ class CarController extends Controller
 
 
     public function deleteGalleryImage($id)
-    {
-        $image = CarImage::findOrFail($id); // Find the image by ID
-        Storage::disk('public')->delete($image->image_path); // Delete the image file from storage
-        $image->delete(); // Delete the record from the database
-    
-        return redirect()->back()->with('success', 'Image deleted successfully.');
-    }
-    
+{
+    $image = CarImage::findOrFail($id);
+    Storage::disk('public')->delete($image->image_path); // Delete the image file
+    $image->delete(); // Delete the record from the database
+
+    return redirect()->back()->with('success', 'Image deleted successfully.');
+}
 
     
 
