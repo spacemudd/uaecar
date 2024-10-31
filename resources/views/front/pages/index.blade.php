@@ -124,6 +124,7 @@
                     <a href="{{ route('cars.show', $car->id) }}" class="card3" style="text-decoration: none;">
                         <span class="px-3 py-2" style="display: inline-block;">
                         <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 20px;">{{ $car->car_name . ' ' . $car->model}}</h3>
+                        <br>
                             <h4 class="car_name" style="display:inline-block; margin:0;">{{ $car->year }}</h4>
                         </span>
                         <div class="span-group px-3" style="font-size: 12px;">
