@@ -42,8 +42,8 @@ class CarController extends Controller
             'car_name' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'year' => 'required|integer|min:1886|max:' . date('Y'), // Valid range for car year
-            'plate_number' => 'required|string|max:255',
-            'categories' => 'nullable|string|max:255',
+            'plate_number' => 'required|string|',
+            'categories' => 'nullable|string|',
             'seats' => 'required|integer|min:1|max:100', // Adjust max according to your requirements
             'doors' => 'required|integer|min:1|max:10', // Adjust max according to your requirements
             'color' => 'required|string|max:50',
@@ -52,19 +52,16 @@ class CarController extends Controller
             'car_price_monthly' => 'required|numeric',
             'gear' => 'required|string|max:50',
             'description' => 'nullable|string',
-            'chassis_number' => 'required|string|max:255',
+            'chassis_number' => 'required|string|',
             'is_visible' => 'required|boolean',
-            'delivery' => 'required|boolean',
-            'kilo_daily' => 'required|integer',
-            'kilo_monthly' => 'required|integer',
+            'delivery' => 'nullable|boolean', // Optional
+            'kilo_daily' => 'nullable|integer', // Optional
+            'kilo_monthly' => 'nullable|integer', // Optional
             'node_system_id' => 'required|integer', // New field validation
-            'car_picture' => 'nullable|image',
+            'car_picture' => 'required|image', // Make mandatory
             'car_gallery.*' => 'nullable|image|max:2048', // Validate multiple images
-
-            // 'car_gallery.*' => 'nullable|image', // Adjusted to validate multiple images
-            // Validate image file if provided
         ]);
-    
+        
         // Create a new car instance
         $car = new Car();
     
@@ -84,23 +81,20 @@ class CarController extends Controller
         $car->description = $request->description;
         $car->chassis_number = $request->chassis_number;
         $car->is_visible = $request->is_visible;
-        $car->delivery = $request->delivery;
-        $car->kilo_daily = $request->kilo_daily;
-        $car->kilo_monthly = $request->kilo_monthly;
+        $car->delivery = $request->delivery; // Optional
+        $car->kilo_daily = $request->kilo_daily; // Optional
+        $car->kilo_monthly = $request->kilo_monthly; // Optional
         $car->node_id = $request->node_system_id; // Assign the new field
     
         if ($request->hasFile('car_picture')) {
             $car->car_picture = $request->file('car_picture')->store('car_images', 'public'); // Store in public disk
         }
-
-        
     
         // Save the car to the database
         $car->save();
-
-
-        if($request->hasFile('car_gallery')){
-            foreach($request->file('car_gallery') as $image) {
+    
+        if ($request->hasFile('car_gallery')) {
+            foreach ($request->file('car_gallery') as $image) {
                 $path = $image->store('car_images', 'public');
                 CarImage::create([
                     'car_id' => $car->id,
@@ -112,6 +106,7 @@ class CarController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Car added successfully!');
     }
+    
 
 
     public function edit($id)
@@ -136,7 +131,11 @@ class CarController extends Controller
             'year' => 'required|integer',
             'plate_number' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'car_gallery.*' => 'nullable|image', // Validate multiple images
+            'car_gallery.*' => 'nullable|image',
+            'chassis_number' => 'required|string|max:255',
+            'kilo_daily' => 'required|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
+            'kilo_monthly' => 'required|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
+            'node_system_id' => 'required|string|max:255', // Add validation for node_system_id
 
         ]);
     
@@ -153,6 +152,12 @@ class CarController extends Controller
         $car->year = $request->year;
         $car->plate_number = $request->plate_number;
         $car->description = $request->description;
+        $car->chassis_number = $request->chassis_number;
+        $car->kilo_daily = $request->kilo_daily;
+        $car->kilo_monthly = $request->kilo_monthly;
+        $car->node_id = $request->node_system_id; // Save node_system_id
+        // Save kilo daily
+         // Save chassis number
     
         // Handle car image upload
         if ($request->hasFile('car_picture')) {

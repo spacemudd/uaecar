@@ -11,61 +11,79 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('admin.cars.update', $car->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.cars.update', $car->id) }}" method="POST" enctype="multipart/form-data" class="row" onsubmit="return validateForm()">
                                 @csrf
                                 @method('PATCH')
 
                                 <div class="form-group col-md-6 col-lg-4">
                                     <label for="node_system_id">Node System ID:</label>
-                                    <input type="number" class="form-control" name="node_system_id" value="{{ old('node_system_id', $car->node_id) }}">
+                                    <input type="text" class="form-control" name="node_system_id" value="{{ old('node_system_id', $car->node_id) }}">
                                 </div>
+
 
                                 <div class="form-group col-md-6 col-lg-4">
                                     <label for="car_name">Car Name</label>
                                     <input type="text" name="car_name" class="form-control" value="{{ old('car_name', $car->car_name) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="model">Model</label>
                                     <input type="text" name="model" class="form-control" value="{{ old('model', $car->model) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="seats">Seats</label>
                                     <input type="number" name="seats" class="form-control" value="{{ old('seats', $car->seats) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="price_daily">Price Daily (AED)</label>
                                     <input type="number" name="price_daily" class="form-control" value="{{ old('price_daily', $car->price_daily) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="price_weekly">Price Weekly (AED)</label>
                                     <input type="number" name="price_weekly" class="form-control" value="{{ old('price_weekly', $car->price_weekly) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="price_monthly">Price Monthly (AED)</label>
                                     <input type="number" name="price_monthly" class="form-control" value="{{ old('price_monthly', $car->price_monthly) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="year">Year</label>
                                     <input type="number" name="year" class="form-control" value="{{ old('year', $car->year) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="description">Description</label>
                                     <textarea name="description" class="form-control" rows="3">{{ old('description', $car->description) }}</textarea>
                                 </div>
 
-                                <div class="form-group">
+
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="plate_number">Plate Number</label>
                                     <input type="text" name="plate_number" class="form-control" value="{{ old('plate_number', $car->plate_number) }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
+                                    <label for="chassis_number">Chassis Number</label>
+                                    <input type="text" name="chassis_number" class="form-control" value="{{ old('chassis_number', $car->chassis_number) }}">
+                                </div>
+                                
+                                <div class="form-group col-md-6 col-lg-4">
+                                    <label for="kilo_daily">Kilo Daily</label>
+                                    <input type="number" name="kilo_daily" class="form-control" value="{{ old('kilo_daily', $car->kilo_daily) }}">
+                                </div>
+                                
+                                <div class="form-group col-md-6 col-lg-4">
+                                    <label for="kilo_daily">Kilo Daily</label>
+                                    <input type="number" name="kilo_monthly" class="form-control" value="{{ old('kilo_monthly', $car->kilo_monthly) }}">
+                                </div>
+
+
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="car_picture">Car Image</label>
                                     <input type="file" name="car_picture" class="form-control">
                                     
@@ -76,9 +94,9 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-lg-4">
                                     <label for="car_gallery">Car Gallery Images</label>
-                                    <input type="file" name="car_gallery[]" multiple>
+                                    <input type="file" name="car_gallery[]" class="form-control" multiple>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Update Car</button>
@@ -87,28 +105,28 @@
 
                             <!-- Separate section for deleting gallery images -->
                             <div class="mt-4">
-    <h5>Current Gallery Images</h5>
-    <div class="row">
-        @if($images && $images->count() > 0)
-            @foreach($images as $image)
-                <div class="col-md-3 mb-2"> <!-- Adjust the column size as needed -->
-                    <div class="card">
-                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Current Car Image" class="card-img-top" style="max-width: 100%; height: auto; object-fit: cover;">
-                        <div class="card-body text-center">
-                            <form action="{{ route('admin.cars.gallery.delete', $image->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        @else
-            <p>No images available.</p>
-        @endif
-    </div>
-</div>
+                                <h5>Current Gallery Images</h5>
+                                <div class="row">
+                                    @if($images && $images->count() > 0)
+                                        @foreach($images as $image)
+                                            <div class="col-md-3 mb-2"> <!-- Adjust the column size as needed -->
+                                                <div class="card">
+                                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="Current Car Image" class="card-img-top" style="max-width: 100%; height: auto; object-fit: cover;">
+                                                    <div class="card-body text-center">
+                                                        <form action="{{ route('admin.cars.gallery.delete', $image->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <p>No images available.</p>
+                                    @endif
+                                </div>
+                            </div>
 
                         </div>
                     </div>
