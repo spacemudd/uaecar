@@ -229,6 +229,32 @@
     </div>
 </div>
 
+<div class="col-6">
+    <div class="row">
+        <div class="col-4">
+            <div class="blue-icon">
+                <img src="{{ asset('front/img/icons/mileage.png') }}" alt="kilo_daily" class="icon-img" />
+            </div>
+        </div>
+        <div class="col-8">
+            <h5 class="small">4,500/km Monthly</h5>
+        </div>
+    </div>
+</div>
+
+<div class="col-6">
+    <div class="row">
+        <div class="col-4">
+            <div class="blue-icon">
+                <img src="{{ asset('front/img/icons/mileage.png') }}" alt="kilo_monthly" class="icon-img" />
+            </div>
+        </div>
+        <div class="col-8">
+            <h5 class="small">450/km Daily</h5>
+        </div>
+    </div>
+</div>
+
 
 
 </div>
