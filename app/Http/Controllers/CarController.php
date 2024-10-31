@@ -50,15 +50,12 @@ class CarController extends Controller
             'car_price_daily' => 'required|numeric',
             'car_price_weekly' => 'required|numeric',
             'car_price_monthly' => 'required|numeric',
-            'gear' => 'required|string|max:50',
             'description' => 'nullable|string',
             'chassis_number' => 'required|string|',
             'is_visible' => 'required|boolean',
-            'delivery' => 'nullable|boolean', // Optional
             'kilo_daily' => 'nullable|integer', // Optional
             'kilo_monthly' => 'nullable|integer', // Optional
-            'node_system_id' => 'required|integer', // New field validation
-            'car_picture' => 'required|image', // Make mandatory
+            'node_system_id' => 'required|string|max:255', // Change to string if it can be alphanumeric            'car_picture' => 'required|image', // Make mandatory
             'car_gallery.*' => 'nullable|image|max:2048', // Validate multiple images
         ]);
         

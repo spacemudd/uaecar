@@ -19,7 +19,7 @@
                         @csrf
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="node_system_id">Node System ID:</label>
-                                <input type="number" class="form-control" id="node_system_id" name="node_system_id">
+                                <input type="text" class="form-control" id="node_system_id" name="node_system_id">
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="car_name">Car Name:</label>
@@ -132,7 +132,6 @@
         </div>
     </div>
 </div>
-
 <script>
     function validateForm() {
         let isValid = true;
