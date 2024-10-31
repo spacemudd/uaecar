@@ -136,7 +136,7 @@ class CarController extends Controller
             'year' => 'required|integer',
             'plate_number' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'car_gallery.*' => 'nullable|image|max:2048', // Validate multiple images
+            'car_gallery.*' => 'nullable|image', // Validate multiple images
 
         ]);
     
