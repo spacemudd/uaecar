@@ -95,7 +95,7 @@
             <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('storage/' . $image->image_path) }}" alt="Car Picture">
+            <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture">
 
         </div>
         @foreach($images as $image)
