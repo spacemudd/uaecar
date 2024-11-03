@@ -7243,19 +7243,3 @@ height: 100% !important;
 }
 
 
-.carousel-background {
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 1),
-        rgba(50, 50, 50, 0.8),
-        rgba(100, 100, 100, 0.6),
-        rgba(150, 150, 150, 0.4),
-        rgba(200, 200, 200, 0.2),
-        rgba(50, 50, 50, 0.8),
-        rgba(0, 0, 0, 1)
-    );
-    position: relative; /* To position the gradient */
-    z-index: 1; /* Ensure it's behind the carousel items */
-    height: 100%; /* Adjust height as needed */
-    overflow: hidden; /* Prevent overflow of images */
-}

@@ -114,7 +114,8 @@ class CarController extends Controller
 
 
     public function update(Request $request, $id)
-    {        // Validate the request
+    {
+        // Validate the request
         $request->validate([
             'car_name' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -128,75 +129,58 @@ class CarController extends Controller
             'description' => 'nullable|string',
             'car_gallery.*' => 'nullable|image',
             'chassis_number' => 'required|string|max:255',
-            'kilo_daily' => 'required|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
-            'kilo_monthly' => 'required|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
-            'node_system_id' => 'required|string|max:255', // Add validation for node_system_id
-
+            'kilo_daily' => 'required|integer',
+            'kilo_monthly' => 'required|integer',
+            'node_system_id' => 'required|string|max:255',
         ]);
     
         // Find the car by ID
         $car = Car::findOrFail($id);
     
-        // Update car details
-        $car->car_name = $request->car_name;
-        $car->model = $request->model;
-        $car->seats = $request->seats;
-        $car->price_daily = $request->price_daily;
-        $car->price_weekly = $request->price_weekly;
-        $car->price_monthly = $request->price_monthly;
-        $car->year = $request->year;
-        $car->plate_number = $request->plate_number;
-        $car->description = $request->description;
-        $car->chassis_number = $request->chassis_number;
-        $car->kilo_daily = $request->kilo_daily;
-        $car->kilo_monthly = $request->kilo_monthly;
-        $car->node_id = $request->node_system_id; // Save node_system_id
-        // Save kilo daily
-         // Save chassis number
+        try {
+            // Update car details
+            $car->car_name = $request->car_name;
+            $car->model = $request->model;
+            $car->seats = $request->seats;
+            $car->price_daily = $request->price_daily;
+            $car->price_weekly = $request->price_weekly;
+            $car->price_monthly = $request->price_monthly;
+            $car->year = $request->year;
+            $car->plate_number = $request->plate_number;
+            $car->description = $request->description;
+            $car->chassis_number = $request->chassis_number;
+            $car->kilo_daily = $request->kilo_daily;
+            $car->kilo_monthly = $request->kilo_monthly;
+            $car->node_id = $request->node_system_id; // Save node_system_id
     
-        // Handle car image upload
-        if ($request->hasFile('car_picture')) {
-            $car->car_picture = $request->file('car_picture')->store('car_images', 'public'); // Store in public disk
-        }
-        
-
-        // if ($request->hasFile('car_gallery')) {
-        //     // Optional: Clear previous gallery images if needed
-    
-        //     foreach ($request->file('car_gallery') as $image) {
-        //         // Store each image and create a new CarImage record
-        //         $path = $image->store('car_images', 'public');
-    
-        //         // Save the image path in the car_gallery table
-        //         CarImage::create([
-        //             'car_id' => $car->id,
-        //             'image_path' => $path,
-        //         ]);
-        //     }
-        // }
-
-      
-
-     
-        // Save the car details
-        $car->save();
-    
-
-        if($request->hasFile('car_gallery')){
-            foreach($request->file('car_gallery') as $image) {
-                $path = $image->store('car_images', 'public');
-                CarImage::create([
-                    'car_id' => $car->id,
-                    'image_path' => $path,
-                ]);
+            // Handle car image upload
+            if ($request->hasFile('car_picture')) {
+                $car->car_picture = $request->file('car_picture')->store('car_images', 'public'); // Store in public disk
             }
-        }
-        
     
-        // Optionally return a response or redirect
-        return redirect()->route('admin.carlist', $car->id)->with('success', 'Car updated successfully!');
+            // Save the car details
+            $car->save();
+    
+            // Handle car gallery uploads
+            if ($request->hasFile('car_gallery')) {
+                foreach ($request->file('car_gallery') as $image) {
+                    $path = $image->store('car_images', 'public');
+                    CarImage::create([
+                        'car_id' => $car->id,
+                        'image_path' => $path,
+                    ]);
+                }
+            }
+    
+            // Optionally return a response or redirect
+            return redirect()->route('admin.carlist', $car->id)->with('success', 'Car updated successfully!');
+        } catch (\Exception $e) {
+            // Log the error and return with an error message
+            Log::error('Error updating car: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Something went wrong!']);
+        }
     }
-
+    
 
     public function deleteGalleryImage($id)
 {
