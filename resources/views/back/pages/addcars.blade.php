@@ -52,7 +52,7 @@
 
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="color">Color:</label>
-                                <select class="form-control" id="color" name="color" required>
+                                <select class="form-control" id="color" name="color">
                                     <option value="Red">Red</option>
                                     <option value="Blue">Blue</option>
                                     <option value="Green">Green</option>
@@ -62,15 +62,15 @@
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="car_price_daily">Car Price Daily:</label>
-                                <input type="number" class="form-control" id="car_price_daily" name="car_price_daily" step="0.01" required>
+                                <input type="number" class="form-control" id="price_daily" name="price_daily" step="0.01" required>
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
-                                <label for="car_price_weekly">Car Price Weekly:</label>
-                                <input type="number" class="form-control" id="car_price_weekly" name="car_price_weekly" step="0.01" required>
+                                <label for="price_weekly">Car Price Weekly:</label>
+                                <input type="number" class="form-control" id="price_weekly" name="price_weekly" step="0.01" required>
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
-                                <label for="car_price_monthly">Car Price Monthly:</label>
-                                <input type="number" class="form-control" id="car_price_monthly" name="car_price_monthly" step="0.01" required>
+                                <label for="price_monthly">Car Price Monthly:</label>
+                                <input type="number" class="form-control" id="price_monthly" name="price_monthly" step="0.01" required>
                             </div>
                             
                             <div class="form-group col-md-6 col-lg-4">
@@ -97,16 +97,6 @@
                                 <label for="car_gallery">Car Gallery:</label>
                                 <input type="file" class="form-control" id="car_gallery" name="car_gallery[]" accept="image/*" multiple>
                             </div>
-
-                            <div class="form-group col-md-6 col-lg-4">
-                                <label for="is_visible">Is Visible:</label>
-                                <select class="form-control" id="is_visible" name="is_visible" required>
-                                    <option value="1" selected>Yes</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </div>
-
-                           
 
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="kilo_daily">Kilo Daily:</label>
