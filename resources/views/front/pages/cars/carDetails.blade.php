@@ -93,7 +93,7 @@
         <div class="row py-3 gy-2">
             <div class="col-lg-8">
             <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
+    <div class="carousel-inner car-box">
         <div class="carousel-item active">
             <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture">
 
