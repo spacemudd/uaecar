@@ -78,7 +78,7 @@
                                 </div>
                                 
                                 <div class="form-group col-md-6 col-lg-4">
-                                    <label for="kilo_daily">Kilo Daily</label>
+                                    <label for="kilo_daily">Kilo Monthly</label>
                                     <input type="number" name="kilo_monthly" class="form-control" value="{{ old('kilo_monthly', $car->kilo_monthly) }}">
                                 </div>
 
