@@ -39,7 +39,11 @@
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="categories">Categories:</label>
-                                <input type="text" class="form-control" id="categories" name="categories">
+                                <select class="form-control" id="categories" name="categories">
+                                    <option value="Luxury">Luxury</option>
+                                    <option value="Premium">Premium</option>
+                                    <option value="Economy">Economy</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="seats">Seats:</label>
@@ -58,6 +62,7 @@
                                     <option value="Green">Green</option>
                                     <option value="Black">Black</option>
                                     <option value="White">White</option>
+                                    <option value="Gray">Gray</option> <!-- Added Gray here -->
                                 </select>
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
