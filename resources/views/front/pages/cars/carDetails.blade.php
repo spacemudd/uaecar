@@ -267,12 +267,12 @@
                         </div>
 
 
-                        <div class="text-center my-3">
+                        <!-- <div class="text-center my-3">
                             <img src="{{asset('public/front/img/icons/apple-pay.png')}}" alt="Visa" class="img-fluid" style="height: 40px; margin-right: 10px;">
                             <img src="{{asset('public/front/img/icons/visa.png')}}" alt="MasterCard" class="img-fluid" style="height: 40px;">
                             <img src="{{asset('public/front/img/icons/visa.png')}}" alt="MasterCard" class="img-fluid" style="height: 40px;">
 
-                        </div>
+                        </div> -->
                         
                         </div>
                 </div>
