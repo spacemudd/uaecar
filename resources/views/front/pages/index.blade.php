@@ -76,7 +76,7 @@
                 </video>
             </div>
             <div class="slogan-container">
-            <img src="{{ asset('front/img/slogann.png') }}" alt="Slogan" class="slogan-image">
+            <h3 class="slogan-image">The Right Car For Every Road - Rent Your Way</h3>
         </div>
            
         </div>
@@ -112,8 +112,8 @@
 
         .slogan-container {
             position: absolute;
-            top: 50%;
-            right: 13%; /* Position it 20px from the right */
+            top: 60%;
+            right: 11%; /* Position it 20px from the right */
             transform: translateY(-50%); /* Center vertically */
             z-index: 1; /* Ensure the slogan is above the video */
             text-align: center; /* Center the slogan */
@@ -122,13 +122,35 @@
         .slogan-image {
             max-width: 100%; /* Responsive image */
             height: auto;
+            color: white;
+            font-weight: 50;
+            font-size: 30px;
         }
 
-        @media (max-width: 600px) {
-            .slogan-image {
-                display: none; /* Hide on small screens */
-            }
+        @media (max-width: 768px) {
+        .slogan-image {
+            display: none; /* Hide image on small screens */
         }
+        .slogan-text {
+            display: block; /* Show alternative text */
+            text-align: center; /* Center text */
+        }
+
+        
+    }
+
+
+    @media (max-width: 480px) {
+        .slogan-image {
+            display: none; /* Hide image on small screens */
+        }
+        .slogan-text {
+            display: block; /* Show alternative text */
+            text-align: center; /* Center text */
+        }
+
+        
+    }
     </style>
     </header>
 
@@ -164,7 +186,7 @@
             <div class="row">
                 @foreach($cars as $car)
                     <a href="{{ route('cars.show', $car->id) }}" class="card3" style="text-decoration: none;">
-                        <span class="px-3 py-2" style="display: inline-block;">
+                        <span class="px-4 py-3" style="display: inline-block;">
                         <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 20px;">{{ $car->car_name . ' ' . $car->model}}</h3>
                         <br>
                             <h4 class="car_name" style="display:inline-block; margin:0;">{{ $car->year }}</h4>
@@ -198,8 +220,8 @@
                                 <div class="col-6">
                                    <div class="mb-3 d-flex justify-center">
                                    <button class="btn mx-auto text-center my-2" style="background-color: #949494; color: white;" data-bs-toggle="modal" data-bs-target="#bookingModal13">
-    Book Now
-</button>
+                                    Book Now
+                                </button>
 
                                     </div>
                                 </div>
