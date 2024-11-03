@@ -121,21 +121,21 @@ class CarController extends Controller
     public function update(Request $request, $id)
     {        // Validate the request
         $request->validate([
-            'car_name' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'seats' => 'required|integer',
-            'price_daily' => 'required|numeric',
-            'price_weekly' => 'required|numeric',
-            'price_monthly' => 'required|numeric',
+            'node_system_id' => 'nullable|string|max:255', // Add validation for node_system_id
+            'car_name' => 'nullable|string|max:255',
+            'model' => 'nullable|string|max:255',
+            'seats' => 'nullable|integer',
+            'price_daily' => 'nullable|numeric',
+            'price_weekly' => 'nullable|numeric',
+            'price_monthly' => 'nullable|numeric',
             'car_picture' => 'nullable|image',
-            'year' => 'required|integer',
-            'plate_number' => 'required|string|max:255',
+            'year' => 'nullable|integer',
+            'plate_number' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'car_gallery.*' => 'nullable|image',
-            'chassis_number' => 'required|string|max:255',
-            'kilo_daily' => 'required|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
-            'kilo_monthly' => 'required|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
-            'node_system_id' => 'required|string|max:255', // Add validation for node_system_id
+            'chassis_number' => 'nullable|string|max:255',
+            'kilo_daily' => 'nullable|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
+            'kilo_monthly' => 'nullable|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
 
         ]);
     
