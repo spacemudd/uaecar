@@ -263,7 +263,7 @@
                             <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
                             <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
                    
-                            <!-- <a href="#" class="btn btn-primary no-radius mt-4 w-100 py-3">Checkout</a> <!-- Add the no-radius class -->                         -->
+                            <!-- <a href="#" class="btn btn-primary no-radius mt-4 w-100 py-3">Checkout</a> <!-- Add the no-radius class --> 
                         </div>
 
 

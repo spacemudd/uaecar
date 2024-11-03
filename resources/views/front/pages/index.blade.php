@@ -74,20 +74,62 @@
                     <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
                     <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
                 </video>
-                
             </div>
-
-
+            <div class="slogan-container">
+            <img src="{{ asset('front/img/slogann.png') }}" alt="Slogan" class="slogan-image">
+        </div>
+           
         </div>
 
 
+
+
         <style>
-            @media (max-width: 600px) { /* Adjust the width as needed */
-                .slogan {
-                    display: none;
-                }
+        .header {
+            position: relative;
+            overflow: hidden;
+            height: 33vh; /* Adjust height as needed */
+        }
+
+        .video-fullscreen-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-fullscreen-video {
+            min-width: 100%;
+            min-height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0; /* Send video behind header */
+        }
+
+        .slogan-container {
+            position: absolute;
+            top: 50%;
+            right: 13%; /* Position it 20px from the right */
+            transform: translateY(-50%); /* Center vertically */
+            z-index: 1; /* Ensure the slogan is above the video */
+            text-align: center; /* Center the slogan */
+        }
+
+        .slogan-image {
+            max-width: 100%; /* Responsive image */
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .slogan-image {
+                display: none; /* Hide on small screens */
             }
-        </style>
+        }
+    </style>
     </header>
 
     <!-- Clients Section -->

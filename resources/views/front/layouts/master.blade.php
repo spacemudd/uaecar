@@ -16,6 +16,8 @@
 </head>
 <body>
 
+
+
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -27,8 +29,12 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
             </button>
+
         </div>
+
     </div>
+
+
 
     <div class="collapse navbar-collapse w-100" id="navbar">
         <ul class="navbar-nav me-auto w-100 d-flex justify-content-center ">
@@ -49,7 +55,11 @@
 
       
     </div>
+
+    
 </nav>
+
+
 
 @yield('content')
 
