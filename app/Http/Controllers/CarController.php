@@ -135,7 +135,9 @@ class CarController extends Controller
             'car_gallery.*' => 'nullable|image',
             'chassis_number' => 'nullable|string|max:255',
             'kilo_daily' => 'nullable|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
-            'kilo_monthly' => 'nullable|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
+            'kilo_monthly' => 'nullable|integer',
+            'category' => 'nullable|string',
+            'color' => 'nullable|string', // Validate kilo daily // Add validation for chassis number // Validate multiple images
 
         ]);
     
