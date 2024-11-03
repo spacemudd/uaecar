@@ -46,7 +46,6 @@
                                             <th>Price Monthly</th>
                                             <th>Car Image</th>
                                             <th>Year</th>
-                                            <!-- <th>Color</th> -->
                                             <th>Plate Number</th>
                                             <th>Visible</th> <!-- New column for visibility -->
                                             <th>Actions</th> <!-- Actions column -->
@@ -63,25 +62,22 @@
                                                 <td>{{ $car->price_monthly . ' AED' }}</td>
                                                 <td><img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Image" style="width: 100px; height: auto;"></td>
                                                 <td>{{ $car->year }}</td>
-                                                <!-- <td>{{ $car->color }}</td> -->
                                                 <td>{{ $car->plate_number }}</td>
                                                 <td>
-                                                <form action="{{ route('admin.cars.toggleVisibility', $car->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <label>
-                                                        <input type="checkbox" onchange="this.form.submit()" {{ $car->is_visible ? 'checked' : '' }}>
-                                                        <i class="fas {{ $car->is_visible ? 'fa-eye' : 'fa-eye-slash' }}" title="{{ $car->is_visible ? 'Hide' : 'Show' }}"></i>
-                                                    </label>
-                                                </form>
-                                                                                                </td>
+                                                    <form action="{{ route('admin.cars.toggleVisibility', $car->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <label>
+                                                            <input type="checkbox" onchange="this.form.submit()" {{ $car->is_visible ? 'checked' : '' }}>
+                                                            <i class="fas {{ $car->is_visible ? 'fa-eye' : 'fa-eye-slash' }}" title="{{ $car->is_visible ? 'Hide' : 'Show' }}"></i>
+                                                        </label>
+                                                    </form>
+                                                </td>
                                                 <td>
-                                                    <!-- Add any actions, like edit or delete -->
-                                                    <div class="d-inline-block">
-                                                    <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-info" title="Edit">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-
+                                                    <div class="btn-group" role="group">
+                                                        <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-info" title="Edit">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
                                                         <form action="{{ route('admin.cars.delete', $car->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
@@ -90,6 +86,7 @@
                                                             </button>
                                                         </form>
                                                     </div>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
