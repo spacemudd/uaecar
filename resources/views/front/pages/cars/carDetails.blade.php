@@ -262,8 +262,19 @@
                         <div class="btn-double mt-30" data-grouptype="&amp;">
                             <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
                             <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
+                   
+                            <!-- <a href="#" class="btn btn-primary no-radius mt-4 w-100 py-3">Checkout</a> <!-- Add the no-radius class -->                         -->
                         </div>
-                    </div>
+
+
+                        <div class="text-center my-3">
+                            <img src="{{asset('public/front/img/icons/apple-pay.png')}}" alt="Visa" class="img-fluid" style="height: 40px; margin-right: 10px;">
+                            <img src="{{asset('public/front/img/icons/visa.png')}}" alt="MasterCard" class="img-fluid" style="height: 40px;">
+                            <img src="{{asset('public/front/img/icons/visa.png')}}" alt="MasterCard" class="img-fluid" style="height: 40px;">
+
+                        </div>
+                        
+                        </div>
                 </div>
             </div>
         </div>

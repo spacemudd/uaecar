@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="plate_number">Plate Number:</label>
-                                <input type="text" class="form-control" id="plate_number" name="plate_number" required>
+                                <input type="text" class="form-control" id="plate_number" name="plate_number">
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="categories">Categories:</label>
@@ -83,7 +83,7 @@
 
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="description">Description:</label>
-                                <textarea class="form-control" id="description" name="description" required></textarea>
+                                <textarea class="form-control" id="description" name="description"></textarea>
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="chassis_number">Chassis Number:</label>
@@ -106,13 +106,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-6 col-lg-4">
-                                <label for="delivery">Delivery:</label>
-                                <select class="form-control" id="delivery" name="delivery" required>
-                                    <option value="1" selected>1</option> <!-- Default value set to 1 -->
-                                    <option value="0">0</option>
-                                </select>
-                            </div>
+                           
 
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="kilo_daily">Kilo Daily:</label>

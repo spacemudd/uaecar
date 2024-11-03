@@ -22,7 +22,7 @@ class FormSubmissionMail extends Mailable
     public function build()
     {
         return $this->view('emails.form-submition')
-                    ->subject('Kaiadmin')
+                    ->subject('LUXURIA')
                     ->with([
                         'data' => $this->data,
                         'carDetailsUrl' => $this->carDetailsUrl,
