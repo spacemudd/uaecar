@@ -89,7 +89,6 @@
 
 <section id="cars" class="py-5">
     <div class="my-container mx-auto">
-        <h1>{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
         <div class="row py-3 gy-2">
             <div class="col-lg-8">
             <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -123,7 +122,7 @@
             <div class="col-lg-4">
     <div class="card about-card py-2"> <!-- Reduced padding -->
         <div class="card-body">
-            <h3 class="text-start my-0 fs-5">About Car</h3> <!-- Decreased font size -->
+        <h1>{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
             <p class="text-end my-0 py-0 pe-1 fw-bold fs-6">
                 Daily Cost: <span class="fs-4">{{ $car->price_daily }} AED </span>
             </p>
