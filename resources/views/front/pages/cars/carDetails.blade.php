@@ -212,7 +212,7 @@
             </div>
         </div>
         <div class="col-8">
-            <h5 class="small">{{ number_format($car->price_monthly, 0) }} AED Monthly</h5>
+            <h5 class="small" style="font-weight: 100;">{{ number_format($car->price_monthly, 0) }} AED Monthly</h5>
         </div>
     </div>
 </div>
