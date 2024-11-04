@@ -87,7 +87,7 @@
         </style>
     </header>
 
-<section id="cars" class="py-5">
+<section id="cars" class="">
     <div class="my-container mx-auto">
         <div class="row py-3 gy-2">
             <div class="col-lg-8">
@@ -122,7 +122,7 @@
             <div class="col-lg-4">
     <div class="card about-card py-2"> <!-- Reduced padding -->
         <div class="card-body">
-        <h1>{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
+        <h1 class="fs-3">{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
             <p class="text-end my-0 py-0 pe-1 fw-bold fs-6">
                 Daily Cost: <span class="fs-4">{{ $car->price_daily }} AED </span>
             </p>
@@ -289,19 +289,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="btn-double mt-30" data-grouptype="&amp;">
+                            <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
+                            <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
+                   
+                            <!-- <a href="#" class="btn btn-primary no-radius mt-4 w-100 py-3">Checkout</a> <!-- Add the no-radius class --> 
+                        </div>
             </div>
         </div>
     </div>
 </div>
 
 
-
-                        <div class="btn-double mt-30" data-grouptype="&amp;">
-                            <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
-                            <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
-                   
-                            <!-- <a href="#" class="btn btn-primary no-radius mt-4 w-100 py-3">Checkout</a> <!-- Add the no-radius class --> 
-                        </div>
 
 
                         <!-- <div class="text-center my-3">
