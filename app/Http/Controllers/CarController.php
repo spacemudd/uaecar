@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\CarImage; // Ensure you have this model for handling car images
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
@@ -109,13 +110,30 @@ class CarController extends Controller
     
 
 
+
     public function edit($id)
     {
-        $car = Car::findOrFail($id);
+        $car = Car::findOrFail($id); // Get the car
         $images = $car->gallery;
+    
+        // Directly get the categories from the car instance
+        $categoryValue = $car->categories; // Assuming this is the column name for categories
+    
+        // Define the colors array
 
-        return view('back.pages.edit', compact('car', 'images'));
+        $colors = ['Red', 'Blue', 'Green', 'Black', 'White', 'Gray'];
+
+        // Get the car's current color
+        $currentColor = $car->color; // Assuming 'color' is a column on the Car model
+
+
+
+        return view('back.pages.edit', compact('car', 'images', 'categoryValue', 'colors', 'currentColor'));
     }
+    
+    
+    
+    
 
 
     public function update(Request $request, $id)
@@ -136,6 +154,8 @@ class CarController extends Controller
             'chassis_number' => 'nullable|string|max:255',
             'kilo_daily' => 'nullable|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
             'kilo_monthly' => 'nullable|integer',
+            'categories' => 'nullable|string|in:Luxury,Premium,Economy', // Updated
+            'color' => 'nullable|string|in:Red,Blue,Green,Black,White,Gray', // Updated
              // Validate kilo daily // Add validation for chassis number // Validate multiple images
 
         ]);
@@ -156,7 +176,9 @@ class CarController extends Controller
         $car->chassis_number = $request->chassis_number;
         $car->kilo_daily = $request->kilo_daily;
         $car->kilo_monthly = $request->kilo_monthly;
-        $car->node_id = $request->node_system_id; // Save node_system_id
+        $car->node_id = $request->node_system_id;
+        $car->categories = $request->categories;
+        $car->color = $request->color; // Save node_system_id
         // Save kilo daily
          // Save chassis number
     

@@ -76,9 +76,34 @@
                                     <label for="kilo_daily">Kilo Daily</label>
                                     <input type="number" name="kilo_daily" class="form-control" value="{{ old('kilo_daily', $car->kilo_daily) }}">
                                 </div>
-                                
+
                                 <div class="form-group col-md-6 col-lg-4">
-                                    <label for="kilo_daily">Kilo Monthly</label>
+                                    <label for="categories">Categories:</label>
+                                    <select class="form-control" id="categories" name="categories">
+                                        <option value="Luxury" {{ old('categories', $categoryValue) == 'Luxury' ? 'selected' : '' }}>Luxury</option>
+                                        <option value="Premium" {{ old('categories', $categoryValue) == 'Premium' ? 'selected' : '' }}>Premium</option>
+                                        <option value="Economy" {{ old('categories', $categoryValue) == 'Economy' ? 'selected' : '' }}>Economy</option>
+                                    </select>
+                                </div>
+
+
+
+
+                                <div class="form-group col-md-6 col-lg-4">
+                                    <label for="color">Color:</label>
+                                    <select class="form-control" id="color" name="color">
+                                        @foreach ($colors as $color)
+                                            <option value="{{ $color }}" {{ old('color', $currentColor) == $color ? 'selected' : '' }}>
+                                                {{ $color }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+             
+                                <div class="form-group col-md-6 col-lg-4">
+                                    <label for="kilo_monthly">Kilo Monthly</label>
                                     <input type="number" name="kilo_monthly" class="form-control" value="{{ old('kilo_monthly', $car->kilo_monthly) }}">
                                 </div>
 
