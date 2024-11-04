@@ -157,7 +157,7 @@ class CarController extends Controller
             'categories' => 'nullable|string|in:Luxury,Premium,Economy', // Updated
             'color' => 'nullable|string|in:Red,Blue,Green,Black,White,Gray', // Updated
              // Validate kilo daily // Add validation for chassis number // Validate multiple images
-
+            'doors' => 'nullable|integer|min:2|max:5', // New validation for doors
         ]);
     
         // Find the car by ID
@@ -178,7 +178,8 @@ class CarController extends Controller
         $car->kilo_monthly = $request->kilo_monthly;
         $car->node_id = $request->node_system_id;
         $car->categories = $request->categories;
-        $car->color = $request->color; // Save node_system_id
+        $car->color = $request->color;
+        $car->doors = $request->doors; // Save node_system_id
         // Save kilo daily
          // Save chassis number
     

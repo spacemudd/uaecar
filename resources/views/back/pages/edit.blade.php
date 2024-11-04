@@ -36,6 +36,12 @@
                                     <input type="number" name="seats" class="form-control" value="{{ old('seats', $car->seats) }}">
                                 </div>
 
+                                <div class="form-group col-md-6">
+                                    <label for="doors">Number of Doors:</label>
+                                    <input type="number" class="form-control" id="doors" name="doors" value="{{ old('doors', $car->doors) }}" min="2" max="5">
+                                </div>
+
+
                                 <div class="form-group col-md-6 col-lg-4">
                                     <label for="price_daily">Price Daily (AED)</label>
                                     <input type="number" name="price_daily" class="form-control" value="{{ old('price_daily', $car->price_daily) }}">
