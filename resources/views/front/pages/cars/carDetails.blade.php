@@ -1,6 +1,6 @@
 @extends('front.layouts.master')
-
 @section('scripts')
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
@@ -8,41 +8,53 @@
 <link rel="stylesheet" href="{{ asset('front/css/car-details/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('front/css/car-details/index.css') }}">
 
-    <script>
-        $(document).ready(function() {
-            $('.contact__form').on('submit', function(e) {
-                e.preventDefault(); // Prevent the default form submission
 
-                const form = $(this); // Reference the current form
-                console.log('Form action URL:', form.attr('action')); // Log the form action URL
 
-                $.ajax({
-                    url: form.attr('action'), // The form action URL
-                    type: 'POST',
-                    data: form.serialize(), // Serialize the form data
-                    success: function(response) {
-                        console.log('AJAX response:', response); // Log the response
-                        if (response.success) {
-                            swal("Thank You for Your Request!", "Your request has been successfully submitted, and our team will review it shortly. We will contact you as soon as possible to confirm your booking.", "success").then(() => {
-                                // Reset the form fields
-                                form[0].reset();
-                                // Close the modal
-                                form.closest('.modal').modal('hide');
+<script>
+    $(document).ready(function() {
+        $('.contact__form').on('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            const form = $(this); // Reference the current form
+            console.log('Form action URL:', form.attr('action')); // Log the form action URL
+
+            $.ajax({
+                url: form.attr('action'), // The form action URL
+                type: 'POST',
+                data: form.serialize(), // Serialize the form data
+                success: function(response) {
+                    console.log('AJAX response:', response); // Log the response
+                    try {
+                        // Ensure response is parsed as JSON
+                        const jsonResponse = typeof response === 'string' ? JSON.parse(response) : response;
+
+                        if (jsonResponse.success) {
+                            // Display success message
+                            swal("Thank You!", jsonResponse.message, "success").then(() => {
+                                form[0].reset(); // Reset the form
+                                form.closest('.modal').modal('hide'); // Close the modal
                             });
                         } else {
-                            swal("Error!", "There was a problem with your request.", "error");
+                            // Handle error messages
+                            swal("Error!", jsonResponse.message || "There was a problem with your request.", "error");
                         }
-                    },
-                    error: function(xhr) {
-                        console.error(xhr); // Log the error response
-                        swal("Error!", "There was a problem with your request. Please try again.", "error");
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                        swal("Error!", "An unexpected error occurred. Please try again.", "error");
                     }
-                });
+                },
+                error: function(xhr) {
+                    console.error(xhr); // Log the error response
+                    swal("Error!", "There was a problem with your request. Please try again.", "error");
+                }
             });
         });
-    </script>
-    
+    });
+</script>
+
+
 @endsection
+
 
 @section('content')
 <div class="preloader-bg"></div>
@@ -289,12 +301,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="btn-double mt-30" data-grouptype="&amp;">
-                            <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
-                            <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
-                   
-                            <!-- <a href="#" class="btn btn-primary no-radius mt-4 w-100 py-3">Checkout</a> <!-- Add the no-radius class --> 
-                        </div>
+                @php
+    $carName = urlencode($car->car_name); // URL encode the car name
+    $carPicture = asset('storage/' . $car->car_picture); // URL of the car picture
+    $message = "Hello, I am interested in the car: $carName. Here is the picture: $carPicture";
+    $whatsappLink = "https://api.whatsapp.com/send?phone=971508050851&text=" . urlencode($message);
+@endphp
+
+<div class="btn-double mt-30" data-grouptype="&amp;">
+    <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
+    <a href="{{ $whatsappLink }}" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
+</div>
+
+
             </div>
         </div>
     </div>

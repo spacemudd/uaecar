@@ -114,7 +114,8 @@
                     <div class="widget clearfix">
                         <div class="footer-logo"><img src="{{ asset('front/img/new-logo.png') }}" alt=""></div>
                         <div class="widget-text">
-                            <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
+                            <p>The Right Car For Every Road - Rent Your Way
+                            </p>
                             <div class="social-icons">
                                 <ul class="list-inline">
                                     <li><a href="https://wa.me/971542700030"><i class="fa-brands fa-whatsapp"></i></a></li>
