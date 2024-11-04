@@ -124,7 +124,7 @@
             height: auto;
             color: white;
             font-weight: 50;
-            font-size: 30px;
+            font-size: 25px;
         }
 
         @media (max-width: 768px) {
