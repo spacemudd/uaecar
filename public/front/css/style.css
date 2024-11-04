@@ -1808,7 +1808,7 @@ font-family: 'Outfit', sans-serif;
 
 /* =======  Video Background style  ======= */
 .video-fullscreen-wrap {
-    height: 30vh;
+    height: 33vh;
     overflow: hidden;
 }
 .video-fullscreen-video {
