@@ -88,7 +88,7 @@
     </header>
 
 <section id="cars" class="py-5">
-    <div class="container">
+    <div class="my-container mx-auto">
         <h1>{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
         <div class="row py-3 gy-2">
             <div class="col-lg-8">
@@ -121,143 +121,181 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="card about-card py-2">
-                    <div class="card-body">
-                        <h3 class="text-start my-0">About Car</h3>
-                        <p class="text-end my-0 py-0 pe-1 fw-bold">
-                        Daily Cost: <span class="fs-2">{{ $car->price_daily }} AED </span>
-</p>                        <div class="progress mt-0" style="height:7px;" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar w-25"></div>
+    <div class="card about-card py-2"> <!-- Reduced padding -->
+        <div class="card-body">
+            <h3 class="text-start my-0 fs-5">About Car</h3> <!-- Decreased font size -->
+            <p class="text-end my-0 py-0 pe-1 fw-bold fs-6">
+                Daily Cost: <span class="fs-4">{{ $car->price_daily }} AED </span>
+            </p>
+            <div class="progress mt-1" style="height:8px;" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar w-25"></div>
+            </div>
+            <p class="myPar py-2 fs-6">P.S. Please note that the limit is 450 kilometers per day and 4,500 kilometers per month. Any additional kilometers will incur a charge of 1 Dirham each.</p>
+
+            <div class="row gy-3"> <!-- Reduced vertical spacing -->
+                <div class="col-6 mb-3"> <!-- Adjusted bottom margin -->
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/car-seat.png') }}" alt="Seats" class="icon-img" style="width: 30px; height: 30px;" /> <!-- Decreased icon size -->
+                            </div>
                         </div>
-                        <p class="myPar py-3">P.S. Please note that the limit is 450 kilometers per day and 4,500 kilometers per month. Any additional kilometers will incur a charge of 1 Dirham each.</p>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ $car->seats }} Seats</h5> <!-- Decreased font size -->
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="row gy-7">
-                        <div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/car-seat.png') }}" alt="Seats" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">{{ $car->seats }} Seats</h5>
-        </div>
-    </div>
-</div>
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/car.png') }}" alt="Doors" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">{{ $car->doors }} Doors</h5>
-        </div>
-    </div>
-</div>
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/free-delivery.png') }}" alt="Delivery" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">Free Delivery</h5>
-        </div>
-    </div>
-</div>
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/gear.png') }}" alt="Gear" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">{{ $car->gear }}</h5>
-        </div>
-    </div>
-</div>
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/wallet.png') }}" alt="Daily Price" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">{{ $car->price_daily }} AED Daily</h5>
-        </div>
-    </div>
-</div>
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/wallet.png') }}" alt="Weekly Price" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">{{ number_format($car->price_weekly, 0) }} AED Weekly</h5>
-        </div>
-    </div>
-</div>
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/wallet.png') }}" alt="Monthly Price" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small" style="font-weight: 100;">{{ number_format($car->price_monthly, 0) }} AED Monthly</h5>
-        </div>
-    </div>
-</div>
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/calendar.png') }}" alt="Year" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">{{ $car->year }}</h5>
-        </div>
-    </div>
-</div>
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/car.png') }}" alt="Doors" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ $car->doors }} Doors</h5>
+                        </div>
+                    </div>
+                </div>
 
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/mileage.png') }}" alt="kilo_daily" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">4,500/km Monthly</h5>
-        </div>
-    </div>
-</div>
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/free-delivery.png') }}" alt="Delivery" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">Free Delivery</h5>
+                        </div>
+                    </div>
+                </div>
 
-<div class="col-6">
-    <div class="row">
-        <div class="col-4">
-            <div class="blue-icon">
-                <img src="{{ asset('front/img/icons/mileage.png') }}" alt="kilo_monthly" class="icon-img" />
-            </div>
-        </div>
-        <div class="col-8">
-            <h5 class="small">450/km Daily</h5>
-        </div>
-    </div>
-</div>
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/gear.png') }}" alt="Gear" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ $car->gear }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/wallet.png') }}" alt="Daily Price" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ $car->price_daily }} AED Daily</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/wallet.png') }}" alt="Weekly Price" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ number_format($car->price_weekly, 0) }} AED Weekly</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/wallet.png') }}" alt="Monthly Price" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ number_format($car->price_monthly, 0) }} AED Monthly</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/calendar.png') }}" alt="Year" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ $car->year }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/mileage.png') }}" alt="kilo_daily" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">4,500/km Monthly</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/mileage.png') }}" alt="kilo_monthly" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">450/km Daily</h5>
+                        </div>
+                    </div>
+                </div>
 
 
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/color-wheel.png') }}" alt="color" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ $car->color }}</h5>
+                        </div>
+                    </div>
+                </div>
 
+
+                <div class="col-6 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="blue-icon">
+                                <img src="{{ asset('front/img/icons/signal.png') }}" alt="color" class="icon-img" style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="small fs-6">{{ $car->categories }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
                         <div class="btn-double mt-30" data-grouptype="&amp;">
                             <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a>
