@@ -8,14 +8,21 @@ use App\Mail\FormSubmissionMail;
 use App\Models\Car;
 use App\Models\BookingRequest;
 use App\Mail\ContactMail;
+use Carbon\Carbon;
+
 
 class FormController extends Controller
 {
     public function submit(Request $request)
     {
         $validatedData = $this->validateBookingRequest($request);
+    
+        // Convert pickup_date and return_date to YYYY-MM-DD format using Carbon
+        $pickupDate = Carbon::createFromFormat('m/d/Y', $validatedData['pickup_date'])->format('Y-m-d');
+        $returnDate = Carbon::createFromFormat('m/d/Y', $validatedData['return_date'])->format('Y-m-d');
+    
         $car = Car::findOrFail($validatedData['carID']);
-
+    
         $booking = BookingRequest::create([
             'request_number' => BookingRequest::count() + 100,
             'car_id' => $car->id,
@@ -24,17 +31,20 @@ class FormController extends Controller
             'email' => $validatedData['email'],
             'phone' => $validatedData['phone'],
             'pickup_city' => $validatedData['pickup_city'],
-            'pickup_date' => $validatedData['pickup_date'],
-            'return_date' => $validatedData['return_date'],
+            'pickup_date' => $pickupDate,  // Use the converted date
+            'return_date' => $returnDate,  // Use the converted date
             'message' => $validatedData['message'],
             'daily_car_price' => $validatedData['daily_car_price'],
         ]);
-
+    
+        // Send email after booking is created
         $carDetailsUrl = route('cars.show', ['id' => $car->id]);
         Mail::to('abdelrahmanyouseff@gmail.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
-
+    
+        // Return success view after processing the form
         return view('front.pages.successView');
     }
+    
 
     public function sendContactEmail(Request $request)
     {
