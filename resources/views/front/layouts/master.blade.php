@@ -112,8 +112,9 @@
                 <!-- about & social icons -->
                 <div class="col-md-4 widget-area">
                     <div class="widget clearfix">
-                        <div class="footer-logo"><img src="{{ asset('front/img/new-logo.png') }}" alt=""></div>
-                        <div class="widget-text">
+                    <div class="footer-logo ms-1">
+                        <img src="{{ asset('front/img/new-logo.png') }}" alt="">
+                    </div>                        <div class="widget-text">
                             <p>The Right Car For Every Road - Rent Your Way
                             </p>
                             <div class="social-icons">

@@ -5,7 +5,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
-
 @section('content')
     <!-- Preloader -->
     <div class="preloader-bg"></div>
@@ -123,6 +122,40 @@
             </div>
         </div>
     </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Owl Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
+
+<!-- Initialize Owl Carousel with your custom settings -->
+<script>
+$(document).ready(function(){
+    $(".owl-carousel").owlCarousel({
+        loop: true,                     // Enable continuous loop
+        margin: 10,                     // Adjust margin between items
+        nav: false,                     // Disable navigation buttons
+        dots: false,                    // Hide pagination dots
+        autoplay: true,                 // Enable autoplay
+        autoplayTimeout: 1000,          // Time between slides (1 second)
+        autoplayHoverPause: true,       // Pause on hover
+        autoplaySpeed: 2000,             // Speed of transition between slides
+        responsive: {
+            0: {
+                items: 1              // 1 item on small screens
+            },
+            600: {
+                items: 3              // 3 items on medium screens
+            },
+            1000: {
+                items: 5              // 5 items on large screens
+            }
+        }
+    });
+});
+</script>
+
+
 
     <!-- Cars Section -->
 <section class="cars2 section-padding my-0 py-0 px-3 mx-auto">
