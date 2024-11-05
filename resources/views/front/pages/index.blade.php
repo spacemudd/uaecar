@@ -1,7 +1,6 @@
 @extends('front.layouts.master')
 
-<link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -32,83 +31,80 @@
            
         </div>
 
-
-
-
         <style>
-        .header {
-            position: relative;
-            overflow: hidden;
-            height: 33vh; /* Adjust height as needed */
-        }
+                .header {
+                    position: relative;
+                    overflow: hidden;
+                    height: 33vh; /* Adjust height as needed */
+                }
 
-        .video-fullscreen-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+                .video-fullscreen-wrap {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                }
 
-        .video-fullscreen-video {
-            min-width: 100%;
-            min-height: 100%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0; /* Send video behind header */
-        }
+                .video-fullscreen-video {
+                    min-width: 100%;
+                    min-height: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 0; /* Send video behind header */
+                }
 
-        .slogan-container {
-            position: absolute;
-            top: 60%;
-            right: 11%; /* Position it 20px from the right */
-            transform: translateY(-50%); /* Center vertically */
-            z-index: 1; /* Ensure the slogan is above the video */
-            text-align: center; /* Center the slogan */
-        }
+                .slogan-container {
+                    position: absolute;
+                    top: 60%;
+                    right: 11%; /* Position it 20px from the right */
+                    transform: translateY(-50%); /* Center vertically */
+                    z-index: 1; /* Ensure the slogan is above the video */
+                    text-align: center; /* Center the slogan */
+                }
 
-        .slogan-image {
-            max-width: 100%; /* Responsive image */
-            height: auto;
-            color: white;
-            font-weight: 50;
-            font-size: 20px;
-        }
+                .slogan-image {
+                    max-width: 100%; /* Responsive image */
+                    height: auto;
+                    color: white;
+                    font-weight: 50;
+                    font-size: 20px;
+                }
 
-        @media (max-width: 768px) {
+                @media (max-width: 768px) {
 
-        .slogan-text {
-            display: block; /* Show alternative text */
-            text-align: center; /* Center text */
-        }
+                .slogan-text {
+                    display: block; /* Show alternative text */
+                    text-align: center; /* Center text */
+                }
 
-        
-    }
+                
+            }
 
 
-    @media (max-width: 480px) {
+            @media (max-width: 480px) {
 
-        .slogan-image {
-            max-width: 100%; /* Responsive image */
-            height: auto;
-            color: white;
-            font-weight: 50;
-            font-size: 15px;
-            text-align: center;
-            margin-right: 20px;
-        }
-       
-        .slogan-text {
-            font-size: 20px;
-            text-align: center; /* Center text */
-        }
+                .slogan-image {
+                    max-width: 100%; /* Responsive image */
+                    height: auto;
+                    color: white;
+                    font-weight: 50;
+                    font-size: 15px;
+                    text-align: center;
+                    margin-right: 20px;
+                }
+            
+                .slogan-text {
+                    font-size: 20px;
+                    text-align: center; /* Center text */
+                }
 
-        
-    }
-    </style>
+                
+            }
+        </style>
     </header>
 
     <!-- Clients Section -->
@@ -182,15 +178,19 @@
                                     </button>
                                 </div>
                             </div>
-
-                            <div class="col-6">
-    <div class="mb-3 d-flex justify-center">
-        <!-- WhatsApp Button -->
-        <a href="https://wa.me/971542700030?text=Hi!%20I%20am%20interested%20in%20this%20car.%20Here%20is%20the%20link%20to%20the%20car:%20{{ route('cars.show', ['id' => $car->id]) }}%20and%20here%20is%20the%20image%20of%20the%20car:%20{{ asset('path/to/car-image.jpg') }}" target="_blank" class="btn btn-success mx-auto text-center my-2" style="background-color: #128c7e;">
-            <i class="fab fa-whatsapp"></i> WhatsApp
+                            <div class="col-6 position-relative">
+    <div class="mb-3">
+        <!-- WhatsApp Icon as a clickable link -->
+        <a href="https://wa.me/971542700030?text=Hi!%20I%20am%20interested%20in%20this%20car.%20Here%20is%20the%20link%20to%20the%20car:%20{{ route('cars.show', ['id' => $car->id]) }}%20and%20here%20is%20the%20image%20of%20the%20car:%20{{ asset('path/to/car-image.jpg') }}" target="_blank" class="position-absolute bottom-0 end-0 mb-4 me-3">
+            <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i> <!-- Larger WhatsApp icon -->
         </a>
     </div>
 </div>
+
+
+
+
+
 
                         </div>
                     </div>

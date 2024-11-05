@@ -187,8 +187,6 @@
 <script src="{{ asset('front/js/YouTubePopUp.js') }}"></script>
 <script src="{{ asset('front/js/custom.js') }}"></script>
 
-<!-- Include SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>
