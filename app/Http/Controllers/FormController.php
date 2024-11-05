@@ -18,9 +18,9 @@ class FormController extends Controller
         $validatedData = $this->validateBookingRequest($request);
     
         // Convert pickup_date and return_date to YYYY-MM-DD format using Carbon
-        $pickupDate = Carbon::createFromFormat('Y-m-d H:i:s', $validatedData['pickup_date'])->format('Y-m-d');
-        $returnDate = Carbon::createFromFormat('Y-m-d H:i:s', $validatedData['return_date'])->format('Y-m-d');
-        
+        $pickupDate = Carbon::createFromFormat('m/d/Y', $validatedData['pickup_date'])->format('Y-m-d');
+        $returnDate = Carbon::createFromFormat('m/d/Y', $validatedData['return_date'])->format('Y-m-d');
+    
         $car = Car::findOrFail($validatedData['carID']);
     
         $booking = BookingRequest::create([
