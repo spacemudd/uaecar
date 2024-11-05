@@ -172,8 +172,7 @@
     </section>
 
     <!-- Cars Section -->
-<section class="cars2 section-padding my-0 py-0">
-    <div class="aha">
+<section class="cars2 section-padding my-0 py-0 px-3 mx-auto">
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
@@ -181,13 +180,12 @@
                     <p>Choose the car that fits your needs</p>
                 </div>
             </div>
-        </div>
 
         <div class="row">
             @foreach($cars as $car)
                 <!-- Car Card -->
                 
-                <a href="{{ route('cars.show', $car->id) }}" class="card3 col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 " style="text-decoration: none;">
+                <a href="{{ route('cars.show', $car->id) }}" class="card3 col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 " style="text-decoration: none;">
                     <span class="px-4 py-3" style="display: inline-block;">
                         <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 20px;">{{ $car->car_name . ' ' . $car->model}}</h3>
                         <br>
