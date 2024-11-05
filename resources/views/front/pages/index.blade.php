@@ -142,7 +142,7 @@ $(document).ready(function(){
         autoplaySpeed: 2000,             // Speed of transition between slides
         responsive: {
             0: {
-                items: 1              // 1 item on small screens
+                items: 5             // 1 item on small screens
             },
             600: {
                 items: 3              // 3 items on medium screens
