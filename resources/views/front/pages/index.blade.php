@@ -171,21 +171,23 @@
                             <h6 class="text-center text-white fw-light">{{ $car->price_monthly }} <span>AED</span></h6>
                         </div>
                         <div class="row">
-                            <div class="col-6">
-                                <div class="mb-3 d-flex justify-center">
-                                    <button class="btn mx-auto text-center my-2" style="background-color: #949494; color: white;" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
-                                        Book Now
-                                    </button>
+                        <div class="col-6">
+                            <div class="mb-3 d-flex justify-content-start">
+                                <button class="btn text-center my-2" style="background-color: #949494; color: white;" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
+                                    Book Now
+                                </button>
+                            </div>
+                        </div>
+
+                            
+                            <div class="col-6 position-relative">
+                                <div class="mb-3">
+                                    <!-- WhatsApp Icon as a clickable link -->
+                                    <a href="https://wa.me/971542700030?text=Hi!%20I%20am%20interested%20in%20this%20car.%20Here%20is%20the%20link%20to%20the%20car:%20{{ route('cars.show', ['id' => $car->id]) }}%20and%20here%20is%20the%20image%20of%20the%20car:%20{{ asset('path/to/car-image.jpg') }}" target="_blank" class="position-absolute bottom-0 end-0 mb-4 me-3">
+                                        <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i> <!-- Larger WhatsApp icon -->
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-6 position-relative">
-    <div class="mb-3">
-        <!-- WhatsApp Icon as a clickable link -->
-        <a href="https://wa.me/971542700030?text=Hi!%20I%20am%20interested%20in%20this%20car.%20Here%20is%20the%20link%20to%20the%20car:%20{{ route('cars.show', ['id' => $car->id]) }}%20and%20here%20is%20the%20image%20of%20the%20car:%20{{ asset('path/to/car-image.jpg') }}" target="_blank" class="position-absolute bottom-0 end-0 mb-4 me-3">
-            <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i> <!-- Larger WhatsApp icon -->
-        </a>
-    </div>
-</div>
 
 
 
