@@ -9,36 +9,92 @@
 </div>
 
 <header class="header">
-    <div class="video-fullscreen-wrap">
-        <div class="video-fullscreen-video" data-overlay-dark="2">
-            <video playsinline autoplay loop muted>
-                <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
-                <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
-            </video>
+        <div class="video-fullscreen-wrap">
+            
+            <div class="video-fullscreen-video" data-overlay-dark="2">
+                <video playsinline autoplay loop muted>
+                    <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
+                    <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
+                </video>
+            </div>
+            <div class="slogan-container">
+            <h3 class="slogan-image">The Right Car For Every Road - Rent Your Way</h3>
         </div>
-    </div>
+           
+        </div>
 
-    <style>
-        .blue-icon {
-            display: flex;
-            align-items: center;
+
+
+
+        <style>
+        .header {
+            position: relative;
+            overflow: hidden;
+            height: 33vh; /* Adjust height as needed */
         }
-        .icon-img {
-            width: 18px; /* Adjust the size as needed */
-            height: 18px; /* Maintain aspect ratio */
-            margin-right: 10px; /* Space between icon and text */
+
+        .video-fullscreen-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
-        @media (max-width: 600px) {
-            .slogan {
-                display: none;
-            }
+
+        .video-fullscreen-video {
+            min-width: 100%;
+            min-height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0; /* Send video behind header */
         }
-        .carousel-item img {
-            max-height: 700px; /* Adjust as needed */
-            object-fit: cover; /* Maintain aspect ratio and fill the area */
+
+        .slogan-container {
+            position: absolute;
+            top: 60%;
+            right: 11%; /* Position it 20px from the right */
+            transform: translateY(-50%); /* Center vertically */
+            z-index: 1; /* Ensure the slogan is above the video */
+            text-align: center; /* Center the slogan */
         }
+
+        .slogan-image {
+            max-width: 100%; /* Responsive image */
+            height: auto;
+            color: white;
+            font-weight: 50;
+            font-size: 25px;
+        }
+
+        @media (max-width: 768px) {
+        .slogan-image {
+            display: none; /* Hide image on small screens */
+        }
+        .slogan-text {
+            display: block; /* Show alternative text */
+            text-align: center; /* Center text */
+        }
+
+        
+    }
+
+
+    @media (max-width: 480px) {
+        .slogan-image {
+            display: none; /* Hide image on small screens */
+        }
+        .slogan-text {
+            display: block; /* Show alternative text */
+            text-align: center; /* Center text */
+        }
+
+        
+    }
     </style>
-</header>
+    </header>
 
 <div class="container">
     <div class="row justify-content-center">
