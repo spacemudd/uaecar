@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="my-logo md-5 text-left">
                 <a href="{{ route('index') }}">
-                    <img src="{{ asset('front/img/new-logo.png') }}" alt="" class="">
+                    <img src="{{ asset('front/img/new-logo3.png') }}" alt="" class="">
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +113,7 @@
                 <div class="col-md-4 widget-area">
                     <div class="widget clearfix">
                     <div class="footer-logo ms-1">
-                        <img src="{{ asset('front/img/new-logo.png') }}" alt="">
+                        <img src="{{ asset('front/img/new-logo3.png') }}" alt="">
                     </div>                        <div class="widget-text">
                             <p>The Right Car For Every Road - Rent Your Way
                             </p>
