@@ -185,7 +185,7 @@
             @foreach($cars as $car)
                 <!-- Car Card -->
                 
-                <a href="{{ route('cars.show', $car->id) }}" class=" col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 " style="text-decoration: none;">
+                <a href="{{ route('cars.show', $car->id) }}" class=" col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
                     <div class="card3 w-100">
                     <span class="px-4 py-3" style="display: inline-block;">
                         <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 20px;">{{ $car->car_name . ' ' . $car->model}}</h3>
