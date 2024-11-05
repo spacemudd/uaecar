@@ -20,7 +20,7 @@ use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Mail\TestEmail; // Make sure you have created the TestEmail Mailable
 // Route::get('/car/{id}', function() {
 //    return Car::find(request()->id);
 // });
@@ -121,3 +121,12 @@ Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryIm
 Route::get('/successview', function () {
     return view('front.pages.successView'); // Adjust to your actual view file
 })->name('successview');
+
+
+
+Route::get('/send-test-email', function () {
+    // Send a test email
+    Mail::to('your-email@example.com')->send(new TestEmail());
+
+    return 'Test email sent!';
+});

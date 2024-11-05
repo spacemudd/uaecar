@@ -260,7 +260,7 @@
     $carName = urlencode($car->car_name); // URL encode the car name
     $carPicture = asset('storage/' . $car->car_picture); // URL of the car picture
     $message = "Hello, I am interested in the car: $carName. Here is the picture: $carPicture";
-    $whatsappLink = "https://api.whatsapp.com/send?phone=971508050851&text=" . urlencode($message);
+    $whatsappLink = "https://api.whatsapp.com/send?phone=971542700030&text=" . urlencode($message);
 @endphp
 
 <div class="btn-double mt-30" data-grouptype="&amp;">

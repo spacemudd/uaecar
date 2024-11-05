@@ -178,12 +178,14 @@
                             </div>
 
                             <div class="col-6">
-                                <div class="mb-3 d-flex justify-center">
-                                    <button class="btn btn-success mx-auto text-center my-2" style="background-color: #128c7e;">
-                                        <i class="fab fa-whatsapp"></i> WhatsApp
-                                    </button>
-                                </div>
-                            </div>
+    <div class="mb-3 d-flex justify-center">
+        <!-- WhatsApp Button -->
+        <a href="https://wa.me/971542700030?text=Hi!%20I%20am%20interested%20in%20this%20car.%20Here%20is%20the%20link%20to%20the%20car:%20{{ route('cars.show', ['id' => $car->id]) }}%20and%20here%20is%20the%20image%20of%20the%20car:%20{{ asset('path/to/car-image.jpg') }}" target="_blank" class="btn btn-success mx-auto text-center my-2" style="background-color: #128c7e;">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+    </div>
+</div>
+
                         </div>
                     </div>
                     </div>
