@@ -1,60 +1,11 @@
 @extends('front.layouts.master')
 
-<!-- Scripts and Styles -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        // Contact Form Submission
-        $('.contact__form').on('submit', function(e) {
-            e.preventDefault(); // Prevent the default form submission
 
-            const form = $(this); // Reference the current form
-            console.log('Form action URL:', form.attr('action')); // Log the form action URL
-
-            $.ajax({
-                url: form.attr('action'), // The form action URL
-                type: 'POST',
-                data: form.serialize(), // Serialize the form data
-                success: function(response) {
-                    console.log('AJAX response:', response); // Log the response
-                    if (response.success) {
-                        swal("Thank You for Your Request!", "Your request has been successfully submitted, and our team will review it shortly. We will contact you as soon as possible to confirm your booking.", "success").then(() => {
-                            form[0].reset(); // Reset the form fields
-                            form.closest('.modal').modal('hide'); // Close the modal
-                        });
-                    } else {
-                        swal("Error!", "There was a problem with your request.", "error");
-                    }
-                },
-                error: function(xhr) {
-                    console.error(xhr); // Log the error response
-                    swal("Error!", "There was a problem with your request. Please try again.", "error");
-                }
-            });
-        });
-
-        // Owl Carousel Initialization
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 4000, // Time between slides
-            autoplayHoverPause: false, // Continue movement on hover
-            smartSpeed: 10000, // Speed of movement
-            responsive: {
-                0: { items: 1 },
-                100: { items: 3 },
-                500: { items: 5 }
-            }
-        });
-    });
-</script>
 
 @section('content')
     <!-- Preloader -->
@@ -184,8 +135,7 @@
         <div class="row gy-2">
             @foreach($cars as $car)
                 <!-- Car Card -->
-                
-                <a href="{{ route('cars.show', $car->id) }}" class=" col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
                     <div class="card3 w-100">
                     <span class="px-4 py-3" style="display: inline-block;">
                         <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 20px;">{{ $car->car_name . ' ' . $car->model}}</h3>
@@ -197,10 +147,12 @@
                         <span>{{ $car->doors . ' Doors' }}</span>
                         <span>Automatic</span>
                     </div>
+                    <a href="{{ route('cars.show', $car->id) }}">
+
                     <div>
                         <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture">
                     </div>
-
+                    </a>
                     <div class="row mb-5 gx-2 justify-content-center">
                         <div class="col-4">
                             <h4 class="text-center text-white">Daily</h4>
@@ -236,8 +188,7 @@
                     </div>
                     </div>
                
-                </a>
-
+                    </div>
                 <!-- Booking Modal -->
                 <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
