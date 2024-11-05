@@ -172,7 +172,7 @@
     </section>
 
     <!-- Cars Section -->
-    <section class="cars2 section-padding my-0 py-0">
+<section class="cars2 section-padding my-0 py-0">
     <div class="aha">
         <div class="row">
             <div class="col-12">
@@ -186,7 +186,8 @@
         <div class="row">
             @foreach($cars as $car)
                 <!-- Car Card -->
-                <a href="{{ route('cars.show', $car->id) }}" class="card3 col-12 col-sm-6 col-md-4 col-lg-4" style="text-decoration: none;">
+                
+                <a href="{{ route('cars.show', $car->id) }}" class="card3 col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 " style="text-decoration: none;">
                     <span class="px-4 py-3" style="display: inline-block;">
                         <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 20px;">{{ $car->car_name . ' ' . $car->model}}</h3>
                         <br>
