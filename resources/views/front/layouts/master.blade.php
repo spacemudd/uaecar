@@ -156,7 +156,7 @@
         <div class="bottom-footer-text">
             <div class="row copyright">
                 <div class="col-md-12">
-                    <p class="mb-0">&copy;2024 <a href="#">Luxuria Rental Car</a>. All rights reserved.</p>
+                    <p class="mb-0">&copy;2024 <a href="#">Luxuria Cars</a>. All rights reserved.</p>
                 </div>
             </div>
         </div>

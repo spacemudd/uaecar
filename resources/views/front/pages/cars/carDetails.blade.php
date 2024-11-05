@@ -230,7 +230,7 @@
                 </div>
 
 
-                <div class="col-6 mb-3">
+                <!-- <div class="col-6 mb-3">
                     <div class="row align-items-center">
                         <div class="col-4">
                             <div class="blue-icon">
@@ -241,7 +241,7 @@
                             <h5 class="small fs-6">{{ $car->color }}</h5>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="col-6 mb-3">
@@ -334,7 +334,6 @@
                                             <select name="pickup_city" class="select2 select" style="width: 100%" required>
                                                 <option value="" disabled selected>Select a City</option>
                                                 <option value="Dubai">Dubai</option>
-                                                <option value="Abu Dhabi">Abu Dhabi</option>
                                                 <option value="Sharjah">Sharjah</option>
                                                 <option value="Al Ain">Al Ain</option>
                                             </select>
