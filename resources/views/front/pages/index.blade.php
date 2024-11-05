@@ -75,13 +75,11 @@
             height: auto;
             color: white;
             font-weight: 50;
-            font-size: 25px;
+            font-size: 20px;
         }
 
         @media (max-width: 768px) {
-        .slogan-image {
-            display: none; /* Hide image on small screens */
-        }
+
         .slogan-text {
             display: block; /* Show alternative text */
             text-align: center; /* Center text */
@@ -92,11 +90,19 @@
 
 
     @media (max-width: 480px) {
+
         .slogan-image {
-            display: none; /* Hide image on small screens */
+            max-width: 100%; /* Responsive image */
+            height: auto;
+            color: white;
+            font-weight: 50;
+            font-size: 15px;
+            text-align: center;
+            margin-right: 20px;
         }
+       
         .slogan-text {
-            display: block; /* Show alternative text */
+            font-size: 20px;
             text-align: center; /* Center text */
         }
 
