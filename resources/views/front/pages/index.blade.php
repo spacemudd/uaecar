@@ -57,21 +57,23 @@
                 }
 
                 .slogan-container {
-                    position: absolute;
-                    top: 60%;
-                    right: 11%; /* Position it 20px from the right */
-                    transform: translateY(-50%); /* Center vertically */
-                    z-index: 1; /* Ensure the slogan is above the video */
-                    text-align: center; /* Center the slogan */
-                }
+                        position: absolute;
+                        top: 60%;
+                        right: 15%;
+                        transform: translateY(-50%);
+                        z-index: 1;
+                        text-align: center;
+                        }
 
-                .slogan-image {
-                    max-width: 100%; /* Responsive image */
-                    height: auto;
-                    color: white;
-                    font-weight: 50;
-                    font-size: 20px;
-                }
+
+                        .slogan-image {
+                            max-width: 100%;
+                            height: auto;
+                            color: white;
+                            font-weight: 50;
+                            font-size: 18px;
+                            margin-right: 0;
+                            }
 
                 @media (max-width: 768px) {
 
@@ -85,6 +87,7 @@
 
 
             @media (max-width: 480px) {
+              
 
                 .slogan-image {
                     max-width: 100%; /* Responsive image */
@@ -93,7 +96,6 @@
                     font-weight: 50;
                     font-size: 15px;
                     text-align: center;
-                    margin-right: 20px;
                 }
             
                 .slogan-text {

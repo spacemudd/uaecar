@@ -15,6 +15,7 @@ use App\Http\Controllers\WhyUsController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\back\adminDashboardController;
+use App\Http\Controllers\LoginController;
 use App\Models\Car;
 use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
@@ -102,7 +103,6 @@ Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 // Route::post('/admin/cars/{id}/upload', [\App\Http\Controllers\Admin\CarsController::class, 'upload'])->name('admin.cars.upload');
 Route::patch('/admin/cars/{id}/toggle-visibility', [CarController::class, 'toggleVisibility'])->name('admin.cars.toggleVisibility');
 Route::delete('/admin/cars/{id}', [CarController::class, 'destroy'])->name('admin.cars.delete');
-Route::post('admin/cars/store', [CarController::class, 'store'])->name('cars.store');
 
 
 
@@ -124,9 +124,14 @@ Route::get('/successview', function () {
 
 
 
-Route::get('/send-test-email', function () {
-    // Send a test email
-    Mail::to('your-email@example.com')->send(new TestEmail());
+// Route::post('/login', [LoginController::class, 'login'])->name('login.custom');
 
-    return 'Test email sent!';
-});
+
+// Custom login route
+Route::get('admin/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+// Handle custom login POST request
+Route::post('login', [LoginController::class, 'login'])->name('login.custom');
+
+// You can add a custom route to handle logout
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
