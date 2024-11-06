@@ -83,21 +83,21 @@
 </div>
 <br>
 
-                <h3 style="font-family: 'Rajdhani', sans-serif;">About the Car</h3>
-                <p style="font-family: 'Rajdhani', sans-serif; color:black;">{{ $car->description }}</p>
+                <h3 style="font-family: 'Calisto MT', serif;">About the Car</h3>
+                <p style="font-family: 'Calisto MT', serif; color:black;">{{ $car->description }}</p>
             </div>
 
             <div class="col-lg-4">
     <div class="card about-card"> <!-- Reduced padding -->
         <div class="card-body">
-        <h1 class="fs-3" style="font-family: 'Rajdhani', sans-serif;">{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
+        <h1 class="fs-3" style="font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' .  $car->model . ' ' . $car->year }}</h1>
             <p class="text-end my-0 py-0 pe-1 fw-bold fs-6">
-                Daily Cost: <span class="fs-4">{{ $car->price_daily }} AED </span>
+                Daily Cost: <span class="fs-4" style="font-family: 'Calisto MT', serif;">{{ $car->price_daily }} AED </span>
             </p>
             <div class="progress mt-1" style="height:8px;" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar w-25"></div>
             </div>
-            <p class="myPar py-2 fs-6" style="font-family: 'Rajdhani', sans-serif;">P.S. Please note that the limit is 450 kilometers per day and 4,500 kilometers per month. Any additional kilometers will incur a charge of 1 Dirham each.</p>
+            <p class="myPar py-2 fs-6" style="font-family: 'Calisto MT', serif;;">P.S. Please note that the limit is 450 kilometers per day and 4,500 kilometers per month. Any additional kilometers will incur a charge of 1 Dirham each.</p>
 
             <div class="row gy-3"> <!-- Reduced vertical spacing -->
                 <div class="col-6 mb-3"> <!-- Adjusted bottom margin -->

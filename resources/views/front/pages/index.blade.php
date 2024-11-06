@@ -25,7 +25,7 @@
                 </video>
             </div>
             <div class="slogan-container">
-            <h3 class="slogan-image">The Right Car For Every Road - Rent Your Way</h3>
+            <h3 class="slogan-image" style="font-family: 'Calisto MT', serif;">The Right Car For Every Road - Rent Your Way</h3>
         </div>
            
         </div>
@@ -164,8 +164,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h2 style="font-family: 'Rajdhani', sans-serif;">Our Cars</h2><br>
-                    <p style="font-family: 'Rajdhani', sans-serif;">Choose the car that fits your needs</p>
+                    <h2 style="font-family: 'Calisto MT', serif;">Our Cars</h2><br>
+                    <p style="font-family: 'Calisto MT', serif;">Choose the car that fits your needs</p>
                 </div>
             </div>
 
@@ -175,11 +175,11 @@
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
                     <div class="card3 w-100">
                     <span class="px-4 py-3" style="display: inline-block;">
-                        <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Rajdhani', sans-serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
+                        <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
                         <br>
-                        <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Rajdhani', sans-serif;">{{ $car->year }}</h4>
+                        <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
                     </span>
-                    <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Rajdhani', sans-serif;">
+                    <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                         <span>{{ $car->seats . ' Seats' }}</span>
                         <span>{{ $car->doors . ' Doors' }}</span>
                         <span>Automatic</span>
@@ -192,23 +192,23 @@
                     </a>
                     <div class="row mb-5 gx-2 justify-content-center">
                         <div class="col-4">
-                            <h4 class="text-center text-white" style="font-family: 'Rajdhani', sans-serif; font-size:medium;">Daily</h4>
-                            <h6 class="text-center text-white fw-bold" style="font-family: 'Rajdhani', sans-serif; font-size:large;">{{ $car->price_daily }} <span>AED</span></h6>
+                            <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Daily</h4>
+                            <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_daily }} <span>AED</span></h6>
                         </div>
 
                         <div class="col-4">
-                            <h4 class="text-center text-white" style="font-family: 'Rajdhani', sans-serif; font-size:medium;">Weekly</h4>
-                            <h6 class="text-center text-white fw-bold" style="font-family: 'Rajdhani', sans-serif; font-size:large;">{{ $car->price_weekly }} <span>AED</span></h6>
+                            <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Weekly</h4>
+                            <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_weekly }} <span>AED</span></h6>
                         </div>
 
                         <div class="col-4">
-                            <h4 class="text-center text-white" style="font-family: 'Rajdhani', sans-serif; font-size:medium;">Monthly</h4>
-                            <h6 class="text-center text-white fw-bold" style="font-family: 'Rajdhani', sans-serif; font-size:large;">{{ $car->price_monthly }} <span>AED</span></h6>
+                            <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Monthly</h4>
+                            <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_monthly }} <span>AED</span></h6>
                         </div>
                         <div class="row">
                         <div class="col-6">
                             <div class="mb-3 d-flex justify-content-start">
-                                <button class="btn text-center my-2" style="background-color: #949494; color: white;" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
+                                <button class="btn text-center my-2" style="background-color: #949494; color: white; font-family: 'Calisto MT', serif;" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
                                     Book Now
                                 </button>
                             </div>

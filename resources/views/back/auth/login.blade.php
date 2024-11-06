@@ -29,7 +29,8 @@
                 </div>
 
                 <!-- Login Form -->
-                <form action="/login" method="POST">
+                <form action="{{ route('login.custom') }}" method="POST">
+                @csrf  <!-- CSRF Token -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required autofocus>

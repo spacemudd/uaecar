@@ -19,7 +19,7 @@
                 </video>
             </div>
             <div class="slogan-container">
-            <h3 class="slogan-image">The Right Car For Every Road - Rent Your Way</h3>
+            <h3 class="slogan-image" style="font-family: 'Calisto MT', serif;">The Right Car For Every Road - Rent Your Way</h3>
         </div>
            
         </div>
@@ -113,8 +113,8 @@
                 <div class="col-md-6">
                     <div class="content">
                         <div class="section-subtitle">LUXURIA</div>
-                        <div class="section-title">We Are More Than <span>A Car Rental Company</span></div>
-                        <p style="font-size: 15px;">At Luxuria Cars, we are driven to understand our clients'
+                        <div class="section-title" style="font-family: 'Calisto MT', serif;">We Are More Than <span>A Car Rental Company</span></div>
+                        <p style="font-size: 15px; font-family: 'Calisto MT', serif;">At Luxuria Cars, we are driven to understand our clients'
                         varied needs and provide a tailored range of car rental
                         solutions. Our team of experienced
                         professionals and enthusiastic individuals committed to
@@ -145,8 +145,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="content">
-                        <div class="section-title"><span>Our Vision</span></div>
-                        <p style="font-size: 15px;">Luxuria Rent a Car aims to be a trailblazer in the
+                        <div class="section-title" style="font-family: 'Calisto MT', serif;"><span>Our Vision</span></div>
+                        <p style="font-size: 15px; font-family: 'Calisto MT', serif;">Luxuria Rent a Car aims to be a trailblazer in the
                         UAE car rental industry,
                         representing the pinnacle of high-quality vehicle rentals. With
                         our sights set on an expansive nationwide network and an
@@ -173,8 +173,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="content">
-                    <div class="section-title"><span>WHY CHOOSE US?</span></div>
-                    <p style="font-size: 15px;">
+                    <div class="section-title" style="font-family: 'Calisto MT', serif;"><span>WHY CHOOSE US?</span></div>
+                    <p style="font-size: 15px; font-family: 'Calisto MT', serif;">
                         <strong>Customer-Centric Service:</strong> Personalized, attentive service to meet your unique needs. <br>
                         <strong>Diverse Quality Fleet:</strong> A wide range of well-maintained vehicles from economy to luxury. <br>
                         <strong>Flexible Rental Plans:</strong> Customizable options to fit your schedule and requirements. <br>

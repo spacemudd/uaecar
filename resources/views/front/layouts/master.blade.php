@@ -16,6 +16,8 @@
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" />
+
+    
 </head>
 <body>
 
@@ -80,8 +82,8 @@
                                     <div class="icon-footer"> <i class="flaticon-phone-call"></i> </div>
                                 </div>
                                 <div class="footer-contact-link-content">
-                                    <h6>Call us</h6>
-                                    <p>+971 54-270-0030</p>
+                                    <h6 style="font-family: 'Calisto MT', serif;">Call us</h6>
+                                    <p style="font-family:'Calisto MT', serif;">+971 54-270-0030</p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
@@ -91,8 +93,8 @@
                                         <div class="icon-footer"> <i class="omfi-envelope"></i> </div>
                                     </div>
                                     <div class="footer-contact-link-content ms-2"> <!-- Add a margin-left to create some space between icon and text -->
-                                        <h6 class="mb-0">Write to us</h6> <!-- Optional: Remove margin-bottom on h6 for tighter alignment -->
-                                        <p class="mb-0">info@rentaluxuria.com</p> <!-- Optional: Remove margin-bottom on p for tighter alignment -->
+                                        <h6 class="mb-0" style="font-family: 'Calisto MT', serif;">Write to us</h6> <!-- Optional: Remove margin-bottom on h6 for tighter alignment -->
+                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">info@rentaluxuria.com</p> <!-- Optional: Remove margin-bottom on p for tighter alignment -->
                                     </div>
                                 </a>
                             </div>
@@ -104,8 +106,8 @@
                                         <div class="icon-footer"> <i class="omfi-location"></i> </div>
                                     </div>
                                     <div class="footer-contact-link-content ms-2">
-                                        <h6 class="mb-0">Address</h6>
-                                        <p class="mb-0">Al Rashidiya 3 - Ajman - United Arab Emirates</p>
+                                        <h6 class="mb-0" style="font-family: 'Calisto MT', serif;">Address</h6>
+                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Al Rashidiya 3 - Ajman - United Arab Emirates</p>
                                     </div>
                                 </a>
                             </div>
@@ -124,7 +126,7 @@
                     <div class="footer-logo ms-1">
                         <img src="{{ asset('front/img/new-logo3.png') }}" alt="">
                     </div>                        <div class="widget-text" style="font-family: 'Rajdhani', sans-serif;">
-                            <p>The Right Car For Every Road - Rent Your Way
+                            <p style="font-family: 'Calisto MT', serif;">The Right Car For Every Road - Rent Your Way
                             </p>
                             <div class="social-icons">
                                 <ul class="list-inline">
@@ -143,7 +145,7 @@
                 <!-- quick links -->
                 <div class="col-md-3 offset-md-1 widget-area">
                     <div class="widget clearfix usful-links">
-                        <h3 class="widget-title">Quick Links</h3>
+                        <h3 class="widget-title" style="font-family: 'Calisto MT', serif;">Quick Links</h3>
                         <ul>
                             <li><a href="{{ route('index') }}">Home</a></li>
                             <li><a href="{{ route('about') }}">About</a></li>

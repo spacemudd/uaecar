@@ -1,13 +1,12 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
+use App\Models\AdminUser;  // Make sure to import the AdminUser model if not already
 
 class LoginController extends Controller
 {
@@ -33,8 +32,8 @@ class LoginController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
-        // Attempt login
-        if (Auth::attempt($credentials, $request->remember)) {
+        // Attempt to log in using the admin guard
+        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
             // Redirect to the admin dashboard after successful login
             return redirect()->route('admin.dashboard');
         }
@@ -46,7 +45,7 @@ class LoginController extends Controller
     // Handle logout
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();  // Make sure to use the correct guard for admin logout
 
         // Redirect to the login page after logout
         return redirect()->route('login');

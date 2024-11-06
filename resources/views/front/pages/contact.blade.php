@@ -21,7 +21,7 @@
                 </video>
             </div>
             <div class="slogan-container">
-            <h3 class="slogan-image">The Right Car For Every Road - Rent Your Way</h3>
+            <h3 class="slogan-image" style="font-family: 'Calisto MT', serif;">The Right Car For Every Road - Rent Your Way</h3>
         </div>
            
         </div>
@@ -112,26 +112,26 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item"> <span class="icon omfi-envelope"></span>
-                        <h5>Email us</h5>
-                        <p>info@rentluxuria.com</p> <i class="numb omfi-envelope"></i>
+                        <h5 style="font-family: 'Calisto MT', serif;">Email us</h5>
+                        <p style="font-family: 'Calisto MT', serif;">info@rentluxuria.com</p> <i class="numb omfi-envelope"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item"> <span class="icon omfi-location"></span>
-                        <h5>Our address</h5>
-                        <p>Mehalat Al Sheebani - Shop number 2 - Al Rashidiya 3 - Ajman - United Arab Emirates</p> <i class="numb omfi-location"></i>
+                        <h5 style="font-family: 'Calisto MT', serif;">Our address</h5>
+                        <p style="font-family: 'Calisto MT', serif;">Mehalat Al Sheebani - Shop number 2 - Al Rashidiya 3 - Ajman - United Arab Emirates</p> <i class="numb omfi-location"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item"> <span class="icon ti-time"></span>
-                        <h5>Opening Hours</h5>
-                        <p>10:00 AM - 10:00 PM</p> <i class="numb ti-time"></i>
+                        <h5 style="font-family: 'Calisto MT', serif;">Opening Hours</h5>
+                        <p style="font-family: 'Calisto MT', serif;">10:00 AM - 10:00 PM</p> <i class="numb ti-time"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item active"> <span class="icon omfi-phone"></span>
-                        <h5>Call us</h5>
-                        <p>+971 54-270-0030</p> <i class="numb omfi-phone"></i>
+                        <h5 style="font-family: 'Calisto MT', serif;">Call us</h5>
+                        <p style="font-family: 'Calisto MT', serif;">+971 54-270-0030</p> <i class="numb omfi-phone"></i>
                     </div>
                 </div>
             </div>
@@ -144,19 +144,19 @@
                 <!-- Form -->
                 <div class="col-lg-6 col-md-12 mb-30">
                     <div class="form-box">
-                        <h5>Get in touch</h5>
+                        <h5 style="font-family: 'Calisto MT', serif;">Get in touch</h5>
                         <form method="post" class="contact__form" action="{{ route('form.contact') }}">
 
                         @csrf 
                             <!-- form message -->
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
+                                    <div class="alert alert-success contact__msg" style="display: none; font-family: 'Calisto MT', serif;" role="alert"> Your message was sent successfully. </div>
                                 </div>
                             </div>
                             <!-- form elements -->
                             <div class="row">
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-6 form-group" >
                                     <input name="name" type="text" placeholder="Your Name *" required>
                                 </div>
                                 <div class="col-md-6 form-group">
@@ -171,7 +171,7 @@
                                 <div class="col-md-12 form-group">
                                     <textarea name="message" id="message" cols="30" rows="4" placeholder="Message *" required></textarea>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="font-family: 'Calisto MT', serif;">
                                     <input name="submit" type="submit" value="Send Message">
                                 </div>
                             </div>
@@ -199,8 +199,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h6>Rent Your Car</h6>
-                    <h5>Interested in Renting?</h5>
-                    <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a>
+                    <h5 style="font-family: 'Calisto MT', serif;">Interested in Renting?</h5>
+                    <p style="font-family: 'Calisto MT', serif;">Don't hesitate and send us a message.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a>
                 </div>
             </div>
         </div>

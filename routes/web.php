@@ -132,3 +132,22 @@ Route::post('login', [LoginController::class, 'login'])->name('login.custom');
 
 // You can add a custom route to handle logout
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
+Route::middleware('auth:admin')->group(function () {
+
+    // Admin Dashboard Routes
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/add-new-car', [AdminDashboardController::class, 'addCars'])->name('admin.form');
+    Route::get('/admin/carlist', [AdminDashboardController::class, 'showCarList'])->name('admin.carlist'); 
+    
+    // Car Management Routes
+    Route::patch('/admin/cars/{id}/toggle-visibility', [CarController::class, 'toggleVisibility'])->name('admin.cars.toggleVisibility');
+    Route::delete('/admin/cars/{id}', [CarController::class, 'destroy'])->name('admin.cars.delete');
+    Route::post('admin/cars/store', [CarController::class, 'store'])->name('admin.cars.store');
+    Route::get('admin/cars/{id}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
+    Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
+    Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryImage'])->name('admin.cars.gallery.delete');
+
+});

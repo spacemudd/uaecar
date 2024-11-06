@@ -56,7 +56,12 @@
 54. Modal Popup style
  
 ----------------------------------------------------------------------------------- */
-
+@font-face {
+    font-family: 'Calisto MT'; /* Define a name for your font */
+    src: url('/fonts/calisto-mt.ttf') format('truetype'); /* Point to your font file */
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* ======= Typography style ======= */
 html,
@@ -65,6 +70,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
     font-smoothing: antialiased;
+    font-family: 'Calisto MT', serif;
 }
 * {
     margin: 0;

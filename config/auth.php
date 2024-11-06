@@ -35,12 +35,20 @@ return [
     |
     */
 
-    'guards' => [
+   'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+    // New admin guard
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin_users',  // Use a separate provider for admin users
+            'session' => 'admin_session',  // Optional: specify a different session name for admin
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -62,13 +70,14 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => env('AUTH_MODEL', App\Models\User::class),  // Regular user model
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        // New admin provider
+        'admin_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminUser::class,  // Admin user model
+        ],
     ],
 
     /*
