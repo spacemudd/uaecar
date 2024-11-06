@@ -83,24 +83,30 @@
                             </div>
                             <div class="footer-contact-links-divider"></div>
                             <div class="footer-contact-link-wrapper">
-                                <div class="image-wrapper footer-contact-link-icon">
-                                    <div class="icon-footer"> <i class="omfi-envelope"></i> </div>
-                                </div>
-                                <div class="footer-contact-link-content">
-                                    <h6>Write to us</h6>
-                                    <p>info@rentaluxuria.com</p>
-                                </div>
+                                <a href="{{ route('contact') }}" class="footer-contact-link d-flex align-items-center"> <!-- Use Bootstrap flex utility classes -->
+                                    <div class="image-wrapper footer-contact-link-icon">
+                                        <div class="icon-footer"> <i class="omfi-envelope"></i> </div>
+                                    </div>
+                                    <div class="footer-contact-link-content ms-2"> <!-- Add a margin-left to create some space between icon and text -->
+                                        <h6 class="mb-0">Write to us</h6> <!-- Optional: Remove margin-bottom on h6 for tighter alignment -->
+                                        <p class="mb-0">info@rentaluxuria.com</p> <!-- Optional: Remove margin-bottom on p for tighter alignment -->
+                                    </div>
+                                </a>
                             </div>
+
                             <div class="footer-contact-links-divider"></div>
                             <div class="footer-contact-link-wrapper">
-                                <div class="image-wrapper footer-contact-link-icon">
-                                    <div class="icon-footer"> <i class="omfi-location"></i> </div>
-                                </div>
-                                <div class="footer-contact-link-content">
-                                    <h6>Address</h6>
-                                    <p>Al Rashidiya 3 - Ajman - United Arab Emirates</p>
-                                </div>
+                                <a href="https://www.google.com/maps/place/Luxuria+Cars+Rental/@25.3982346,55.4403971,64m/data=!3m1!1e3!4m6!3m5!1s0x3e5f596a8e876377:0x26f89404dd87b493!8m2!3d25.3982362!4d55.4404803!16s%2Fg%2F11wj48l2kp?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="footer-contact-link d-flex align-items-center">
+                                    <div class="image-wrapper footer-contact-link-icon">
+                                        <div class="icon-footer"> <i class="omfi-location"></i> </div>
+                                    </div>
+                                    <div class="footer-contact-link-content ms-2">
+                                        <h6 class="mb-0">Address</h6>
+                                        <p class="mb-0">Al Rashidiya 3 - Ajman - United Arab Emirates</p>
+                                    </div>
+                                </a>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -139,7 +145,7 @@
                     </div>
                 </div>
                 <!-- subscribe -->
-                <div class="col-md-4 widget-area">
+                <!-- <div class="col-md-4 widget-area">
                     <div class="widget clearfix">
                         <h3 class="widget-title">Subscribe</h3>
                         <p>Want to be notified about our services? Just sign up and we'll send you a notification by email.</p>
@@ -150,7 +156,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- bottom footer -->
