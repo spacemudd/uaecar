@@ -30,73 +30,81 @@
 
 
         <style>
-        .header {
-            position: relative;
-            overflow: hidden;
-            height: 33vh; /* Adjust height as needed */
-        }
+                .header {
+                    position: relative;
+                    overflow: hidden;
+                    height: 33vh; /* Adjust height as needed */
+                }
 
-        .video-fullscreen-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+                .video-fullscreen-wrap {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                }
 
-        .video-fullscreen-video {
-            min-width: 100%;
-            min-height: 100%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0; /* Send video behind header */
-        }
+                .video-fullscreen-video {
+                    min-width: 100%;
+                    min-height: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 0; /* Send video behind header */
+                }
 
-        .slogan-container {
-            position: absolute;
-            top: 60%;
-            right: 11%; /* Position it 20px from the right */
-            transform: translateY(-50%); /* Center vertically */
-            z-index: 1; /* Ensure the slogan is above the video */
-            text-align: center; /* Center the slogan */
-        }
-
-        .slogan-image {
-            max-width: 100%; /* Responsive image */
-            height: auto;
-            color: white;
-            font-weight: 50;
-            font-size: 25px;
-        }
-
-        @media (max-width: 768px) {
-        .slogan-image {
-            display: none; /* Hide image on small screens */
-        }
-        .slogan-text {
-            display: block; /* Show alternative text */
-            text-align: center; /* Center text */
-        }
-
-        
-    }
+                .slogan-container {
+                        position: absolute;
+                        top: 60%;
+                        right: 15%;
+                        transform: translateY(-50%);
+                        z-index: 1;
+                        text-align: center;
+                        }
 
 
-    @media (max-width: 480px) {
-        .slogan-image {
-            display: none; /* Hide image on small screens */
-        }
-        .slogan-text {
-            display: block; /* Show alternative text */
-            text-align: center; /* Center text */
-        }
+                        .slogan-image {
+                            max-width: 100%;
+                            height: auto;
+                            color: white;
+                            font-weight: 50;
+                            font-size: 18px;
+                            margin-right: 0;
+                            }
 
-        
-    }
-    </style>
+                @media (max-width: 768px) {
+
+                .slogan-text {
+                    display: block; /* Show alternative text */
+                    text-align: center; /* Center text */
+                }
+
+                
+            }
+
+
+            @media (max-width: 480px) {
+              
+
+                .slogan-image {
+                    max-width: 100%; /* Responsive image */
+                    height: auto;
+                    color: white;
+                    font-weight: 50;
+                    font-size: 15px;
+                    text-align: center;
+                }
+            
+                .slogan-text {
+                    font-size: 20px;
+                    text-align: center; /* Center text */
+                }
+
+                
+            }
+        </style>
     </header>
     <!-- Contact Box -->
     <div class="contact-box">
@@ -175,8 +183,14 @@
                 <div class="col-lg-5 offset-lg-1 col-md-12">
                     <h5>Location</h5>
                     <div class="google-map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d273.36515892157473!2d55.4403971!3d25.3982346!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f596a8e876377%3A0x26f89404dd87b493!2sLuxuria%20Cars%20Rental!5e1!3m2!1sar!2ssa!4v1730029981917!5m2!1sar!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
-            </div>
+                        <!-- Wrap the iframe inside an anchor tag pointing to the Google Maps link -->
+                        <a href="https://www.google.com/maps/place/Luxuria+Cars+Rental/@25.3982346,55.4403971,64m/data=!3m1!1e3!4m6!3m5!1s0x3e5f596a8e876377:0x26f89404dd87b493!8m2!3d25.3982362!4d55.4404803!16s%2Fg%2F11wj48l2kp?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="display: block; width: 100%; height: 100%;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d273.36515892157473!2d55.4403971!3d25.3982346!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f596a8e876377%3A0x26f89404dd87b493!2sLuxuria%20Cars%20Rental!5e1!3m2!1sar!2ssa!4v1730029981917!5m2!1sar!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </a>
+                    </div>
+                </div>
+
+
         </div>
     </section>
     <!-- Lets Talk -->

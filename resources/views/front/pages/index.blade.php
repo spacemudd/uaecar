@@ -132,29 +132,29 @@
 
 <!-- Initialize Owl Carousel with your custom settings -->
 <script>
-$(document).ready(function(){
-    $(".owl-carousel").owlCarousel({
-        loop: true,                     // Enable continuous loop
-        margin: 10,                     // Adjust margin between items
-        nav: false,                     // Disable navigation buttons
-        dots: false,                    // Hide pagination dots
-        autoplay: true,                 // Enable autoplay
-        autoplayTimeout: 1000,          // Time between slides (1 second)
-        autoplayHoverPause: true,       // Pause on hover
-        autoplaySpeed: 2000,             // Speed of transition between slides
-        responsive: {
-            0: {
-                items: 5             // 1 item on small screens
-            },
-            600: {
-                items: 3              // 3 items on medium screens
-            },
-            1000: {
-                items: 5              // 5 items on large screens
+    $(document).ready(function(){
+        $(".owl-carousel").owlCarousel({
+            loop: true,                     // Enable continuous loop
+            margin: 10,                     // Adjust margin between items
+            nav: false,                     // Disable navigation buttons
+            dots: false,                    // Hide pagination dots
+            autoplay: true,                 // Enable autoplay
+            autoplayTimeout: 1000,          // Time between slides (1 second)
+            autoplayHoverPause: true,       // Pause on hover
+            autoplaySpeed: 2000,             // Speed of transition between slides
+            responsive: {
+                0: {
+                    items: 5             // 1 item on small screens
+                },
+                600: {
+                    items: 3              // 3 items on medium screens
+                },
+                1000: {
+                    items: 5              // 5 items on large screens
+                }
             }
-        }
+        });
     });
-});
 </script>
 
 
@@ -164,8 +164,8 @@ $(document).ready(function(){
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h2>Our Cars</h2><br>
-                    <p>Choose the car that fits your needs</p>
+                    <h2 style="font-family: 'Rajdhani', sans-serif;">Our Cars</h2><br>
+                    <p style="font-family: 'Rajdhani', sans-serif;">Choose the car that fits your needs</p>
                 </div>
             </div>
 
@@ -175,11 +175,11 @@ $(document).ready(function(){
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
                     <div class="card3 w-100">
                     <span class="px-4 py-3" style="display: inline-block;">
-                        <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 20px;">{{ $car->car_name . ' ' . $car->model}}</h3>
+                        <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Rajdhani', sans-serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
                         <br>
-                        <h4 class="car_name" style="display:inline-block; margin:0;">{{ $car->year }}</h4>
+                        <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Rajdhani', sans-serif;">{{ $car->year }}</h4>
                     </span>
-                    <div class="span-group px-3" style="font-size: 12px;">
+                    <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Rajdhani', sans-serif;">
                         <span>{{ $car->seats . ' Seats' }}</span>
                         <span>{{ $car->doors . ' Doors' }}</span>
                         <span>Automatic</span>
@@ -192,18 +192,18 @@ $(document).ready(function(){
                     </a>
                     <div class="row mb-5 gx-2 justify-content-center">
                         <div class="col-4">
-                            <h4 class="text-center text-white">Daily</h4>
-                            <h6 class="text-center text-white fw-light">{{ $car->price_daily }} <span>AED</span></h6>
+                            <h4 class="text-center text-white" style="font-family: 'Rajdhani', sans-serif; font-size:medium;">Daily</h4>
+                            <h6 class="text-center text-white fw-bold" style="font-family: 'Rajdhani', sans-serif; font-size:large;">{{ $car->price_daily }} <span>AED</span></h6>
                         </div>
 
                         <div class="col-4">
-                            <h4 class="text-center text-white">Weekly</h4>
-                            <h6 class="text-center text-white fw-light">{{ $car->price_weekly }} <span>AED</span></h6>
+                            <h4 class="text-center text-white" style="font-family: 'Rajdhani', sans-serif; font-size:medium;">Weekly</h4>
+                            <h6 class="text-center text-white fw-bold" style="font-family: 'Rajdhani', sans-serif; font-size:large;">{{ $car->price_weekly }} <span>AED</span></h6>
                         </div>
 
                         <div class="col-4">
-                            <h4 class="text-center text-white">Monthly</h4>
-                            <h6 class="text-center text-white fw-light">{{ $car->price_monthly }} <span>AED</span></h6>
+                            <h4 class="text-center text-white" style="font-family: 'Rajdhani', sans-serif; font-size:medium;">Monthly</h4>
+                            <h6 class="text-center text-white fw-bold" style="font-family: 'Rajdhani', sans-serif; font-size:large;">{{ $car->price_monthly }} <span>AED</span></h6>
                         </div>
                         <div class="row">
                         <div class="col-6">

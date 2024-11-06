@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" />
@@ -120,7 +123,7 @@
                     <div class="widget clearfix">
                     <div class="footer-logo ms-1">
                         <img src="{{ asset('front/img/new-logo3.png') }}" alt="">
-                    </div>                        <div class="widget-text">
+                    </div>                        <div class="widget-text" style="font-family: 'Rajdhani', sans-serif;">
                             <p>The Right Car For Every Road - Rent Your Way
                             </p>
                             <div class="social-icons">
