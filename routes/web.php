@@ -101,20 +101,17 @@ Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 // Route::get('/admin/cars', [\App\Http\Controllers\Admin\CarsController::class, 'index'])->name('admin.cars.index');
 // Route::get('/admin/cars/{id}', [\App\Http\Controllers\Admin\CarsController::class, 'show'])->name('admin.cars.show');
 // Route::post('/admin/cars/{id}/upload', [\App\Http\Controllers\Admin\CarsController::class, 'upload'])->name('admin.cars.upload');
-Route::patch('/admin/cars/{id}/toggle-visibility', [CarController::class, 'toggleVisibility'])->name('admin.cars.toggleVisibility');
-Route::delete('/admin/cars/{id}', [CarController::class, 'destroy'])->name('admin.cars.delete');
 
 
-
-Route::get('/admin/dashboard', [adminDashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/add-new-car', [adminDashboardController::class, 'addCars'])->name('admin.form');
-Route::get('/admin/carlist', [adminDashboardController::class, 'showCarList'])->name('admin.carlist'); 
-Route::post('admin/cars/store', [CarController::class, 'store'])->name('admin.cars.store');
-
-
-Route::get('admin/cars/{id}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
-Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
-Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryImage'])->name('admin.cars.gallery.delete');
+// Route::patch('/admin/cars/{id}/toggle-visibility', [CarController::class, 'toggleVisibility'])->name('admin.cars.toggleVisibility');
+// Route::delete('/admin/cars/{id}', [CarController::class, 'destroy'])->name('admin.cars.delete');
+// Route::get('/admin/dashboard', [adminDashboardController::class, 'index'])->name('admin.dashboard');
+// Route::get('/admin/add-new-car', [adminDashboardController::class, 'addCars'])->name('admin.form');
+// Route::get('/admin/carlist', [adminDashboardController::class, 'showCarList'])->name('admin.carlist'); 
+// Route::post('admin/cars/store', [CarController::class, 'store'])->name('admin.cars.store');
+// Route::get('admin/cars/{id}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
+// Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
+// Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryImage'])->name('admin.cars.gallery.delete');
 
 
 
