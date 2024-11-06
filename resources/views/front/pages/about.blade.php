@@ -106,7 +106,7 @@
                     <div class="content">
                         <div class="section-subtitle">LUXURIA</div>
                         <div class="section-title">We Are More Than <span>A Car Rental Company</span></div>
-                        <p style="font-size: 15px;">At Kaiadmin Rent a Car, we are driven to understand our clients'
+                        <p style="font-size: 15px;">At Luxuria Cars, we are driven to understand our clients'
                         varied needs and provide a tailored range of car rental
                         solutions. Our team of experienced
                         professionals and enthusiastic individuals committed to
@@ -138,7 +138,7 @@
                 <div class="col-md-6">
                     <div class="content">
                         <div class="section-title"><span>Our Vision</span></div>
-                        <p style="font-size: 15px;">Kaiadmin Rent a Car aims to be a trailblazer in the
+                        <p style="font-size: 15px;">Luxuria Rent a Car aims to be a trailblazer in the
                         UAE car rental industry,
                         representing the pinnacle of high-quality vehicle rentals. With
                         our sights set on an expansive nationwide network and an
