@@ -247,7 +247,7 @@
     <section class="cars2 section-padding my-0 py-0 px-3 mx-auto">
         <div class="row">
     <div class="col-12 text-left"> <!-- Changed from text-center to text-left -->
-        <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif;">Premium Cars</h2>
+        <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif;">Premium & Economy Cars</h2>
     </div>
 </div>
 
