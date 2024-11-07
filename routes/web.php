@@ -16,6 +16,8 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\back\adminDashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CategoryController;
+
 use App\Models\Car;
 use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
@@ -149,5 +151,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('admin/cars/{id}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
     Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
     Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryImage'])->name('admin.cars.gallery.delete');
-
 });
+
+
+Route::get('/luxury', [CategoryController::class, 'showLuxury'])->name('luxury.page');
+Route::get('/premium', [CategoryController::class, 'showPremium'])->name('premium.page');
+Route::get('/economy', [CategoryController::class, 'showEconomy'])->name('economy.page');
