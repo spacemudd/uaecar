@@ -195,7 +195,7 @@
                                         <input name="email" type="email" placeholder="Email *" required>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
-                                        <input name="phone" id="phone" type="tel" placeholder="Phone *" required class="form-control iti">
+                                        <input name="phone" type="text" placeholder="Phone *" required>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <label>Pick Up Location</label>
@@ -236,7 +236,6 @@
                 minDate: 0  // This ensures the user can only select today's date or any future date
             });
         });
-        
 
     </script>
 @endsection
