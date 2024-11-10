@@ -1,5 +1,7 @@
 @extends('front.layouts.master')
 
+
+
 @section('content')
 <body class="bg-gray">
     <!-- Preloader -->
