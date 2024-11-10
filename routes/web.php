@@ -157,3 +157,16 @@ Route::middleware('auth:admin')->group(function () {
 Route::get('/luxury', [CategoryController::class, 'showLuxury'])->name('luxury.page');
 Route::get('/premium', [CategoryController::class, 'showPremium'])->name('premium.page');
 Route::get('/economy', [CategoryController::class, 'showEconomy'])->name('economy.page');
+
+
+
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-email', function () {
+    Mail::raw('This is a test email from RentLuxuria!', function ($message) {
+        $message->to('info@rentluxuria.com')  // The email you want to receive requests at
+                ->subject('Test Email from RentLuxuria');
+    });
+
+    return 'Test email sent!';
+});

@@ -41,7 +41,7 @@ class FormController extends Controller
 
         // Send the form submission email with car details URL
         $carDetailsUrl = route('cars.show', ['id' => $car->id]);
-        Mail::to('abdelrahmanyouseff@gmail.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
+        Mail::to('info@rentluxuria.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
 
         // Return a success view after processing the form
         return view('front.pages.successView');

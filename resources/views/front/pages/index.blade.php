@@ -417,19 +417,33 @@
         <!-- Section Title -->
         <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">RENT ANY CAR YOU LIKE</h2>
 
-        <!-- Clickable Labels with Images -->
-        <div class="row mt-4">
-            <!-- Label 1 -->
-            <div class="col-md-4 mb-4 d-flex align-items-stretch" style="height: 250px;">
+        <!-- Tab Navigation for Smaller Screens -->
+        <ul class="nav nav-pills justify-content-center mb-4" id="carTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="luxury-tab" data-bs-toggle="pill" href="#luxury" role="tab" aria-controls="luxury" aria-selected="true">
+                    LUXURY
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="premium-tab" data-bs-toggle="pill" href="#premium" role="tab" aria-controls="premium" aria-selected="false">
+                    PREMIUM
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="economy-tab" data-bs-toggle="pill" href="#economy" role="tab" aria-controls="economy" aria-selected="false">
+                    ECONOMY
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="carTabsContent">
+            <!-- Luxury Tab -->
+            <div class="tab-pane fade show active" id="luxury" role="tabpanel" aria-labelledby="luxury-tab">
                 <a href="{{ route('luxury.page') }}" class="d-block text-decoration-none text-dark">
-                    <div class="d-flex align-items-center justify-content-center h-100 position-relative rounded" style="height: 100%; width: 100%;">
-                        <!-- Image -->
-                        <img src="{{asset('front/img/luxurycar.jpeg')}}" alt="Feature 1" class="img-fluid rounded w-100 h-100">
-
-                        <!-- Overlay (shadow) -->
+                    <div class="d-flex align-items-center justify-content-center position-relative rounded mb-4">
+                        <img src="{{asset('front/img/luxurycar.jpeg')}}" alt="Luxury Car" class="img-fluid rounded w-100">
                         <div class="overlay position-absolute w-100 h-100 bg-dark opacity-50 rounded"></div>
-
-                        <!-- Text -->
                         <div class="text-center position-absolute">
                             <h4 class="text-white" style="font-size: 2.5rem; font-weight: bold; text-transform: uppercase;">LUXURY</h4>
                         </div>
@@ -437,17 +451,12 @@
                 </a>
             </div>
 
-            <!-- Label 2 -->
-            <div class="col-md-4 mb-4 d-flex align-items-stretch" style="height: 250px;">
+            <!-- Premium Tab -->
+            <div class="tab-pane fade" id="premium" role="tabpanel" aria-labelledby="premium-tab">
                 <a href="{{ route('premium.page') }}" class="d-block text-decoration-none text-dark">
-                    <div class="d-flex align-items-center justify-content-center h-100 position-relative rounded" style="height: 100%; width: 100%;">
-                        <!-- Image -->
-                        <img src="{{ asset('front/img/premium.png') }}" alt="Feature 2" class="img-fluid rounded w-100 h-100">
-
-                        <!-- Overlay (shadow) -->
+                    <div class="d-flex align-items-center justify-content-center position-relative rounded mb-4">
+                        <img src="{{ asset('front/img/premium.png') }}" alt="Premium Car" class="img-fluid rounded w-100">
                         <div class="overlay position-absolute w-100 h-100 bg-dark opacity-50 rounded"></div>
-
-                        <!-- Text -->
                         <div class="text-center position-absolute">
                             <h4 class="text-white" style="font-size: 2.5rem; font-weight: bold; text-transform: uppercase;">PREMIUM</h4>
                         </div>
@@ -455,17 +464,12 @@
                 </a>
             </div>
 
-            <!-- Label 3 -->
-            <div class="col-md-4 mb-4 d-flex align-items-stretch" style="height: 250px;">
+            <!-- Economy Tab -->
+            <div class="tab-pane fade" id="economy" role="tabpanel" aria-labelledby="economy-tab">
                 <a href="{{ route('economy.page') }}" class="d-block text-decoration-none text-dark">
-                    <div class="d-flex align-items-center justify-content-center h-100 position-relative rounded" style="height: 100%; width: 100%;">
-                        <!-- Image -->
-                        <img src="{{ asset('front/img/economy.jpg') }}" alt="Feature 3" class="img-fluid rounded w-100 h-100">
-
-                        <!-- Overlay (shadow) -->
+                    <div class="d-flex align-items-center justify-content-center position-relative rounded mb-4">
+                        <img src="{{ asset('front/img/economy.jpg') }}" alt="Economy Car" class="img-fluid rounded w-100">
                         <div class="overlay position-absolute w-100 h-100 bg-dark opacity-50 rounded"></div>
-
-                        <!-- Text -->
                         <div class="text-center position-absolute">
                             <h4 class="text-white" style="font-size: 2.5rem; font-weight: bold; text-transform: uppercase;">ECONOMY</h4>
                         </div>
