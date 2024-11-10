@@ -69,60 +69,74 @@
           <!-- End Logo Header -->
         </div>
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
-          <div class="sidebar-content">
-            <ul class="nav nav-secondary">
+    <div class="sidebar-content">
+        <ul class="nav nav-secondary">
+            <!-- Dashboard Item -->
             <li class="nav-item active">
-    <a
-        href="{{ route('admin.dashboard') }}"
-        class="collapsed"
-        aria-expanded="false"
-    >
-        <i class="fas fa-home"></i>
-        <p>Dashboard</p>
-    </a>
-</li>
+                <a href="{{ route('admin.dashboard') }}" class="collapsed" aria-expanded="false">
+                    <i class="fas fa-home"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
 
-              <li class="nav-section">
+            <!-- Components Section -->
+            <li class="nav-section">
                 <span class="sidebar-mini-icon">
-                  <i class="fa fa-ellipsis-h"></i>
+                    <i class="fa fa-ellipsis-h"></i>
                 </span>
                 <h4 class="text-section">Components</h4>
-              </li>
-              <li class="nav-item">
+            </li>
+
+            <!-- Cars Section -->
+            <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
-                <i class="fas fa-car"></i>
-                <p>Cars</p>
-                  <span class="caret"></span>
+                    <i class="fas fa-car"></i>
+                    <p>Cars</p>
+                    <span class="caret"></span>
                 </a>
                 <div class="collapse" id="base">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href={{ route('admin.form') }}>
-                        <span class="sub-item">Add New Car </span>
-                      </a>
-                  </li>
-
-                    <li>
-                      <a href={{ route('admin.carlist') }}>
-                        <span class="sub-item">Show Car list</span>
-                      </a>
-                    </li>
-
-                  </ul>
+                    <ul class="nav nav-collapse">
+                        <li>
+                            <a href="{{ route('admin.form') }}">
+                                <span class="sub-item">Add New Car</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.carlist') }}">
+                                <span class="sub-item">Show Car List</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-              </li>
+            </li>
 
+            <!-- Settings Section (Collapsible) -->
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#settings">
+                    <i class="fas fa-cog"></i>
+                    <p>Settings</p>
+                    <span class="caret"></span>
+                </a>
+                <div class="collapse" id="settings">
+                    <ul class="nav nav-collapse">
+                        <li>
+                            <a href="#">
+                                <span class="sub-item">General Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="sub-item">Domain Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
-              <li class="nav-item">
-                  <a href="#">
-                      <i class="fas fa-cog"></i>
-                      <p>Settings</p>
-                  </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
+
       <!-- End Sidebar -->
 
       <div class="main-panel">
@@ -227,60 +241,6 @@
                     <li>
                       <div class="message-notif-scroll scrollbar-outer">
                         <div class="notif-center">
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="{{ asset('back/assets/img/jm_denis.jpg') }}"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Jimmy Denis</span>
-                              <span class="block"> How are you ? </span>
-                              <span class="time">5 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="{{ asset('back/assets/img/chadengle.jpg') }}"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Chad</span>
-                              <span class="block"> Ok, Thanks ! </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="{{ asset('back/assets/img/mlane.jpg') }}"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Jhon Doe</span>
-                              <span class="block">
-                                Ready for the meeting today...
-                              </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="{{ asset('back/assets/img/talha.jpg') }}"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Talha</span>
-                              <span class="block"> Hi, Apa Kabar ? </span>
-                              <span class="time">17 minutes ago</span>
-                            </div>
-                          </a>
                         </div>
                       </div>
                     </li>
@@ -325,40 +285,8 @@
                               <span class="time">5 minutes ago</span>
                             </div>
                           </a>
-                          <a href="#">
-                            <div class="notif-icon notif-success">
-                              <i class="fa fa-comment"></i>
-                            </div>
-                            <div class="notif-content">
-                              <span class="block">
-                                Rahmad commented on Admin
-                              </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="{{ asset('back/assets/img/profile2.jpg') }}"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="block">
-                                Reza send messages to you
-                              </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-icon notif-danger">
-                              <i class="fa fa-heart"></i>
-                            </div>
-                            <div class="notif-content">
-                              <span class="block"> Farrah liked Admin </span>
-                              <span class="time">17 minutes ago</span>
-                            </div>
-                          </a>
+
+
                         </div>
                       </div>
                     </li>
@@ -480,7 +408,7 @@
                           </div>
                           <div class="u-text">
                             <h4>Admin</h4>
-                            <p class="text-muted">info@example.com</p>
+                            <p class="text-muted">info@rentluxuria.com</p>
                             <a
                               href="profile.html"
                               class="btn btn-xs btn-secondary btn-sm"
