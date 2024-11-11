@@ -149,15 +149,18 @@
 </div>
 
 
-            <!-- Status Update Form -->
-            <form action="#" method="POST" class="mt-3">
-                @csrf
-                @method('PATCH')
-                <div class="btn-group">
-                    <button type="submit" name="status" value="Approved" class="btn btn-success">Approved</button>
-                    <button type="submit" name="status" value="Canceled" class="btn btn-danger">Canceled</button>
-                </div>
-            </form>
+                <!-- In your Blade view -->
+                <form action="{{ route('bookingRequests.updateStatus', $bookingRequest->id) }}" method="POST" class="mt-3">
+                    @csrf
+                    @method('PATCH')
+
+                    <!-- Status Update Buttons -->
+                    <div class="btn-group">
+                        <button type="submit" name="status" value="Approved" class="btn btn-success">Approved</button>
+                        <button type="submit" name="status" value="Canceled" class="btn btn-danger">Canceled</button>
+                    </div>
+                </form>
+
         </div>
     </div>
 </div>

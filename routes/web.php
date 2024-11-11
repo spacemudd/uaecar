@@ -155,6 +155,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('admin/bookinglist', [BookingController::class, 'bookingList'])->name('booking.list');
     Route::delete('/booking-requests/delete-all', [BookingController::class, 'deleteAll'])->name('booking-requests.deleteAll');
     Route::get('/booking-requests/{id}', [BookingController::class, 'requestProfile'])->name('booking-requests.show');
+    Route::patch('/booking-requests/{id}/status', [BookingController::class, 'updateStatus'])->name('bookingRequests.updateStatus');
 
 
 });

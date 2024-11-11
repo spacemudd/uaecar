@@ -37,7 +37,32 @@ class BookingController extends Controller
         $totalAmount = $bookingRequest->car->daily_price * $daysRented;
 
         // Return the view with the booking request data
-        return view('back.pages.bookingDetails', compact('bookingRequest', 'carPicture', 'totalAmount'));
+        return view('back.pages.bookinglist', compact('bookingRequest', 'carPicture', 'totalAmount'));
 
     }
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        // Validate the incoming request
+        $validated = $request->validate([
+            'status' => 'required|in:Pending,Approved,Canceled', // Accept only these status values
+        ]);
+
+        // Find the booking request by ID
+        $bookingRequest = BookingRequest::findOrFail($id);
+
+        // Update the status of the booking request
+        $bookingRequest->status = $validated['status'];
+        $bookingRequest->save();
+
+        // Redirect back to the booking request profile page with a success message
+        return redirect()->route('booking-requests.show', $bookingRequest->id)
+                         ->with('success', 'Booking status updated successfully!');
+    }
+
+
+
+
+
 }

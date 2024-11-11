@@ -14,9 +14,15 @@ class adminDashboardController extends Controller
     public function index(){
 
         $car_count = Car::count();
+        $pendingBookings = BookingRequest::where('status', 'Pending')->count();
+        $approvedBookings = BookingRequest::where('status', 'Approved')->count();
+        $canceledBookings = BookingRequest::where('status', 'Canceled')->count();
+
+
+
         $booking = BookingRequest::count();
 
-        return view('back.pages.dashboard', compact('car_count', 'booking'));
+        return view('back.pages.dashboard', compact('car_count', 'booking','pendingBookings', 'approvedBookings', 'canceledBookings'));
     }
 
 
