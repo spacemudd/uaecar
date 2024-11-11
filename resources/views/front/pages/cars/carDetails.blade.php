@@ -5,93 +5,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Include intl-tel-input CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.8/build/css/intlTelInput.css">
-
-<!-- Include intl-tel-input utils (for formatting and validation) -->
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.8/build/js/intlTelInput.js"></script>
-
 
     <style>
- /* Ensure that the phone number input field matches the design of other input fields */
-#phone {
-    height: 50px; /* Same height as other input fields */
-    border-radius: .25rem; /* Match the border-radius of the other fields */
-    background-color: #fff; /* Same background as the other fields */
-    border: 1px solid #ced4da; /* Border color */
-}
-
-/* Styling the flag dropdown part */
-.iti__flag-container {
-    height: 100%; /* Make flag container match height */
-    border-radius: .25rem; /* Match border-radius */
-}
-
-/* Remove the left border from the input field */
-.iti__input {
-    border-left: none;
-    border-radius: .25rem; /* Match border-radius */
-    background-color: #fff; /* Match background */
-    height: 50px; /* Match the height */
-}
-
-/* Adjust the flag and dropdown to match design */
-.iti__selected-flag {
-    height: 100%;
-    width: 40px; /* Control the size of the flag */
-    border-radius: .25rem; /* Match border-radius */
-}
-
-/* Adjusting input inside the dropdown */
-.iti__input {
-    padding-left: 45px; /* Make space for flag */
-}
-
-/* Ensuring consistent focus style with other fields */
-#phone:focus, .iti__input:focus {
-    border-color: #80bdff; /* Highlight border on focus */
-    box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25); /* Optional: Add focus shadow */
-}
-/* Ensure the phone number input field matches the design of other input fields */
-#phone {
-    width: 100%;  /* Ensures the input takes up the full width of the container */
-    height: 50px; /* Same height as other input fields */
-    border-radius: .25rem; /* Match the border-radius of other fields */
-    background-color: #fff; /* Same background as other fields */
-    border: 1px solid #ced4da; /* Match the border color of other input fields */
-    padding-left: 45px; /* Space for flag icon */
-}
-
-/* Styling the flag dropdown part */
-.iti__flag-container {
-    height: 100%; /* Ensure flag container matches the height of the input */
-    border-radius: .25rem; /* Match the border-radius of the input */
-}
-
-/* Remove the left border from the input field to prevent double borders */
-.iti__input {
-    border-left: none;
-    border-radius: .25rem; /* Match border-radius */
-    background-color: #fff; /* Match the background color */
-    height: 50px; /* Match the height */
-}
-
-/* Adjust the flag size and appearance */
-.iti__selected-flag {
-    height: 100%;
-    width: 40px; /* Control the width of the flag */
-    border-radius: .25rem; /* Match border-radius */
-}
-
-/* Ensure consistent focus styles with other input fields */
-#phone:focus, .iti__input:focus {
-    border-color: #80bdff; /* Highlight border on focus */
-    box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25); /* Optional: Add focus shadow */
-}
-
-/* Ensure proper alignment of the phone input */
-.iti__input {
-    padding-left: 45px; /* Leave space for the country flag icon */
+    /* Change the color of disabled (past) dates */
+.ui-datepicker .ui-state-disabled {
+    color: #b0b0b0; /* Gray color */
+    background-color: #f0f0f0; /* Light gray background */
+    border: 1px solid #d0d0d0; /* Light gray border */
+    cursor: not-allowed; /* Change cursor to indicate the date is disabled */
 }
 
 </style>
@@ -194,6 +115,7 @@
                             <div class="row gy-3">
                                 @foreach([
                                     ['icon' => 'car-seat.png', 'label' => 'Seats', 'value' => $car->seats],
+                                    
                                     ['icon' => 'car.png', 'label' => 'Doors', 'value' => $car->doors],
                                     ['icon' => 'free-delivery.png', 'label' => 'Free Delivery', 'value' => ''],
                                     ['icon' => 'gear.png', 'label' => 'Gear', 'value' => $car->gear],
@@ -274,20 +196,8 @@
                                         <input name="email" type="email" placeholder="Email *" required>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
-                                    <div class="input-group">
-
-                                        
-                                        <!-- Phone Number Input -->
-                                            <!-- Phone Number Input with Country Code Dropdown -->    
-                                            <input id="phone" name="phone" type="tel" class="form-control" placeholder="Phone *" required>
-
-
-                                        
-                                        </div>
-                                </div>
-
-
-
+                                        <input name="phone" type="text" placeholder="Phone *" required>
+                                    </div>
                                     <div class="col-lg-6 col-md-12">
                                         <label>Pick Up Location</label>
                                         <select name="pickup_city" class="select2 select" style="width: 100%" required>
@@ -328,17 +238,5 @@
             });
         });
 
-        
     </script>
-
-<script>
-    // Initialize the intl-tel-input plugin
-    var input = document.querySelector("#phone");
-    var iti = window.intlTelInput(input, {
-        initialCountry: "us", // Set default country (optional)
-        preferredCountries: ["us", "gb", "fr", "de", "in"], // Optional: Preferred countries to show first
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.8/build/js/utils.js", // Optional: For validation and formatting
-    });
-</script>
-
 @endsection
