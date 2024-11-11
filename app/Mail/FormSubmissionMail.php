@@ -26,6 +26,8 @@ class FormSubmissionMail extends Mailable
                     ->with([
                         'data' => $this->data,
                         'carDetailsUrl' => $this->carDetailsUrl,
-                    ]);
+                    ])
+                    ->from('info@rentluxuria.com', 'LUXURIA CARS')
+                    ->replyTo('info@rentluxuria.com');
     }
 }
