@@ -117,7 +117,7 @@
                                     ['icon' => 'car-seat.png', 'label' => 'Seats', 'value' => $car->seats],
                                     
                                     ['icon' => 'car.png', 'label' => 'Doors', 'value' => $car->doors],
-                                    ['icon' => 'free-delivery.png', 'label' => 'Free Delivery', 'value' => ''],
+                                    ['icon' => 'free-delivery.png', 'label' => 'Free Delivery', 'value' => 'Free Delivery'],
                                     ['icon' => 'gear.png', 'label' => 'Gear', 'value' => $car->gear],
                                     ['icon' => 'wallet.png', 'label' => 'Daily Price', 'value' => $car->price_daily . ' AED'],
                                     ['icon' => 'wallet.png', 'label' => 'Weekly Price', 'value' => number_format($car->price_weekly, 0) . ' AED'],
