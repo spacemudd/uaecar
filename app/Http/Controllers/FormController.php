@@ -16,14 +16,14 @@ class FormController extends Controller
     {
         // Validate the incoming booking request data
         $validatedData = $this->validateBookingRequest($request);
-
+    
         // Use Carbon::parse() to automatically handle date parsing
         $pickupDate = Carbon::parse($validatedData['pickup_date'])->format('Y-m-d');
         $returnDate = Carbon::parse($validatedData['return_date'])->format('Y-m-d');
-
+    
         // Find the car based on the car ID
         $car = Car::findOrFail($validatedData['carID']);
-
+    
         // Create a new booking request record in the database
         $booking = BookingRequest::create([
             'request_number' => BookingRequest::count() + 100,  // Generate a unique request number
@@ -37,15 +37,26 @@ class FormController extends Controller
             'return_date' => $returnDate,  // Store the formatted return date
             'message' => $validatedData['message'],
             'daily_car_price' => $validatedData['daily_car_price'],
+            'status' => 'Pending'  // You can also set a default status here
         ]);
-
+    
+        // Get the email from the validated data
+        $userEmail = $validatedData['email'];
+    
+        // Create the subject with the booking request number and email
+        $subject = 'Booking Request ' . $booking->request_number . ' - ' . $userEmail;
+    
         // Send the form submission email with car details URL
         $carDetailsUrl = route('cars.show', ['id' => $car->id]);
-        Mail::to('info@rentluxuria.com')->send(new FormSubmissionMail($validatedData, $carDetailsUrl));
-
+    
+        // Send the email with the booking request model and subject
+        Mail::to('info@rentluxuria.com')->send(new FormSubmissionMail($booking, $carDetailsUrl, $subject));
+    
         // Return a success view after processing the form
         return view('front.pages.successView');
     }
+    
+    
 
     public function sendContactEmail(Request $request)
     {

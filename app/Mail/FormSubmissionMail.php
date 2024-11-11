@@ -5,27 +5,30 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\BookingRequest;
 
 class FormSubmissionMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $bookingRequest;
     public $carDetailsUrl;
+    public $subject;
 
-    public function __construct($data, $carDetailsUrl)
+    public function __construct(BookingRequest $bookingRequest, $carDetailsUrl, $subject)
     {
-        $this->data = $data;
+        $this->bookingRequest = $bookingRequest;
         $this->carDetailsUrl = $carDetailsUrl;
+        $this->subject = $subject;
     }
 
     public function build()
     {
         return $this->view('emails.form-submition')
-                    ->subject('LUXURIA')
+                    ->subject($this->subject)  // Set the subject dynamically
                     ->with([
-                        'data' => $this->data,
-                        'carDetailsUrl' => $this->carDetailsUrl,
+                        'bookingRequest' => $this->bookingRequest,
+                        'carDetailsUrl' => $this->carDetailsUrl
                     ])
                     ->from('info@rentluxuria.com', 'LUXURIA CARS')
                     ->replyTo('info@rentluxuria.com');
