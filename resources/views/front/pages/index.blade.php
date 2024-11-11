@@ -417,7 +417,7 @@
                
                     </div>
                 <!-- Booking Modal -->
-                <!-- <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
+                <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -501,10 +501,9 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
 
-                <x-booking-form :car="$car" />
 
                 @endif
             @endforeach

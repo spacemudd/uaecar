@@ -44,4 +44,9 @@ class Car extends Model
     {
         return $this->hasMany(CarImage::class, 'car_id');
     }
+
+    public function bookingRequests()
+    {
+        return $this->hasMany(BookingRequest::class, 'car_id');
+    }
 }

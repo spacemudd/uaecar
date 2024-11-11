@@ -23,4 +23,9 @@ class BookingRequest extends Model
         'message',
         'daily_car_price',
     ];
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class, 'car_id');
+    }
 }

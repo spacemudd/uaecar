@@ -69,74 +69,68 @@
           <!-- End Logo Header -->
         </div>
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
-    <div class="sidebar-content">
-        <ul class="nav nav-secondary">
-            <!-- Dashboard Item -->
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
             <li class="nav-item active">
-                <a href="{{ route('admin.dashboard') }}" class="collapsed" aria-expanded="false">
-                    <i class="fas fa-home"></i>
-                    <p>Dashboard</p>
-                </a>
-            </li>
+    <a
+        href="{{ route('admin.dashboard') }}"
+        class="collapsed"
+        aria-expanded="false"
+    >
+        <i class="fas fa-home"></i>
+        <p>Dashboard</p>
+    </a>
+</li>
 
-            <!-- Components Section -->
-            <li class="nav-section">
+              <li class="nav-section">
                 <span class="sidebar-mini-icon">
-                    <i class="fa fa-ellipsis-h"></i>
+                  <i class="fa fa-ellipsis-h"></i>
                 </span>
                 <h4 class="text-section">Components</h4>
-            </li>
-
-            <!-- Cars Section -->
-            <li class="nav-item">
+              </li>
+              <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
-                    <i class="fas fa-car"></i>
-                    <p>Cars</p>
-                    <span class="caret"></span>
+                <i class="fas fa-car"></i>
+                <p>Cars</p>
+                  <span class="caret"></span>
                 </a>
                 <div class="collapse" id="base">
-                    <ul class="nav nav-collapse">
-                        <li>
-                            <a href="{{ route('admin.form') }}">
-                                <span class="sub-item">Add New Car</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.carlist') }}">
-                                <span class="sub-item">Show Car List</span>
-                            </a>
-                        </li>
-                    </ul>
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href={{ route('admin.form') }}>
+                        <span class="sub-item">Add New Car </span>
+                      </a>
+                  </li>
+
+                    <li>
+                      <a href={{ route('admin.carlist') }}>
+                        <span class="sub-item">Show Car list</span>
+                      </a>
+                    </li>
+
+                  </ul>
                 </div>
-            </li>
+              </li>
 
-            <!-- Settings Section (Collapsible) -->
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#settings">
-                    <i class="fas fa-cog"></i>
-                    <p>Settings</p>
-                    <span class="caret"></span>
-                </a>
-                <div class="collapse" id="settings">
-                    <ul class="nav nav-collapse">
-                        <li>
-                            <a href="#">
-                                <span class="sub-item">General Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="sub-item">Domain Settings</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
 
-        </ul>
-    </div>
-</div>
+              <!-- <li class="nav-item">
+                  <a href="#">
+                      <i class="fas fa-cog"></i>
+                      <p>Settings</p>
+                  </a>
+              </li> -->
 
+
+              <li class="nav-item">
+                  <a href={{ route('booking.list') }}>
+                      <i class="fas fa-cog"></i>
+                      <p>Booking Orders</p>
+                  </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <!-- End Sidebar -->
 
       <div class="main-panel">
