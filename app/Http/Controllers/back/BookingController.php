@@ -22,7 +22,7 @@ class BookingController extends Controller
         BookingRequest::truncate();  // This deletes all records in the table
 
         // Redirect back with a success message
-        return redirect()->route('back-pages.bookinglist')->with('success', 'All booking requests have been deleted.');
+        return view('back.pages.bookinglist');
     }
 
 
