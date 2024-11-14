@@ -881,7 +881,7 @@ svg {
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
                                     <span style="background-color: blue;">
-                                        {{ $car->categories }}
+                                        Sports
                                     </span>
                                 </div>
 
