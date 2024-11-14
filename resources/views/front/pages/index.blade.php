@@ -200,23 +200,24 @@
     <!-- Luxury Cars Section -->
     <section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
     
-    <div class="row">
-        <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: white; width: 100vw;">
-            <!-- Centered Title -->
-            <div id="text-container">
-                <div id="line-one">
-                    <h1>LUXURY</h1< />
+        <div class="row">
+            <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: white; width: 100vw;">
+                <!-- Centered Title -->
+                <div id="text-container">
+                    <div id="line-one">
+                        <h1 class="display-3">LUXURY</h1>
+                    </div>
                 </div>
-                </div>
-            <!-- Dropdown Filter -->
-            <select id="priceFilter" class="form-select" style="width: 200px; position: absolute; right: 10px;" onchange="this.form.submit()">
-                <option value="default">Filter By</option>
-                <option value="low-to-high" {{ request('price_filter') === 'low-to-high' ? 'selected' : '' }}>Price: Low to High</option>
-                <option value="high-to-low" {{ request('price_filter') === 'high-to-low' ? 'selected' : '' }}>Price: High to Low</option>
-            </select>
 
+                <!-- Dropdown Filter -->
+                <select id="priceFilter" class="form-select" style="width: 200px; position: absolute; right: 10px;" onchange="this.form.submit()">
+                    <option value="default">Filter By</option>
+                    <option value="low-to-high" {{ request('price_filter') === 'low-to-high' ? 'selected' : '' }}>Price: Low to High</option>
+                    <option value="high-to-low" {{ request('price_filter') === 'high-to-low' ? 'selected' : '' }}>Price: High to Low</option>
+                </select>
+
+            </div>
         </div>
-    </div>
 
 
         <div class="row gy-2" style="background-color: white;">
@@ -380,7 +381,7 @@
                 <div class="col-12 text-center" style="background-color: white; width: 100vw;">
                 <div id="text-container">
                 <div id="line-one">
-                    <h1>Mid Range</h1< />
+                    <h1 class="display-3">Mid Range</h1< />
                 </div>
                 </div>                </div>
             </div>
@@ -547,7 +548,7 @@
                 <div class="col-12 text-center" style="background-color: white; width: 100vw;">
                 <div id="text-container">
                 <div id="line-one">
-                    <h1>Economy</h1< />
+                    <h1 class="display-3">Economy</h1< />
                 </div>
                 </div>
                 </div>
@@ -708,13 +709,13 @@
             </div>
         </section>
 
-
+        <!-- Sport-->
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto">
             <div class="row">
                     <div class="col-12 text-center" style="background-color: white; width: 100vw;">
                     <div id="text-container">
                     <div id="line-one">
-                        <h1>
+                        <h1 class="display-3">
                         Sports and Exotics
                         </h1< />
                     </div>
@@ -882,7 +883,7 @@
                 <div class="col-12 text-center" style="background-color: white; width: 100vw;">
                 <div id="text-container">
                 <div id="line-one">
-                    <h1>
+                    <h1 class="display-3">
                     
                         Vans and Buses
 
