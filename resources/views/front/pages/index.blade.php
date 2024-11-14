@@ -1048,7 +1048,7 @@ svg {
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
                                     <span style="background-color: blue;">
-                                        {{ $car->categories }}
+                                        Buses
                                     </span>
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
