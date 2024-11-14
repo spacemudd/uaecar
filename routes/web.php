@@ -18,7 +18,7 @@ use App\Http\Controllers\back\adminDashboardController;
 use App\Http\Controllers\back\BookingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\StripeController;
 use App\Models\Car;
 use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
@@ -167,3 +167,6 @@ Route::get('/premium', [CategoryController::class, 'showPremium'])->name('premiu
 Route::get('/economy', [CategoryController::class, 'showEconomy'])->name('economy.page');
 
 
+Route::get('/stripe/payment', [StripeController::class, 'pay'])->name('stripe.payment');
+// POST route to handle the form submission
+// Route::post('/stripe/payment', [StripeController::class, 'pay'])->name('test');

@@ -10,6 +10,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+
+
+
 <style>
 
 
@@ -471,7 +474,6 @@
                                                 <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
                                                 <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
 
-
                                                 <div class="col-lg-6 col-md-12">
                                                     <input name="name" type="text" placeholder="Full Name *" required>
                                                 </div>
@@ -505,12 +507,13 @@
 
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="input1_wrapper">
-                                                        <label>Return Up Date and Time</label>
+                                                        <label>Return Date and Time</label>
                                                         <div class="input1_inner">
-                                                            <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Up Date and Time" required>
+                                                            <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Date and Time" required>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-12 col-md-12 form-group">
                                                     <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
                                                 </div>
@@ -989,7 +992,6 @@
                                                 <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
                                                 <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
 
-
                                                 <div class="col-lg-6 col-md-12">
                                                     <input name="name" type="text" placeholder="Full Name *" required>
                                                 </div>
@@ -1049,13 +1051,11 @@
                         </div>
                     </div>
                 </div>
-                        <!-- End Booking Modal -->
-                    @endif
-                @endforeach
-            </div>
-        </section>
-
-
+                @endif
+            @endforeach
+        </div>
+    </div>
+    </section>
 
 <!-- New Section with Centered Title and Clickable Labels -->
 <section class="py-5 mt-5">
@@ -1212,5 +1212,36 @@
         </div>
     </div>
 </section>
+
+
+
+<script>
+    $(document).ready(function(){
+    $('.datepicker').datepicker({
+        minDate: 0  // This ensures the user can only select today's date or any future date
+    });
+});
+
+</script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#pickup_date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:S", // Sets the format to match the API requirement
+            time_24hr: true,
+            minDate: "today",
+        });
+
+        flatpickr("#return_date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:S",
+            time_24hr: true,
+            minDate: "today",
+        });
+    });
+</script>
 
 @endsection
