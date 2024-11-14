@@ -1194,7 +1194,9 @@ svg {
         <!-- Section Title -->
         <!-- <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">RENT ANY CAR YOU LIKE</h2> -->
         <div class="rent-your-car">
-        <h1 class="title-one">Discover, <span class="underlined underline-clip">Our</span><br>Cars Collection <span class="underlined underline-mask">Right</span><br><span class="underlined underline-overflow">Now</span></h1>        </div>
+            <h1 class="title-one">Discover, <span class="underlined underline-clip">Our</span>Cars Collection <span class="underlined underline-mask">Right NOW</span>
+            </h1>
+        </div>
         
 
         <!-- Tab Navigation for Smaller Screens -->
