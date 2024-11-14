@@ -89,6 +89,9 @@
                                         <option value="Luxury" {{ old('categories', $categoryValue) == 'Luxury' ? 'selected' : '' }}>Luxury</option>
                                         <option value="Premium" {{ old('categories', $categoryValue) == 'Premium' ? 'selected' : '' }}>Premium</option>
                                         <option value="Economy" {{ old('categories', $categoryValue) == 'Economy' ? 'selected' : '' }}>Economy</option>
+                                        <option value="Economy" {{ old('categories', $categoryValue) == 'Sports and Exotics' ? 'selected' : '' }}>Sports and Exotics</option>
+                                        <option value="Economy" {{ old('categories', $categoryValue) == 'Vans and Buses' ? 'selected' : '' }}>Vans and Buses</option>
+
                                     </select>
                                 </div>
 
