@@ -12,175 +12,6 @@
 
 <style>
 
-.rent-your-car{
-    display: grid;
-  place-items: center;
-  background: white;
-  width: 66%;
-}
-
-.title-one{
-    font-size: 50px;
-  font-family: sans-serif;
-  color: black;
-}
-
-.underlined {
-/*   background: red; */
-  position: relative;
-}
-.underline-mask:after {
-  content: '';
-  position: absolute;
-  top: 95%;
-  width: 150%;
-  aspect-ratio: 3 / 1;
-  left: 50%;
-  transform: translate(-50%, 0);
-  border-radius: 50%;
-  border: 6px solid hsl(280 80% 50%);
-  /* Use a conic gradient mask to hide and show the bits you want */
-  --spread: 140deg;
-  --start: 290deg;
-  mask: conic-gradient(from var(--start), white 0 var(--spread), transparent var(--spread));
-}
-
-
-.underline-overflow {
-  display: inline-block;
-  /* A little extra padding and overflow hidden   */
-  overflow: hidden;
-  padding-bottom: clamp(1rem, 2vmin, 2rem);
-}
-.underline-overflow:after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  height: 150%;
-  aspect-ratio: 2.5 / 1;
-  left: 50%;
-  transform: translate(-50%, -10%);
-  border-radius: 50%;
-  border: 6px solid hsl(10 80% 50%);
-}
-
-.underline-clip:after {
-  content: '';
-  position: absolute;
-  top: 95%;
-  width: 150%;
-  aspect-ratio: 3 / 1;
-  left: 50%;
-  transform: translate(-50%, 0);
-  border-radius: 50%;
-  border: 6px solid hsl(130 80% 50%);
-  /* Use a clip-path to hide and show the bits you want */
-  clip-path: polygon(0 0, 50% 50%, 100% 0);
-}
-
-:root {
-  --size: 3;
-  --skew: 7;
-  --orange: hsl(20, 100%, 71%);
-  --svgfilter: url(#squiggly-0);
-  --boxshadow: rgb(22, 12, 3);
-  --textshadow: rgb(42, 22, 23);
-  --noise-image: url(data:image/png;base64,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);
-}
-@media only screen and (max-width: 600px) {
-  :root {
-    --size: 2;
-  }
-}
-@media only screen and (max-width: 400px) {
-  :root {
-    --size: 1.4;
-  }
-}
-.lightning {
-  display: flex;
-  position: relative;
-  margin: 4vmin;
-  filter: var(--svgfilter);
-  span {
-    color: black;
-    letter-spacing: calc(var(--size) * 1vmin);
-    font-size: 1rem;
-    padding: calc(0.5 * 1rem) 0 0 0;
-    margin-right: -1rem;
-    text-align: left;
-    text-shadow: none;
-  }
-  > * {
-    margin: 0;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: calc(var(--size) * 0.8vmin) calc(var(--size) * 1.6vmin);
-
-    transform: skew(calc(var(--skew) * -1deg), calc(var(--skew) * -1deg));
-    font-size: calc(var(--size) * 2vmax);
-    font-weight: 700;
-    color: Crimson;
-
-    text-transform: uppercase;
-    text-align: right;
-    border: 3px solid var(--boxshadow);
-    border-left: 0;
-    text-shadow: var(--textshadow) 0px 0px 0px,
-      var(--textshadow) 0.669131px 0.743145px 0px,
-      var(--textshadow) 1.33826px 1.48629px 0px,
-      var(--textshadow) 2.00739px 2.22943px 0px,
-      var(--textshadow) 2.67652px 2.97258px 0px,
-      var(--textshadow) 3.34565px 3.71572px 0px,
-      var(--textshadow) 4.01478px 4.45887px 0px,
-      var(--textshadow) 4.68391px 5.20201px 0px;
-    box-shadow: var(--border) 0px 0px 0px,
-      var(--boxshadow) 0.819152px 0.573576px 0px,
-      var(--boxshadow) 1.6383px 1.14715px 0px,
-      var(--boxshadow) 2.45746px 1.72073px 0px,
-      var(--boxshadow) 3.27661px 2.29431px 0px,
-      var(--boxshadow) 4.09576px 2.86788px 0px,
-      var(--boxshadow) 4.91491px 3.44146px 0px,
-      var(--boxshadow) 5.73406px 4.01504px 0px,
-      var(--boxshadow) 6.55322px 4.58861px 0px,
-      var(--boxshadow) 7.37237px 5.16219px 0px,
-      var(--boxshadow) 8.19152px 5.73576px 0px,
-      var(--boxshadow) 9.01067px 6.30934px 0px,
-      var(--boxshadow) 9.82982px 6.88292px 0px,
-      var(--boxshadow) 10.649px 7.45649px 0px,
-      var(--boxshadow) 11.4681px 8.03007px 0px;
-    &:last-child {
-      left: calc(var(--size) * -1vmin);
-      position: relative;
-      text-align: left;
-       font-size: 8vmin;
-      span {
-        border-top: 1px solid;
-      }
-    }
-  }
-}
-
-
-
-.noisy {
-  background-image: var(--noise-image);
-}
-
-
-svg {
-  height: 1px;
-}
-
-
-
-
-
-#line-one {
-  text-shadow: rgb(70, 139, 151) 0px 0px, rgb(70, 139, 151) -1px 1px, rgb(70, 139, 151) -2px 2px, rgb(70, 139, 151) -3px 3px, rgb(70, 139, 151) -4px 4px, rgb(70, 139, 151) -5px 5px, rgb(70, 139, 151) -6px 6px, rgb(70, 139, 151) -7px 7px, rgb(70, 139, 151) -8px 8px, rgb(70, 139, 151) -9px 9px, rgb(70, 139, 151) -10px 10px, rgb(70, 139, 151) -11px 11px, rgb(70, 139, 151) -12px 12px, rgb(70, 139, 151) -13px 13px, rgb(70, 139, 151) -14px 14px, rgb(70, 139, 151) -15px 15px, rgb(70, 139, 151) -16px 16px, rgb(70, 139, 151) -17px 17px, rgb(70, 139, 151) -18px 18px, rgb(70, 139, 151) -19px 19px, rgb(70, 139, 151) -20px 20px, rgb(70, 139, 151) -21px 21px, rgb(70, 139, 151) -22px 22px, rgb(70, 139, 151) -23px 23px, rgb(70, 139, 151) -24px 24px, rgb(70, 139, 151) -25px 25px, rgb(70, 139, 151) -26px 26px, rgb(70, 139, 151) -27px 27px, rgb(70, 139, 151) -28px 28px, rgb(70, 139, 151) -29px 29px, rgb(70, 139, 151) -30px 30px, rgb(70, 139, 151) -31px 31px, rgb(70, 139, 151) -32px 32px, rgb(70, 139, 151) -33px 33px, rgb(70, 139, 151) -34px 34px, rgb(70, 139, 151) -35px 35px, rgb(70, 139, 151) -36px 36px, rgb(70, 139, 151) -37px 37px, rgb(70, 139, 151) -38px 38px, rgb(70, 139, 151) -39px 39px, rgb(70, 139, 151) -40px 40px, rgb(70, 139, 151) -41px 41px, rgb(70, 139, 151) -42px 42px, rgb(70, 139, 151) -43px 43px, rgb(70, 139, 151) -44px 44px, rgb(70, 139, 151) -45px 45px, rgb(70, 139, 151) -46px 46px, rgb(70, 139, 151) -47px 47px, rgb(70, 139, 151) -48px 48px, rgb(70, 139, 151) -49px 49px, rgb(70, 139, 151) -50px 50px, rgb(70, 139, 151) -51px 51px, rgb(70, 139, 151) -52px 52px, rgb(70, 139, 151) -53px 53px, rgb(70, 139, 151) -54px 54px, rgb(70, 139, 151) -55px 55px, rgb(70, 139, 151) -56px 56px, rgb(70, 139, 151) -57px 57px, rgb(70, 139, 151) -58px 58px, rgb(70, 139, 151) -59px 59px, rgb(70, 139, 151) -60px 60px, rgb(70, 139, 151) -61px 61px, rgb(70, 139, 151) -62px 62px, rgb(70, 139, 151) -63px 63px, rgb(70, 139, 151) -64px 64px, rgb(70, 139, 151) -65px 65px, rgb(70, 139, 151) -66px 66px, rgb(70, 139, 151) -67px 67px, rgb(70, 139, 151) -68px 68px, rgb(70, 139, 151) -69px 69px, rgb(70, 139, 151) -70px 70px, rgb(70, 139, 151) -71px 71px, rgb(70, 139, 151) -72px 72px, rgb(70, 139, 151) -73px 73px, rgb(70, 139, 151) -74px 74px, rgb(70, 139, 151) -75px 75px, rgb(70, 139, 151) -76px 76px, rgb(70, 139, 151) -77px 77px, rgb(70, 139, 151) -78px 78px, rgb(70, 139, 151) -79px 79px, rgb(70, 139, 151) -80px 80px, rgb(70, 139, 151) -81px 81px, rgb(70, 139, 151) -82px 82px, rgb(70, 139, 151) -83px 83px, rgb(70, 139, 151) -84px 84px, rgb(70, 139, 151) -85px 85px, rgb(70, 139, 151) -86px 86px, rgb(70, 139, 151) -87px 87px, rgb(70, 139, 151) -88px 88px, rgb(70, 139, 151) -89px 89px, rgb(70, 139, 151) -90px 90px, rgb(70, 139, 151) -91px 91px, rgb(70, 139, 151) -92px 92px, rgb(70, 139, 151) -93px 93px, rgb(70, 139, 151) -94px 94px, rgb(70, 139, 151) -95px 95px, rgb(70, 139, 151) -96px 96px, rgb(70, 139, 151) -97px 97px, rgb(70, 139, 151) -98px 98px, rgb(70, 139, 151) -99px 99px, rgb(70, 139, 151) -100px 100px, rgb(70, 139, 151) -101px 101px, rgb(70, 139, 151) -102px 102px, rgb(70, 139, 151) -103px 103px, rgb(70, 139, 151) -104px 104px, rgb(70, 139, 151) -105px 105px, rgb(70, 139, 151) -106px 106px, rgb(70, 139, 151) -107px 107px, rgb(70, 139, 151) -108px 108px, rgb(70, 139, 151) -109px 109px, rgb(70, 139, 151) -110px 110px, rgb(70, 139, 151) -111px 111px, rgb(70, 139, 151) -112px 112px, rgb(70, 139, 151) -113px 113px, rgb(70, 139, 151) -114px 114px, rgb(70, 139, 151) -115px 115px, rgb(70, 139, 151) -116px 116px, rgb(70, 139, 151) -117px 117px, rgb(70, 139, 151) -118px 118px, rgb(70, 139, 151) -119px 119px, rgb(70, 139, 151) -120px 120px, rgb(70, 139, 151) -121px 121px, rgb(70, 139, 151) -122px 122px, rgb(70, 139, 151) -123px 123px, rgb(70, 139, 151) -124px 124px, rgb(70, 139, 151) -125px 125px, rgb(70, 139, 151) -126px 126px, rgb(70, 139, 151) -127px 127px, rgb(70, 139, 151) -128px 128px, rgb(70, 139, 151) -129px 129px, rgb(70, 139, 151) -130px 130px, rgb(70, 139, 151) -131px 131px, rgb(70, 139, 151) -132px 132px, rgb(70, 139, 151) -133px 133px, rgb(70, 139, 151) -134px 134px, rgb(70, 139, 151) -135px 135px, rgb(70, 139, 151) -136px 136px, rgb(70, 139, 151) -137px 137px, rgb(70, 139, 151) -138px 138px, rgb(70, 139, 151) -139px 139px, rgb(70, 139, 151) -140px 140px, rgb(70, 139, 151) -141px 141px, rgb(70, 139, 151) -142px 142px, rgb(70, 139, 151) -143px 143px, rgb(70, 139, 151) -144px 144px, rgb(70, 139, 151) -145px 145px, rgb(70, 139, 151) -146px 146px, rgb(70, 139, 151) -147px 147px, rgb(70, 139, 151) -148px 148px, rgb(70, 139, 151) -149px 149px, rgb(70, 139, 151) -150px 150px, rgb(70, 139, 151) -151px 151px, rgb(70, 139, 151) -152px 152px, rgb(70, 139, 151) -153px 153px, rgb(70, 139, 151) -154px 154px, rgb(70, 139, 151) -155px 155px, rgb(70, 139, 151) -156px 156px, rgb(70, 139, 151) -157px 157px, rgb(70, 139, 151) -158px 158px, rgb(70, 139, 151) -159px 159px, rgb(70, 139, 151) -160px 160px, rgb(70, 139, 151) -161px 161px, rgb(70, 139, 151) -162px 162px, rgb(70, 139, 151) -163px 163px, rgb(70, 139, 151) -164px 164px, rgb(70, 139, 151) -165px 165px, rgb(70, 139, 151) -166px 166px, rgb(70, 139, 151) -167px 167px, rgb(70, 139, 151) -168px 168px, rgb(70, 139, 151) -169px 169px, rgb(70, 139, 151) -170px 170px, rgb(70, 139, 151) -171px 171px, rgb(70, 139, 151) -172px 172px, rgb(70, 139, 151) -173px 173px, rgb(70, 139, 151) -174px 174px, rgb(70, 139, 151) -175px 175px, rgb(70, 139, 151) -176px 176px, rgb(70, 139, 151) -177px 177px, rgb(70, 139, 151) -178px 178px, rgb(70, 139, 151) -179px 179px, rgb(70, 139, 151) -180px 180px, rgb(70, 139, 151) -181px 181px, rgb(70, 139, 151) -182px 182px, rgb(70, 139, 151) -183px 183px, rgb(70, 139, 151) -184px 184px, rgb(70, 139, 151) -185px 185px, rgb(70, 139, 151) -186px 186px, rgb(70, 139, 151) -187px 187px, rgb(70, 139, 151) -188px 188px, rgb(70, 139, 151) -189px 189px, rgb(70, 139, 151) -190px 190px, rgb(70, 139, 151) -191px 191px, rgb(70, 139, 151) -192px 192px, rgb(70, 139, 151) -193px 193px, rgb(70, 139, 151) -194px 194px, rgb(70, 139, 151) -195px 195px, rgb(70, 139, 151) -196px 196px, rgb(70, 139, 151) -197px 197px, rgb(70, 139, 151) -198px 198px, rgb(70, 139, 151) -199px 199px, rgb(70, 139, 151) -200px 200px, rgb(70, 139, 151) -201px 201px, rgb(70, 139, 151) -202px 202px, rgb(70, 139, 151) -203px 203px, rgb(70, 139, 151) -204px 204px, rgb(70, 139, 151) -205px 205px, rgb(70, 139, 151) -206px 206px, rgb(70, 139, 151) -207px 207px, rgb(70, 139, 151) -208px 208px, rgb(70, 139, 151) -209px 209px, rgb(70, 139, 151) -210px 210px, rgb(70, 139, 151) -211px 211px, rgb(70, 139, 151) -212px 212px, rgb(70, 139, 151) -213px 213px, rgb(70, 139, 151) -214px 214px, rgb(70, 139, 151) -215px 215px, rgb(70, 139, 151) -216px 216px, rgb(70, 139, 151) -217px 217px, rgb(70, 139, 151) -218px 218px, rgb(70, 139, 151) -219px 219px, rgb(70, 139, 151) -220px 220px, rgb(70, 139, 151) -221px 221px, rgb(70, 139, 151) -222px 222px, rgb(70, 139, 151) -223px 223px, rgb(70, 139, 151) -224px 224px, rgb(70, 139, 151) -225px 225px, rgb(70, 139, 151) -226px 226px, rgb(70, 139, 151) -227px 227px, rgb(70, 139, 151) -228px 228px, rgb(70, 139, 151) -229px 229px, rgb(70, 139, 151) -230px 230px, rgb(70, 139, 151) -231px 231px, rgb(70, 139, 151) -232px 232px, rgb(70, 139, 151) -233px 233px, rgb(70, 139, 151) -234px 234px, rgb(70, 139, 151) -235px 235px, rgb(70, 139, 151) -236px 236px, rgb(70, 139, 151) -237px 237px, rgb(70, 139, 151) -238px 238px, rgb(70, 139, 151) -239px 239px, rgb(70, 139, 151) -240px 240px, rgb(70, 139, 151) -241px 241px, rgb(70, 139, 151) -242px 242px, rgb(70, 139, 151) -243px 243px, rgb(70, 139, 151) -244px 244px, rgb(70, 139, 151) -245px 245px, rgb(70, 139, 151) -246px 246px, rgb(70, 139, 151) -247px 247px, rgb(70, 139, 151) -248px 248px, rgb(70, 139, 151) -249px 249px, rgb(70, 139, 151) -250px 250px, rgb(70, 139, 151) -251px 251px, rgb(70, 139, 151) -252px 252px, rgb(70, 139, 151) -253px 253px, rgb(70, 139, 151) -254px 254px, rgb(70, 139, 151) -255px 255px, rgb(70, 139, 151) -256px 256px, rgb(70, 139, 151) -257px 257px, rgb(70, 139, 151) -258px 258px, rgb(70, 139, 151) -259px 259px, rgb(70, 139, 151) -260px 260px, rgb(70, 139, 151) -261px 261px, rgb(70, 139, 151) -262px 262px, rgb(70, 139, 151) -263px 263px, rgb(70, 139, 151) -264px 264px, rgb(70, 139, 151) -265px 265px, rgb(70, 139, 151) -266px 266px, rgb(70, 139, 151) -267px 267px, rgb(70, 139, 151) -268px 268px, rgb(70, 139, 151) -269px 269px, rgb(70, 139, 151) -270px 270px, rgb(70, 139, 151) -271px 271px, rgb(70, 139, 151) -272px 272px, rgb(70, 139, 151) -273px 273px, rgb(70, 139, 151) -274px 274px, rgb(70, 139, 151) -275px 275px, rgb(70, 139, 151) -276px 276px, rgb(70, 139, 151) -277px 277px, rgb(70, 139, 151) -278px 278px, rgb(70, 139, 151) -279px 279px, rgb(70, 139, 151) -280px 280px, rgb(70, 139, 151) -281px 281px, rgb(70, 139, 151) -282px 282px, rgb(70, 139, 151) -283px 283px, rgb(70, 139, 151) -284px 284px, rgb(70, 139, 151) -285px 285px, rgb(70, 139, 151) -286px 286px, rgb(70, 139, 151) -287px 287px, rgb(70, 139, 151) -288px 288px, rgb(70, 139, 151) -289px 289px, rgb(70, 139, 151) -290px 290px, rgb(70, 139, 151) -291px 291px, rgb(70, 139, 151) -292px 292px, rgb(70, 139, 151) -293px 293px, rgb(70, 139, 151) -294px 294px, rgb(70, 139, 151) -295px 295px, rgb(70, 139, 151) -296px 296px, rgb(70, 139, 151) -297px 297px, rgb(70, 139, 151) -298px 298px, rgb(70, 139, 151) -299px 299px, rgb(70, 139, 151) -300px 300px, rgb(70, 139, 151) -301px 301px, rgb(70, 139, 151) -302px 302px, rgb(70, 139, 151) -303px 303px, rgb(70, 139, 151) -304px 304px, rgb(70, 139, 151) -305px 305px, rgb(70, 139, 151) -306px 306px, rgb(70, 139, 151) -307px 307px, rgb(70, 139, 151) -308px 308px, rgb(70, 139, 151) -309px 309px, rgb(70, 139, 151) -310px 310px, rgb(70, 139, 151) -311px 311px, rgb(70, 139, 151) -312px 312px, rgb(70, 139, 151) -313px 313px, rgb(70, 139, 151) -314px 314px, rgb(70, 139, 151) -315px 315px, rgb(70, 139, 151) -316px 316px, rgb(70, 139, 151) -317px 317px, rgb(70, 139, 151) -318px 318px, rgb(70, 139, 151) -319px 319px, rgb(70, 139, 151) -320px 320px, rgb(70, 139, 151) -321px 321px, rgb(70, 139, 151) -322px 322px, rgb(70, 139, 151) -323px 323px, rgb(70, 139, 151) -324px 324px, rgb(70, 139, 151) -325px 325px, rgb(70, 139, 151) -326px 326px, rgb(70, 139, 151) -327px 327px, rgb(70, 139, 151) -328px 328px, rgb(70, 139, 151) -329px 329px, rgb(70, 139, 151) -330px 330px, rgb(70, 139, 151) -331px 331px, rgb(70, 139, 151) -332px 332px, rgb(70, 139, 151) -333px 333px, rgb(70, 139, 151) -334px 334px, rgb(70, 139, 151) -335px 335px, rgb(70, 139, 151) -336px 336px, rgb(70, 139, 151) -337px 337px, rgb(70, 139, 151) -338px 338px, rgb(70, 139, 151) -339px 339px, rgb(70, 139, 151) -340px 340px, rgb(70, 139, 151) -341px 341px, rgb(70, 139, 151) -342px 342px, rgb(70, 139, 151) -343px 343px, rgb(70, 139, 151) -344px 344px, rgb(70, 139, 151) -345px 345px, rgb(70, 139, 151) -346px 346px, rgb(70, 139, 151) -347px 347px, rgb(70, 139, 151) -348px 348px, rgb(70, 139, 151) -349px 349px, rgb(70, 139, 151) -350px 350px, rgb(70, 139, 151) -351px 351px, rgb(70, 139, 151) -352px 352px, rgb(70, 139, 151) -353px 353px, rgb(70, 139, 151) -354px 354px, rgb(70, 139, 151) -355px 355px, rgb(70, 139, 151) -356px 356px, rgb(70, 139, 151) -357px 357px, rgb(70, 139, 151) -358px 358px, rgb(70, 139, 151) -359px 359px, rgb(70, 139, 151) -360px 360px, rgb(70, 139, 151) -361px 361px, rgb(70, 139, 151) -362px 362px, rgb(70, 139, 151) -363px 363px, rgb(70, 139, 151) -364px 364px, rgb(70, 139, 151) -365px 365px, rgb(70, 139, 151) -366px 366px, rgb(70, 139, 151) -367px 367px, rgb(70, 139, 151) -368px 368px, rgb(70, 139, 151) -369px 369px, rgb(70, 139, 151) -370px 370px, rgb(70, 139, 151) -371px 371px, rgb(70, 139, 151) -372px 372px, rgb(70, 139, 151) -373px 373px, rgb(70, 139, 151) -374px 374px, rgb(70, 139, 151) -375px 375px, rgb(70, 139, 151) -376px 376px, rgb(70, 139, 151) -377px 377px, rgb(70, 139, 151) -378px 378px, rgb(70, 139, 151) -379px 379px, rgb(70, 139, 151) -380px 380px, rgb(70, 139, 151) -381px 381px, rgb(70, 139, 151) -382px 382px, rgb(70, 139, 151) -383px 383px, rgb(70, 139, 151) -384px 384px, rgb(70, 139, 151) -385px 385px, rgb(70, 139, 151) -386px 386px, rgb(70, 139, 151) -387px 387px, rgb(70, 139, 151) -388px 388px, rgb(70, 139, 151) -389px 389px, rgb(70, 139, 151) -390px 390px, rgb(70, 139, 151) -391px 391px, rgb(70, 139, 151) -392px 392px, rgb(70, 139, 151) -393px 393px, rgb(70, 139, 151) -394px 394px, rgb(70, 139, 151) -395px 395px, rgb(70, 139, 151) -396px 396px, rgb(70, 139, 151) -397px 397px, rgb(70, 139, 151) -398px 398px, rgb(70, 139, 151) -399px 399px, rgb(70, 139, 151) -400px 400px, rgb(70, 139, 151) -401px 401px, rgb(70, 139, 151) -402px 402px, rgb(70, 139, 151) -403px 403px, rgb(70, 139, 151) -404px 404px, rgb(70, 139, 151) -405px 405px, rgb(70, 139, 151) -406px 406px, rgb(70, 139, 151) -407px 407px, rgb(70, 139, 151) -408px 408px, rgb(70, 139, 151) -409px 409px, rgb(70, 139, 151) -410px 410px, rgb(70, 139, 151) -411px 411px, rgb(70, 139, 151) -412px 412px, rgb(70, 139, 151) -413px 413px, rgb(70, 139, 151) -414px 414px, rgb(70, 139, 151) -415px 415px, rgb(70, 139, 151) -416px 416px, rgb(70, 139, 151) -417px 417px, rgb(70, 139, 151) -418px 418px, rgb(70, 139, 151) -419px 419px, rgb(70, 139, 151) -420px 420px, rgb(70, 139, 151) -421px 421px, rgb(70, 139, 151) -422px 422px, rgb(70, 139, 151) -423px 423px, rgb(70, 139, 151) -424px 424px, rgb(70, 139, 151) -425px 425px, rgb(70, 139, 151) -426px 426px, rgb(70, 139, 151) -427px 427px, rgb(70, 139, 151) -428px 428px, rgb(70, 139, 151) -429px 429px, rgb(70, 139, 151) -430px 430px, rgb(70, 139, 151) -431px 431px, rgb(70, 139, 151) -432px 432px, rgb(70, 139, 151) -433px 433px, rgb(70, 139, 151) -434px 434px, rgb(70, 139, 151) -435px 435px, rgb(70, 139, 151) -436px 436px, rgb(70, 139, 151) -437px 437px, rgb(70, 139, 151) -438px 438px, rgb(70, 139, 151) -439px 439px, rgb(70, 139, 151) -440px 440px, rgb(70, 139, 151) -441px 441px, rgb(70, 139, 151) -442px 442px, rgb(70, 139, 151) -443px 443px, rgb(70, 139, 151) -444px 444px, rgb(70, 139, 151) -445px 445px, rgb(70, 139, 151) -446px 446px, rgb(70, 139, 151) -447px 447px, rgb(70, 139, 151) -448px 448px, rgb(70, 139, 151) -449px 449px, rgb(70, 139, 151) -450px 450px, rgb(70, 139, 151) -451px 451px, rgb(70, 139, 151) -452px 452px, rgb(70, 139, 151) -453px 453px, rgb(70, 139, 151) -454px 454px, rgb(70, 139, 151) -455px 455px, rgb(70, 139, 151) -456px 456px, rgb(70, 139, 151) -457px 457px, rgb(70, 139, 151) -458px 458px, rgb(70, 139, 151) -459px 459px, rgb(70, 139, 151) -460px 460px, rgb(70, 139, 151) -461px 461px, rgb(70, 139, 151) -462px 462px, rgb(70, 139, 151) -463px 463px, rgb(70, 139, 151) -464px 464px, rgb(70, 139, 151) -465px 465px, rgb(70, 139, 151) -466px 466px, rgb(70, 139, 151) -467px 467px, rgb(70, 139, 151) -468px 468px, rgb(70, 139, 151) -469px 469px, rgb(70, 139, 151) -470px 470px, rgb(70, 139, 151) -471px 471px, rgb(70, 139, 151) -472px 472px, rgb(70, 139, 151) -473px 473px, rgb(70, 139, 151) -474px 474px, rgb(70, 139, 151) -475px 475px, rgb(70, 139, 151) -476px 476px, rgb(70, 139, 151) -477px 477px, rgb(70, 139, 151) -478px 478px, rgb(70, 139, 151) -479px 479px, rgb(70, 139, 151) -480px 480px, rgb(70, 139, 151) -481px 481px, rgb(70, 139, 151) -482px 482px, rgb(70, 139, 151) -483px 483px, rgb(70, 139, 151) -484px 484px, rgb(70, 139, 151) -485px 485px, rgb(70, 139, 151) -486px 486px, rgb(70, 139, 151) -487px 487px, rgb(70, 139, 151) -488px 488px, rgb(70, 139, 151) -489px 489px, rgb(70, 139, 151) -490px 490px, rgb(70, 139, 151) -491px 491px, rgb(70, 139, 151) -492px 492px, rgb(70, 139, 151) -493px 493px, rgb(70, 139, 151) -494px 494px, rgb(70, 139, 151) -495px 495px, rgb(70, 139, 151) -496px 496px, rgb(70, 139, 151) -497px 497px, rgb(70, 139, 151) -498px 498px, rgb(70, 139, 151) -499px 499px, rgba(0, 0, 0, 0.4) -10px 0px 15px, rgba(0, 0, 0, 0.4) -20px 10px 15px, rgba(0, 0, 0, 0.4) -30px 20px 15px, rgba(0, 0, 0, 0.4) -40px 30px 15px, rgba(0, 0, 0, 0.4) -50px 40px 15px, rgba(0, 0, 0, 0.4) -60px 50px 15px, rgba(0, 0, 0, 0.4) -70px 60px 15px, rgba(0, 0, 0, 0.4) -80px 70px 15px, rgba(0, 0, 0, 0.4) -90px 80px 15px, rgba(0, 0, 0, 0.4) -100px 90px 15px, rgba(0, 0, 0, 0.4) -110px 100px 15px, rgba(0, 0, 0, 0.4) -120px 110px 15px, rgba(0, 0, 0, 0.4) -130px 120px 15px, rgba(0, 0, 0, 0.4) -140px 130px 15px, rgba(0, 0, 0, 0.4) -150px 140px 15px, rgba(0, 0, 0, 0.4) -160px 150px 15px, rgba(0, 0, 0, 0.4) -170px 160px 15px, rgba(0, 0, 0, 0.4) -180px 170px 15px, rgba(0, 0, 0, 0.4) -190px 180px 15px, rgba(0, 0, 0, 0.4) -200px 190px 15px, rgba(0, 0, 0, 0.4) -210px 200px 15px, rgba(0, 0, 0, 0.4) -220px 210px 15px, rgba(0, 0, 0, 0.4) -230px 220px 15px, rgba(0, 0, 0, 0.4) -240px 230px 15px, rgba(0, 0, 0, 0.4) -250px 240px 15px, rgba(0, 0, 0, 0.4) -260px 250px 15px, rgba(0, 0, 0, 0.4) -270px 260px 15px, rgba(0, 0, 0, 0.4) -280px 270px 15px, rgba(0, 0, 0, 0.4) -290px 280px 15px, rgba(0, 0, 0, 0.4) -300px 290px 15px, rgba(0, 0, 0, 0.4) -310px 300px 15px, rgba(0, 0, 0, 0.4) -320px 310px 15px, rgba(0, 0, 0, 0.4) -330px 320px 15px, rgba(0, 0, 0, 0.4) -340px 330px 15px, rgba(0, 0, 0, 0.4) -350px 340px 15px, rgba(0, 0, 0, 0.4) -360px 350px 15px, rgba(0, 0, 0, 0.4) -370px 360px 15px, rgba(0, 0, 0, 0.4) -380px 370px 15px, rgba(0, 0, 0, 0.4) -390px 380px 15px, rgba(0, 0, 0, 0.4) -400px 390px 15px, rgba(0, 0, 0, 0.4) -410px 400px 15px, rgba(0, 0, 0, 0.4) -420px 410px 15px, rgba(0, 0, 0, 0.4) -430px 420px 15px, rgba(0, 0, 0, 0.4) -440px 430px 15px, rgba(0, 0, 0, 0.4) -450px 440px 15px, rgba(0, 0, 0, 0.4) -460px 450px 15px, rgba(0, 0, 0, 0.4) -470px 460px 15px, rgba(0, 0, 0, 0.4) -480px 470px 15px, rgba(0, 0, 0, 0.4) -490px 480px 15px, rgba(0, 0, 0, 0.4) -500px 490px 15px
-}
 
                 .ui-datepicker .ui-state-disabled {
                     color: #b0b0b0; /* Gray color */
@@ -366,11 +197,11 @@ svg {
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
         
             <div class="row mt-4">
-                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: white; width: 100vw;">
+                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: black; width: 100vw;">
                     <!-- Centered Title -->
                     <div id="text-container">
                         <div id="line-one">
-                            <h1 class="display-3 mb-4">LUXURY</h1>
+                            <h1 class="display-3 mb-4" style="color:white;">LUXURY</h1>
                         </div>
                     </div>
 
@@ -523,10 +354,10 @@ svg {
         <!-- Mid Range Section -->
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
             <div class="row mt-4">
-                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: white; width: 100vw;">
+                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: black; width: 100vw;">
                     <div id="text-container">
                         <div id="line-one">
-                            <h1 class="display-3">Mid Range</h1>
+                            <h1 class="display-3" style="color: white;">Mid Range</h1>
                         </div>
                     </div>
                 </div>
@@ -689,10 +520,10 @@ svg {
        <!-- Economy Section -->
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
             <div class="row mt-4">
-                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: white; width: 100vw;">
+                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: black; width: 100vw;">
                     <div id="text-container">
                         <div id="line-one">
-                            <h1 class="display-3">Economy</h1>
+                            <h1 class="display-3" style="color: white;">Economy</h1>
                         </div>
                     </div>
                 </div>
@@ -854,10 +685,10 @@ svg {
         <!-- Sport Section -->
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
             <div class="row mt-4">
-                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: white; width: 100vw;">
+                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: black; width: 100vw;">
                     <div id="text-container">
                         <div id="line-one">
-                            <h1 class="display-3">
+                            <h1 class="display-3" style="color: white;">
                                 Sports and Exotics
                             </h1>
                         </div>
@@ -1021,10 +852,10 @@ svg {
 
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
             <div class="row mt-4">
-                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: white; width: 100vw;">
+                <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: black; width: 100vw;">
                     <div id="text-container" class="mt-4 mb-4">
                         <div id="line-one">
-                            <h1 class="display-3">
+                            <h1 class="display-3" style="color: white;">
                                 Vans and Buses
                             </h1>
                         </div>
@@ -1048,7 +879,7 @@ svg {
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
                                     <span style="background-color: blue;">
-                                        Buses
+                                    Bases
                                     </span>
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
@@ -1192,15 +1023,7 @@ svg {
 <section class="py-5 mt-5">
     <div class="container text-center">
         <!-- Section Title -->
-        <!-- <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">RENT ANY CAR YOU LIKE</h2> -->
-        <div class="d-flex align-items-center justify-content-center bg-white">
-    <h1 class="display-3 text-center">
-        Discover, <span class="text-primary">Our</span> Cars Collection 
-        <span class="text-secondary">Right NOW</span>
-    </h1>
-</div>
-
-        
+        <h2 id="line-three" class="display-4 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">RENT ANY CAR YOU LIKE</h2>
 
         <!-- Tab Navigation for Smaller Screens -->
         <ul class="nav nav-pills justify-content-center mb-4" id="carTabs" role="tablist">
@@ -1270,16 +1093,9 @@ svg {
 
 <!--Instagram-->
 <section class="instagram-posts-section py-5 my-5">
-            <div class="container text-center">
-            <div class="lightning">
-                <div class="noisy">
-                    Instagram
-                </div>
-                <div class="noisy">
-                    Posts
-                </div>
-            </div>        
-<div class="row">
+    <div class="container text-center">
+        <h2 class="display-4 mb-4">Latest Instagram Posts</h2>
+        <div class="row">
             <!-- Instagram Post 1 -->
             <div class="col-md-4 mb-4">
                 <blockquote class="instagram-media" data-instgrm data-instgrm-permalink="https://www.instagram.com/p/DBwY8JEtjN3/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
