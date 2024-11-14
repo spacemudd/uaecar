@@ -1193,10 +1193,13 @@ svg {
     <div class="container text-center">
         <!-- Section Title -->
         <!-- <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">RENT ANY CAR YOU LIKE</h2> -->
-        <div class="rent-your-car">
-            <h1 class="title-one">Discover, <span class="underlined underline-clip">Our</span>Cars Collection <span class="underlined underline-mask">Right NOW</span>
-            </h1>
-        </div>
+        <div class="d-flex align-items-center justify-content-center bg-white">
+    <h1 class="display-3 text-center">
+        Discover, <span class="text-primary">Our</span> Cars Collection 
+        <span class="text-secondary">Right NOW</span>
+    </h1>
+</div>
+
         
 
         <!-- Tab Navigation for Smaller Screens -->
