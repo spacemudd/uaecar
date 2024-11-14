@@ -6,6 +6,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
 <script async src="//www.instagram.com/embed.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
 
 
 <style>
@@ -268,12 +273,15 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12">
                                                     <label>Car Name</label>
-                                                    <input name="carName" type="text" class="form-control" value="{{ $car->car_name }}" readonly>
+                                                    <input name="carName" type="text" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <label>Car ID</label>
                                                     <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
                                                 </div>
+                                                <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
+                                                <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
+
                                                 <div class="col-lg-6 col-md-12">
                                                     <input name="name" type="text" placeholder="Full Name *" required>
                                                 </div>
@@ -298,20 +306,22 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="input1_wrapper">
-                                                        <label>Pick Up Date</label>
+                                                        <label>Pick Up Date and Time</label>
                                                         <div class="input1_inner">
-                                                            <input name="pickup_date" type="text" class="form-control input datepicker" placeholder="Pick Up Date">
+                                                            <input id="pickup_date" name="pickup_date" type="text" class="form-control input" placeholder="Pick Up Date and Time" required>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="input1_wrapper">
-                                                        <label>Return Date</label>
+                                                        <label>Return Date and Time</label>
                                                         <div class="input1_inner">
-                                                            <input name="return_date" type="text" class="form-control input datepicker" placeholder="Return Date">
+                                                            <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Date and Time" required>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-12 col-md-12 form-group">
                                                     <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
                                                 </div>
@@ -438,12 +448,15 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12">
                                                     <label>Car Name</label>
-                                                    <input name="carName" type="text" class="form-control" value="{{ $car->car_name }}" readonly>
+                                                    <input name="carName" type="text" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <label>Car ID</label>
                                                     <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
                                                 </div>
+                                                <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
+                                                <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
+
                                                 <div class="col-lg-6 col-md-12">
                                                     <input name="name" type="text" placeholder="Full Name *" required>
                                                 </div>
@@ -468,17 +481,18 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="input1_wrapper">
-                                                        <label>Pick Up Date</label>
+                                                        <label>Pick Up Date and Time</label>
                                                         <div class="input1_inner">
-                                                            <input name="pickup_date" type="text" class="form-control input datepicker" placeholder="Pick Up Date" required>
+                                                            <input id="pickup_date" name="pickup_date" type="text" class="form-control input" placeholder="Pick Up Date and Time" required>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="input1_wrapper">
-                                                        <label>Return Date</label>
+                                                        <label>Return Up Date and Time</label>
                                                         <div class="input1_inner">
-                                                            <input name="return_date" type="text" class="form-control input datepicker" placeholder="Return Date">
+                                                            <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Up Date and Time" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -502,9 +516,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 @endif
             @endforeach
         </div>
@@ -709,5 +720,24 @@
 
 </script>
 
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#pickup_date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:S", // Sets the format to match the API requirement
+            time_24hr: true,
+            minDate: "today",
+        });
+
+        flatpickr("#return_date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:S",
+            time_24hr: true,
+            minDate: "today",
+        });
+    });
+</script>
 
 @endsection
