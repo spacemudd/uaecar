@@ -76,7 +76,6 @@ Route::get('/appointments/success', [AppointmentsController::class, 'success'])-
 Route::post('/appointments', [AppointmentsController::class, 'store'])->name('appointments.store');
 Route::get('/appointments/create', [AppointmentsController::class, 'create'])->name('appointments.create');
 
-Route::get('sell-your-car', [SellYourCarController::class, 'index'])->name('sell-your-car.index');
 // Route::post('sell-your-car', [SellYourCarController::class, 'store'])->name('sell-your-car.store');
 
 // TODO
