@@ -879,174 +879,170 @@
         </section>
 
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto">
-        <div class="row">
-                <div class="col-12 text-center" style="background-color: white; width: 100vw;">
-                <div id="text-container">
+    <div class="row">
+        <div class="col-12 text-center" style="background-color: white; width: 100vw;">
+            <div id="text-container" class="mt-4 mb-4"> <!-- Added margin-top and margin-bottom for spacing -->
                 <div id="line-one">
                     <h1 class="display-3">
-                    
                         Vans and Buses
-
-                    </h1< />
-                </div>
-                </div>
+                    </h1>
                 </div>
             </div>
-            <div class="row gy-2">
-                @foreach($cars as $car)
-                @if(strtolower($car->categories) == 'vans and buses') <!-- Check if category is 'economy' or 'premium' -->
-                    <!-- Car Card -->
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
-                            <div class="card3 w-100">
-                                <span class="px-4 py-3" style="display: inline-block;">
-                                    <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
-                                    <br>
-                                    <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
-                                </span>
-                                <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
-                                    <span>{{ $car->seats . ' Seats' }}</span>
-                                    <span>{{ $car->doors . ' Doors' }}</span>
-                                    <span>Automatic</span>
-                                    <span style="background-color: blue;">
-                                        {{ $car->categories }}
-                                    </span>
-                                </div>
-                                <a href="{{ route('cars.show', $car->id) }}">
+        </div>
+    </div>
 
-                                <div>
-                                    <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture">
-                                </div>
-                                </a>
-                                <div class="row mb-5 gx-2 justify-content-center">
-                                    <div class="col-4">
-                                        <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Daily</h4>
-                                        <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_daily }} <span>AED</span></h6>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Weekly</h4>
-                                        <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_weekly }} <span>AED</span></h6>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Monthly</h4>
-                                        <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_monthly }} <span>AED</span></h6>
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-6">
-                                        <div class="mb-3 d-flex justify-content-start">
-                                            <button class="btn text-center my-2" style="background-color: #949494; color: white; font-family: 'Calisto MT', serif;" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
-                                                Book Now
-                                            </button>
-                                        </div>
-                                    </div>
-                                        <div class="col-6 position-relative">
-                                            <div class="mb-3">
-                                                <!-- WhatsApp Icon as a clickable link -->
-                                                <a href="https://wa.me/971542700030?text=Hi!%20I%20am%20interested%20in%20this%20car.%20Here%20is%20the%20link%20to%20the%20car:%20{{ route('cars.show', ['id' => $car->id]) }}%20and%20here%20is%20the%20image%20of%20the%20car:%20{{ asset('path/to/car-image.jpg') }}" target="_blank" class="position-absolute bottom-0 end-0 mb-4 me-3">
-                                                    <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i> <!-- Larger WhatsApp icon -->
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="row gy-2 mt-4"> <!-- Added margin-top to space the cards from the heading -->
+        @foreach($cars as $car)
+            @if(strtolower($car->categories) == 'vans and buses')
+                <!-- Car Card -->
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
+                    <div class="card3 w-100">
+                        <span class="px-4 py-3" style="display: inline-block;">
+                            <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
+                            <br>
+                            <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
+                        </span>
+                        <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
+                            <span>{{ $car->seats . ' Seats' }}</span>
+                            <span>{{ $car->doors . ' Doors' }}</span>
+                            <span>Automatic</span>
+                            <span style="background-color: blue;">
+                                {{ $car->categories }}
+                            </span>
                         </div>
-                    <!-- Booking Modal -->
-                    <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="bookingModalLabel{{ $car->id }}">Booking Form for {{ $car->car_name }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="booking-box">
-                                        <div class="booking-inner clearfix">
-                                            <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix" id="bookingForm">
-                                                @csrf
-                                                <input type="hidden" name="car_id" value="{{ $car->id }}">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <label>Car Name</label>
-                                                        <input name="carName" type="text" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <label>Car ID</label>
-                                                        <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
-                                                    </div>
-                                                    <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
-                                                    <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
+                        <a href="{{ route('cars.show', $car->id) }}">
+                            <div>
+                                <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture">
+                            </div>
+                        </a>
+                        <div class="row mb-5 gx-2 justify-content-center">
+                            <div class="col-4">
+                                <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Daily</h4>
+                                <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_daily }} <span>AED</span></h6>
+                            </div>
 
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <input name="name" type="text" placeholder="Full Name *" required>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <input name="email" type="email" placeholder="Email *" required>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <input name="phone" type="text" placeholder="Phone *" required>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <div class="select1_wrapper">
-                                                            <label>Pick Up Location</label>
-                                                            <div class="select1_inner">
-                                                                <select name="pickup_city" class="select2 select" style="width: 100%" required>
-                                                                    <option value="" disabled selected>Select a City</option>
-                                                                    <option value="Dubai">Dubai</option>
-                                                                    <option value="Sharjah">Sharjah</option>
-                                                                    <option value="Alain">Alain</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <div class="input1_wrapper">
-                                                            <label>Pick Up Date and Time</label>
-                                                            <div class="input1_inner">
-                                                                <input id="pickup_date" name="pickup_date" type="text" class="form-control input" placeholder="Pick Up Date and Time" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                            <div class="col-4">
+                                <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Weekly</h4>
+                                <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_weekly }} <span>AED</span></h6>
+                            </div>
 
-                                                    <div class="col-lg-6 col-md-12">
-                                                        <div class="input1_wrapper">
-                                                            <label>Return Up Date and Time</label>
-                                                            <div class="input1_inner">
-                                                                <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Up Date and Time" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12 form-group">
-                                                        <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <button type="submit" class="booking-button mt-15">Rent Now</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                            <div class="col-4">
+                                <h4 class="text-center text-white" style="font-family: 'Calisto MT', serif; font-size:medium;">Monthly</h4>
+                                <h6 class="text-center text-white fw-bold" style="font-family: 'Calisto MT', serif; font-size:large;">{{ $car->price_monthly }} <span>AED</span></h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3 d-flex justify-content-start">
+                                        <button class="btn text-center my-2" style="background-color: #949494; color: white; font-family: 'Calisto MT', serif;" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}">
+                                            Book Now
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div class="col-6 position-relative">
+                                    <div class="mb-3">
+                                        <!-- WhatsApp Icon as a clickable link -->
+                                        <a href="https://wa.me/971542700030?text=Hi!%20I%20am%20interested%20in%20this%20car.%20Here%20is%20the%20link%20to%20the%20car:%20{{ route('cars.show', ['id' => $car->id]) }}%20and%20here%20is%20the%20image%20of%20the%20car:%20{{ asset('path/to/car-image.jpg') }}" target="_blank" class="position-absolute bottom-0 end-0 mb-4 me-3">
+                                            <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i> <!-- Larger WhatsApp icon -->
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endif
-                @endforeach
-            </div>
-        </div>
-        </section>
+                </div>
+                <!-- Booking Modal -->
+                <div class="modal fade" id="bookingModal{{ $car->id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ $car->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="bookingModalLabel{{ $car->id }}">Booking Form for {{ $car->car_name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="booking-box">
+                                    <div class="booking-inner clearfix">
+                                        <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix" id="bookingForm">
+                                            @csrf
+                                            <input type="hidden" name="car_id" value="{{ $car->id }}">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label>Car Name</label>
+                                                    <input name="carName" type="text" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label>Car ID</label>
+                                                    <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
+                                                </div>
+                                                <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
+                                                <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
+
+                                                <div class="col-lg-6 col-md-12">
+                                                    <input name="name" type="text" placeholder="Full Name *" required>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <input name="email" type="email" placeholder="Email *" required>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <input name="phone" type="text" placeholder="Phone *" required>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="select1_wrapper">
+                                                        <label>Pick Up Location</label>
+                                                        <div class="select1_inner">
+                                                            <select name="pickup_city" class="select2 select" style="width: 100%" required>
+                                                                <option value="" disabled selected>Select a City</option>
+                                                                <option value="Dubai">Dubai</option>
+                                                                <option value="Sharjah">Sharjah</option>
+                                                                <option value="Alain">Alain</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="input1_wrapper">
+                                                        <label>Pick Up Date and Time</label>
+                                                        <div class="input1_inner">
+                                                            <input id="pickup_date" name="pickup_date" type="text" class="form-control input" placeholder="Pick Up Date and Time" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="input1_wrapper">
+                                                        <label>Return Up Date and Time</label>
+                                                        <div class="input1_inner">
+                                                            <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Up Date and Time" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <label>Additional Comments</label>
+                                                    <textarea class="form-control" name="message" rows="6" placeholder="Leave a Message"></textarea>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div class="submitBtn">
+                                                        <button type="submit" class="submit1">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+</section>
+
 
 <!-- New Section with Centered Title and Clickable Labels -->
 <section class="py-5 mt-5">
