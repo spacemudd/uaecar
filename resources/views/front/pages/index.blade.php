@@ -386,10 +386,7 @@
                                     <span>{{ $car->seats . ' Seats' }}</span>
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
-                                    <span style="background-color: 
-                                        {{ strtolower($car->categories) === 'premium' ? 'orange' : (strtolower($car->categories) === 'economy' ? 'black' : 'transparent') }}; 
-                                        color: 
-                                        {{ strtolower($car->categories) === 'economy' ? 'white' : 'black' }};">
+                                    <span style="background-color: green;">
                                         {{ $car->categories }}
                                     </span>
                                 </div>
