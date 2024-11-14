@@ -54,7 +54,7 @@
     padding: calc(var(--size) * 0.8vmin) calc(var(--size) * 1.6vmin);
 
     transform: skew(calc(var(--skew) * -1deg), calc(var(--skew) * -1deg));
-    font-size: calc(var(--size) * 3vmax);
+    font-size: calc(var(--size) * 2vmax);
     font-weight: 700;
     color: Crimson;
 
