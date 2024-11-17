@@ -469,7 +469,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <label>Car ID</label>
-                                                    <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
+                                                    <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonWebCarly>
                                                 </div>
                                                 <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
                                                 <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
@@ -991,6 +991,7 @@
                                                 </div>
                                                 <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
                                                 <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
+
 
                                                 <div class="col-lg-6 col-md-12">
                                                     <input name="name" type="text" placeholder="Full Name *" required>

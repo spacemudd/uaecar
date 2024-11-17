@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Stripe\StripeClient;
+use App\Models\Car;
 
 class StripeController extends Controller
 {
@@ -20,16 +21,43 @@ class StripeController extends Controller
     }
     
 
-    public function pay(Request $request)
+    public function pay($car_id, $rate_daily, $days, $total, $pickup_date, $return_date)
     {
-        $carName = $request->input('car_name');
-        $totalPrice = $request->input('total_price');
-        $priceDaily = $request->input('price_daily');
-        $pickupDate = $request->input('pickup_date');
-        $returnDate = $request->input('return_date');
+        // استرجاع السيارة باستخدام car_id
+        $car = Car::find($car_id);
+
+        // Stripe payment logic
+        $session = $this->stripe->checkout->sessions->create([
+            'mode' => 'payment',
+            'success_url' => 'http://127.0.0.1:8000/success',
+            'cancel_url' => 'http://127.0.0.1:8000/cancel',
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'AED',
+                        'product_data' => [
+                            'name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
+                        ],
+                        'unit_amount' => $total * 100, // Stripe expects amount in cents
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+            'metadata' => [
+                // 'car_id' => $car->id,
+                // 'pickup_location' => $pickup_location,
+                // 'return_location' => $return_location,
+                // 'customer_name' => $customer_name,
+                // 'customer_email' => $customer_email,
+                'pickup_date' => $pickup_date,
+                'return_date' => $return_date,
+                'days' => $days,
+                // 'status' => $status,
+            ],
+        ]);
+        
     
-        // Use this data to display the car information on the payment page or process payment logic
-        return view('payment', compact('carName', 'totalPrice', 'priceDaily', 'pickupDate', 'returnDate'));
+        return redirect($session->url);
     }
     
 }

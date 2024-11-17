@@ -18,6 +18,7 @@ use App\Http\Controllers\back\adminDashboardController;
 use App\Http\Controllers\back\BookingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StripeController;
 use App\Models\Car;
 use App\Services\AutoTraderService;
@@ -68,6 +69,7 @@ Route::get('/home', [indexController::class, 'showVisibleCars'])->name('index');
 
 Route::get('/contact-us', [CompanyController::class, 'showContact'])->name('contact');
 Route::get('/car/{id}', [CarController::class, 'show'])->name('cars.show');
+
 Route::post('form/submit', [FormController::class, 'submit'])->name('form.submit');
 Route::post('form/contact', [FormController::class, 'sendContactEmail'])->name('form.contact');
 Route::get('/submission-status', [FormController::class, 'submissionStatus'])->name('submission.status');
@@ -167,6 +169,14 @@ Route::get('/premium', [CategoryController::class, 'showPremium'])->name('premiu
 Route::get('/economy', [CategoryController::class, 'showEconomy'])->name('economy.page');
 
 
-Route::get('/stripe/payment', [StripeController::class, 'pay'])->name('stripe.payment');
+// Route to handle Stripe payment
+Route::get('/stripe/payment/{car}/{rate_daily}/{days}/{total}/{pickup_date}/{return_date}', [StripeController::class, 'pay'])->name('stripe.payment');
+
 // POST route to handle the form submission
 // Route::post('/stripe/payment', [StripeController::class, 'pay'])->name('test');
+
+Route::get('/payment', function(){
+    return view('front.pages.payment');
+});
+
+Route::get('/payment/{id}', [PaymentController::class, 'show'])->name('cars.checkout');
