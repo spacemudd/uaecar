@@ -13,10 +13,17 @@ class FormController extends Controller
 {
     public function submit(Request $request)
     {
+        // استخراج رقم اللوحة من الطلب
         $plateNumber = $request->input('plate_number');
         $plateNumber = preg_replace('/^[A-B]-/', '', $plateNumber);
+    
+        // الحصول على التوكن من الذاكرة المؤقتة
         $token = $this->getAuthToken();
+    
+        // الحصول على تفاصيل السيارة عبر رقم اللوحة
         $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
+    
+        // التحقق من حالة السيارة
         return $this->respondCarStatus($car, $plateNumber, $request);
     }
     
@@ -79,30 +86,23 @@ class FormController extends Controller
         }
     
         if ($car['status'] === 'Available') {
-            // Get the daily price and the number of days selected by the user
-            $priceDaily = $request->input('price_daily');  // Price per day
-            $pickupDate = $request->input('pickup_date');  // Pickup date
-            $returnDate = $request->input('return_date');  // Return date
-    
-            // Calculate the number of days
-            $pickup = \Carbon\Carbon::parse($pickupDate);
-            $return = \Carbon\Carbon::parse($returnDate);
-            $daysDifference = $pickup->diffInDays($return); // Get the number of days between pickup and return
-    
-            // Calculate total price
-            $totalPrice = $priceDaily * $daysDifference;
-    
-            // Get car details to pass to payment page
-            $carName = $request->input('carName'); 
-    
-            // Return payment link directly with car details
-            return redirect()->route('stripe.payment', [
-                'total_price' => $totalPrice,
-                'car_name' => $carName,
-                'price_daily' => $priceDaily,
-                'pickup_date' => $pickupDate,
-                'return_date' => $returnDate
+            // تخزين بيانات الريكوست في الجلسة
+            session([
+                'pickup_date' => $request->input('pickup_date'),  // Get from request
+                'return_date' => $request->input('return_date'),  // Get from request
+                'rate_daily' => $request->input('price_daily'),  // Get from request
+                'pickup_location' => '71',  // Static value
+                'return_location' => '71',  // Static value
+                'status' => 'pending_updates',  // Static value or dynamic from car
+                'vehicle_hint' => $request->input('carName'),  // Get from request
+                'customer_name' => $request->input('name'),  // Get from request
+                'customer_mobile' => $request->input('phone'),  // Get from request
+                'customer_email' => $request->input('email'),  // Get from request
+                'car_id' => $request->input('car_id'),  // Store car_id for later use
             ]);
+            
+            // إعادة التوجيه إلى صفحة عرض تفاصيل السيارة (مسار cars.checkout)
+            return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
     
         return response()->json([
@@ -110,6 +110,8 @@ class FormController extends Controller
             'message' => 'Car is not available for booking at the moment.'
         ]);
     }
+    
+    
 
 
     private function reserveCar($car, $request, $token)
