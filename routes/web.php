@@ -64,6 +64,8 @@ use App\Mail\TestEmail; // Make sure you have created the TestEmail Mailable
 
 // Public Routes
 Route::get('/', [indexController::class, 'showVisibleCars'])->name('index');
+Route::get('/home', [indexController::class, 'showVisibleCars'])->name('index');
+
 Route::get('/contact-us', [CompanyController::class, 'showContact'])->name('contact');
 Route::get('/car/{id}', [CarController::class, 'show'])->name('cars.show');
 Route::post('form/submit', [FormController::class, 'submit'])->name('form.submit');
