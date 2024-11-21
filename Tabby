@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e8f7ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header img {
+      max-width: 150px;
+    }
+
+    .section-title {
+      background: #e1eff7;
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .booking-summary {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .car-info img {
+      max-width: 150px;
+      border-radius: 4px;
+    }
+
+    .car-details {
+      flex: 1;
+    }
+
+    .price-includes, .additional-info, .payment-details {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      list-style-type: none;
+      margin-bottom: 10px;
+    }
+
+    .price-section {
+      text-align: right;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .note {
+      background: #ffe4c4;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .security {
+      background: #e1eff7;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .payment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+    
+  <div class="container">
+    <div class="header">
+      <img src="budget-logo.png" alt="Budget Logo">
+    </div>
+
+    <div class="section-title">Your Booking Summary</div>
+
+    <div class="booking-summary">
+      <div class="car-info">
+        <img src="car-placeholder.png" alt="Car Image">
+      </div>
+      <div class="car-details">
+        <p><strong>Hyundai Accent or similar</strong></p>
+        <p>Group C</p>
+        <p>People: 5 | Doors: 4 | Luggage: 3</p>
+        <p>Air-Con: Yes | Gearbox: Automatic | GPS: No</p>
+      </div>
+    </div>
+
+    <div class="price-includes">
+      <h4>Price Includes:</h4>
+      <ul>
+        <li>✔ 500 km</li>
+        <li>✔ Airport/city surcharge</li>
+        <li>✔ Local Tax</li>
+        <li>✔ Vehicle Registration Fee</li>
+        <li>✔ Theft Protection</li>
+        <li>✔ Collision Damage Waiver</li>
+      </ul>
+    </div>
+
+    <div class="additional-info">
+      <h4>Additional Information:</h4>
+      <p>Price for additional kilometers/miles: 0.47 SAR/km.</p>
+      <p>You must be at least 21 years old to rent this vehicle.</p>
+      <p>Damage Excess: 2,875.00 SAR</p>
+      <p>Theft Protection Excess: 2,875.00 SAR</p>
+    </div>
+
+    <div class="price-section">
+      Total: <span>$97.60</span>
+    </div>
+
+    <div class="note">
+      Please note: The credit card used to pay must be shown at the rental counter.
+    </div>
+
+    <div class="security">
+      <p>Security: Budget takes data security seriously and we use secure socket layer (SSL) encryption within our booking process. Your card data will now be sent encrypted with "Norton Secured."</p>
+    </div>
+
+    <div class="payment-form">
+      <label for="card-type">Card Type</label>
+      <select id="card-type">
+        <option>VISA</option>
+        <option>MasterCard</option>
+      </select>
+
+      <label for="name-on-card">Name on Card</label>
+      <input type="text" id="name-on-card">
+
+      <label for="card-number">Card Number</label>
+      <input type="text" id="card-number">
+
+      <label for="expiry-date">Card Expiry Date</label>
+      <input type="month" id="expiry-date">
+
+      <label for="security-number">Security Number</label>
+      <input type="text" id="security-number">
+
+      <button>Confirm Your Booking and Pay Now</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; Budget &middot; 2022
+  </footer>
+</body>
+
+</html>

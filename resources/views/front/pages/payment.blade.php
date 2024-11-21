@@ -1,353 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="{{ asset('front/css/plugins.css') }}" />
+<link rel="stylesheet" href="{{ asset('front/css/pstyle.css') }}" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Work+Sans:wght@800&display=swap');
 
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            padding: 15px;
-            background-color: white;
-        }
 
-        .container {
-            margin: 20px auto;
-            max-width: 1000px;
-            background-color: white;
-            padding: 0;
-        }
+<div class="mx-auto text-center" style="max-width: 500px;">
+        <img class="col-xxl-12 mx-auto" src="{{ asset('front/img/black.png') }}">
+        </div>
 
-        .form-control {
-            height: 25px;
-            width: 150px;
-            border: none;
-            border-radius: 0;
-            font-weight: 800;
-            padding: 0 0 5px 0;
-            background-color: transparent;
-            box-shadow: none;
-            outline: none;
-            border-bottom: 2px solid #ccc;
-            margin: 0;
-            font-size: 14px;
-        }
+  <section class="content">
 
-        .form-control:focus {
-            box-shadow: none;
-            border-bottom: 2px solid #ccc;
-            background-color: transparent;
-        }
+    <div class="image-logo" style="max-width: 500px; min-height: 200px; margin-left: auto; margin-right: auto; border-radius: 8px; display: flex; flex-direction: column; position: relatie;">
+    <img class="col-sm-lg-xs-6 col-xxl-12" src="{{ asset('storage/' . $car->car_picture) }}">
 
-        .form-control2 {
-            font-size: 14px;
-            height: 20px;
-            width: 55px;
-            border: none;
-            border-radius: 0;
-            font-weight: 800;
-            padding: 0 0 5px 0;
-            background-color: transparent;
-            box-shadow: none;
-            outline: none;
-            border-bottom: 2px solid #ccc;
-            margin: 0;
-        }
-
-        .form-control2:focus {
-            box-shadow: none;
-            border-bottom: 2px solid #ccc;
-            background-color: transparent;
-        }
-
-        .form-control3 {
-            font-size: 14px;
-            height: 20px;
-            width: 30px;
-            border: none;
-            border-radius: 0;
-            font-weight: 800;
-            padding: 0 0 5px 0;
-            background-color: transparent;
-            box-shadow: none;
-            outline: none;
-            border-bottom: 2px solid #ccc;
-            margin: 0;
-        }
-
-        .form-control3:focus {
-            box-shadow: none;
-            border-bottom: 2px solid #ccc;
-            background-color: transparent;
-        }
-
-        p {
-            margin: 0;
-        }
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-        }
-
-        .text-muted {
-            font-size: 10px;
-        }
-
-        .textmuted {
-            color: #6c757d;
-            font-size: 13px;
-        }
-
-        .fs-14 {
-            font-size: 14px;
-        }
-
-        .btn.btn-primary {
-            width: 100%;
-            height: 55px;
-            border-radius: 0;
-            padding: 13px 0;
-            background-color: black;
-            border: none;
-            font-weight: 600;
-        }
-
-        .btn.btn-primary:hover .fas {
-            transform: translateX(10px);
-            transition: transform 0.5s ease
-        }
-
-        .fw-900 {
-            font-weight: 900;
-        }
-
-        ::placeholder {
-            font-size: 12px;
-        }
-
-        .ps-30 {
-            padding-left: 30px;
-        }
-
-        .h4 {
-            font-family: 'Work Sans', sans-serif !important;
-            font-weight: 800 !important;
-        }
-
-        .textmuted,
-        h5,
-        .text-muted {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .payment-option {
-            cursor: pointer;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            transition: background-color 0.3s;
-        }
-
-        .payment-option:hover {
-            background-color: #f7f7f7;
-        }
-        .visa-icon {
-            font-size: 20px;
-            color: #1A1F71; /* Visa Blue */
-        }
-
-        .mastercard-icon {
-            font-size: 20px;
-            color: #FF5F00; /* MasterCard Red/Orange */
-        }
-        .custom-navbar .logo img {
-            max-height: 20px; /* Adjust the logo size if needed */
-        }
-        .container{
-            max-height: 20px;
-        }
-        .logo{
-            width: 304px;
-            height: auto;
-        }
-
-    </style>
-</head>
-
-<header class="d-flex align-items-center">
-    <div class="container-fluid ">
-        <a href="#" class="d-block">
-            <img src="{{ asset('front/img/black.png') }}" alt="Logo" class="img-fluid" style="max-height: 100px; max-width: 300px;">
-        </a>
     </div>
-</header>
-
-
-<body>
-
-
 
 
     <div class="container">
-        <div class="row m-0">
-            <div class="col-lg-7 pb-5 pe-lg-5">
-                <div class="row">
-                    <div class="col-12 p-5">
-                        <img src="{{asset('storage/' . $car->car_picture)}}"
-                            alt="">
+      <div class="payment">
+      <div class="payment__shipping">
+    <div class="payment__title-car fs-1">
+        <i class="icon icon-car"></i> {{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}
+    </div>
+    <div class="details__user">
+        <div class="user__name">
+            <ul class="list-unstyled" style="padding-left: 20px; width:1000px">
+                <li class="row">
+                    <div class="col-md-3" style="white-space: nowrap; padding-right: 100px;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> Free Shipping
                     </div>
-                    <div class="row m-0 bg-light">
-                        <div class="col-md-4 col-6 ps-30 pe-0 my-4">
-                            <p class="text-muted">Seats</p>
-                            <p class="h5">{{ $car->seats }}<span class="ps-1"></span></p>
-                        </div>
-                        <div class="col-md-4 col-6 ps-30 my-4">
-                            <p class="text-muted">Model</p>
-                            <p class="h5 m-0">{{ $car->year }}</p>
-                        </div>
-                        <div class="col-md-4 col-6 ps-30 my-4">
-                            <p class="text-muted">Color</p>
-                            <p class="h5 m-0">{{ $car->color }}</p>
-                        </div>
-                        <div class="col-md-4 col-6 ps-30 my-4">
-                            <p class="text-muted">Rate Daily</p>
-                            <p class="h5 m-0">{{ $car->price_daily }} AED</p>
-                        </div>
-                        <div class="col-md-4 col-6 ps-30 my-4">
-                            <p class="text-muted">Rate Weekly</p>
-                            <p class="h5 m-0">{{ $car->price_weekly }} AED</p>
-                        </div>
-                        <div class="col-md-4 col-6 ps-30 my-4">
-                            <p class="text-muted">Rate Monthly</p>
-                            <p class="h5 m-0">{{$car->price_monthly}} AED</p>
-                        </div>
+                    <div class="col-md-3" style="white-space: nowrap; padding-right: 100px;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> {{ $car->seats }} Seats
+                    </div>
+                    <div class="col-md-3" style="white-space: nowrap; padding-right: 100px;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> {{ $car->doors }} Doors
+                    </div>
+                    <div class="col-md-3" style="white-space: nowrap;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> Color {{$car->color}}
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-md-3" style="white-space: nowrap; padding-right: 100px;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> Rate daily <strong>{{ $car->price_daily }}</strong> AED
+                    </div>
+                    <div class="col-md-3" style="white-space: nowrap; padding-right: 100px;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> Rate Weekly <strong>{{ $car->price_weekly }}</strong> AED
+                    </div>
+                    <div class="col-md-3" style="white-space: nowrap; padding-right: 0px;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> Rate Monthly <strong>{{ $car->price_monthly }}</strong> AED
+                    </div>
+                    <div class="col-md-3" style="white-space: nowrap;">
+                        <i class="fas fa-check-circle text-success" style="font-size: 16px; vertical-align: middle;"></i> {{$car->categories}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <div class="payment__title">
+            Payment Method
+            </div>
+
+
+            <div class="container">
+    <div class="row g-3">
+        <!-- Credit/Debit Card -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <a href="#" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="image">
+                        <img src="{{ asset('front/img/icons/visa.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
+                    </div>
+                    <div class="text ms-3 flex-grow-1">
+                        <span class="fw-bold">Credit/Debit Card</span>
                     </div>
                 </div>
+                <div class="paragraph mt-auto">
+                    Pay with Visa or Mastercard, debit, or credit.
+                </div>
+            </a>
+        </div>
+
+        <!-- Tabby -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+            <a href="#" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="image">
+                        <img src="{{ asset('front/img/icons/tabby01.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
+                    </div>
+                    <div class="text ms-3 flex-grow-1">
+                        <span class="fw-bold">Tabby</span>
+                    </div>
+                </div>
+                <div class="paragraph mt-auto">
+                    Pay in 4 interest-free payments of <br>
+                    <span style="font-weight: bold;">{{ $total / 4 }}</span> AED
+                </div>
+            </a>
+        </div>
+
+        <!-- Tamara -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+            <a href="#" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="image">
+                        <img src="{{ asset('front/img/icons/tamara.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
+                    </div>
+                    <div class="text ms-3 flex-grow-1">
+                        <span class="fw-bold">Tamara</span>
+                    </div>
+                </div>
+                <div class="paragraph mt-auto">
+                    Pay in 4 interest-free payments of <br>
+                    <span style="font-weight: bold;">{{ $total / 4 }}</span> AED
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+      <div class="container py-4">
+    <div class="row g-3">
+        <!-- Customer Information Section -->
+        <div class="col-12 col-sm-12 col-md-6 fs-6">
+            <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
+                <h5 class="mb-3">
+                    <i class="bi bi-person-circle me-2"></i>Customer Information
+                </h5>
+                <div class="mb-1">
+                    <strong>Name:</strong> {{ $customer_name }}
+                </div>
+                <div class="mb-1">
+                    <strong>Pickup Date:</strong> {{ $pickup_date }}
+                </div>
+                <div class="mb-1">
+                    <strong>Return Date:</strong> {{ $return_date }}
+                </div>
+                <div class="mt-1">
+                    <strong>Phone Number:</strong> {{ $customer_mobile }}
+                    <br>
+                    <strong>Email Address:</strong> {{ $customer_email }}
+                </div>
             </div>
-            <div class="col-lg-5 p-0 ps-lg-4">
-                <div class="row m-0">
-                    <div class="col-12 px-4">
-                        <div class="d-flex align-items-end mt-4 mb-2">
-                            <p class="h4 m-0"><span class="pe-1">{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</span>                            <P class="ps-3 textmuted">1L</P>
-                        </div>
+        </div>
 
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Daily Price</p>
-                            <p class="fs-14 fw-bold">{{$car->price_daily}} AED</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Shipping</p>
-                            <p class="fs-14 fw-bold">Free</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Pickup Date</p>
-                            <p class="fs-14 fw-bold">{{ $pickup_date }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Return Date</p>
-                            <p class="fs-14 fw-bold">{{ $return_date }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Total Rental Days</p>
-                            <p class="fs-14 fw-bold">{{ $days }} Days</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <p class="textmuted fw-bold">Total</p>
-                            <div class="d-flex align-text-top ">
-                                <span class="fas mt-1 pe-1 fs-14 "></span><span class="h4">{{ $total }} AED</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 px-4">
-                        <div class="d-flex align-items-end mt-4 mb-2">
-                            <p class="h4 m-0"><span class="pe-1">Customer Information</span>                            <P class="ps-3 textmuted">1L</P>
-                        </div>
-
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Name</p>
-                            <p class="fs-14 fw-bold">{{$customer_name}}</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Email</p>
-                            <p class="fs-14 fw-bold">{{ $customer_email }}</p>
-                        </div>
-
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Phone Number</p>
-                            <p class="fs-14 fw-bold">{{ $customer_mobile }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p class="textmuted">Total Rental Daysr</p>
-                            <p class="fs-14 fw-bold">{{ $customer_mobile }}</p>
-                        </div>
-
-                    </div>
-                    <div class="col-12 px-0">
-                        <div class="row bg-light m-0">
-                            <div class="col-12 px-4 my-4">
-                                <p class="fw-bold">Payment Methods</p>
-                            </div>
-                            <!-- Clickable Payment Methods -->
-                            <div class="col-12 px-4 mb-3">
-                            <div class="payment-option d-flex justify-content-between align-items-center" onclick="window.location.href='{{ route('stripe.payment', [
-    'car' => $car->id, 
-    'rate_daily' => $rate_daily, 
-    'days' => $days, 
-    'total' => $total,
-    'pickup_date' => $pickup_date,
-    'return_date' => $return_date
-]) }}'">
-                                    <p class="mb-0">Pay with Debit/Credit Card</p>
-                                    
-                                    <!-- Visa and MasterCard Icons with Right Alignment -->
-                                    <div class="d-flex justify-content-end">
-                                        <i class="fab fa-cc-visa visa-icon" style="font-size: 20px; margin-right: 10px;"></i>
-                                        <i class="fab fa-cc-mastercard mastercard-icon" style="font-size: 20px;"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="col-12 px-4 mb-3">
-                                <div class="payment-option" onclick="alert('Pay with Tabby selected')" style="display: flex; justify-content: space-between; align-items: center;">
-                                    <p>Pay with Tabby</p>
-                                    <img src="{{ asset('front/img/icons/tabby.png') }}" alt="Tabby Logo" class="pe-2" style="width: 100px; height: 30px;">
-                                </div>
-                            </div>
-
-                            <div class="col-12 px-4 mb-3">
-                                <div class="payment-option" onclick="alert('Pay with Tabby selected')" style="display: flex; justify-content: space-between; align-items: center;">
-                                    <p>Pay with Tabby</p>
-                                    <img src="{{ asset('front/img/icons/tamara.jpeg') }}" alt="Tabby Logo" class="pe-2" style="width: 100px; height: 30px;">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+        <!-- Invoice Details Section -->
+        <div class="col-12 col-sm-12 col-md-6 fs-6">
+            <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
+                <h5 class="mb-3">
+                    <i class="bi bi-receipt me-2"></i>Invoice Details
+                </h5>
+                <div class="mb-1">
+                    <strong>Car Daily Cost:</strong> {{ $car->price_daily }} AED
+                </div>
+                <div class="mb-1">
+                    <strong>Tax:</strong> 50 AED
+                </div>
+                <div class="mb-1">
+                    <strong>Shipping Fee:</strong> 0 AED
+                </div>
+                <div class="mt-1">
+                    <strong>Total:</strong>
+                    <span style="font-weight: bold; font-size: 18px;">{{ $total }} AED</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+    </div>
+    </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+<!-- <div class="container mt-5 g-3">
+  <h3 class="mx-auto mb-4">Similar Products</h3>
+  <div id="similarProductsCarousel" class="">
+    <div class="container">
+      <div class="row">
+        @foreach($similarProducts as $product)
+          <div class="">
+          <a href="{{ route('cars.show', $product->id) }}">
 
-</html>
+              <div class="card shadow-sm rounded" style="width: 200px;">
+                <img src="{{ asset('storage/' . $product->car_picture) }}" class="card-img-top" alt="Product" style="width: 200px;">
+                <div class="card-body">
+                  <h5 class="card-title text-truncate">{{ $product->car_name . ' ' . $product->model . ' ' . $product->year }}</h5>
+                  <p class="card-text text-muted" style="font-size: 20px;">{{ $product->price_daily }} AED</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        @endforeach
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="d-flex">
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+1" class="d-block w-100" alt="Item 1">
+                </div>
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+2" class="d-block w-100" alt="Item 2">
+                </div>
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+3" class="d-block w-100" alt="Item 3">
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex">
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+4" class="d-block w-100" alt="Item 4">
+                </div>
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+5" class="d-block w-100" alt="Item 5">
+                </div>
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+6" class="d-block w-100" alt="Item 6">
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex">
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+7" class="d-block w-100" alt="Item 7">
+                </div>
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+8" class="d-block w-100" alt="Item 8">
+                </div>
+                <div class="carousel-item-inner">
+                    <img src="https://via.placeholder.com/500x300?text=Item+9" class="d-block w-100" alt="Item 9">
+                </div>
+            </div>
+        </div>
+        <!-- Add more items as needed -->
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+<div class="actions">
+        <a href="#" class="backBtn">Go Back to Shop</a>
+    </div>
+  </section>
+  </div>
+
+

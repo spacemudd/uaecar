@@ -20,6 +20,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StripeController;
+use App\Services\TabbyService;
 use App\Models\Car;
 use App\Services\AutoTraderService;
 use Illuminate\Foundation\Application;
@@ -179,3 +180,6 @@ Route::get('/payment', function(){
 });
 
 Route::get('/payment/{id}', [PaymentController::class, 'show'])->name('cars.checkout');
+
+
+
