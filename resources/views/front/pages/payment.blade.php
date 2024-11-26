@@ -204,66 +204,53 @@
 </div> -->
 
 
+<section>
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-inner"> <!-- The Carousel Container -->
+      <!-- Carousel Item 1 -->
+      <div class="carousel-item active">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-1 justify-content-center">
+          @foreach($similarProducts as $car)
+          <div class="col d-flex justify-content-center">
+            <div class="card shadow-sm mx-8 my-5">
+              <!-- Image Section -->
+              <img src="{{ asset('storage/' . $car->car_picture) }}" 
+                   class="card-img-top" 
+                   alt="Car Image" 
+                   style="height: 300px; object-fit: cover;" />
+              <div class="card-body">
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-regular fa-star text-warning"></i>
+                <i class="fa-regular fa-star text-warning"></i>
+                <p class="card-text">{{ $car->make }} - {{ $car->model }} - {{$car->year}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                  <a href="{{ route('cars.show', $car->id) }}" class="btn btn-sm btn-outline-warning">View</a>                  </div>
+                  <small class="text-bg-warning px-2 rounded">{{ $car->price_daily }} AED</small>
+                </div>
+              </div>
+            </div><!-- End of card -->
+          </div>
+          @endforeach
+        </div><!-- End of row -->
+      </div><!-- End of carousel-item -->
+    </div><!-- End of carousel-inner -->
+  </div>
+</section>
 
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="d-flex">
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+1" class="d-block w-100" alt="Item 1">
-                </div>
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+2" class="d-block w-100" alt="Item 2">
-                </div>
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+3" class="d-block w-100" alt="Item 3">
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="d-flex">
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+4" class="d-block w-100" alt="Item 4">
-                </div>
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+5" class="d-block w-100" alt="Item 5">
-                </div>
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+6" class="d-block w-100" alt="Item 6">
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="d-flex">
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+7" class="d-block w-100" alt="Item 7">
-                </div>
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+8" class="d-block w-100" alt="Item 8">
-                </div>
-                <div class="carousel-item-inner">
-                    <img src="https://via.placeholder.com/500x300?text=Item+9" class="d-block w-100" alt="Item 9">
-                </div>
-            </div>
-        </div>
-        <!-- Add more items as needed -->
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+
+
+
+
+
+
+
+
 </div>
 
-
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</section>
 
 
 
@@ -276,4 +263,10 @@
   </section>
   </div>
 
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

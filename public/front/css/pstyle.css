@@ -89,21 +89,24 @@
         font-size: 12px;
     }
 
-    .carousel-item-inner {
-        flex: 1;
-        margin: 0 10px;
-    }
-    .carousel-item img {
-        width: 100%;
-        height: auto;
-    }
-    
+    .new {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+      .carousel-item {
+        min-height: auto;
+      }
+
+
 
     @media screen and (max-width: 900px) {
         .pay-card{
             width: 300px;
         }
     }
+
+    
     
 
 
