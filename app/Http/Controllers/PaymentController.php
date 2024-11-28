@@ -37,6 +37,7 @@ class PaymentController extends Controller
             'customer_mobile' => session('customer_mobile'),
             'customer_email' => session('customer_email'),
             'similarProducts' => $similarProducts,
+            'pickup_city' => session('pickup_city'),
         ]);
     }
 
@@ -44,19 +45,30 @@ class PaymentController extends Controller
     {
         $car = $this->getCarById($id);
 
+        // استرجاع معلومات استئجار السيارة من الجلسة
         $pickupDate = session('pickup_date');
         $returnDate = session('return_date');
         $rateDaily = session('rate_daily');
         $days = $this->calculateRentalDays($pickupDate, $returnDate);
         $total = $rateDaily * $days;
-
+    
+        // معلومات العميل (تأكد من أن هذه المعلومات متاحة في الجلسة)
+        $customerName = session('customer_name');
+        $customerEmail = session('customer_email');
+        $customerPhone = session('customer_phone');
+        $customerCity = session('customer_city');
+    
         return redirect()->route('stripe.payment', [
-            'car' => $car->id,
+            'car_id' => $car->id,
             'rate_daily' => $rateDaily,
             'days' => $days,
             'total' => $total,
             'pickup_date' => $pickupDate,
             'return_date' => $returnDate,
+            'customer_name' => $customerName,
+            'customer_email' => $customerEmail,
+            'customer_phone' => $customerPhone,
+            'customer_city' => $customerCity,
         ]);
     }
 
