@@ -74,20 +74,39 @@
     <div class="row g-3">
         <!-- Credit/Debit Card -->
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-            <a href="#" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="image">
-                        <img src="{{ asset('front/img/icons/visa.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
-                    </div>
-                    <div class="text ms-3 flex-grow-1">
-                        <span class="fw-bold">Credit/Debit Card</span>
-                    </div>
-                </div>
-                <div class="paragraph mt-auto">
-                    Pay with Visa or Mastercard, debit, or credit.
-                </div>
-            </a>
+    <form action="{{ route('stripe.payment') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+        @csrf <!-- Include this for Laravel CSRF protection -->
+
+        <div class="d-flex align-items-center mb-3">
+            <div class="image">
+                <img src="{{ asset('front/img/icons/visa.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
+            </div>
+            <div class="text ms-3 flex-grow-1">
+                <span class="fw-bold">Credit/Debit Card</span>
+            </div>
         </div>
+        <div class="paragraph mt-auto">
+            Pay with Visa or Mastercard, debit, or credit.
+        </div>
+
+          <!-- Hidden inputs to pass required data -->
+    <input type="hidden" name="car_id" value="{{ $car->id }}">
+    <input type="hidden" name="price_daily" value="{{ $price_daily }}">
+    <input type="hidden" name="days" value="{{ $days }}">
+    <input type="hidden" name="total" value="{{ $total }}">
+    <input type="hidden" name="pickup_date" value="{{ $pickup_date }}">
+    <input type="hidden" name="return_date" value="{{ $return_date }}">
+    
+    <!-- Add hidden inputs for customer information -->
+    <input type="hidden" name="customer_name" value="{{ $customer_name }}">
+    <input type="hidden" name="customer_email" value="{{ $customer_email }}">
+    <input type="hidden" name="customer_phone" value="{{ $customer_mobile }}">
+    <input type="hidden" name="customer_city" value="{{ $pickup_city }}">
+        <button type="submit" class="btn btn-primary mt-3">Pay Now</button>
+    </form>
+</div>
+
+
 
         <!-- Tabby -->
         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
@@ -147,6 +166,8 @@
                     <strong>Phone Number:</strong> {{ $customer_mobile }}
                     <br>
                     <strong>Email Address:</strong> {{ $customer_email }}
+                    <br>
+                    <strong>Pickup City:</strong> {{ $pickup_city }}
                 </div>
             </div>
         </div>

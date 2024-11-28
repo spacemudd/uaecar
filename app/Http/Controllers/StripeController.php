@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe\StripeClient;
 use App\Models\Car;
+use App\Models\Invoice;
 
 class StripeController extends Controller
 {
@@ -21,16 +22,45 @@ class StripeController extends Controller
     }
     
 
-    public function pay($car_id, $rate_daily, $days, $total, $pickup_date, $return_date)
+    public function pay(Request $request)
     {
-        // استرجاع السيارة باستخدام car_id
-        $car = Car::find($car_id);
-
+        $request->validate([
+            'car_id' => 'required|exists:cars,id',
+            'price_daily' => 'required|numeric',
+            'days' => 'required|integer|min:1',
+            'total' => 'required|numeric',
+            'pickup_date' => 'required|date',
+            'return_date' => 'required|date',
+            'customer_name' => 'required|string',
+            'customer_email' => 'required|email',
+            'customer_phone' => 'required|string',
+            'customer_city' => 'required|string',
+        ]);
+    
+        $car = Car::find($request->car_id);
+    
+        // After creating the invoice
+        $invoice = Invoice::create([
+            'customer_name' => $request->customer_name,
+            'customer_email' => $request->customer_email,
+            'customer_phone' => $request->customer_phone,
+            'city' => $request->customer_city,
+            'pickup_date' => $request->pickup_date,
+            'return_date' => $request->return_date,
+            'creation_date' => now(),
+            'description' => "This is a new Car",
+            'car_daily_price' => "10.2",
+            'total_days' => 12,
+            'total_amount' => $request->total,
+            'tax' => 0, // Optional: set the tax if applicable
+            'status' => 'pending', // Change to 'paid' after successful payment confirmation
+        ]);
+    
         // Stripe payment logic
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
-            'success_url' => 'http://127.0.0.1:8000/success',
-            'cancel_url' => 'http://127.0.0.1:8000/cancel',
+            'success_url' => route('successview', ['session_id' => '{CHECKOUT_SESSION_ID}', 'invoice_id' => $invoice->id]),
+            'cancel_url' => route('payment.cancel'),
             'line_items' => [
                 [
                     'price_data' => [
@@ -38,26 +68,38 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
                         ],
-                        'unit_amount' => $total * 100, // Stripe expects amount in cents
+                        'unit_amount' => $request->total * 100, // Stripe expects amount in cents
                     ],
                     'quantity' => 1,
                 ],
             ],
             'metadata' => [
-                // 'car_id' => $car->id,
-                // 'pickup_location' => $pickup_location,
-                // 'return_location' => $return_location,
-                // 'customer_name' => $customer_name,
-                // 'customer_email' => $customer_email,
-                'pickup_date' => $pickup_date,
-                'return_date' => $return_date,
-                'days' => $days,
-                // 'status' => $status,
+                'pickup_date' => $request->pickup_date,
+                'return_date' => $request->return_date,
+                'days' => $request->days,
+                'customer_name' => $request->customer_name,
+                'customer_email' => $request->customer_email,
+                'customer_phone' => $request->customer_phone,
+                'pickup_city' => $request->customer_city,
             ],
         ]);
-        
+    
+        session(['user_invoices' => $invoice->id]);
     
         return redirect($session->url);
     }
+    
+
+
+    public function successView(Request $request)
+    {
+        // احصل على معرف الفاتورة من الجلسة
+        $invoiceId = session('user_invoices');
+    
+        
+    
+        return view('front.pages.successView', compact('invoiceId'));
+    }
+    
     
 }

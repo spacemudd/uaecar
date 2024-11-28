@@ -13,17 +13,13 @@ class FormController extends Controller
 {
     public function submit(Request $request)
     {
-        // استخراج رقم اللوحة من الطلب
         $plateNumber = $request->input('plate_number');
         $plateNumber = preg_replace('/^[A-B]-/', '', $plateNumber);
     
-        // الحصول على التوكن من الذاكرة المؤقتة
         $token = $this->getAuthToken();
     
-        // الحصول على تفاصيل السيارة عبر رقم اللوحة
         $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
     
-        // التحقق من حالة السيارة
         return $this->respondCarStatus($car, $plateNumber, $request);
     }
     
@@ -40,7 +36,7 @@ class FormController extends Controller
     private function authenticate()
     {
         $username = 'info@rentluxuria.com';
-        $password = 'N^9SHXvCLzVbP(Ild(PI9sqP';
+        $password = 'B!2plF@t9psJOiZCd9AVRC#o';
 
         $response = Http::post('https://luxuria.crs.ae/api/v1/auth/jwt/token', [
             'username' => $username,
@@ -86,7 +82,6 @@ class FormController extends Controller
         }
     
         if ($car['status'] === 'Available') {
-            // تخزين بيانات الريكوست في الجلسة
             session([
                 'pickup_date' => $request->input('pickup_date'),  // Get from request
                 'return_date' => $request->input('return_date'),  // Get from request
@@ -99,9 +94,9 @@ class FormController extends Controller
                 'customer_mobile' => $request->input('phone'),  // Get from request
                 'customer_email' => $request->input('email'),  // Get from request
                 'car_id' => $request->input('car_id'),  // Store car_id for later use
+                'pickup_city' => $request->input('pickup_city'),
             ]);
             
-            // إعادة التوجيه إلى صفحة عرض تفاصيل السيارة (مسار cars.checkout)
             return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
     

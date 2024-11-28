@@ -18,6 +18,7 @@ use App\Http\Controllers\back\adminDashboardController;
 use App\Http\Controllers\back\BookingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StripeController;
 use App\Services\TabbyService;
@@ -121,9 +122,7 @@ Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 
 
 
-Route::get('/successview', function () {
-    return view('front.pages.successView'); // Adjust to your actual view file
-})->name('successview');
+Route::get('/successview', [StripeController::class, 'successView'])->name('successview');
 
 
 
@@ -169,9 +168,8 @@ Route::get('/premium', [CategoryController::class, 'showPremium'])->name('premiu
 Route::get('/economy', [CategoryController::class, 'showEconomy'])->name('economy.page');
 
 
-// Route to handle Stripe payment
-Route::get('/stripe/payment/{car}/{rate_daily}/{days}/{total}/{pickup_date}/{return_date}', [StripeController::class, 'pay'])->name('stripe.payment');
-
+// // Route to handle Stripe payment
+Route::get('/stripe/payment/{car_id}/{rate_daily}/{days}/{total}/{pickup_date}/{return_date}/{customer_name}/{customer_email}/{customer_phone}/{customer_city}', [StripeController::class, 'pay'])->name('stripe.payment');
 // POST route to handle the form submission
 // Route::post('/stripe/payment', [StripeController::class, 'pay'])->name('test');
 
@@ -183,3 +181,12 @@ Route::get('/payment/{id}', [PaymentController::class, 'show'])->name('cars.chec
 
 
 
+Route::post('/stripe/payment', [StripeController::class, 'pay'])->name('stripe.payment');
+Route::get('/payment/success', function () {
+    return 'Payment was successful!';
+})->name('payment.success');
+Route::get('/payment/cancel', function () {
+    return 'Payment was canceled.';
+})->name('payment.cancel');
+
+Route::get('/invoice/{id}', [InvoiceController::class, 'show'])->name('invoice.show');
