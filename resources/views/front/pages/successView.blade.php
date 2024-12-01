@@ -112,7 +112,7 @@
                 <p>Thank you for your submission. We will get back to you shortly.</p>
                 <hr>
                 <p class="mb-0">If you have any questions, feel free to contact us.</p>
-                <a href="{{ route('invoice.show', ['id' => $invoiceId]) }}" class="btn btn-primary mt-4">View Invoice</a>            </div>
+                <a href="{{ route('grant-access', ['id' => $invoiceId]) }}" class="btn btn-primary mt-4">View Invoice</a>            </div>
             
         </div>
 
