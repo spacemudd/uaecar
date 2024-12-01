@@ -53,7 +53,7 @@ class StripeController extends Controller
             'total_days' => 12,
             'total_amount' => $request->total,
             'tax' => 0, // Optional: set the tax if applicable
-            'status' => 'pending', // Change to 'paid' after successful payment confirmation
+            'status' => 'Payment Recieved', // Change to 'paid' after successful payment confirmation
         ]);
     
         // Stripe payment logic

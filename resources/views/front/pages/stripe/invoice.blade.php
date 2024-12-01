@@ -18,8 +18,10 @@
                         <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #{{ $invoice->id }}</strong></p>
                     </div>
                     <div class="col-xl-3 text-end">
-                        <button class="btn btn-light text-capitalize border-0"><i class="fas fa-print text-primary"></i> Print</button>
-                        <button class="btn btn-light text-capitalize"><i class="far fa-file-pdf text-danger"></i> Export</button>
+                        <!-- Print Button -->
+                        <button class="btn btn-light text-capitalize border-0" onclick="window.print()">
+                            <i class="fas fa-print text-primary"></i> Print
+                        </button>
                     </div>
                 </div>
                 <hr>
@@ -41,7 +43,7 @@
                             <ul class="list-unstyled">
                                 <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA;"></i> <span class="fw-bold">ID:</span> #{{ $invoice->id }}</li>
                                 <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA;"></i> <span class="fw-bold">Creation Date:</span> {{ $invoice->creation_date }}</li>
-                                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA;"></i> <span class="fw-bold">Status:</span> <span class="badge bg-warning text-black fw-bold">{{ ucfirst($invoice->status) }}</span></li>
+                                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA;"></i> <span class="fw-bold">Status:</span> <span class="badge bg-success text-white fw-bold">{{ ucfirst($invoice->status) }}</span></li>
                             </ul>
                         </div>
                     </div>
@@ -83,9 +85,7 @@
                         <div class="col-xl-10">
                             <p>Thank you for your purchase</p>
                         </div>
-                        <div class="col-xl-2 text-end">
-                            <button type="button" class="btn btn-primary text-capitalize" style="background-color:#60bdf3;">Download</button>
-                        </div>
+
                     </div>
                 </div>
             </div>
