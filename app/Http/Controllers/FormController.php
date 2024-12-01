@@ -36,7 +36,7 @@ class FormController extends Controller
     private function authenticate()
     {
         $username = 'info@rentluxuria.com';
-        $password = 'B!2plF@t9psJOiZCd9AVRC#o';
+        $password = 'm9r&rO1wURXF5CCgLBOf2(cT';
 
         $response = Http::post('https://luxuria.crs.ae/api/v1/auth/jwt/token', [
             'username' => $username,

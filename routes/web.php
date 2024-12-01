@@ -190,3 +190,5 @@ Route::get('/payment/cancel', function () {
 })->name('payment.cancel');
 
 Route::get('/invoice/{id}', [InvoiceController::class, 'show'])->name('invoice.show');
+// Route::get('/invoice/{id}/download', [InvoiceController::class, 'download'])->name('invoice.download');
+
