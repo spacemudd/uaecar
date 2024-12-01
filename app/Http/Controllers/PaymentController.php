@@ -11,6 +11,8 @@ class PaymentController extends Controller
     public function show($id)
     {
         $car = $this->getCarById($id);
+        session(['car_id' => $car]);
+
 
         $pickupDate = session('pickup_date');
         $returnDate = session('return_date');
