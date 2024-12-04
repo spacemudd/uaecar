@@ -56,7 +56,6 @@ class StripeController extends Controller
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
             'success_url' => route('successview', ['session_id' => '{CHECKOUT_SESSION_ID}', 'invoice_id' => $invoice->id]),
-            'cancel_url' => route('payment.cancel'),
             'line_items' => [
                 [
                     'price_data' => [
@@ -134,7 +133,7 @@ class StripeController extends Controller
             'return_location' => '71',
             'pickup_date' => session('pickup_date'),
             'return_date' => session('return_date'),
-            'vehicle_hint' => $carName . $carModel . $carYear . $carPlateNumber,
+            'vehicle_hint' => $carName . ' ' . $carModel . ' ' . $carYear . ' ' . $carPlateNumber,
             'rate_daily' => $invoice->car_daily_price,
             'status' => 'confirmed',
         ];

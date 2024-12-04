@@ -100,10 +100,14 @@ class FormController extends Controller
             return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
     
-        return response()->json([
-            'success' => false,
-            'message' => 'Car is not available for booking at the moment.'
-        ]);
+        // return response()->json([
+        //     'success' => false,
+        //     'message' => 'Car is not available for booking at the moment.'
+        // ]);
+
+        // In your controller
+        return redirect()->back()->with('error_message', 'Car is not available for booking at the moment You may choose another car or check back later.');
+
     }
     
     

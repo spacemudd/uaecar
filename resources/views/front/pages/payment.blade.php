@@ -10,7 +10,6 @@
 
 
 
-
 <div class="mx-auto text-center" style="max-width: 500px;">
         <img class="col-xxl-12 mx-auto" src="{{ asset('front/img/black.png') }}">
         </div>
@@ -73,7 +72,7 @@
             <div class="container">
     <div class="row g-3">
         <!-- Credit/Debit Card -->
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <form action="{{ route('stripe.payment') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
         @csrf <!-- Include this for Laravel CSRF protection -->
 
@@ -109,8 +108,12 @@
 
 
         <!-- Tabby -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-            <a href="#" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+        <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+            <form action="{{ route('create.checkout') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+                @csrf
+                <input type="hidden" name="amount" value="{{ $total }}"> 
+                <input type="hidden" name="currency" value="AED">
+
                 <div class="d-flex align-items-center mb-3">
                     <div class="image">
                         <img src="{{ asset('front/img/icons/tabby01.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
@@ -121,13 +124,18 @@
                 </div>
                 <div class="paragraph mt-auto">
                     Pay in 4 interest-free payments of <br>
-                    <span style="font-weight: bold;">{{ $total / 4 }}</span> AED
+                    <span style="font-weight: bold;" id="tabby-payment-amount"></span> AED
                 </div>
-            </a>
-        </div>
+
+                <div id="tabby-promo-widget"></div>
+
+                <button type="submit" class="btn btn-primary mt-2">Pay Now</button>
+            </form>
+        </div> -->
+
 
         <!-- Tamara -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+        <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
             <a href="#" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
                     <div class="image">
@@ -142,12 +150,16 @@
                     <span style="font-weight: bold;">{{ $total / 4 }}</span> AED
                 </div>
             </a>
-        </div>
+        </div> -->
+
+
+
+
+
     </div>
 </div>
-      <div class="container py-4">
+      <!-- <div class="container py-4">
     <div class="row g-3">
-        <!-- Customer Information Section -->
         <div class="col-12 col-sm-12 col-md-6 fs-6">
             <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                 <h5 class="mb-3">
@@ -172,7 +184,6 @@
             </div>
         </div>
 
-        <!-- Invoice Details Section -->
         <div class="col-12 col-sm-12 col-md-6 fs-6">
             <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                 <h5 class="mb-3">
@@ -194,35 +205,11 @@
             </div>
         </div>
     </div>
-</div>
-</div>
-    </div>
-    </div>
-</div>
-
-<!-- <div class="container mt-5 g-3">
-  <h3 class="mx-auto mb-4">Similar Products</h3>
-  <div id="similarProductsCarousel" class="">
-    <div class="container">
-      <div class="row">
-        @foreach($similarProducts as $product)
-          <div class="">
-          <a href="{{ route('cars.show', $product->id) }}">
-
-              <div class="card shadow-sm rounded" style="width: 200px;">
-                <img src="{{ asset('storage/' . $product->car_picture) }}" class="card-img-top" alt="Product" style="width: 200px;">
-                <div class="card-body">
-                  <h5 class="card-title text-truncate">{{ $product->car_name . ' ' . $product->model . ' ' . $product->year }}</h5>
-                  <p class="card-text text-muted" style="font-size: 20px;">{{ $product->price_daily }} AED</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        @endforeach
-      </div>
-    </div>
-  </div>
 </div> -->
+</div>
+    </div>
+    </div>
+</div>
 
 
 <section>
@@ -261,14 +248,6 @@
   </div>
 </section>
 
-
-
-
-
-
-
-
-
 </div>
 
 </section>
@@ -279,11 +258,10 @@
 
 
 <div class="actions">
-        <a href="#" class="backBtn">Go Back to Shop</a>
+        <!-- <a href="#" class="backBtn">Choose different payment method</a> -->
     </div>
   </section>
   </div>
-
 
 
 

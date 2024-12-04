@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cae05bb50ae27a0ed42ea3018b580bf5",
+    "content-hash": "9d42dd43a95a13cb63b8f1cf6e3e05eb",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -7782,6 +7782,52 @@
                 }
             ],
             "time": "2024-07-26T12:41:01+00:00"
+        },
+        {
+            "name": "tabbyai/laravel",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sultan-algarbi/tabby-laravel-package.git",
+                "reference": "4da07b18d00ee3db08156eee264885c49f8e027f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sultan-algarbi/tabby-laravel-package/zipball/4da07b18d00ee3db08156eee264885c49f8e027f",
+                "reference": "4da07b18d00ee3db08156eee264885c49f8e027f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tabby\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sultan Algarbi",
+                    "email": "sultanye@gmail.com"
+                }
+            ],
+            "description": "Laravel package for integrating with Tabby.",
+            "keywords": [
+                "api",
+                "integration",
+                "package",
+                "payment",
+                "payment gateway",
+                "sdk",
+                "tabby"
+            ],
+            "support": {
+                "issues": "https://github.com/sultan-algarbi/tabby-laravel-package/issues",
+                "source": "https://github.com/sultan-algarbi/tabby-laravel-package/tree/v2.1.1"
+            },
+            "time": "2024-11-14T11:35:23+00:00"
         },
         {
             "name": "tightenco/ziggy",
