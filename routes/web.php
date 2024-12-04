@@ -22,6 +22,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StripeController;
 use App\Http\Middleware\VerifyInvoiceAccess;
+use App\Http\Controllers\Tabby\TabbyController;
 use App\Services\TabbyService;
 use App\Models\Car;
 use App\Services\AutoTraderService;
@@ -30,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
 use App\Http\Middleware\SessionAuth;
+use App\Http\Controllers\Tabby\CheckoutController;
 use App\Mail\TestEmail; // Make sure you have created the TestEmail Mailable
 // Route::get('/car/{id}', function() {
 //    return Car::find(request()->id);
@@ -206,5 +208,9 @@ Route::get('/revoke-access', function () {
 });
 
 
+Route::post('/tabby/create-checkout', [TabbyController::class, 'createCheckout'])->name('create.checkout');
+Route::get('/payment/success', [TabbyController::class, 'paymentSuccess']);
+Route::get('/payment/cancel', [TabbyController::class, 'paymentCancel']);
+Route::get('/payment/failure', [TabbyController::class, 'paymentFailure']);
+Route::post('/tabby/webhook', [TabbyController::class, 'webhookHandler']);
 
-Route::post('/payment/tabby/{id}', [PaymentController::class, 'passDatatoTabby'])->name('payment.tabby');

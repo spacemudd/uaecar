@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http; // إضافة هذا السطر
+use Illuminate\Support\Facades\Log;
+
+
 
 class PaymentController extends Controller
 {
+
+   
     public function show($id)
     {
         $car = $this->getCarById($id);
@@ -86,4 +92,10 @@ class PaymentController extends Controller
 
         return max($pickup->diffInDays($return), 1);
     }
+    
+
+
+
+
+    
 }
