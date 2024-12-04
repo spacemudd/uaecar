@@ -124,7 +124,7 @@
               <li class="nav-item">
                   <a href={{ route('booking.list') }}>
                       <i class="fas fa-cog"></i>
-                      <p>Booking Orders</p>
+                      <p>Invoices</p>
                   </a>
               </li>
             </ul>

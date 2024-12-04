@@ -29,18 +29,7 @@
                 </ul>
             </div>
 
-            <!-- Add "Delete All" button above the table -->
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <form action="{{ route('booking-requests.deleteAll') }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete all booking requests?')">
-                            <i class="fas fa-trash-alt"></i> Delete All Booking Requests
-                        </button>
-                    </form>
-                </div>
-            </div>
+
 
             <div class="row">
                 <div class="col-md-12">
@@ -54,57 +43,35 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Request Number</th>
-                                            <th>Car Name</th>
+                                            <th>Customer Name</th>
+                                            <th>Customer Email</th>
                                             <th>Phone Number</th>
                                             <th>Email</th>
                                             <th>Pickup Date</th>
                                             <th>Return Date</th>
-                                            <th>Status</th>
+                                            <th>Total Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($booking_request as $request)
+                                        @foreach ($invoices as $request)
                                             <tr onclick="window.location='{{ route('booking-requests.show', $request->id) }}'" style="cursor: pointer;">
                                                 <td>{{ $request->id }}</td>
-                                                <td>{{ $request->request_number }}</td>
-                                                <td>{{ $request->car_name }}</td>
-                                                <td>{{ $request->phone }}</td>
-                                                <td>{{ $request->email }}</td>
+                                                <td>{{ $request->customer_name }}</td>
+                                                <td>{{ $request->customer_email }}</td>
+                                                <td>{{ $request->customer_phone }}</td>
+                                                <td>{{ $request->customer_email }}</td>
                                                 <td>{{ $request->pickup_date }}</td>
                                                 <td>{{ $request->return_date }}</td>
-                                                <td>
-                                                    <span class="badge 
-                                                        @if($request->status == 'Pending')
-                                                            bg-warning text-dark
-                                                        @elseif($request->status == 'Approved')
-                                                            bg-success text-white
-                                                        @elseif($request->status == 'Canceled')
-                                                            bg-danger text-white
-                                                        @else
-                                                            bg-secondary text-white
-                                                        @endif
-                                                    ">
-                                                        {{ $request->status }}
-                                                    </span>
-                                                </td>
+
+                                                <td>{{ $request->total_amount }}</td>
+
                                                 <td>
                                                     <form action="#" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('PATCH')
                                                     </form>
                                                 </td>
-                                                <td>
-                                                    <div class="btn-group" role="group">
-                                                        <form action="#" method="POST" style="display:inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger" title="Delete">
-                                                                <i class="fas fa-trash-alt"></i> <!-- Font Awesome trash icon -->
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
