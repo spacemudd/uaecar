@@ -2,6 +2,8 @@
 
 return [
 
+    'test_key' => env('STRIPE_SECRET_KEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

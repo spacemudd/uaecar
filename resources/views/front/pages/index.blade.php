@@ -9,6 +9,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session('error_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Unfortunately',
+                text: "{{ session('error_message') }}",
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+@endif
+
 
 <style>
 
@@ -189,6 +204,12 @@
             </div>
         </div>
     </section>
+
+<!-- 
+    <div class="text-center">
+    <img src="{{ asset('front/img/Web_Banners_7.png') }}" alt="Banner Image" class="img-fluid" style="max-width: 1200px;"> 
+</div>
+ -->
 
 <!-- Initialize Owl Carousel with your custom settings -->
 
@@ -1057,6 +1078,8 @@
 
 
 
+
+
 <!-- New Section with Centered Title and Clickable Labels -->
 <section class="py-5 mt-5">
     <div class="container text-center">
@@ -1193,7 +1216,7 @@
                     </div>
                     <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-paper-plane"></i> Subscribe
-                            </button>
+                            </button>   
 
 
                 </form>
