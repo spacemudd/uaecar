@@ -29,8 +29,6 @@
                 </ul>
             </div>
 
-
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -46,32 +44,30 @@
                                             <th>Customer Name</th>
                                             <th>Customer Email</th>
                                             <th>Phone Number</th>
-                                            <th>Email</th>
                                             <th>Pickup Date</th>
                                             <th>Return Date</th>
                                             <th>Total Amount</th>
+                                            <th>Actions</th> <!-- New column for icons -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($invoices as $request)
-                                            <tr onclick="window.location='{{ route('booking-requests.show', $request->id) }}'" style="cursor: pointer;">
+                                            <tr>
                                                 <td>{{ $request->id }}</td>
                                                 <td>{{ $request->customer_name }}</td>
                                                 <td>{{ $request->customer_email }}</td>
                                                 <td>{{ $request->customer_phone }}</td>
-                                                <td>{{ $request->customer_email }}</td>
                                                 <td>{{ $request->pickup_date }}</td>
                                                 <td>{{ $request->return_date }}</td>
-
                                                 <td>{{ $request->total_amount }}</td>
-
                                                 <td>
-                                                    <form action="#" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('PATCH')
-                                                    </form>
-                                                </td>
+                                                    <!-- View Icon -->
+                                                    <a href="{{ route('admin.show.invoice', ['id' => $request->id]) }}" title="View Details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
 
+                                                  
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

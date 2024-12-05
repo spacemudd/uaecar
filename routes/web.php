@@ -218,3 +218,4 @@ Route::post('/tabby/webhook', [TabbyController::class, 'webhookHandler']);
 
 
 
+Route::get('/admin/invoice/{id}', [InvoiceController::class, 'view'])->name('admin.show.invoice');
