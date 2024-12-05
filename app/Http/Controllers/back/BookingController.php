@@ -11,10 +11,9 @@ class BookingController extends Controller
 {
     //
 
-    public function bookingList(){
-        $invoices = Invoice::all();
-        return view('back.pages.bookinglist', compact('invoices'));
-
+    public function invoiceList(){
+        $invoicelist = Invoice::all();
+        return view('back.pages.invoicelist', compact('invoicelist'));
     }
 
 

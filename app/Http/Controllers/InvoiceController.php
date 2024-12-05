@@ -17,4 +17,11 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($id); 
         return view('back.pages.invoiceview', compact('invoice'));
     }
+
+
+    public function invoiceList(){
+        $invoicelist = Invoice::all();
+        return view('back.pages.invoicelist', compact('invoicelist'));
+    }
+
 }

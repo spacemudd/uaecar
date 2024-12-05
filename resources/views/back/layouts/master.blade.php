@@ -122,7 +122,7 @@
 
 
               <li class="nav-item">
-                  <a href={{ route('booking.list') }}>
+                  <a href={{ route('invoice.list') }}>
                       <i class="fas fa-cog"></i>
                       <p>Invoices</p>
                   </a>

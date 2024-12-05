@@ -51,7 +51,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($invoices as $request)
+                                        @foreach ($invoicelist as $request)
                                             <tr>
                                                 <td>{{ $request->id }}</td>
                                                 <td>{{ $request->customer_name }}</td>

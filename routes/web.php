@@ -15,7 +15,6 @@ use App\Http\Controllers\WhyUsController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\back\adminDashboardController;
-use App\Http\Controllers\back\BookingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InvoiceController;
@@ -160,10 +159,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('admin/cars/{id}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
     Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
     Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryImage'])->name('admin.cars.gallery.delete');
-    Route::get('admin/bookinglist', [BookingController::class, 'bookingList'])->name('booking.list');
-    Route::delete('/booking-requests/delete-all', [BookingController::class, 'deleteAll'])->name('booking-requests.deleteAll');
-    Route::get('/booking-requests/{id}', [BookingController::class, 'requestProfile'])->name('booking-requests.show');
-    Route::patch('/booking-requests/{id}/status', [BookingController::class, 'updateStatus'])->name('bookingRequests.updateStatus');
+    Route::get('admin/InvoiceList', [InvoiceController::class, 'invoiceList'])->name('invoice.list');
+   
 
 
 });
