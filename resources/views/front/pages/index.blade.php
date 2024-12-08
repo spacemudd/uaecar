@@ -11,6 +11,20 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if (session('node_error_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Error!',
+                text: "Please Try again later",
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+@endif
+
+
+
 @if (session('error_message'))
     <script>
         document.addEventListener('DOMContentLoaded', function() {

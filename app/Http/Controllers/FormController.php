@@ -77,11 +77,11 @@ class FormController extends Controller
     private function respondCarStatus($car, $plateNumber, $request)
     {
         if (!$car) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Car not found in the Node system. Plate number: ' . $plateNumber
-            ]);
+            // تخزين الرسالة في سيشن باسم مختلف
+            return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
+        
+        
     
         if ($car['status'] === 'Available') {
             // Store car details in session
