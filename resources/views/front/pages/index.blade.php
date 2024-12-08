@@ -282,13 +282,6 @@
                             <h1 class="display-3 mb-4" style="color:white;">LUXURY</h1>
                         </div>
                     </div>
-
-                    <!-- Dropdown Filter -->
-                    <!-- <select id="priceFilter" class="form-select" style="width: 200px; position: absolute; right: 10px;" onchange="this.form.submit()">
-                        <option value="default">Filter By</option>
-                        <option value="low-to-high" {{ request('price_filter') === 'low-to-high' ? 'selected' : '' }}>Price: Low to High</option>
-                        <option value="high-to-low" {{ request('price_filter') === 'high-to-low' ? 'selected' : '' }}>Price: High to Low</option>
-                    </select> -->
                 </div>
             </div>
 
@@ -421,10 +414,13 @@
                                             <div class="col-lg-12 col-md-12 form-group">
                                                 <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
                                             </div>
+
                                             <div class="col-lg-12 col-md-12">
                                                 <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
                                                 <button type="submit" class="btn contact__btn">Submit</button>
                                             </div>
+                                             
+                                             
                                         </div>
                                     </form>
                                 </div>
@@ -586,14 +582,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 form-group">
-                                                    <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
-                                                </div>
-                                                <div class="col-lg-12 col-md-12">
-                                                    <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
-                                                </div>
-                                                <div class="col-lg-12 col-md-12">
-                                                    <button type="submit" class="booking-button mt-15">Rent Now</button>
-                                                </div>
+                                                <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
+                                                <button type="submit" class="btn contact__btn">Submit</button>
+                                            </div>
+                                             
+
                                             </div>
                                         </form>
                                     </div>
