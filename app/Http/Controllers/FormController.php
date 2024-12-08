@@ -195,7 +195,6 @@ class FormController extends Controller
         
         $carImage = $request->input('car_picture'); // هذا سيأتي من الفورم
         session(['car_picture' => $carImage]);
-        dd(session('car_picture'));
 
 
         
