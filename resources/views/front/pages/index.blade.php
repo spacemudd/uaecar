@@ -786,7 +786,7 @@
         <div class="row gy-2 mt-4" style="background-color: white;">
 <!-- Loop through Sport cars only -->
 @foreach($cars as $car)
-    @if(strtolower($car->categories) === 'sports')  <!-- Filter only luxury cars -->
+    @if(strtolower($car->categories) === 'sports and exotics')  <!-- Filter only luxury cars -->
         <!-- Car Card -->
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" style="text-decoration: none;">
             <div class="card3 w-100">
