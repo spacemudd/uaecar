@@ -114,7 +114,7 @@ class FormController extends Controller
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
         
         if ($response->successful()) {
-            $vehicles = $response->json();     Optionally, you can redirect to the checkout page here
+            $vehicles = $response->json();
             return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         
             if (isset($vehicles['data']) && is_array($vehicles['data'])) {
