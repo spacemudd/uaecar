@@ -77,10 +77,8 @@ class FormController extends Controller
     private function respondCarStatus($car, $plateNumber, $request)
     {
         if (!$car) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Car not found in the Node system. Plate number: ' . $plateNumber
-            ]);
+            // تخزين الرسالة في سيشن باسم مختلف
+            return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
     
         if ($car['status'] === 'Available') {
@@ -116,7 +114,8 @@ class FormController extends Controller
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
         
         if ($response->successful()) {
-            $vehicles = $response->json();
+            $vehicles = $response->json();     Optionally, you can redirect to the checkout page here
+            return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         
             if (isset($vehicles['data']) && is_array($vehicles['data'])) {
                 $selectedCarPrice = $request->input('price_daily');
