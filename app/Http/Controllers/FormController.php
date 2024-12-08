@@ -16,7 +16,10 @@ class FormController extends Controller
     public function submit(Request $request)
     {
         $plateNumber = $request->input('plate_number');
-        $plateNumber = preg_replace('/^[A-B]-/', '', $plateNumber);
+        $plateNumber = preg_replace('/[^0-9]/', '', $plateNumber);
+
+// Now $plateNumber contains only the numbers from the input
+
     
         $token = $this->getAuthToken();
     
