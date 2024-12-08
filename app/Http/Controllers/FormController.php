@@ -81,7 +81,7 @@ class FormController extends Controller
             return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
     
-        if ($car['status'] === 'Available') {
+        if ($car['status'] == 'Available') {
             // Store car details in session
             session([
                 'pickup_date' => $request->input('pickup_date'),
@@ -182,12 +182,6 @@ class FormController extends Controller
                     'car-2-id' => $existingCars[2]->id,
                 ]);
 
-
-        
-                // Optionally, you can dump the existing cars to verify
-                // dd($existingCars); // Uncomment this line to debug
-        
-                // You now have the list of cars that match the plate numbers in $existingCars
             }
         }
         
