@@ -16,10 +16,7 @@ class FormController extends Controller
     public function submit(Request $request)
     {
         $plateNumber = $request->input('plate_number');
-        $plateNumber = preg_replace('/[^0-9]/', '', $plateNumber);
-
-// Now $plateNumber contains only the numbers from the input
-
+        $plateNumber = preg_replace('/^[A-B]-/', '', $plateNumber);
     
         $token = $this->getAuthToken();
     
@@ -80,11 +77,11 @@ class FormController extends Controller
     private function respondCarStatus($car, $plateNumber, $request)
     {
         if (!$car) {
-            // تخزين الرسالة في سيشن باسم مختلف
-            return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
+            return response()->json([
+                'success' => false,
+                'message' => 'Car not found in the Node system. Plate number: ' . $plateNumber
+            ]);
         }
-        
-        
     
         if ($car['status'] === 'Available') {
             // Store car details in session
@@ -104,8 +101,7 @@ class FormController extends Controller
                 'car_image' => $car['image_url'] ?? null,  // Assuming image_url exists in car data
             ]);
     
-            // Optionally, you can redirect to the checkout page here
-            // return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
+            return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
     
         // Proceed with fetching other available cars
