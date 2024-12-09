@@ -84,6 +84,9 @@ class FormController extends Controller
         if ($car['status'] == 'Available') {
             session()->flush();
 
+            $carId = $request->input('car_id');
+            session(['car_id' => $carId]);
+
             // إذا كانت السيارة متاحة
             session([
                 'pickup_date' => $request->input('pickup_date'),

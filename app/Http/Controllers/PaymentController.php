@@ -67,7 +67,7 @@ class PaymentController extends Controller
         $customerCity = session('customer_city');
     
         return redirect()->route('stripe.payment', [
-            'car_id' => $car->id,
+            'car_id' => session('car_id'),
             'rate_daily' => $rateDaily,
             'days' => $days,
             'total' => $total,
