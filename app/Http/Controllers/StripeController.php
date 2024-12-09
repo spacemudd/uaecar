@@ -113,9 +113,9 @@ class StripeController extends Controller
         }
 
         $token = $this->getAuthToken();
-        if (!$token) {
-            return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
-        }
+        // if (!$token) {
+        //     return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
+        // }
 
         $carId = Car::find(session('car_id'));
         $carName = $carId[0]['car_name'];
