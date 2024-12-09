@@ -142,6 +142,8 @@ class StripeController extends Controller
             'Authorization' => 'Bearer ' . $token,
         ])->post($apiUrl, $apiData);
 
+        dd(session()->all());  // هذه الطباعة ستعرض جميع القيم المخزنة في السيشن
+
         return view('front.pages.successView', compact('invoiceId'));
     }
 }
