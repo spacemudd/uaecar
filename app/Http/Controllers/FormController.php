@@ -193,25 +193,5 @@ class FormController extends Controller
     
     
 
-
-    public function reserveCar($car, $request, $token)
-    {
-        return Http::withHeaders([
-            'Authorization' => "Bearer $token",
-            'Content-Type' => 'application/json'
-        ])->post('https://luxuria.crs.ae/api/v1/reservations', [
-            'pickup_date' => $request->input('pickup_date'),  
-            'return_date' => $request->input('return_date'),  
-            'rate_daily' => $request->input('price_daily'),  
-            'pickup_location' => '71',  // Static value
-            'return_location' => '71',  // Static value
-            'status' => 'pending_updates',  // Dynamic value from the car data
-            'vehicle_hint' => $request->input('carName'),  // Dynamic value from the car data
-            'customer_name' =>$request->input('name'),
-            'customer_mobile' => $request->input('phone'),
-            'customer_email' => $request->input('email'),
-        ]);
-    }
-
     
 }
