@@ -117,10 +117,10 @@ class StripeController extends Controller
             return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
         }
         $carId = Car::find(session('car_id'));
-        $carName = $carId[0]['car_name'];
-        $carModel = $carId[0]['model'];
-        $carYear = $carId[0]['year'];
-        $carPlateNumber = $carId[0]['plate_number'];
+        $carName = $carId[1]['car_name'];
+        $carModel = $carId[1]['model'];
+        $carYear = $carId[1]['year'];
+        $carPlateNumber = $carId[1]['plate_number'];
 
         $apiUrl = 'https://luxuria.crs.ae/api/v1/reservations';
         $apiData = [
