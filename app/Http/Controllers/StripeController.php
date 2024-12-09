@@ -89,7 +89,7 @@ class StripeController extends Controller
         $loginUrl = 'https://luxuria.crs.ae/api/v1/auth/jwt/token';
         $response = Http::post($loginUrl, [
             'username' => 'info@rentluxuria.com',
-            'password' => 'm9r&rO1wURXF5CCgLBOf2(cT',
+            'password' => ')ixLj(CQYSE84MRMqm*&dega',
         ]);
 
         if ($response->successful()) {
@@ -113,9 +113,9 @@ class StripeController extends Controller
         }
 
         $token = $this->getAuthToken();
-        // if (!$token) {
-        //     return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
-        // }
+        if (!$token) {
+            return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
+        }
 
         $carId = Car::find(session('car_id'));
         $carName = $carId[0]['car_name'];
