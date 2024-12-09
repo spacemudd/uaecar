@@ -141,7 +141,7 @@ class StripeController extends Controller
             'Authorization' => 'Bearer ' . $token,
         ])->post($apiUrl, $apiData);
 
-
+        dd($carId);
         return view('front.pages.successView', compact('invoiceId'));
     }
 }
