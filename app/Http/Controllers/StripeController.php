@@ -116,7 +116,6 @@ class StripeController extends Controller
         if (!$token) {
             return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
         }
-
         $carId = Car::find(session('car_id'));
         $carName = $carId[0]['car_name'];
         $carModel = $carId[0]['model'];
@@ -142,7 +141,6 @@ class StripeController extends Controller
             'Authorization' => 'Bearer ' . $token,
         ])->post($apiUrl, $apiData);
 
-        dd($carId);  // هذه الطباعة ستعرض جميع القيم المخزنة في السيشن
 
         return view('front.pages.successView', compact('invoiceId'));
     }
