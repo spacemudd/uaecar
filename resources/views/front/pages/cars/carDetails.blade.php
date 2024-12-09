@@ -42,6 +42,61 @@
 </script>
 
 
+
+@if (session('error_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'This Car Is Currently Booked',
+                html: `
+                    <p style="color:red;">{{ session('error_message') }}</p>
+                    <img src="{{ session('car_picture') }}" alt="Selected Car" class="car-image" style="max-width: 50%; height: auto; margin-top: 10px;">
+
+                    <div class="mt-4">
+                        <h5>Recommended Cars</h5>
+                        <div class="row">
+                           <div class="col-4 text-center">
+                                <a href="{{ route('cars.show', ['id' => session('car-0-id')]) }}" style="text-decoration: none; color: inherit;">
+                                    <img src="{{ asset('storage/' . session('car-0-image')) }}" alt="Car 1" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
+                                    <h6>{{ session('car-0-name') . ' ' . session('car-0-model') }}</h6>
+                                    <p>{{ session('car-0-price') }} AED</p>
+                                </a>
+                            </div>
+
+                            <!-- Car 2 -->
+                            <div class="col-4 text-center">
+                                <a href="{{ route('cars.show', ['id' => session('car-1-id')]) }}" style="text-decoration: none; color: inherit;">
+                                    <img src="{{ asset('storage/' . session('car-1-image')) }}" alt="Car 2" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
+                                    <h6>{{ session('car-1-name') . ' ' . session('car-1-model') }}</h6>
+                                    <p>{{ session('car-1-price') }} AED</p>
+                                </a>
+                            </div>
+
+
+                            <!-- Car 3 -->
+                            <div class="col-4 text-center">
+                                <a href="{{ route('cars.show', ['id' => session('car-2-id')]) }}" style="text-decoration: none; color: inherit;">
+                                    <img src="{{ asset('storage/' . session('car-2-image')) }}" alt="Car 3" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
+                                    <h6>{{ session('car-2-name') . ' ' . session('car-2-model') }}</h6>
+                                    <p>{{ session('car-2-price') }} AED</p>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                `,
+                confirmButtonText: 'OK',
+                width: '800px', // Increase width to accommodate all content
+                customClass: {
+                    popup: 'swal-popup-custom'
+                }
+            });
+        });
+    </script>
+
+@endif
+
+
 @section('content')
     <!-- Preloader Section -->
     <div class="preloader-bg"></div>
@@ -187,83 +242,90 @@
 
     <!-- Modal for Booking Form -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Booking Form for {{ $car->car_name }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="booking-box">
-                        <div class="booking-inner clearfix">
-                            <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix">
-                                @csrf
-                                <input type="hidden" name="car_id" value="{{ $car->id }}">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="alert alert-success contact__msg" style="display: none" role="alert">Your message was sent successfully.</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Car Name</label>
-                                        <input name="carName" type="text" class="form-control" value="{{ $car->car_name }}" readonly>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Car ID</label>
-                                        <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <input name="name" type="text" placeholder="Full Name *" required>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <input name="email" type="email" placeholder="Email *" required>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <input name="phone" type="text" placeholder="Phone *" required>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Pick Up Location</label>
-                                        <select name="pickup_city" class="select2 select" style="width: 100%" required>
-                                            <option value="" disabled selected>Select a City</option>
-                                            <option value="Dubai">Dubai</option>
-                                            <option value="Sharjah">Sharjah</option>
-                                            <option value="Al Ain">Al Ain</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                                    <div class="input1_wrapper">
-                                                        <label>Pick Up Date and Time</label>
-                                                        <div class="input1_inner">
-                                                            <input id="pickup_date" name="pickup_date" type="text" class="form-control input" placeholder="Pick Up Date and Time" required>
-                                                        </div>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="bookingModalLabel{{ $car->id }}">Booking Form for {{ $car->car_name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="booking-box">
+                                <div class="booking-inner clearfix">
+                                    <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix" id="bookingForm">
+                                        @csrf
+                                        <input type="hidden" name="car_id" value="{{ $car->id }}">
+                                        <input type="hidden" name="car_picture" value="{{ asset('storage/' . $car->car_picture) }}"> <!-- Hidden input for the car picture -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12">
+                                                <label>Car Name</label>
+                                                <input name="carName" type="text" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <label>Car ID</label>
+                                                <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
+                                            </div>
+                                            <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
+                                            <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
+                                            <div class="col-lg-6 col-md-12">
+                                                <input name="name" type="text" placeholder="Full Name *" required>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <input name="email" type="email" placeholder="Email *" required>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <input name="phone" type="text" placeholder="Phone *" required>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <div class="select1_wrapper">
+                                                    <label>Pick Up Location</label>
+                                                    <div class="select1_inner">
+                                                        <select name="pickup_city" class="select2 select" style="width: 100%" required>
+                                                            <option value="" disabled selected>Select a City</option>
+                                                            <option value="Dubai">Dubai</option>
+                                                            <option value="Sharjah">Sharjah</option>
+                                                            <option value="Alain">Alain</option>
+                                                        </select>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <div class="input1_wrapper">
+                                                    <label>Pick Up Date and Time</label>
+                                                    <div class="input1_inner">
+                                                        <input id="pickup_date" name="pickup_date" type="text" class="form-control input" placeholder="Pick Up Date and Time" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <div class="input1_wrapper">
+                                                    <label>Return Up Date and Time</label>
+                                                    <div class="input1_inner">
+                                                        <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Up Date and Time" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 form-group">
+                                                <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
+                                            </div>
 
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div class="input1_wrapper">
-                                                        <label>Return Up Date and Time</label>
-                                                        <div class="input1_inner">
-                                                            <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Up Date and Time" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                    <div class="col-lg-12 col-md-12 form-group">
-                                        <textarea name="message" id="message" cols="30" rows="4" placeholder="Additional Note"></textarea>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
-                                    </div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <button type="submit" class="booking-button mt-15">Rent Now</button>
-                                    </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <input type="hidden" name="daily_car_price" value="{{ $car->price_daily }}">
+                                                <button type="submit" class="btn contact__btn">Submit</button>
+                                            </div>
+                                             
+                                             
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
 @endsection

@@ -435,8 +435,7 @@
 
         </section>
 
-
-
+        
 
         <!-- Mid Range Section -->
         <section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">

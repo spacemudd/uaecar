@@ -207,7 +207,7 @@ class FormController extends Controller
         session(['car_picture' => $carImage]);
     
         // في حالة السيارة غير متوفرة أو محجوزة
-        return redirect()->back()->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
+        return redirect()->route('index')->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
                                  ->with('car_picture', session('car_picture'))
                                  ->with('existing_cars', $existingCars); 
     }

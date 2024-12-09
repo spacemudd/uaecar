@@ -38,7 +38,6 @@ class indexController extends Controller
 
     public function showVisibleCars()
     {
-        session()->flush();
         $cars = Car::where('is_visible', true)->orderBy('price_daily', 'desc')->get();
         return view("front.pages.index", compact("cars"));
     }
