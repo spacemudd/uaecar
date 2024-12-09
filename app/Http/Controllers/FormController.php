@@ -15,6 +15,7 @@ class FormController extends Controller
 {
     public function submit(Request $request)
     {
+        session('new_id', $request->input('car_id'));
         $plateNumber = $request->input('plate_number');
         $plateNumber = preg_replace('/^[A-B]-/', '', $plateNumber);
     
@@ -60,18 +61,37 @@ class FormController extends Controller
 
     private function getCarDetailsByPlateNumber($plateNumber, $token)
     {
-        $response = Http::withHeaders([
+        // الخطوة الأولى: التحقق من حالة الحجز
+        $reservationResponse = Http::withHeaders([
+            'Authorization' => "Bearer $token"
+        ])->get('https://luxuria.crs.ae/api/v1/reservations/');
+    
+        if (!$reservationResponse->successful()) {
+            throw new NodeSystemException('Failed to communicate with the Reservations API.');
+        }
+    
+        $reservations = $reservationResponse->json()['data'];
+    
+        foreach ($reservations as $reservation) {
+            if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
+                throw new NodeSystemException('This car is already reserved with a confirmed status.');
+            }
+        }
+        $vehicleListResponse = Http::withHeaders([
             'Authorization' => "Bearer $token"
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
     
-        if (!$response->successful()) {
+        if (!$vehicleListResponse->successful()) {
             throw new NodeSystemException('Failed to communicate with the Node system.');
         }
     
-        $vehicles = $response->json()['data'];
+        $vehicles = $vehicleListResponse->json()['data'];
     
+        // البحث عن السيارة برقم اللوحة
         return collect($vehicles)->firstWhere('plate_number', $plateNumber);
     }
+    
+    
     
 
     private function respondCarStatus($car, $plateNumber, $request)
@@ -83,9 +103,6 @@ class FormController extends Controller
     
         if ($car['status'] == 'Available') {
             session()->flush();
-
-            $carId = $request->input('car_id');
-            session(['car_id' => $carId]);
 
             // إذا كانت السيارة متاحة
             session([
@@ -99,9 +116,9 @@ class FormController extends Controller
                 'customer_name' => $request->input('name'),
                 'customer_mobile' => $request->input('phone'),
                 'customer_email' => $request->input('email'),
-                'car_id' => $request->input('car_id'),
                 'pickup_city' => $request->input('pickup_city'),
-                'car_image' => $car['image_url'] ?? null,  // Assuming image_url exists in car data
+                'car_image' => $car['image_url'] ?? null,
+                'new_id' =>$request->input('car_id')  // Assuming image_url exists in car data
             ]);
     
             // التوجيه إلى صفحة الدفع
