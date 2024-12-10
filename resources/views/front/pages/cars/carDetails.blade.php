@@ -43,59 +43,6 @@
 
 
 
-@if (session('error_message'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: 'This Car Is Currently Booked',
-                html: `
-                    <p style="color:red;">{{ session('error_message') }}</p>
-                    <img src="{{ session('car_picture') }}" alt="Selected Car" class="car-image" style="max-width: 50%; height: auto; margin-top: 10px;">
-
-                    <div class="mt-4">
-                        <h5>Recommended Cars</h5>
-                        <div class="row">
-                           <div class="col-4 text-center">
-                                <a href="{{ route('cars.show', ['id' => session('car-0-id')]) }}" style="text-decoration: none; color: inherit;">
-                                    <img src="{{ asset('storage/' . session('car-0-image')) }}" alt="Car 1" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                    <h6>{{ session('car-0-name') . ' ' . session('car-0-model') }}</h6>
-                                    <p>{{ session('car-0-price') }} AED</p>
-                                </a>
-                            </div>
-
-                            <!-- Car 2 -->
-                            <div class="col-4 text-center">
-                                <a href="{{ route('cars.show', ['id' => session('car-1-id')]) }}" style="text-decoration: none; color: inherit;">
-                                    <img src="{{ asset('storage/' . session('car-1-image')) }}" alt="Car 2" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                    <h6>{{ session('car-1-name') . ' ' . session('car-1-model') }}</h6>
-                                    <p>{{ session('car-1-price') }} AED</p>
-                                </a>
-                            </div>
-
-
-                            <!-- Car 3 -->
-                            <div class="col-4 text-center">
-                                <a href="{{ route('cars.show', ['id' => session('car-2-id')]) }}" style="text-decoration: none; color: inherit;">
-                                    <img src="{{ asset('storage/' . session('car-2-image')) }}" alt="Car 3" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                    <h6>{{ session('car-2-name') . ' ' . session('car-2-model') }}</h6>
-                                    <p>{{ session('car-2-price') }} AED</p>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                `,
-                confirmButtonText: 'OK',
-                width: '800px', // Increase width to accommodate all content
-                customClass: {
-                    popup: 'swal-popup-custom'
-                }
-            });
-        });
-    </script>
-
-@endif
-
 
 @section('content')
     <!-- Preloader Section -->
