@@ -96,12 +96,10 @@ class FormController extends Controller
 
     private function respondCarStatus($car, $plateNumber, $request)
     {
-        // Check if the car exists in the system
         if (!$car) {
             return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
     
-        // If the car is available, save data to session and redirect to checkout page
         if ($car['status'] == 'Available') {
             session()->flush();
     
@@ -124,87 +122,64 @@ class FormController extends Controller
             return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
     
-        // Fetch luxury category cars
         $luxuryCars = Car::where('categories', 'Luxury')
-            ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture', 'categories'])
+            ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
             ->toArray();
         array_walk($luxuryCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
-        // Get the node API token
         $token = Cache::get('node_api_token') ?: $this->authenticate();
     
-        // Query the API for car data
         $response = Http::withHeaders(['Authorization' => 'Bearer ' . $token])
             ->get('https://luxuria.crs.ae/api/v1/vehicles');
     
         if ($response->successful()) {
-            // Get available plate numbers from the API
             $apiPlateNumbers = array_map(fn($car) => preg_replace('/\D/', '', $car['plate_number']),
                 array_filter($response->json()['data'], fn($car) => $car['status'] === 'Available')
             );
     
-            // Filter the luxury cars based on availability from the API
             $updatedLuxuryCars = array_filter($luxuryCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
     
-            // Find the luxury car with the lowest price
-            $carWithLowestPrice = array_reduce($updatedLuxuryCars, fn($lowestCar, $car) => 
-                ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar
-            );
+            $carWithLowestPrice = array_reduce($updatedLuxuryCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
-            // Fetch mid-range category cars
             $midRangeCars = Car::where('categories', 'Mid Range')
-                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture', 'categories'])
+                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
                 ->toArray();
             array_walk($midRangeCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
-            // Fetch economy category cars
             $economyCars = Car::where('categories', 'Economy')
-                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture', 'categories'])
+                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
                 ->toArray();
             array_walk($economyCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
-            // Update mid-range cars based on availability from API
             $updatedMidRangeCars = array_filter($midRangeCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
-            $carWithLowestMidRangePrice = array_reduce($updatedMidRangeCars, fn($lowestCar, $car) => 
-                ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar
-            );
+            $carWithLowestMidRangePrice = array_reduce($updatedMidRangeCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
-            // Update economy cars based on availability from API
             $updatedEconomyCars = array_filter($economyCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
-            $carWithLowestEconomyPrice = array_reduce($updatedEconomyCars, fn($lowestCar, $car) => 
-                ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar
-            );
+            $carWithLowestEconomyPrice = array_reduce($updatedEconomyCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
-            // Save car image to session
+            $carCategories = [
+                'luxury' => $carWithLowestPrice,
+                'mid-range' => $carWithLowestMidRangePrice,
+                'economy' => $carWithLowestEconomyPrice,
+            ];
+    
             $carImage = $request->input('car_picture');
             session(['car_picture' => $carImage]);
     
-            // Redirect to the main page with the car details
-            // تحضير البيانات التي سيتم إرسالها مع التوجيه
-            $data = [
-                'error_message' => 'Car is not available for booking at the moment. You may choose another car or check back later.',
-                'car_picture' => session('car_picture')
-            ];
-
-            // إضافة بيانات السيارة المميزة إذا كانت موجودة
-            if ($carWithLowestPrice) {
-                $data['car-luxury-picture'] = $carWithLowestPrice['car_picture'];
-                $data['car-luxury-name'] = $carWithLowestPrice['car_name'];
-                $data['car-luxury-model'] = $carWithLowestPrice['model'];
-                $data['car-luxury-year'] = $carWithLowestPrice['year'];
-                $data['car-luxury-price'] = $carWithLowestPrice['price_daily'];
+            $redirect = redirect()->route('index')
+                ->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
+                ->with('car_picture', session('car_picture'));
+    
+            foreach ($carCategories as $category => $carData) {
+                $redirect = $redirect
+                    ->with("car-{$category}-picture", $carData['car_picture'])
+                    ->with("car-{$category}-name", $carData['car_name'])
+                    ->with("car-{$category}-model", $carData['model'])
+                    ->with("car-{$category}-year", $carData['year'])
+                    ->with("car-{$category}-price", $carData['price_daily']);
             }
-
-            // إضافة بيانات السيارة المتوسطة إذا كانت موجودة
-            if ($carWithLowestMidRangePrice) {
-                $data['car-mid-range-picture'] = $carWithLowestMidRangePrice['car_picture'];
-                $data['car-mid-range-name'] = $carWithLowestMidRangePrice['car_name'];
-            }
-
-            // القيام بالتوجيه مع البيانات المحضرة
-            return redirect()->route('index')->with($data);
-
+    
+            return $redirect;
         }
     }
-        
 }    
