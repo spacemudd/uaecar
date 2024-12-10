@@ -125,90 +125,90 @@ class FormController extends Controller
         }
     
         // إذا كانت السيارة محجوزة أو في حالة أخرى
-        $token = Cache::get('node_api_token');
+        // $token = Cache::get('node_api_token');
     
-        if (!$token) {
-            $token = $this->authenticate();
-        }
+        // if (!$token) {
+        //     $token = $this->authenticate();
+        // }
     
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->get('https://luxuria.crs.ae/api/v1/vehicles');
+        // $response = Http::withHeaders([
+        //     'Authorization' => 'Bearer ' . $token
+        // ])->get('https://luxuria.crs.ae/api/v1/vehicles');
     
-        if ($response->successful()) {
-            $vehicles = $response->json();
+        // if ($response->successful()) {
+        //     $vehicles = $response->json();
             
-            // إذا كانت البيانات متاحة
-            if (isset($vehicles['data']) && is_array($vehicles['data'])) {
-                $selectedCarPrice = $request->input('price_daily');
+        //     // إذا كانت البيانات متاحة
+        //     if (isset($vehicles['data']) && is_array($vehicles['data'])) {
+        //         $selectedCarPrice = $request->input('price_daily');
     
-                $availableCars = array_filter($vehicles['data'], function ($vehicle) use ($selectedCarPrice) {
-                    return isset($vehicle['status']) && $vehicle['status'] === 'Available' &&
-                        isset($vehicle['price_daily']) &&
-                        $vehicle['price_daily'] >= ($selectedCarPrice - 100) &&
-                        $vehicle['price_daily'] <= ($selectedCarPrice + 100);
-                });
+        //         $availableCars = array_filter($vehicles['data'], function ($vehicle) use ($selectedCarPrice) {
+        //             return isset($vehicle['status']) && $vehicle['status'] === 'Available' &&
+        //                 isset($vehicle['price_daily']) &&
+        //                 $vehicle['price_daily'] >= ($selectedCarPrice - 100) &&
+        //                 $vehicle['price_daily'] <= ($selectedCarPrice + 100);
+        //         });
     
-                if (count($availableCars) < 3) {
-                    $availableCars = array_filter($vehicles['data'], function ($vehicle) {
-                        return isset($vehicle['status']) && $vehicle['status'] === 'Available';
-                    });
+        //         if (count($availableCars) < 3) {
+        //             $availableCars = array_filter($vehicles['data'], function ($vehicle) {
+        //                 return isset($vehicle['status']) && $vehicle['status'] === 'Available';
+        //             });
     
-                    shuffle($availableCars);
-                    $availableCars = array_slice($availableCars, 0, 3);
-                }
+        //             shuffle($availableCars);
+        //             $availableCars = array_slice($availableCars, 0, 3);
+        //         }
     
-                // جمع أرقام اللوحات وتخزينها في السيشن
-                $plateNumbers = [];
-                foreach ($availableCars as $car) {
-                    if (isset($car['plate_number'])) {
-                        $plateNumbers[] = $car['plate_number']; // إضافة كل رقم لوحة إلى المصفوفة
-                    }
-                }
+        //         // جمع أرقام اللوحات وتخزينها في السيشن
+        //         $plateNumbers = [];
+        //         foreach ($availableCars as $car) {
+        //             if (isset($car['plate_number'])) {
+        //                 $plateNumbers[] = $car['plate_number']; // إضافة كل رقم لوحة إلى المصفوفة
+        //             }
+        //         }
     
-                session(['available_car_plate_numbers' => $plateNumbers]);
+        //         session(['available_car_plate_numbers' => $plateNumbers]);
     
-                // إزالة الحروف والأرقام غير الرقمية من أرقام اللوحات المخزنة في السيشن
-                $cleanedPlateNumbers = array_map(function ($plate) {
-                    return preg_replace('/[^0-9]/', '', $plate); // إزالة أي شيء غير الأرقام
-                }, $plateNumbers);
+        //         // إزالة الحروف والأرقام غير الرقمية من أرقام اللوحات المخزنة في السيشن
+        //         $cleanedPlateNumbers = array_map(function ($plate) {
+        //             return preg_replace('/[^0-9]/', '', $plate); // إزالة أي شيء غير الأرقام
+        //         }, $plateNumbers);
     
-                // الآن لديك أرقام اللوحات فقط بدون الحروف والـ "-"
-                $existingCars = DB::table('cars')
-                    ->whereIn(DB::raw('REGEXP_REPLACE(plate_number, "[^0-9]", "")'), $cleanedPlateNumbers) // البحث بعد إزالة الحروف والـ "-"
-                    ->get(['id', 'plate_number', 'car_name', 'price_daily', 'car_picture', 'model', 'year']); // إرجاع الـ ID ورقم اللوحة
+        //         // الآن لديك أرقام اللوحات فقط بدون الحروف والـ "-"
+        //         $existingCars = DB::table('cars')
+        //             ->whereIn(DB::raw('REGEXP_REPLACE(plate_number, "[^0-9]", "")'), $cleanedPlateNumbers) // البحث بعد إزالة الحروف والـ "-"
+        //             ->get(['id', 'plate_number', 'car_name', 'price_daily', 'car_picture', 'model', 'year']); // إرجاع الـ ID ورقم اللوحة
     
-                session([
-                    'car-0-name' => $existingCars[0]->car_name,
-                    'car-0-price' => $existingCars[0]->price_daily,
-                    'car-0-image' => $existingCars[0]->car_picture,
-                    'car-0-model' => $existingCars[0]->model,
-                    'car-0-year' => $existingCars[0]->year,
-                    'car-0-id' => $existingCars[0]->id,
-                    'car-1-name' => $existingCars[1]->car_name,
-                    'car-1-price' => $existingCars[1]->price_daily,
-                    'car-1-image' => $existingCars[1]->car_picture,
-                    'car-1-model' => $existingCars[1]->model,
-                    'car-1-year' => $existingCars[1]->year,
-                    'car-1-id' => $existingCars[1]->id,
-                    'car-2-name' => $existingCars[2]->car_name,
-                    'car-2-price' => $existingCars[2]->price_daily,
-                    'car-2-image' => $existingCars[2]->car_picture,
-                    'car-2-model' => $existingCars[2]->model,
-                    'car-2-year' => $existingCars[2]->year,
-                    'car-2-id' => $existingCars[2]->id,
-                ]);
-            }
-        }
+        //         session([
+        //             'car-0-name' => $existingCars[0]->car_name,
+        //             'car-0-price' => $existingCars[0]->price_daily,
+        //             'car-0-image' => $existingCars[0]->car_picture,
+        //             'car-0-model' => $existingCars[0]->model,
+        //             'car-0-year' => $existingCars[0]->year,
+        //             'car-0-id' => $existingCars[0]->id,
+        //             'car-1-name' => $existingCars[1]->car_name,
+        //             'car-1-price' => $existingCars[1]->price_daily,
+        //             'car-1-image' => $existingCars[1]->car_picture,
+        //             'car-1-model' => $existingCars[1]->model,
+        //             'car-1-year' => $existingCars[1]->year,
+        //             'car-1-id' => $existingCars[1]->id,
+        //             'car-2-name' => $existingCars[2]->car_name,
+        //             'car-2-price' => $existingCars[2]->price_daily,
+        //             'car-2-image' => $existingCars[2]->car_picture,
+        //             'car-2-model' => $existingCars[2]->model,
+        //             'car-2-year' => $existingCars[2]->year,
+        //             'car-2-id' => $existingCars[2]->id,
+        //         ]);
+        //     }
+        // }
     
-        // إرسال صورة السيارة في الجلسة
-        $carImage = $request->input('car_picture');
-        session(['car_picture' => $carImage]);
+        // // إرسال صورة السيارة في الجلسة
+        // $carImage = $request->input('car_picture');
+        // session(['car_picture' => $carImage]);
     
-        // في حالة السيارة غير متوفرة أو محجوزة
-        return redirect()->route('index')->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
-                                 ->with('car_picture', session('car_picture'))
-                                 ->with('existing_cars', $existingCars); 
+        // // في حالة السيارة غير متوفرة أو محجوزة
+        // return redirect()->route('index')->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
+        //                          ->with('car_picture', session('car_picture'))
+        //                          ->with('existing_cars', $existingCars); 
     }
     
     
