@@ -123,7 +123,7 @@ class FormController extends Controller
         }
     
         $luxuryCars = Car::where('categories', 'Luxury')
-            ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
+            ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture', 'categories'])
             ->toArray();
         array_walk($luxuryCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
@@ -142,12 +142,12 @@ class FormController extends Controller
             $carWithLowestPrice = array_reduce($updatedLuxuryCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
             $midRangeCars = Car::where('categories', 'Mid Range')
-                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
+                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture', 'cartegories'])
                 ->toArray();
             array_walk($midRangeCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
             $economyCars = Car::where('categories', 'Economy')
-                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
+                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture','categories'])
                 ->toArray();
             array_walk($economyCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
