@@ -26,6 +26,7 @@
 
 
 @if (session('error_message'))
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
@@ -39,29 +40,38 @@
                         <div class="row">
                            <div class="col-4 text-center">
                                 <a href="#" style="text-decoration: none; color: inherit;">
-                                    <img src="{{ asset('storage/' . session('car-0-image')) }}" alt="Car 1" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                    <h6>{{ session('car-0-name') . ' ' . session('car-0-model') }}</h6>
-                                    <p>{{ session('car-0-price') }} AED</p>
+                                    @if(session('car-luxury-picture') && session('car-luxury-name') && session('car-luxury-model') && session('car-luxury-price'))
+                                        <img src="{{ asset('storage/' . session('car-luxury-picture')) }}" alt="Car 1" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
+                                        <h6>{{ session('car-luxury-name') . ' ' . session('car-luxury-model') }}</h6>
+                                        <p>{{ session('car-luxury-price') }} AED</p>
+                                    @else
+                                        <p>لا توجد سيارات موصى بها حالياً.</p>
+                                    @endif
                                 </a>
+
                             </div>
 
                             <!-- Car 2 -->
                             <div class="col-4 text-center">
                                 <a href="#" style="text-decoration: none; color: inherit;">
-                                    <img src="{{ asset('storage/' . session('car-1-image')) }}" alt="Car 2" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                    <h6>{{ session('car-1-name') . ' ' . session('car-1-model') }}</h6>
-                                    <p>{{ session('car-1-price') }} AED</p>
+                                 <!-- عرض سيارات متوسطة (Mid Range) -->
+                                    @if(session('car-mid-range-picture'))
+                                        <img src="{{ asset('storage/' . session('car-mid-range-picture')) }}" alt="Mid Range Car" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
+                                        <h6>{{ session('car-mid-range-name') . ' ' . session('car-mid-range-model') }}</h6>
+                                        <p>{{ session('car-mid-range-price') }} AED</p>
+                                    @endif
                                 </a>
                             </div>
 
 
                             <!-- Car 3 -->
                             <div class="col-4 text-center">
-                                <a href="#" style="text-decoration: none; color: inherit;">
-                                    <img src="{{ asset('storage/' . session('car-2-image')) }}" alt="Car 3" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                    <h6>{{ session('car-2-name') . ' ' . session('car-2-model') }}</h6>
-                                    <p>{{ session('car-2-price') }} AED</p>
-                                </a>
+                                <!-- عرض سيارات اقتصادية (Economy) -->
+                                @if(session('car-economy-picture'))
+                                    <img src="{{ asset('storage/' . session('car-economy-picture')) }}" alt="Economy Car" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
+                                    <h6>{{ session('car-economy-name') . ' ' . session('car-economy-model') }}</h6>
+                                    <p>{{ session('car-economy-price') }} AED</p>
+                                @endif
                             </div>
 
                         </div>
