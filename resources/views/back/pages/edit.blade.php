@@ -86,11 +86,11 @@
                                 <div class="form-group col-md-6 col-lg-4">
                                     <label for="categories">Categories:</label>
                                     <select class="form-control" id="categories" name="categories">
-                                        <option value="luxury" {{ old('categories', $categoryValue) == 'luxury' ? 'selected' : '' }}>Luxury</option>
-                                        <option value="mid range" {{ old('categories', $categoryValue) == 'mid range' ? 'selected' : '' }}>Mid Range</option>
-                                        <option value="economy" {{ old('categories', $categoryValue) == 'economy' ? 'selected' : '' }}>Economy</option>
-                                        <option value="sports and exotics" {{ old('categories', $categoryValue) == 'Sports and Exotics' ? 'selected' : '' }}>Sports and Exotics</option>
-                                        <option value="vans and buses" {{ old('categories', $categoryValue) == 'Vans and Buses' ? 'selected' : '' }}>Vans and Buses</option>
+                                        <option value="Luxury" {{ old('categories', $categoryValue) == 'luxury' ? 'selected' : '' }}>Luxury</option>
+                                        <option value="Mid Range" {{ old('categories', $categoryValue) == 'mid range' ? 'selected' : '' }}>Mid Range</option>
+                                        <option value="Rconomy" {{ old('categories', $categoryValue) == 'economy' ? 'selected' : '' }}>Economy</option>
+                                        <option value="Sports and Exotics" {{ old('categories', $categoryValue) == 'Sports and Exotics' ? 'selected' : '' }}>Sports and Exotics</option>
+                                        <option value="Vans and Buses" {{ old('categories', $categoryValue) == 'Vans and Buses' ? 'selected' : '' }}>Vans and Buses</option>
 
                                     </select>
                                 </div>
