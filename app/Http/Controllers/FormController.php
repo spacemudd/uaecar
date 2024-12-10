@@ -165,28 +165,35 @@ class FormController extends Controller
             return redirect()->route('index')
                     ->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
                     ->with('car_picture', session('car_picture'))
+    // التحقق من وجود بيانات السيارة الفاخرة (Luxury)
+    ->when($carWithLowestPrice, function($query) use ($carWithLowestPrice) {
+        return $query
+            ->with('car-luxury-picture', $carWithLowestPrice['car_picture'])
+            ->with('car-luxury-name', $carWithLowestPrice['car_name'])
+            ->with('car-luxury-model', $carWithLowestPrice['model'])
+            ->with('car-luxury-year', $carWithLowestPrice['year'])
+            ->with('car-luxury-price', $carWithLowestPrice['price_daily']);
+    })
 
-                    // للسيارة الفاخرة (Luxury)
-                    ->with('car-luxury-picture', $carWithLowestPrice['car_picture'])
-                    ->with('car-luxury-name', $carWithLowestPrice['car_name'])
-                    ->with('car-luxury-model', $carWithLowestPrice['model'])
-                    ->with('car-luxury-year', $carWithLowestPrice['year'])
-                    ->with('car-luxury-price', $carWithLowestPrice['price_daily'])
+    // التحقق من وجود بيانات السيارة المتوسطة (Mid Range)
+    ->when($carWithLowestMidRangePrice, function($query) use ($carWithLowestMidRangePrice) {
+        return $query
+            ->with('car-mid-range-picture', $carWithLowestMidRangePrice['car_picture'])
+            ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name'])
+            ->with('car-mid-range-model', $carWithLowestMidRangePrice['model'])
+            ->with('car-mid-range-year', $carWithLowestMidRangePrice['year'])
+            ->with('car-mid-range-price', $carWithLowestMidRangePrice['price_daily']);
+    })
 
-                    // للسيارة المتوسطة (Mid Range)
-                    ->with('car-mid-range-picture', $carWithLowestMidRangePrice['car_picture'])
-                    ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name'])
-                    ->with('car-mid-range-model', $carWithLowestMidRangePrice['model'])
-                    ->with('car-mid-range-year', $carWithLowestMidRangePrice['year'])
-                    ->with('car-mid-range-price', $carWithLowestMidRangePrice['price_daily'])
-
-                    // للسيارة الاقتصادية (Economy)
-                    ->with('car-economy-picture', $carWithLowestEconomyPrice['car_picture'])
-                    ->with('car-economy-name', $carWithLowestEconomyPrice['car_name'])
-                    ->with('car-economy-model', $carWithLowestEconomyPrice['model'])
-                    ->with('car-economy-year', $carWithLowestEconomyPrice['year'])
-                    ->with('car-economy-price', $carWithLowestEconomyPrice['price_daily']);
-
+    // التحقق من وجود بيانات السيارة الاقتصادية (Economy)
+    ->when($carWithLowestEconomyPrice, function($query) use ($carWithLowestEconomyPrice) {
+        return $query
+            ->with('car-economy-picture', $carWithLowestEconomyPrice['car_picture'])
+            ->with('car-economy-name', $carWithLowestEconomyPrice['car_name'])
+            ->with('car-economy-model', $carWithLowestEconomyPrice['model'])
+            ->with('car-economy-year', $carWithLowestEconomyPrice['year'])
+            ->with('car-economy-price', $carWithLowestEconomyPrice['price_daily']);
+    });
         }
     }
 }    

@@ -40,13 +40,13 @@
                         <div class="row">
                            <div class="col-4 text-center">
                                 <a href="#" style="text-decoration: none; color: inherit;">
-                                    @if(session('car-luxury-picture') && session('car-luxury-name') && session('car-luxury-model') && session('car-luxury-price'))
-                                        <img src="{{ asset('storage/' . session('car-luxury-picture')) }}" alt="Car 1" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                        <h6>{{ session('car-luxury-name') . ' ' . session('car-luxury-model') }}</h6>
-                                        <p>{{ session('car-luxury-price') }} AED</p>
-                                    @else
-                                        <p>لا توجد سيارات موصى بها حالياً.</p>
-                                    @endif
+                                    @if(isset($carWithLowestPrice))
+                                    <div>
+                                        <img src="{{ $carWithLowestPrice['car_picture'] }}" alt="Luxury Car">
+                                        <p>{{ $carWithLowestPrice['car_name'] }} - {{ $carWithLowestPrice['model'] }} ({{ $carWithLowestPrice['year'] }})</p>
+                                        <p>Price: {{ $carWithLowestPrice['price_daily'] }}</p>
+                                    </div>
+                                @endif
                                 </a>
 
                             </div>
@@ -56,9 +56,11 @@
                                 <a href="#" style="text-decoration: none; color: inherit;">
                                  <!-- عرض سيارات متوسطة (Mid Range) -->
                                     @if(session('car-mid-range-picture'))
-                                        <img src="{{ asset('storage/' . session('car-mid-range-picture')) }}" alt="Mid Range Car" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                        <h6>{{ session('car-mid-range-name') . ' ' . session('car-mid-range-model') }}</h6>
-                                        <p>{{ session('car-mid-range-price') }} AED</p>
+                                     <div>
+                                        <img src="{{ $carWithLowestMidRangePrice['car_picture'] }}" alt="Mid Range Car">
+                                        <p>{{ $carWithLowestMidRangePrice['car_name'] }} - {{ $carWithLowestMidRangePrice['model'] }} ({{ $carWithLowestMidRangePrice['year'] }})</p>
+                                        <p>Price: {{ $carWithLowestMidRangePrice['price_daily'] }}</p>
+                                    </div>
                                     @endif
                                 </a>
                             </div>
@@ -68,9 +70,9 @@
                             <div class="col-4 text-center">
                                 <!-- عرض سيارات اقتصادية (Economy) -->
                                 @if(session('car-economy-picture'))
-                                    <img src="{{ asset('storage/' . session('car-economy-picture')) }}" alt="Economy Car" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                    <h6>{{ session('car-economy-name') . ' ' . session('car-economy-model') }}</h6>
-                                    <p>{{ session('car-economy-price') }} AED</p>
+                                  <img src="{{ $carWithLowestEconomyPrice['car_picture'] }}" alt="Economy Car">
+                                    <p>{{ $carWithLowestEconomyPrice['car_name'] }} - {{ $carWithLowestEconomyPrice['model'] }} ({{ $carWithLowestEconomyPrice['year'] }})</p>
+                                    <p>Price: {{ $carWithLowestEconomyPrice['price_daily'] }}</p>
                                 @endif
                             </div>
 
