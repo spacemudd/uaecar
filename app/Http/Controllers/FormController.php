@@ -180,22 +180,30 @@ class FormController extends Controller
             session(['car_picture' => $carImage]);
     
             // Redirect to the main page with the car details
-            return redirect()->route('index')
-                ->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
-                ->with('car_picture', session('car_picture'))
-                ->when($carWithLowestPrice, function($query) use ($carWithLowestPrice) {
-                    return $query
-                        ->with('car-luxury-picture', $carWithLowestPrice['car_picture'])
-                        ->with('car-luxury-name', $carWithLowestPrice['car_name'])
-                        ->with('car-luxury-model', $carWithLowestPrice['model'])
-                        ->with('car-luxury-year', $carWithLowestPrice['year'])
-                        ->with('car-luxury-price', $carWithLowestPrice['price_daily']);
-                })
-                ->when($carWithLowestMidRangePrice, function($query) use ($carWithLowestMidRangePrice) {
-                    return $query
-                        ->with('car-mid-range-picture', $carWithLowestMidRangePrice['car_picture'])
-                        ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name']);
-                });
+            // تحضير البيانات التي سيتم إرسالها مع التوجيه
+            $data = [
+                'error_message' => 'Car is not available for booking at the moment. You may choose another car or check back later.',
+                'car_picture' => session('car_picture')
+            ];
+
+            // إضافة بيانات السيارة المميزة إذا كانت موجودة
+            if ($carWithLowestPrice) {
+                $data['car-luxury-picture'] = $carWithLowestPrice['car_picture'];
+                $data['car-luxury-name'] = $carWithLowestPrice['car_name'];
+                $data['car-luxury-model'] = $carWithLowestPrice['model'];
+                $data['car-luxury-year'] = $carWithLowestPrice['year'];
+                $data['car-luxury-price'] = $carWithLowestPrice['price_daily'];
+            }
+
+            // إضافة بيانات السيارة المتوسطة إذا كانت موجودة
+            if ($carWithLowestMidRangePrice) {
+                $data['car-mid-range-picture'] = $carWithLowestMidRangePrice['car_picture'];
+                $data['car-mid-range-name'] = $carWithLowestMidRangePrice['car_name'];
+            }
+
+            // القيام بالتوجيه مع البيانات المحضرة
+            return redirect()->route('index')->with($data);
+
         }
     }
         
