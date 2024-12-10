@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class FormController extends Controller
 {
     /**
-     * Handle the car submission form.
+     * Handle the car submission formm.
      */
     public function submit(Request $request)
     {
