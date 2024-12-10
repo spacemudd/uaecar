@@ -157,29 +157,36 @@ class FormController extends Controller
             $updatedEconomyCars = array_filter($economyCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
             $carWithLowestEconomyPrice = array_reduce($updatedEconomyCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
-            $carCategories = [
-                'luxury' => $carWithLowestPrice,
-                'mid-range' => $carWithLowestMidRangePrice,
-                'economy' => $carWithLowestEconomyPrice,
-            ];
+          
     
             $carImage = $request->input('car_picture');
             session(['car_picture' => $carImage]);
     
-            $redirect = redirect()->route('index')
-                ->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
-                ->with('car_picture', session('car_picture'));
-    
-            foreach ($carCategories as $category => $carData) {
-                $redirect = $redirect
-                    ->with("car-{$category}-picture", $carData['car_picture'])
-                    ->with("car-{$category}-name", $carData['car_name'])
-                    ->with("car-{$category}-model", $carData['model'])
-                    ->with("car-{$category}-year", $carData['year'])
-                    ->with("car-{$category}-price", $carData['price_daily']);
-            }
-    
-            return $redirect;
+            return redirect()->route('index')
+                    ->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
+                    ->with('car_picture', session('car_picture'))
+
+                    // للسيارة الفاخرة (Luxury)
+                    ->with('car-luxury-picture', $carWithLowestPrice['car_picture'])
+                    ->with('car-luxury-name', $carWithLowestPrice['car_name'])
+                    ->with('car-luxury-model', $carWithLowestPrice['model'])
+                    ->with('car-luxury-year', $carWithLowestPrice['year'])
+                    ->with('car-luxury-price', $carWithLowestPrice['price_daily'])
+
+                    // للسيارة المتوسطة (Mid Range)
+                    ->with('car-mid-range-picture', $carWithLowestMidRangePrice['car_picture'])
+                    ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name'])
+                    ->with('car-mid-range-model', $carWithLowestMidRangePrice['model'])
+                    ->with('car-mid-range-year', $carWithLowestMidRangePrice['year'])
+                    ->with('car-mid-range-price', $carWithLowestMidRangePrice['price_daily'])
+
+                    // للسيارة الاقتصادية (Economy)
+                    ->with('car-economy-picture', $carWithLowestEconomyPrice['car_picture'])
+                    ->with('car-economy-name', $carWithLowestEconomyPrice['car_name'])
+                    ->with('car-economy-model', $carWithLowestEconomyPrice['model'])
+                    ->with('car-economy-year', $carWithLowestEconomyPrice['year'])
+                    ->with('car-economy-price', $carWithLowestEconomyPrice['price_daily']);
+
         }
     }
 }    
