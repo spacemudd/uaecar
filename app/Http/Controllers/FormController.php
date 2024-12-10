@@ -96,10 +96,12 @@ class FormController extends Controller
 
     private function respondCarStatus($car, $plateNumber, $request)
     {
+        // التحقق من وجود السيارة في النظام
         if (!$car) {
             return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
     
+        // إذا كانت السيارة متاحة، يتم حفظ البيانات في الجلسة والتوجيه إلى صفحة الدفع
         if ($car['status'] == 'Available') {
             session()->flush();
     
@@ -122,6 +124,7 @@ class FormController extends Controller
             return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
     
+        // استعلام سيارات الفئة الفاخرة (Luxury)
         $luxuryCars = Car::where('categories', 'Luxury')
             ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture', 'categories'])
             ->toArray();
@@ -129,70 +132,74 @@ class FormController extends Controller
     
         $token = Cache::get('node_api_token') ?: $this->authenticate();
     
+        // استعلام من API
         $response = Http::withHeaders(['Authorization' => 'Bearer ' . $token])
             ->get('https://luxuria.crs.ae/api/v1/vehicles');
     
         if ($response->successful()) {
+            // استخراج أرقام اللوحات المتاحة من API
             $apiPlateNumbers = array_map(fn($car) => preg_replace('/\D/', '', $car['plate_number']),
                 array_filter($response->json()['data'], fn($car) => $car['status'] === 'Available')
             );
     
+            // تحديث السيارات الفاخرة مع التحقق من توفرها في API
             $updatedLuxuryCars = array_filter($luxuryCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
     
+            // العثور على السيارة ذات السعر اليومي الأقل
             $carWithLowestPrice = array_reduce($updatedLuxuryCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
+            // استعلام سيارات الفئة المتوسطة (Mid Range)
             $midRangeCars = Car::where('categories', 'Mid Range')
                 ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture', 'categories'])
                 ->toArray();
             array_walk($midRangeCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
+            // استعلام سيارات الفئة الاقتصادية (Economy)
             $economyCars = Car::where('categories', 'Economy')
                 ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture','categories'])
                 ->toArray();
             array_walk($economyCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
     
+            // تحديث سيارات الفئة المتوسطة والتحقق من توفرها
             $updatedMidRangeCars = array_filter($midRangeCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
             $carWithLowestMidRangePrice = array_reduce($updatedMidRangeCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
+            // تحديث سيارات الفئة الاقتصادية والتحقق من توفرها
             $updatedEconomyCars = array_filter($economyCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
             $carWithLowestEconomyPrice = array_reduce($updatedEconomyCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
-    
     
             $carImage = $request->input('car_picture');
             session(['car_picture' => $carImage]);
     
+            // التحقق من وجود بيانات السيارة الفاخرة، المتوسطة والاقتصادية ثم إرسالها إلى الواجهة
             return redirect()->route('index')
-                    ->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
-                    ->with('car_picture', session('car_picture'))
-    // التحقق من وجود بيانات السيارة الفاخرة (Luxury)
-    ->when($carWithLowestPrice, function($query) use ($carWithLowestPrice) {
-        return $query
-            ->with('car-luxury-picture', $carWithLowestPrice['car_picture'])
-            ->with('car-luxury-name', $carWithLowestPrice['car_name'])
-            ->with('car-luxury-model', $carWithLowestPrice['model'])
-            ->with('car-luxury-year', $carWithLowestPrice['year'])
-            ->with('car-luxury-price', $carWithLowestPrice['price_daily']);
-    })
-
-    // التحقق من وجود بيانات السيارة المتوسطة (Mid Range)
-    ->when($carWithLowestMidRangePrice, function($query) use ($carWithLowestMidRangePrice) {
-        return $query
-            ->with('car-mid-range-picture', $carWithLowestMidRangePrice['car_picture'])
-            ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name'])
-            ->with('car-mid-range-model', $carWithLowestMidRangePrice['model'])
-            ->with('car-mid-range-year', $carWithLowestMidRangePrice['year'])
-            ->with('car-mid-range-price', $carWithLowestMidRangePrice['price_daily']);
-    })
-
-    // التحقق من وجود بيانات السيارة الاقتصادية (Economy)
-    ->when($carWithLowestEconomyPrice, function($query) use ($carWithLowestEconomyPrice) {
-        return $query
-            ->with('car-economy-picture', $carWithLowestEconomyPrice['car_picture'])
-            ->with('car-economy-name', $carWithLowestEconomyPrice['car_name'])
-            ->with('car-economy-model', $carWithLowestEconomyPrice['model'])
-            ->with('car-economy-year', $carWithLowestEconomyPrice['year'])
-            ->with('car-economy-price', $carWithLowestEconomyPrice['price_daily']);
-    });
+                ->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
+                ->with('car_picture', session('car_picture'))
+                ->when($carWithLowestPrice, function($query) use ($carWithLowestPrice) {
+                    return $query
+                        ->with('car-luxury-picture', $carWithLowestPrice['car_picture'])
+                        ->with('car-luxury-name', $carWithLowestPrice['car_name'])
+                        ->with('car-luxury-model', $carWithLowestPrice['model'])
+                        ->with('car-luxury-year', $carWithLowestPrice['year'])
+                        ->with('car-luxury-price', $carWithLowestPrice['price_daily']);
+                })
+                ->when($carWithLowestMidRangePrice, function($query) use ($carWithLowestMidRangePrice) {
+                    return $query
+                        ->with('car-mid-range-picture', $carWithLowestMidRangePrice['car_picture'])
+                        ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name'])
+                        ->with('car-mid-range-model', $carWithLowestMidRangePrice['model'])
+                        ->with('car-mid-range-year', $carWithLowestMidRangePrice['year'])
+                        ->with('car-mid-range-price', $carWithLowestMidRangePrice['price_daily']);
+                })
+                ->when($carWithLowestEconomyPrice, function($query) use ($carWithLowestEconomyPrice) {
+                    return $query
+                        ->with('car-economy-picture', $carWithLowestEconomyPrice['car_picture'])
+                        ->with('car-economy-name', $carWithLowestEconomyPrice['car_name'])
+                        ->with('car-economy-model', $carWithLowestEconomyPrice['model'])
+                        ->with('car-economy-year', $carWithLowestEconomyPrice['year'])
+                        ->with('car-economy-price', $carWithLowestEconomyPrice['price_daily']);
+                });
         }
     }
+    
 }    
