@@ -157,7 +157,7 @@ class FormController extends Controller
             $updatedEconomyCars = array_filter($economyCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
             $carWithLowestEconomyPrice = array_reduce($updatedEconomyCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
     
-            dd($carWithLowestEconomyPrice);
+            dd($carWithLowestMidRangePrice);
     
             $carImage = $request->input('car_picture');
             session(['car_picture' => $carImage]);
