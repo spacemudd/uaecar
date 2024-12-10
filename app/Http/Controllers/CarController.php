@@ -154,7 +154,7 @@ class CarController extends Controller
             'chassis_number' => 'nullable|string|max:255',
             'kilo_daily' => 'nullable|integer', // Validate kilo daily // Add validation for chassis number // Validate multiple images
             'kilo_monthly' => 'nullable|integer',
-            'categories' => 'nullable|string|in:Luxury,Premium,Economy', // Updated
+            'categories' => 'nullable|string|in:Luxury,Mid Range,Economy, Vans and Buses,Sports and Exotics', // Updated
             'color' => 'nullable|string|in:Red,Blue,Green,Black,White,Gray', // Updated
              // Validate kilo daily // Add validation for chassis number // Validate multiple images
             'doors' => 'nullable|integer|min:2|max:5', // New validation for doors
