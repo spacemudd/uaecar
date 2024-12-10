@@ -200,59 +200,57 @@ class FormController extends Controller
         //             'car-2-id' => $existingCars[2]->id,
         //         ]);
         //     }
-        // }// الخطوة 1: جلب السيارات الفاخرة من قاعدة البيانات
-        $luxuryCars = Car::where('categories', 'Luxury')
-            ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
-            ->toArray();
+        // }
+// الخطوة 1: جلب السيارات الفاخرة من قاعدة البيانات
+$luxuryCars = Car::where('categories', 'Luxury')
+->get(['id', 'plate_number', 'categories']); // تحديد الأعمدة المطلوبة فقط
 
-        array_walk($luxuryCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
+// تحويل النتيجة إلى مصفوفة
+$luxuryCarsArray = $luxuryCars->toArray();
 
-        $token = Cache::get('node_api_token') ?: $this->authenticate();
-
-        $response = Http::withHeaders(['Authorization' => 'Bearer ' . $token])
-            ->get('https://luxuria.crs.ae/api/v1/vehicles');
-
-        if ($response->successful()) {
-            $apiPlateNumbers = array_map(fn($car) => preg_replace('/\D/', '', $car['plate_number']),
-                array_filter($response->json()['data'], fn($car) => $car['status'] === 'Available')
-            );
-
-            $updatedLuxuryCars = array_filter($luxuryCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
-
-            $carWithLowestPrice = array_reduce($updatedLuxuryCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
-
-
-
-            $midRangeCars = Car::where('categories', 'Mid Range')
-                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
-                ->toArray();
-
-            array_walk($midRangeCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
-
-            // استعلام للسيارات من نوع "Economy"
-            $economyCars = Car::where('categories', 'Economy')
-                ->get(['id', 'plate_number', 'price_daily', 'car_name', 'model', 'year', 'car_picture'])
-                ->toArray();
-
-            array_walk($economyCars, fn(&$car) => $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']));
-
-            // هنا يمكنك تكرار نفس العملية التي قمت بها مع السيارات الفاخرة (luxury) للـ Mid Range و Economy
-            $updatedMidRangeCars = array_filter($midRangeCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
-            $carWithLowestMidRangePrice = array_reduce($updatedMidRangeCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
-
-            $updatedEconomyCars = array_filter($economyCars, fn($car) => in_array($car['plate_number'], $apiPlateNumbers));
-            $carWithLowestEconomyPrice = array_reduce($updatedEconomyCars, fn($lowestCar, $car) => ($lowestCar === null || $car['price_daily'] < $lowestCar['price_daily']) ? $car : $lowestCar);
-
-            $carCategories = [
-                'luxury' => $carWithLowestPrice,
-                'mid-range' => $carWithLowestMidRangePrice,
-                'economy' => $carWithLowestEconomyPrice,
-            ];
-            
-
-
+// تنظيف `plate_number` ليحتوي فقط على الأرقام
+foreach ($luxuryCarsArray as &$car) {
+$car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']);
 }
 
+
+// إذا كانت السيارة محجوزة أو في حالة أخرى
+        $token = Cache::get('node_api_token');
+    
+        if (!$token) {
+            $token = $this->authenticate();
+        }
+    
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->get('https://luxuria.crs.ae/api/v1/vehicles');
+    
+        
+
+
+
+if ($response->successful()) {
+$apiCars = $response->json(); // تحويل الاستجابة إلى JSON
+
+// استخراج أرقام اللوحات فقط من بيانات الـ API
+$apiPlateNumbers = array_map(function ($car) {
+    return preg_replace('/\D/', '', $car['plate_number']);
+}, $apiCars);
+
+// الخطوة 3: تصفية المصفوفة للاحتفاظ فقط بالسيارات المطابقة
+$filteredCars = array_filter($luxuryCarsArray, function ($car) use ($apiPlateNumbers) {
+    return in_array($car['plate_number'], $apiPlateNumbers);
+});
+
+// عرض السيارات المطابقة فقط
+dd($filteredCars);
+} else {
+// معالجة الخطأ إذا فشل الاتصال بالـ API
+return response()->json(['error' => 'Failed to fetch data from API'], 500);
+}
+
+
+           
 
         // إرسال صورة السيارة في الجلسة
         $carImage = $request->input('car_picture');
@@ -261,11 +259,7 @@ class FormController extends Controller
         // في حالة السيارة غير متوفرة أو محجوزة
         return redirect()->route('index')->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
                                  ->with('car_picture', session('car_picture'))
-                                 ->with('car-luxury-picture', $carWithLowestPrice['car_picture'])
-                                 ->with('car-luxury-name', $carWithLowestPrice['car_name'])
-                                 ->with('car-luxury-model', $carWithLowestPrice['model'])
-                                 ->with('car-luxury-year', $carWithLowestPrice['year'])
-                                 ->with('car-luxury-price', $carWithLowestPrice['price_daily']);
+                                 ->with('existing_cars'); 
     }
     
     
