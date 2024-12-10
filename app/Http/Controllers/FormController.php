@@ -9,32 +9,34 @@ use App\Exceptions\NodeSystemException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
-
-
 class FormController extends Controller
 {
+    /**
+     * Handle the car submission form.
+     */
     public function submit(Request $request)
     {
-        session('new_id', $request->input('car_id'));
-        $plateNumber = $request->input('plate_number');
-        $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $plateNumber);    
+        session(['new_id' => $request->input('car_id')]);
+        $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $request->input('plate_number'));
+
         $token = $this->getAuthToken();
-    
         $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
-    
+
         return $this->respondCarStatus($car, $plateNumber, $request);
     }
-    
 
+    /**
+     * Retrieve the authentication token from cache or generate a new one.
+     */
     private function getAuthToken()
     {
         $token = Cache::get('node_api_token');
-        if (!$token) {
-            $token = $this->authenticate();
-        }
-        return $token;
+        return $token ?: $this->authenticate();
     }
 
+    /**
+     * Authenticate with the API and cache the token.
+     */
     private function authenticate()
     {
         $username = 'info@rentluxuria.com';
@@ -52,167 +54,157 @@ class FormController extends Controller
                 Cache::put('node_api_token', $token, now()->addHours(1));
                 return $token;
             }
-            throw new NodeSystemException('Authentication failed: access_token not found.');
+            throw new NodeSystemException('Authentication failed: Token not found.');
         }
 
         throw new NodeSystemException('Authentication failed: ' . ($response->json()['message'] ?? 'Unknown error.'));
     }
 
+    /**
+     * Fetch car details by its plate number.
+     */
     private function getCarDetailsByPlateNumber($plateNumber, $token)
     {
-        // الخطوة الأولى: التحقق من حالة الحجز
-        $reservationResponse = Http::withHeaders([
-            'Authorization' => "Bearer $token"
-        ])->get('https://luxuria.crs.ae/api/v1/reservations/');
-    
-        if (!$reservationResponse->successful()) {
-            throw new NodeSystemException('Failed to communicate with the Reservations API.');
-        }
-    
-        $reservations = $reservationResponse->json()['data'];
-    
-        foreach ($reservations as $reservation) {
-            if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
-                throw new NodeSystemException('This car is already reserved with a confirmed status.');
-            }
-        }
+        $this->checkIfCarIsReserved($plateNumber, $token);
+
         $vehicleListResponse = Http::withHeaders([
             'Authorization' => "Bearer $token"
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
-    
+
         if (!$vehicleListResponse->successful()) {
             throw new NodeSystemException('Failed to communicate with the Node system.');
         }
-    
+
         $vehicles = $vehicleListResponse->json()['data'];
-    
-        // البحث عن السيارة برقم اللوحة
         return collect($vehicles)->firstWhere('plate_number', $plateNumber);
     }
-    
-    
-    
 
+    /**
+     * Check if the car is already reserved with a confirmed status.
+     */
+    private function checkIfCarIsReserved($plateNumber, $token)
+    {
+        $reservationResponse = Http::withHeaders([
+            'Authorization' => "Bearer $token"
+        ])->get('https://luxuria.crs.ae/api/v1/reservations/');
+
+        if (!$reservationResponse->successful()) {
+            throw new NodeSystemException('Failed to communicate with the Reservations API.');
+        }
+
+        $reservations = $reservationResponse->json()['data'];
+        foreach ($reservations as $reservation) {
+            if ($reservation['status'] === 'Confirmed' &&
+                isset($reservation['vehicle_hint']) &&
+                str_contains($reservation['vehicle_hint'], $plateNumber)) {
+                throw new NodeSystemException('This car is already reserved with a confirmed status.');
+            }
+        }
+    }
+
+    /**
+     * Handle the response based on car status and availability.
+     */
     private function respondCarStatus($car, $plateNumber, $request)
     {
         if (!$car) {
-            // إذا كانت السيارة غير موجودة في النظام
             return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
-    
-        if ($car['status'] == 'Available') {
-            session()->flush();
 
-            // إذا كانت السيارة متاحة
-            session([
-                'pickup_date' => $request->input('pickup_date'),
-                'return_date' => $request->input('return_date'),
-                'rate_daily' => $request->input('price_daily'),
-                'pickup_location' => '71',  // Static value
-                'return_location' => '71',  // Static value
-                'status' => 'pending_updates',
-                'vehicle_hint' => $request->input('carName'),
-                'customer_name' => $request->input('name'),
-                'customer_mobile' => $request->input('phone'),
-                'customer_email' => $request->input('email'),
-                'pickup_city' => $request->input('pickup_city'),
-                'car_image' => $car['image_url'] ?? null,
-                'new_id' =>$request->input('car_id')  // Assuming image_url exists in car data
-            ]);
-    
-            // التوجيه إلى صفحة الدفع
+        if ($car['status'] === 'Available') {
+            session()->flush();
+            session($this->prepareSessionData($car, $request));
             return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
-    
-        // إذا كانت السيارة محجوزة أو في حالة أخرى
-        $token = Cache::get('node_api_token');
-    
-        if (!$token) {
-            $token = $this->authenticate();
-        }
-    
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->get('https://luxuria.crs.ae/api/v1/vehicles');
-    
-        if ($response->successful()) {
-            $vehicles = $response->json();
-            
-            // إذا كانت البيانات متاحة
-            if (isset($vehicles['data']) && is_array($vehicles['data'])) {
-                $selectedCarPrice = $request->input('price_daily');
-    
-                $availableCars = array_filter($vehicles['data'], function ($vehicle) use ($selectedCarPrice) {
-                    return isset($vehicle['status']) && $vehicle['status'] === 'Available' &&
-                        isset($vehicle['price_daily']) &&
-                        $vehicle['price_daily'] >= ($selectedCarPrice - 100) &&
-                        $vehicle['price_daily'] <= ($selectedCarPrice + 100);
-                });
-    
-                if (count($availableCars) < 3) {
-                    $availableCars = array_filter($vehicles['data'], function ($vehicle) {
-                        return isset($vehicle['status']) && $vehicle['status'] === 'Available';
-                    });
-    
-                    shuffle($availableCars);
-                    $availableCars = array_slice($availableCars, 0, 3);
-                }
-    
-                // جمع أرقام اللوحات وتخزينها في السيشن
-                $plateNumbers = [];
-                foreach ($availableCars as $car) {
-                    if (isset($car['plate_number'])) {
-                        $plateNumbers[] = $car['plate_number']; // إضافة كل رقم لوحة إلى المصفوفة
-                    }
-                }
-    
-                session(['available_car_plate_numbers' => $plateNumbers]);
-    
-                // إزالة الحروف والأرقام غير الرقمية من أرقام اللوحات المخزنة في السيشن
-                $cleanedPlateNumbers = array_map(function ($plate) {
-                    return preg_replace('/[^0-9]/', '', $plate); // إزالة أي شيء غير الأرقام
-                }, $plateNumbers);
-    
-                // الآن لديك أرقام اللوحات فقط بدون الحروف والـ "-"
-                $existingCars = DB::table('cars')
-                    ->whereIn(DB::raw('REGEXP_REPLACE(plate_number, "[^0-9]", "")'), $cleanedPlateNumbers) // البحث بعد إزالة الحروف والـ "-"
-                    ->get(['id', 'plate_number', 'car_name', 'price_daily', 'car_picture', 'model', 'year']); // إرجاع الـ ID ورقم اللوحة
-    
-                session([
-                    'car-0-name' => $existingCars[0]->car_name,
-                    'car-0-price' => $existingCars[0]->price_daily,
-                    'car-0-image' => $existingCars[0]->car_picture,
-                    'car-0-model' => $existingCars[0]->model,
-                    'car-0-year' => $existingCars[0]->year,
-                    'car-0-id' => $existingCars[0]->id,
-                    'car-1-name' => $existingCars[1]->car_name,
-                    'car-1-price' => $existingCars[1]->price_daily,
-                    'car-1-image' => $existingCars[1]->car_picture,
-                    'car-1-model' => $existingCars[1]->model,
-                    'car-1-year' => $existingCars[1]->year,
-                    'car-1-id' => $existingCars[1]->id,
-                    'car-2-name' => $existingCars[2]->car_name,
-                    'car-2-price' => $existingCars[2]->price_daily,
-                    'car-2-image' => $existingCars[2]->car_picture,
-                    'car-2-model' => $existingCars[2]->model,
-                    'car-2-year' => $existingCars[2]->year,
-                    'car-2-id' => $existingCars[2]->id,
-                ]);
-            }
-        }
-    
-        // إرسال صورة السيارة في الجلسة
-        $carImage = $request->input('car_picture');
-        session(['car_picture' => $carImage]);
-    
-        // في حالة السيارة غير متوفرة أو محجوزة
-        return redirect()->route('index')->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.')
-                                 ->with('car_picture', session('car_picture'))
-                                 ->with('existing_cars', $existingCars); 
-    }
-    
-    
-    
 
-    
+        $this->fetchAndStoreAvailableCars($request);
+
+        return redirect()->route('index')->with('error_message', 'Car is not available for booking at the moment.')
+            ->with('car_picture', session('car_picture'))
+            ->with('existing_cars', session('existing_cars'));
+    }
+
+    /**
+     * Fetch available cars and store in the session.
+     */
+    private function fetchAndStoreAvailableCars($request)
+    {
+        $token = $this->getAuthToken();
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer $token"
+        ])->get('https://luxuria.crs.ae/api/v1/vehicles');
+
+        if ($response->successful()) {
+            $vehicles = $response->json()['data'] ?? [];
+            $availableCars = $this->filterAvailableCars($vehicles, $request->input('price_daily'));
+
+            session($this->prepareAvailableCarsSessionData($availableCars));
+        }
+    }
+
+    /**
+     * Filter available cars based on price range.
+     */
+    private function filterAvailableCars($vehicles, $priceDaily)
+    {
+        $filtered = array_filter($vehicles, function ($vehicle) use ($priceDaily) {
+            return isset($vehicle['status'], $vehicle['price_daily']) &&
+                $vehicle['status'] === 'Available' &&
+                abs($vehicle['price_daily'] - $priceDaily) <= 100;
+        });
+
+        return count($filtered) < 3 ? $this->getFallbackAvailableCars($vehicles) : $filtered;
+    }
+
+    /**
+     * Get fallback available cars if initial filtering is insufficient.
+     */
+    private function getFallbackAvailableCars($vehicles)
+    {
+        $fallback = array_filter($vehicles, fn($vehicle) => $vehicle['status'] === 'Available');
+        shuffle($fallback);
+        return array_slice($fallback, 0, 3);
+    }
+
+    /**
+     * Prepare session data for the selected car.
+     */
+    private function prepareSessionData($car, $request)
+    {
+        return [
+            'pickup_date' => $request->input('pickup_date'),
+            'return_date' => $request->input('return_date'),
+            'rate_daily' => $request->input('price_daily'),
+            'pickup_location' => '71',
+            'return_location' => '71',
+            'status' => 'pending_updates',
+            'vehicle_hint' => $request->input('carName'),
+            'customer_name' => $request->input('name'),
+            'customer_mobile' => $request->input('phone'),
+            'customer_email' => $request->input('email'),
+            'pickup_city' => $request->input('pickup_city'),
+            'car_image' => $car['image_url'] ?? null,
+            'new_id' => $request->input('car_id')
+        ];
+    }
+
+    /**
+     * Prepare session data for available cars.
+     */
+    private function prepareAvailableCarsSessionData($availableCars)
+    {
+        $plateNumbers = array_column($availableCars, 'plate_number');
+        $cleanedPlateNumbers = array_map(fn($plate) => preg_replace('/[^0-9]/', '', $plate), $plateNumbers);
+
+        $existingCars = DB::table('cars')
+            ->whereIn(DB::raw('REGEXP_REPLACE(plate_number, "[^0-9]", "")'), $cleanedPlateNumbers)
+            ->get(['id', 'plate_number', 'car_name', 'price_daily', 'car_picture', 'model', 'year']);
+
+        session(['existing_cars' => $existingCars]);
+
+        return [
+            'car_picture' => session('car_picture'),
+            'available_car_plate_numbers' => $plateNumbers,
+        ];
+    }
 }
