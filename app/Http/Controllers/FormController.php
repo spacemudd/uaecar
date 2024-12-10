@@ -112,7 +112,6 @@ class FormController extends Controller
         }
 
         if ($car['status'] === 'Available') {
-            session()->flush();
             session($this->prepareSessionData($car, $request));
             return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
