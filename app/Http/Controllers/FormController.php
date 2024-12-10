@@ -17,8 +17,7 @@ class FormController extends Controller
     {
         session('new_id', $request->input('car_id'));
         $plateNumber = $request->input('plate_number');
-        $plateNumber = preg_replace('/^[A-B]-/', '', $plateNumber);
-    
+        $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $plateNumber);    
         $token = $this->getAuthToken();
     
         $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
