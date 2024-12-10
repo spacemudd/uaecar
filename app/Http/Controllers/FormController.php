@@ -194,18 +194,7 @@ class FormController extends Controller
                 ->when($carWithLowestMidRangePrice, function($query) use ($carWithLowestMidRangePrice) {
                     return $query
                         ->with('car-mid-range-picture', $carWithLowestMidRangePrice['car_picture'])
-                        ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name'])
-                        ->with('car-mid-range-model', $carWithLowestMidRangePrice['model'])
-                        ->with('car-mid-range-year', $carWithLowestMidRangePrice['year'])
-                        ->with('car-mid-range-price', $carWithLowestMidRangePrice['price_daily']);
-                })
-                ->when($carWithLowestEconomyPrice, function($query) use ($carWithLowestEconomyPrice) {
-                    return $query
-                        ->with('car-economy-picture', $carWithLowestEconomyPrice['car_picture'])
-                        ->with('car-economy-name', $carWithLowestEconomyPrice['car_name'])
-                        ->with('car-economy-model', $carWithLowestEconomyPrice['model'])
-                        ->with('car-economy-year', $carWithLowestEconomyPrice['year'])
-                        ->with('car-economy-price', $carWithLowestEconomyPrice['price_daily']);
+                        ->with('car-mid-range-name', $carWithLowestMidRangePrice['car_name']);
                 });
         }
     }
