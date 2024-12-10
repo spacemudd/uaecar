@@ -86,9 +86,9 @@
                                 <div class="form-group col-md-6 col-lg-4">
                                     <label for="categories">Categories:</label>
                                     <select class="form-control" id="categories" name="categories">
-                                        <option value="Luxury" {{ old('categories', $categoryValue) == 'Luxury' ? 'selected' : '' }}>Luxury</option>
-                                        <option value="Premium" {{ old('categories', $categoryValue) == 'Mid range' ? 'selected' : '' }}>Mid Range</option>
-                                        <option value="Economy" {{ old('categories', $categoryValue) == 'Economy' ? 'selected' : '' }}>Economy</option>
+                                        <option value="Luxury" {{ old('categories', $categoryValue) == 'luxury' ? 'selected' : '' }}>Luxury</option>
+                                        <option value="Mid Range" {{ old('categories', $categoryValue) == 'mid range' ? 'selected' : '' }}>Mid Range</option>
+                                        <option value="Economy" {{ old('categories', $categoryValue) == 'economy' ? 'selected' : '' }}>Economy</option>
                                         <option value="Sports and Exotics" {{ old('categories', $categoryValue) == 'Sports and Exotics' ? 'selected' : '' }}>Sports and Exotics</option>
                                         <option value="Vans and Buses" {{ old('categories', $categoryValue) == 'Vans and Buses' ? 'selected' : '' }}>Vans and Buses</option>
 
