@@ -228,16 +228,12 @@ class FormController extends Controller
                 return $car['rate_daily'] > $targetRate; // السيارات الأعلى من السعر
             })->take(1); // أخذ سيارة واحدة من السيارات الأعلى
         
-            $lowerCars = $availableCars->filter(function ($car) use ($targetRate) {
-                return $car['rate_daily'] < $targetRate; // السيارات الأقل من السعر
-            })->take(1); // أخذ سيارة واحدة من السيارات الأقل
-        
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate); // السيارات الأقرب للسعر
-            })->take(1); // أخذ سيارة واحدة من السيارات الأقرب
+            })->take(2); // أخذ سيارتين من السيارات الأقرب
         
-            // دمج السيارات: الأعلى، الأقرب، والأقل
-            $mergedCars = $higherCars->merge($closestCars)->merge($lowerCars)->unique('plate_number')->take(3);
+            // دمج السيارات: سيارة واحدة أعلى، واثنتين متقاربتين في السعر
+            $mergedCars = $higherCars->merge($closestCars)->unique('plate_number')->take(3);
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
             $plateNumbers = $mergedCars->pluck('plate_number')->map(function ($plate) {
