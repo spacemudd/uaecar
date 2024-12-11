@@ -220,51 +220,8 @@ class FormController extends Controller
                 return isset($car['status']) && $car['status'] === 'Available';
             });
         
-            // تحديد السعر المستهدف (من الطلب أو قيمة ثابتة)
-            $targetRate = $request->input('price_daily'); // السعر المستهدف (يمكن تحديده بشكل ثابت أو عبر المستخدم)
-        
-            // تقسيم السيارات بناءً على السعر
-            $higherCars = $availableCars->filter(function ($car) use ($targetRate) {
-                return $car['rate_daily'] > $targetRate; // السيارات الأعلى من السعر المستهدف
-            });
-        
-            $lowerCars = $availableCars->filter(function ($car) use ($targetRate) {
-                return $car['rate_daily'] < $targetRate; // السيارات الأقل من السعر المستهدف
-            });
-        
-            $mediumCars = $availableCars->filter(function ($car) use ($targetRate) {
-                return $car['rate_daily'] == $targetRate; // السيارات التي تساوي السعر المستهدف
-            });
-        
-            // إذا كانت هناك سيارات في الفئات المختلفة، اختر واحدة عشوائيًا من كل فئة
-            $highCar = $higherCars->isNotEmpty() ? $higherCars->random(1)->first() : null;
-            $mediumCar = $mediumCars->isNotEmpty() ? $mediumCars->random(1)->first() : null;
-            $lowCar = $lowerCars->isNotEmpty() ? $lowerCars->random(1)->first() : null;
-        
-            // التأكد من أنه تم اختيار ثلاث سيارات، وإذا كانت فئة فارغة يمكن اختيار سيارة من فئة أخرى
-            $selectedCars = collect();
-            if ($highCar) {
-                $selectedCars->push($highCar);
-            }
-            if ($mediumCar) {
-                $selectedCars->push($mediumCar);
-            }
-            if ($lowCar) {
-                $selectedCars->push($lowCar);
-            }
-        
-            // إذا كان هناك سيارات ناقصة (مثلاً لا يوجد سيارة متوسطة السعر)، يمكن إضافة سيارة من الفئات الأخرى
-            if ($selectedCars->count() < 3) {
-                $allAvailableCars = $availableCars->shuffle(); // خلط السيارات المتاحة لاختيار سيارات عشوائية
-                $missingCount = 3 - $selectedCars->count();
-                foreach ($allAvailableCars as $car) {
-                    if ($selectedCars->count() < 3) {
-                        if (!$selectedCars->contains($car)) {
-                            $selectedCars->push($car);
-                        }
-                    }
-                }
-            }
+            // اختيار ثلاث سيارات عشوائيًا
+            $selectedCars = $availableCars->random(3); // اختيار 3 سيارات عشوائيًا من السيارات المتاحة
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
             $plateNumbers = $selectedCars->pluck('plate_number')->map(function ($plate) {
@@ -296,6 +253,7 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
+        
         
         
            
