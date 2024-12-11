@@ -343,11 +343,11 @@
                                         <div class="row">
                                             <div class="col-lg-6 col-md-12">
                                                 <label>Car Name</label>
-                                                <input name="carName" type="text" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
+                                                <input name="carName" type="hidden" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <label>Car ID</label>
-                                                <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
+                                                <input type="hidden" class="form-control" value="{{ $car->id }}" name="carID" readonly>
                                             </div>
                                             <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
                                             <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
