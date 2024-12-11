@@ -214,7 +214,7 @@ class FormController extends Controller
 
         if ($response->successful()) {
             $apiCars = $response->json();
-        
+            
             // تصفية السيارات المتاحة
             $availableCars = collect($apiCars['data'])->filter(function ($car) {
                 return isset($car['status']) && $car['status'] === 'Available';
@@ -230,15 +230,12 @@ class FormController extends Controller
         
             // البحث في قاعدة البيانات باستخدام الأرقام فقط
             $carsFromDatabase = DB::table('cars')
-                ->where(function ($query) use ($plateNumbers) {
-                    foreach ($plateNumbers as $number) {
-                        $query->orWhereRaw("REGEXP_REPLACE(plate_number, '[^0-9]', '') = ?", [$number]);
-                    }
-                })
+                ->whereIn(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumbers)
                 ->get();
-
-                dd($carsFromDatabase);
         
+            // التحقق من البيانات المسترجعة
+            dd($carsFromDatabase); // هنا ستتمكن من رؤية البيانات المسترجعة (3 سيارات)
+            
             // تخزين البيانات في الجلسة
             $carData = $carsFromDatabase->map(function ($car) {
                 return [
@@ -255,6 +252,7 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
+        
         
         
         
