@@ -222,7 +222,6 @@ class FormController extends Controller
         
             // اختيار ثلاث سيارات عشوائيًا
             $selectedCars = $availableCars->random(3);
-            dd($selectedCars); // اختيار 3 سيارات عشوائيًا من السيارات المتاحة
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
             $plateNumbers = $selectedCars->pluck('plate_number')->map(function ($plate) {
@@ -237,6 +236,8 @@ class FormController extends Controller
                     }
                 })
                 ->get();
+
+                dd($carsFromDatabase);
         
             // تخزين البيانات في الجلسة
             $carData = $carsFromDatabase->map(function ($car) {
