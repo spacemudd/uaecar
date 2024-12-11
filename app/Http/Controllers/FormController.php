@@ -226,11 +226,11 @@ class FormController extends Controller
             // إيجاد السيارات الأقرب للسعر المستهدف
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate);
-            })->take(4);
+            })->take(4); // أخذ 4 سيارات بدلاً من 3 للحصول على 3 أقرب سيارات في حالة نقص السيارات
         
             // التحقق إذا كانت السيارات المتقاربة فارغة أو تحتوي على سيارات أقل من 3
             if ($closestCars->isEmpty() || $closestCars->count() < 3) {
-                // إذا كانت مجموعة السيارات المتقاربة فارغة، اختر 3 سيارات عشوائيًا من قاعدة البيانات
+                // إذا كانت مجموعة السيارات المتقاربة فارغة أو تحتوي على أقل من 3 سيارات، اختر 3 سيارات عشوائيًا من قاعدة البيانات
                 $randomCars = DB::table('cars')
                     ->inRandomOrder() // اختيار عشوائي
                     ->take(3) // أخذ أول 3 سيارات عشوائيًا
@@ -262,8 +262,8 @@ class FormController extends Controller
                     })
                     ->get();
         
-                // تخزين البيانات في الجلسة
-                $carData = $carsFromDatabase->map(function ($car) {
+                // تأكد من أن هناك 3 سيارات فقط
+                $carData = $carsFromDatabase->take(3)->map(function ($car) {
                     return [
                         'car_name' => $car->make . ' ' . $car->model,
                         'model' => $car->model,
@@ -279,6 +279,7 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
+        
         
 
         
