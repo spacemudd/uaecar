@@ -236,12 +236,12 @@ class FormController extends Controller
                 return $car['rate_daily'] == $targetRate; // السيارات التي تساوي السعر المستهدف
             });
         
-            // تحقق من وجود سيارات في كل فئة (تجنب الأخطاء عند اختيار سيارات عشوائية من فئات فارغة)
+            // إذا كانت هناك سيارات في الفئات المختلفة، اختر واحدة عشوائيًا من كل فئة
             $highCar = $higherCars->isNotEmpty() ? $higherCars->random(1)->first() : null;
             $mediumCar = $mediumCars->isNotEmpty() ? $mediumCars->random(1)->first() : null;
             $lowCar = $lowerCars->isNotEmpty() ? $lowerCars->random(1)->first() : null;
         
-            // إذا كانت السيارات العشوائية المختارة موجودة، جمعها
+            // التأكد من أنه تم اختيار ثلاث سيارات، وإذا كانت فئة فارغة يمكن اختيار سيارة من فئة أخرى
             $selectedCars = collect();
             if ($highCar) {
                 $selectedCars->push($highCar);
@@ -251,6 +251,19 @@ class FormController extends Controller
             }
             if ($lowCar) {
                 $selectedCars->push($lowCar);
+            }
+        
+            // إذا كان هناك سيارات ناقصة (مثلاً لا يوجد سيارة متوسطة السعر)، يمكن إضافة سيارة من الفئات الأخرى
+            if ($selectedCars->count() < 3) {
+                $allAvailableCars = $availableCars->shuffle(); // خلط السيارات المتاحة لاختيار سيارات عشوائية
+                $missingCount = 3 - $selectedCars->count();
+                foreach ($allAvailableCars as $car) {
+                    if ($selectedCars->count() < 3) {
+                        if (!$selectedCars->contains($car)) {
+                            $selectedCars->push($car);
+                        }
+                    }
+                }
             }
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
@@ -283,7 +296,6 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
-        
         
         
            
