@@ -228,30 +228,51 @@ class FormController extends Controller
                 return abs($car['rate_daily'] - $targetRate);
             })->take(3);
         
-            // استخراج أرقام لوحات السيارات (الأرقام فقط)
-            $plateNumbers = $closestCars->pluck('plate_number')->map(function ($plate) {
-                return preg_replace('/[^0-9]/', '', $plate);
-            });
+            // التحقق إذا كانت السيارات المتقاربة فارغة أو تحتوي على سيارات أقل من 3
+            if ($closestCars->isEmpty() || $closestCars->count() < 3) {
+                // إذا كانت مجموعة السيارات المتقاربة فارغة، اختر 3 سيارات عشوائيًا من قاعدة البيانات
+                $randomCars = DB::table('cars')
+                    ->inRandomOrder() // اختيار عشوائي
+                    ->take(3) // أخذ أول 3 سيارات عشوائيًا
+                    ->get();
+                
+                // تخزين البيانات في الجلسة
+                $carData = $randomCars->map(function ($car) {
+                    return [
+                        'car_name' => $car->make . ' ' . $car->model,
+                        'model' => $car->model,
+                        'year' => $car->year,
+                        'price_daily' => $car->price_daily,
+                        'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
+                    ];
+                });
+            } else {
+                // إذا كانت هناك سيارات متقاربة، استخدم السيارات المتقاربة
+                // استخراج أرقام لوحات السيارات (الأرقام فقط)
+                $plateNumbers = $closestCars->pluck('plate_number')->map(function ($plate) {
+                    return preg_replace('/[^0-9]/', '', $plate);
+                });
         
-            // البحث في قاعدة البيانات باستخدام الأرقام فقط
-            $carsFromDatabase = DB::table('cars')
-                ->where(function ($query) use ($plateNumbers) {
-                    foreach ($plateNumbers as $number) {
-                        $query->orWhereRaw("REGEXP_REPLACE(plate_number, '[^0-9]', '') = ?", [$number]);
-                    }
-                })
-                ->get();
+                // البحث في قاعدة البيانات باستخدام الأرقام فقط
+                $carsFromDatabase = DB::table('cars')
+                    ->where(function ($query) use ($plateNumbers) {
+                        foreach ($plateNumbers as $number) {
+                            $query->orWhereRaw("REGEXP_REPLACE(plate_number, '[^0-9]', '') = ?", [$number]);
+                        }
+                    })
+                    ->get();
         
-            // تخزين البيانات في الجلسة
-            $carData = $carsFromDatabase->map(function ($car) {
-                return [
-                    'car_name' => $car->make . ' ' . $car->model,
-                    'model' => $car->model,
-                    'year' => $car->year,
-                    'price_daily' => $car->price_daily,
-                    'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
-                ];
-            });
+                // تخزين البيانات في الجلسة
+                $carData = $carsFromDatabase->map(function ($car) {
+                    return [
+                        'car_name' => $car->make . ' ' . $car->model,
+                        'model' => $car->model,
+                        'year' => $car->year,
+                        'price_daily' => $car->price_daily,
+                        'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
+                    ];
+                });
+            }
         
             // تخزين البيانات في الجلسة
             session(['car_data' => $carData]);
