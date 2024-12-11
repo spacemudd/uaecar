@@ -226,7 +226,7 @@ class FormController extends Controller
             // تقسيم السيارات بناءً على قرب السعر من السعر المستهدف
             $higherCars = $availableCars->filter(function ($car) use ($targetRate) {
                 return $car['rate_daily'] > $targetRate; // السيارات الأعلى من السعر
-            })->take(1); // أخذ سيارة واحدة من السيارات الأعلى
+            })->take(2); // أخذ سيارة واحدة من السيارات الأعلى
         
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate); // السيارات الأقرب للسعر
