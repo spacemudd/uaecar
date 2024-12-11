@@ -220,23 +220,32 @@ class FormController extends Controller
                 return isset($car['status']) && $car['status'] === 'Available';
             });
         
-            // السعر المستهدف من الطلب
-            $targetRate = $request->input('price_daily'); // ضع السعر المطلوب هنا
+            // تحديد السعر المستهدف (من الطلب أو قيمة ثابتة)
+            $targetRate = $request->input('price_daily'); // السعر المستهدف (يمكن تحديده بشكل ثابت أو عبر المستخدم)
         
-            // تقسيم السيارات بناءً على قرب السعر من السعر المستهدف
+            // تقسيم السيارات بناءً على السعر
             $higherCars = $availableCars->filter(function ($car) use ($targetRate) {
-                return $car['rate_daily'] > $targetRate; // السيارات الأعلى من السعر
-            })->take(3); // أخذ سيارة واحدة من السيارات الأعلى
+                return $car['rate_daily'] > $targetRate; // السيارات الأعلى من السعر المستهدف
+            });
         
-            $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
-                return abs($car['rate_daily'] - $targetRate); // السيارات الأقرب للسعر
-            })->take(3); // أخذ سيارتين من السيارات الأقرب
+            $lowerCars = $availableCars->filter(function ($car) use ($targetRate) {
+                return $car['rate_daily'] < $targetRate; // السيارات الأقل من السعر المستهدف
+            });
         
-            // دمج السيارات: سيارة واحدة أعلى، واثنتين متقاربتين في السعر
-            $mergedCars = $higherCars->merge($closestCars)->unique('plate_number')->take(4);
+            $mediumCars = $availableCars->filter(function ($car) use ($targetRate) {
+                return $car['rate_daily'] == $targetRate; // السيارات التي تساوي السعر المستهدف
+            });
+        
+            // اختيار سيارة واحدة عالية السعر، سيارة متوسطة السعر، سيارة منخفضة السعر
+            $highCar = $higherCars->random(1)->first(); // سيارة واحدة من السيارات الأعلى
+            $mediumCar = $mediumCars->random(1)->first(); // سيارة واحدة من السيارات المتوسطة
+            $lowCar = $lowerCars->random(1)->first(); // سيارة واحدة من السيارات الأقل
+        
+            // جمع السيارات العشوائية المختارة
+            $selectedCars = collect([$highCar, $mediumCar, $lowCar]);
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
-            $plateNumbers = $mergedCars->pluck('plate_number')->map(function ($plate) {
+            $plateNumbers = $selectedCars->pluck('plate_number')->map(function ($plate) {
                 return preg_replace('/[^0-9]/', '', $plate);
             });
         
@@ -265,6 +274,7 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
+        
         
            
 
