@@ -226,7 +226,7 @@ class FormController extends Controller
             // إيجاد السيارات الأقرب للسعر المستهدف
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate);
-            })->take(3);
+            })->take(4);
         
             // التحقق إذا كانت السيارات المتقاربة فارغة أو تحتوي على سيارات أقل من 3
             if ($closestCars->isEmpty() || $closestCars->count() < 3) {
