@@ -226,7 +226,7 @@ class FormController extends Controller
             // إيجاد السيارات الأقرب للسعر المستهدف
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate);
-            })->take(3);
+            })->take(3); // تحديد 3 سيارات أقرب
         
             // التحقق إذا كانت السيارات المتقاربة تحتوي على أقل من 3 سيارات
             $carData = collect();
@@ -247,37 +247,31 @@ class FormController extends Controller
                 // إذا كانت السيارات المتقاربة أقل من 3، أكمل العدد المتبقي من السيارات العشوائية
                 $remainingCars = 3 - $carData->count();
                 if ($remainingCars > 0) {
-                    $randomCars = DB::table('cars')
-                        ->inRandomOrder() // اختيار عشوائي
-                        ->take($remainingCars) // أخذ العدد المتبقي من السيارات عشوائيًا
-                        ->get();
+                    $highestPriceCars = $availableCars->sortByDesc('rate_daily')->take($remainingCars); // أخذ السيارات الأعلى في السعر
         
-                    // إضافة السيارات العشوائية
-                    $randomCars->each(function ($car) use ($carData) {
+                    // إضافة السيارات الأعلى في السعر
+                    $highestPriceCars->each(function ($car) use ($carData) {
                         $carData->push([
-                            'car_name' => $car->make . ' ' . $car->model,
-                            'model' => $car->model,
-                            'year' => $car->year,
-                            'price_daily' => $car->price_daily,
-                            'car_picture' => $car->car_picture
+                            'car_name' => $car['make'] . ' ' . $car['model'],
+                            'model' => $car['model'],
+                            'year' => $car['year'],
+                            'price_daily' => $car['rate_daily'],
+                            'car_picture' => $car['car_picture']
                         ]);
                     });
                 }
             } else {
-                // إذا لم توجد سيارات متقاربة، اختر 3 سيارات عشوائيًا
-                $randomCars = DB::table('cars')
-                    ->inRandomOrder() // اختيار عشوائي
-                    ->take(3) // أخذ 3 سيارات عشوائيًا
-                    ->get();
+                // إذا لم توجد سيارات متقاربة، اختر 3 سيارات الأعلى في السعر
+                $highestPriceCars = $availableCars->sortByDesc('rate_daily')->take(3); // أخذ أعلى 3 سيارات في السعر
         
-                // إضافة السيارات العشوائية
-                $randomCars->each(function ($car) use ($carData) {
+                // إضافة السيارات الأعلى في السعر
+                $highestPriceCars->each(function ($car) use ($carData) {
                     $carData->push([
-                        'car_name' => $car->make . ' ' . $car->model,
-                        'model' => $car->model,
-                        'year' => $car->year,
-                        'price_daily' => $car->price_daily,
-                        'car_picture' => $car->car_picture
+                        'car_name' => $car['make'] . ' ' . $car['model'],
+                        'model' => $car['model'],
+                        'year' => $car['year'],
+                        'price_daily' => $car['rate_daily'],
+                        'car_picture' => $car['car_picture']
                     ]);
                 });
             }
