@@ -98,7 +98,7 @@ class FormController extends Controller
     {
         if (!$car) {
             // إذا كانت السيارة غير موجودة في النظام
-            return redirect()->back()->with('error_message', 'Car is not available for booking at the moment. You may choose another car or check back later.');
+            return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
     
         if ($car['status'] == 'Available') {
@@ -226,51 +226,59 @@ class FormController extends Controller
             // إيجاد السيارات الأقرب للسعر المستهدف
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate);
-            })->take(4); // أخذ 4 سيارات بدلاً من 3 للحصول على 3 أقرب سيارات في حالة نقص السيارات
+            })->take(3);
         
-            // التحقق إذا كانت السيارات المتقاربة فارغة أو تحتوي على سيارات أقل من 3
-            if ($closestCars->isEmpty() || $closestCars->count() < 3) {
-                // إذا كانت مجموعة السيارات المتقاربة فارغة أو تحتوي على أقل من 3 سيارات، اختر 3 سيارات عشوائيًا من قاعدة البيانات
+            // التحقق إذا كانت السيارات المتقاربة تحتوي على أقل من 3 سيارات
+            $carData = collect();
+        
+            // إذا كانت هناك سيارات متقاربة
+            if ($closestCars->count() > 0) {
+                // إضافة السيارات المتقاربة
+                $carData = $closestCars->map(function ($car) {
+                    return [
+                        'car_name' => $car['make'] . ' ' . $car['model'],
+                        'model' => $car['model'],
+                        'year' => $car['year'],
+                        'price_daily' => $car['rate_daily'],
+                        'car_picture' => $car['car_picture'] // تأكد من أن لديك عمود car_picture في قاعدة البيانات
+                    ];
+                });
+        
+                // إذا كانت السيارات المتقاربة أقل من 3، أكمل العدد المتبقي من السيارات العشوائية
+                $remainingCars = 3 - $carData->count();
+                if ($remainingCars > 0) {
+                    $randomCars = DB::table('cars')
+                        ->inRandomOrder() // اختيار عشوائي
+                        ->take($remainingCars) // أخذ العدد المتبقي من السيارات عشوائيًا
+                        ->get();
+        
+                    // إضافة السيارات العشوائية
+                    $randomCars->each(function ($car) use ($carData) {
+                        $carData->push([
+                            'car_name' => $car->make . ' ' . $car->model,
+                            'model' => $car->model,
+                            'year' => $car->year,
+                            'price_daily' => $car->price_daily,
+                            'car_picture' => $car->car_picture
+                        ]);
+                    });
+                }
+            } else {
+                // إذا لم توجد سيارات متقاربة، اختر 3 سيارات عشوائيًا
                 $randomCars = DB::table('cars')
                     ->inRandomOrder() // اختيار عشوائي
-                    ->take(4) // أخذ أول 3 سيارات عشوائيًا
+                    ->take(3) // أخذ 3 سيارات عشوائيًا
                     ->get();
-                
-                // تخزين البيانات في الجلسة
-                $carData = $randomCars->map(function ($car) {
-                    return [
+        
+                // إضافة السيارات العشوائية
+                $randomCars->each(function ($car) use ($carData) {
+                    $carData->push([
                         'car_name' => $car->make . ' ' . $car->model,
                         'model' => $car->model,
                         'year' => $car->year,
                         'price_daily' => $car->price_daily,
-                        'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
-                    ];
-                });
-            } else {
-                // إذا كانت هناك سيارات متقاربة، استخدم السيارات المتقاربة
-                // استخراج أرقام لوحات السيارات (الأرقام فقط)
-                $plateNumbers = $closestCars->pluck('plate_number')->map(function ($plate) {
-                    return preg_replace('/[^0-9]/', '', $plate);
-                });
-        
-                // البحث في قاعدة البيانات باستخدام الأرقام فقط
-                $carsFromDatabase = DB::table('cars')
-                    ->where(function ($query) use ($plateNumbers) {
-                        foreach ($plateNumbers as $number) {
-                            $query->orWhereRaw("REGEXP_REPLACE(plate_number, '[^0-9]', '') = ?", [$number]);
-                        }
-                    })
-                    ->get();
-        
-                // تأكد من أن هناك 3 سيارات فقط
-                $carData = $carsFromDatabase->take(4)->map(function ($car) {
-                    return [
-                        'car_name' => $car->make . ' ' . $car->model,
-                        'model' => $car->model,
-                        'year' => $car->year,
-                        'price_daily' => $car->price_daily,
-                        'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
-                    ];
+                        'car_picture' => $car->car_picture
+                    ]);
                 });
             }
         
@@ -279,7 +287,6 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
-        
         
 
         
