@@ -211,47 +211,50 @@ class FormController extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
-
         if ($response->successful()) {
             $apiCars = $response->json();
-            
+        
             // تصفية السيارات المتاحة
             $availableCars = collect($apiCars['data'])->filter(function ($car) {
                 return isset($car['status']) && $car['status'] === 'Available';
             });
         
-            // اختيار ثلاث سيارات عشوائيًا
-            $selectedCars = $availableCars->random(4);
-        
-            // استخراج أرقام لوحات السيارات (الأرقام فقط)
-            $plateNumbers = $selectedCars->pluck('plate_number')->map(function ($plate) {
-                return preg_replace('/[^0-9]/', '', $plate); // إزالة أي حرف غير الأرقام من الرقم
+            // استخراج أرقام اللوحات الخاصة بالسيارات
+            $plateNumbers = $availableCars->pluck('plate_number')->map(function ($plate) {
+                return preg_replace('/[^0-9]/', '', $plate); // إزالة أي حرف غير الأرقام من رقم اللوحة
             });
         
-            // البحث في قاعدة البيانات باستخدام الأرقام فقط
+            // البحث في قاعدة البيانات باستخدام أرقام اللوحات
             $carsFromDatabase = DB::table('cars')
                 ->whereIn(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumbers)
                 ->get();
         
-            // التحقق من البيانات المسترجعة
-            dd($carsFromDatabase); // هنا ستتمكن من رؤية البيانات المسترجعة (3 سيارات)
-            
-            // تخزين البيانات في الجلسة
-            $carData = $carsFromDatabase->map(function ($car) {
-                return [
-                    'car_name' => $car->make . ' ' . $car->model,
-                    'model' => $car->model,
-                    'year' => $car->year,
-                    'price_daily' => $car->price_daily,
-                    'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
-                ];
-            });
+            // التأكد من أن عدد السيارات التي تم استرجاعها هو 3 سيارات
+            if ($carsFromDatabase->count() >= 3) {
+                // اختيار 3 سيارات عشوائيًا من قاعدة البيانات
+                $selectedCars = $carsFromDatabase->random(3);
         
-            // تخزين البيانات في الجلسة
-            session(['car_data' => $carData]);
+                // تخزين البيانات في الجلسة
+                $carData = $selectedCars->map(function ($car) {
+                    return [
+                        'car_name' => $car->make . ' ' . $car->model,
+                        'model' => $car->model,
+                        'year' => $car->year,
+                        'price_daily' => $car->price_daily,
+                        'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
+                    ];
+                });
         
-            // عرض البيانات المخزنة في الجلسة
+                // تخزين البيانات في الجلسة
+                session(['car_data' => $carData]);
+            } else {
+                // في حال لم توجد 3 سيارات، يمكن إضافة منطق التعامل مع هذه الحالة هنا
+                session(['car_data' => 'لا توجد 3 سيارات متاحة في قاعدة البيانات.']);
+            }
+        
+            // عرض البيانات المخزنة في الجلسة (يمكنك طباعة البيانات أو استخدامها في العرض)
         }
+        
         
         
         
