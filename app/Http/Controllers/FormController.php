@@ -98,7 +98,7 @@ class FormController extends Controller
     {
         if (!$car) {
             // إذا كانت السيارة غير موجودة في النظام
-            return redirect()->back()->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
+            return redirect()->route('index')->with('node_error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
         }
     
         if ($car['status'] == 'Available') {
