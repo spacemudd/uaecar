@@ -201,36 +201,30 @@ class FormController extends Controller
         //         ]);
         //     }
         // }
-// الخطوة 1: جلب السيارات الفاخرة من قاعدة البيانات
-$luxuryCars = Car::where('categories', 'Luxury')
-->get(['id', 'plate_number', 'categories']); // تحديد الأعمدة المطلوبة فقط
 
-// تحويل النتيجة إلى مصفوفة
-$luxuryCarsArray = $luxuryCars->toArray();
-
-// تنظيف `plate_number` ليحتوي فقط على الأرقام
-foreach ($luxuryCarsArray as &$car) {
-$car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']);
-}
-
-
-// // إذا كانت السيارة محجوزة أو في حالة أخرى
-//         $token = Cache::get('node_api_token');
+        $token = Cache::get('node_api_token');
     
-//         if (!$token) {
-//             $token = $this->authenticate();
-//         }
+        if (!$token) {
+            $token = $this->authenticate();
+        }
     
-//         $response = Http::withHeaders([
-//             'Authorization' => 'Bearer ' . $token
-//         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
-    
-        
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->get('https://luxuria.crs.ae/api/v1/vehicles');
+
+        if ($response->successful()) {
+        $apiCars = $response->json(); 
+
+            // Filter cars with status "Available"
+        $availableCars = collect($apiCars)->filter(function ($car) {
+            return isset($car['status']) && $car['status'] === 'Available';
+        });
+
+        // Debug available cars
+        dd($availableCars->values()->all());
+    }
 
 
-
-// if ($response->successful()) {
-// $apiCars = $response->json(); // تحويل الاستجابة إلى JSON
 
 // // استخراج أرقام اللوحات فقط من بيانات الـ API
 // $apiPlateNumbers = array_map(function ($car) {
