@@ -226,7 +226,7 @@ class FormController extends Controller
             // إيجاد السيارات الأقرب للسعر المستهدف
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate);
-            })->take(2);
+            })->take(3);
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
             $plateNumbers = $closestCars->pluck('plate_number')->map(function ($plate) {
