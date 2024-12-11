@@ -233,7 +233,7 @@ class FormController extends Controller
                 // إذا كانت مجموعة السيارات المتقاربة فارغة أو تحتوي على أقل من 3 سيارات، اختر 3 سيارات عشوائيًا من قاعدة البيانات
                 $randomCars = DB::table('cars')
                     ->inRandomOrder() // اختيار عشوائي
-                    ->take(3) // أخذ أول 3 سيارات عشوائيًا
+                    ->take(4) // أخذ أول 3 سيارات عشوائيًا
                     ->get();
                 
                 // تخزين البيانات في الجلسة
@@ -263,7 +263,7 @@ class FormController extends Controller
                     ->get();
         
                 // تأكد من أن هناك 3 سيارات فقط
-                $carData = $carsFromDatabase->take(3)->map(function ($car) {
+                $carData = $carsFromDatabase->take(4)->map(function ($car) {
                     return [
                         'car_name' => $car->make . ' ' . $car->model,
                         'model' => $car->model,
