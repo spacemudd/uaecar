@@ -214,40 +214,40 @@ $car['plate_number'] = preg_replace('/\D/', '', $car['plate_number']);
 }
 
 
-// إذا كانت السيارة محجوزة أو في حالة أخرى
-        $token = Cache::get('node_api_token');
+// // إذا كانت السيارة محجوزة أو في حالة أخرى
+//         $token = Cache::get('node_api_token');
     
-        if (!$token) {
-            $token = $this->authenticate();
-        }
+//         if (!$token) {
+//             $token = $this->authenticate();
+//         }
     
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->get('https://luxuria.crs.ae/api/v1/vehicles');
+//         $response = Http::withHeaders([
+//             'Authorization' => 'Bearer ' . $token
+//         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
     
         
 
 
 
-if ($response->successful()) {
-$apiCars = $response->json(); // تحويل الاستجابة إلى JSON
+// if ($response->successful()) {
+// $apiCars = $response->json(); // تحويل الاستجابة إلى JSON
 
-// استخراج أرقام اللوحات فقط من بيانات الـ API
-$apiPlateNumbers = array_map(function ($car) {
-    return preg_replace('/\D/', '', $car['plate_number']);
-}, $apiCars);
+// // استخراج أرقام اللوحات فقط من بيانات الـ API
+// $apiPlateNumbers = array_map(function ($car) {
+//     return preg_replace('/\D/', '', $car['plate_number']);
+// }, $apiCars);
 
-// الخطوة 3: تصفية المصفوفة للاحتفاظ فقط بالسيارات المطابقة
-$filteredCars = array_filter($luxuryCarsArray, function ($car) use ($apiPlateNumbers) {
-    return in_array($car['plate_number'], $apiPlateNumbers);
-});
+// // الخطوة 3: تصفية المصفوفة للاحتفاظ فقط بالسيارات المطابقة
+// $filteredCars = array_filter($luxuryCarsArray, function ($car) use ($apiPlateNumbers) {
+//     return in_array($car['plate_number'], $apiPlateNumbers);
+// });
 
-// عرض السيارات المطابقة فقط
-dd($filteredCars);
-} else {
-// معالجة الخطأ إذا فشل الاتصال بالـ API
-return response()->json(['error' => 'Failed to fetch data from API'], 500);
-}
+// // عرض السيارات المطابقة فقط
+// dd($filteredCars);
+// } else {
+// // معالجة الخطأ إذا فشل الاتصال بالـ API
+// return response()->json(['error' => 'Failed to fetch data from API'], 500);
+// }
 
 
            
