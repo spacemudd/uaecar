@@ -226,62 +226,38 @@ class FormController extends Controller
             // إيجاد السيارات الأقرب للسعر المستهدف
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
                 return abs($car['rate_daily'] - $targetRate);
-            })->take(3); // تحديد 3 سيارات أقرب
+            })->take(3);
         
-            // التحقق إذا كانت السيارات المتقاربة تحتوي على أقل من 3 سيارات
-            $carData = collect();
+            // استخراج أرقام لوحات السيارات (الأرقام فقط)
+            $plateNumbers = $closestCars->pluck('plate_number')->map(function ($plate) {
+                return preg_replace('/[^0-9]/', '', $plate);
+            });
         
-            // إذا كانت هناك سيارات متقاربة
-            if ($closestCars->count() > 0) {
-                // إضافة السيارات المتقاربة
-                $carData = $closestCars->map(function ($car) {
-                    return [
-                        'car_name' => $car['make'] . ' ' . $car['model'],
-                        'model' => $car['model'],
-                        'year' => $car['year'],
-                        'price_daily' => $car['rate_daily'],
-                        'car_picture' => $car['car_picture'] // تأكد من أن لديك عمود car_picture في قاعدة البيانات
-                    ];
-                });
+            // البحث في قاعدة البيانات باستخدام الأرقام فقط
+            $carsFromDatabase = DB::table('cars')
+                ->where(function ($query) use ($plateNumbers) {
+                    foreach ($plateNumbers as $number) {
+                        $query->orWhereRaw("REGEXP_REPLACE(plate_number, '[^0-9]', '') = ?", [$number]);
+                    }
+                })
+                ->get();
         
-                // إذا كانت السيارات المتقاربة أقل من 3، أكمل العدد المتبقي من السيارات العشوائية
-                $remainingCars = 3 - $carData->count();
-                if ($remainingCars > 0) {
-                    $highestPriceCars = $availableCars->sortByDesc('rate_daily')->take($remainingCars); // أخذ السيارات الأعلى في السعر
-        
-                    // إضافة السيارات الأعلى في السعر
-                    $highestPriceCars->each(function ($car) use ($carData) {
-                        $carData->push([
-                            'car_name' => $car['make'] . ' ' . $car['model'],
-                            'model' => $car['model'],
-                            'year' => $car['year'],
-                            'price_daily' => $car['rate_daily'],
-                            'car_picture' => $car['car_picture']
-                        ]);
-                    });
-                }
-            } else {
-                // إذا لم توجد سيارات متقاربة، اختر 3 سيارات الأعلى في السعر
-                $highestPriceCars = $availableCars->sortByDesc('rate_daily')->take(3); // أخذ أعلى 3 سيارات في السعر
-        
-                // إضافة السيارات الأعلى في السعر
-                $highestPriceCars->each(function ($car) use ($carData) {
-                    $carData->push([
-                        'car_name' => $car['make'] . ' ' . $car['model'],
-                        'model' => $car['model'],
-                        'year' => $car['year'],
-                        'price_daily' => $car['rate_daily'],
-                        'car_picture' => $car['car_picture']
-                    ]);
-                });
-            }
+            // تخزين البيانات في الجلسة
+            $carData = $carsFromDatabase->map(function ($car) {
+                return [
+                    'car_name' => $car->make . ' ' . $car->model,
+                    'model' => $car->model,
+                    'year' => $car->year,
+                    'price_daily' => $car->price_daily,
+                    'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
+                ];
+            });
         
             // تخزين البيانات في الجلسة
             session(['car_data' => $carData]);
         
             // عرض البيانات المخزنة في الجلسة
         }
-        
         
 
         
