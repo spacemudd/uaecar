@@ -221,7 +221,7 @@ class FormController extends Controller
             });
         
             // اختيار ثلاث سيارات عشوائيًا
-            $selectedCars = $availableCars->random(3);
+            $selectedCars = $availableCars->random(4);
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
             $plateNumbers = $selectedCars->pluck('plate_number')->map(function ($plate) {
