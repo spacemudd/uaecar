@@ -214,7 +214,7 @@ class FormController extends Controller
 
         if ($response->successful()) {
             $apiCars = $response->json();
-            
+        
             // تصفية السيارات المتاحة
             $availableCars = collect($apiCars['data'])->filter(function ($car) {
                 return isset($car['status']) && $car['status'] === 'Available';
@@ -236,17 +236,26 @@ class FormController extends Controller
                 return $car['rate_daily'] == $targetRate; // السيارات التي تساوي السعر المستهدف
             });
         
-            // اختيار سيارة واحدة عالية السعر، سيارة متوسطة السعر، سيارة منخفضة السعر
-            $highCar = $higherCars->random(1)->first(); // سيارة واحدة من السيارات الأعلى
-            $mediumCar = $mediumCars->random(1)->first(); // سيارة واحدة من السيارات المتوسطة
-            $lowCar = $lowerCars->random(1)->first(); // سيارة واحدة من السيارات الأقل
+            // تحقق من وجود سيارات في كل فئة (تجنب الأخطاء عند اختيار سيارات عشوائية من فئات فارغة)
+            $highCar = $higherCars->isNotEmpty() ? $higherCars->random(1)->first() : null;
+            $mediumCar = $mediumCars->isNotEmpty() ? $mediumCars->random(1)->first() : null;
+            $lowCar = $lowerCars->isNotEmpty() ? $lowerCars->random(1)->first() : null;
         
-            // جمع السيارات العشوائية المختارة
-            $selectedCars = collect([$highCar, $mediumCar, $lowCar]);
+            // إذا كانت السيارات العشوائية المختارة موجودة، جمعها
+            $selectedCars = collect();
+            if ($highCar) {
+                $selectedCars->push($highCar);
+            }
+            if ($mediumCar) {
+                $selectedCars->push($mediumCar);
+            }
+            if ($lowCar) {
+                $selectedCars->push($lowCar);
+            }
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
             $plateNumbers = $selectedCars->pluck('plate_number')->map(function ($plate) {
-                return preg_replace('/[^0-9]/', '', $plate);
+                return preg_replace('/[^0-9]/', '', $plate); // إزالة أي حرف غير الأرقام من الرقم
             });
         
             // البحث في قاعدة البيانات باستخدام الأرقام فقط
@@ -274,6 +283,7 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
+        
         
         
            
