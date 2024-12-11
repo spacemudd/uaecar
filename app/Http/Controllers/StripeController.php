@@ -134,7 +134,7 @@ class StripeController extends Controller
             'pickup_date' => session('pickup_date'),
             'return_date' => session('return_date'),
             'vehicle_hint' => $carName . ' ' . $carModel . ' ' . $carYear . ' ' . $carPlateNumber,
-            'rate_daily' => $invoice->car_daily_price,
+            'rate_daily' => session('rate_daily'),
             'status' => 'confirmed',
         ];
 
