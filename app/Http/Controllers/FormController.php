@@ -214,7 +214,7 @@ class FormController extends Controller
 
         if ($response->successful()) {
             $apiCars = $response->json();
-        
+            
             // تصفية السيارات المتاحة
             $availableCars = collect($apiCars['data'])->filter(function ($car) {
                 return isset($car['status']) && $car['status'] === 'Available';
@@ -223,13 +223,24 @@ class FormController extends Controller
             // السعر المستهدف من الطلب
             $targetRate = $request->input('price_daily'); // ضع السعر المطلوب هنا
         
-            // إيجاد السيارات الأقرب للسعر المستهدف
+            // تقسيم السيارات بناءً على قرب السعر من السعر المستهدف
+            $higherCars = $availableCars->filter(function ($car) use ($targetRate) {
+                return $car['rate_daily'] > $targetRate; // السيارات الأعلى من السعر
+            });
+        
+            $lowerCars = $availableCars->filter(function ($car) use ($targetRate) {
+                return $car['rate_daily'] < $targetRate; // السيارات الأقل من السعر
+            });
+        
             $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
-                return abs($car['rate_daily'] - $targetRate);
-            })->take(3);
+                return abs($car['rate_daily'] - $targetRate); // السيارات الأقرب للسعر
+            })->take(3); // نأخذ فقط 3 سيارات قريبة من السعر
+        
+            // دمج السيارات: الأعلى، الأقرب، والأقل
+            $mergedCars = $higherCars->merge($closestCars)->merge($lowerCars)->unique('plate_number');
         
             // استخراج أرقام لوحات السيارات (الأرقام فقط)
-            $plateNumbers = $closestCars->pluck('plate_number')->map(function ($plate) {
+            $plateNumbers = $mergedCars->pluck('plate_number')->map(function ($plate) {
                 return preg_replace('/[^0-9]/', '', $plate);
             });
         
@@ -258,8 +269,6 @@ class FormController extends Controller
         
             // عرض البيانات المخزنة في الجلسة
         }
-        
-
         
            
 
