@@ -213,16 +213,59 @@ class FormController extends Controller
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
 
         if ($response->successful()) {
-        $apiCars = $response->json(); 
+            $apiCars = $response->json();
+        
+            // تصفية السيارات المتاحة
+            $availableCars = collect($apiCars['data'])->filter(function ($car) {
+                return isset($car['status']) && $car['status'] === 'Available';
+            });
+        
+            // السعر المستهدف من الطلب
+            $targetRate = $request->input('price_daily'); // ضع السعر المطلوب هنا
+        
+            // إيجاد السيارات الأقرب للسعر المستهدف
+            $closestCars = $availableCars->sortBy(function ($car) use ($targetRate) {
+                return abs($car['rate_daily'] - $targetRate);
+            })->take(2);
+        
+            // استخراج أرقام لوحات السيارات (الأرقام فقط)
+            $plateNumbers = $closestCars->pluck('plate_number')->map(function ($plate) {
+                return preg_replace('/[^0-9]/', '', $plate);
+            });
+        
+            // البحث في قاعدة البيانات باستخدام الأرقام فقط
+            $carsFromDatabase = DB::table('cars')
+                ->where(function ($query) use ($plateNumbers) {
+                    foreach ($plateNumbers as $number) {
+                        $query->orWhereRaw("REGEXP_REPLACE(plate_number, '[^0-9]', '') = ?", [$number]);
+                    }
+                })
+                ->get();
+        
+            // تخزين البيانات في الجلسة
+            $carData = $carsFromDatabase->map(function ($car) {
+                return [
+                    'car_name' => $car->make . ' ' . $car->model,
+                    'model' => $car->model,
+                    'year' => $car->year,
+                    'price_daily' => $car->price_daily,
+                    'car_picture' => $car->car_picture // تأكد من أن لديك عمود car_picture في قاعدة البيانات
+                ];
+            });
+        
+            // تخزين البيانات في الجلسة
+            session(['car_data' => $carData]);
+        
+            // عرض البيانات المخزنة في الجلسة
+        }
+        
 
-            // Filter cars with status "Available"
-        $availableCars = collect($apiCars)->filter(function ($car) {
-            return isset($car['status']) && $car['status'] === 'Available';
-        });
+        
+           
 
-        // Debug available cars
-        dd($availableCars->values()->all());
-    }
+            
+        
+        
 
 
 
