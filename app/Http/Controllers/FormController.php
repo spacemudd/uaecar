@@ -97,14 +97,12 @@ class FormController extends Controller
     private function respondCarStatus($car, $plateNumber, $request)
     {
         $carImage = $request->input('car_picture');
-        dd($carImage);
-        session('car_img', $carImage);
-        dd(session($carImage));
-        
+     
         if (!$car) {
             // إذا كانت السيارة غير موجودة في النظام
             return redirect()->route('index')->with('error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber)
-            ->with('car_img', session('car_img'));
+            ->with('car_picture', $carImage);
+            
 
             
         }
