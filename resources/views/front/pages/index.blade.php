@@ -12,6 +12,12 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+@if(session('error_message_reservation'))
+    <div class="alert alert-danger">
+        {{ session('error_message') }}
+    </div>
+@endif
+
 
 @if (session('error_message'))
     <script>

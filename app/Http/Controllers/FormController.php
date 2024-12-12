@@ -96,11 +96,38 @@ class FormController extends Controller
 
         // التحقق إذا كانت السيارة محجوزة
         foreach ($reservations as $reservation) {
-            if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
-                throw new NodeSystemException('This car is already reserved with a confirmed status.');
+            // التحقق إذا كانت السيارة محجوزة ومؤكدة
+            if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint'])) {
+                $plateNumber = preg_replace('/[^0-9]/', '', $reservation['vehicle_hint']); // استخراج رقم اللوحة
+    
+                // البحث عن السيارة في قاعدة البيانات باستخدام رقم اللوحة
+                $carFromDatabase = DB::table('cars')
+                    ->where(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumber)
+                    ->first();
+    
+                if ($carFromDatabase) {
+                    // إذا تم العثور على السيارة في قاعدة البيانات
+                    $carData = [
+                        'car_name' => $carFromDatabase->car_name,
+                        'price_daily' => $carFromDatabase->price_daily,
+                        'model' => $carFromDatabase->model,
+                        'car_picture' => $carFromDatabase->car_picture,
+                    ];
+    
+                    // حفظ بيانات السيارة في الجلسة
+                    session(['car_reserved' => true]);
+                    session(['reserved_car_data' => $carData]);
+    
+                    // إرجاع رسالة بأن السيارة محجوزة مع بيانات السيارة
+                    return redirect()->route('index')
+                        ->with('error_message_reservation', 'This car is confirmed reserved. Here are the car details.')
+                        ->with('car_details', $carData);
+                }
             }
         }
-
+        
+        
+        
         // الحصول على قائمة السيارات المتوفرة
         $vehicleListResponse = Http::withHeaders([
             'Authorization' => "Bearer $token"
