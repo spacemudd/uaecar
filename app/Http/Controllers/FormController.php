@@ -123,7 +123,6 @@ class FormController extends Controller
     {
         $carImage = $request->input('car_picture');
 
-        $carImage = $request->input('car_picture');
      
         if (!$car) {
             // إذا كانت السيارة غير موجودة في النظام
