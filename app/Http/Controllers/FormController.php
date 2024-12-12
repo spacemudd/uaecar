@@ -130,9 +130,7 @@ class FormController extends Controller
     
                     $carData = $selectedCars->map(function ($car) {
                         return [
-                            'car_name' => $car->make . ' ' . $car->model,
-                            'model' => $car->model,
-                            'year' => $car->year,
+                            'car_name' => $car->make . ' ' . $car->model . ' ' . $car->year,
                             'price_daily' => $car->price_daily,
                             'car_picture' => $car->car_picture,
                         ];
@@ -150,7 +148,7 @@ class FormController extends Controller
             session(['car_picture' => $carImage]);
     
             return redirect()->route('index')
-                ->with('error_message', 'Car is not available for booking at the moment or not found in the Node system. Please check the available options below.')
+                ->with('error_message', 'Car is not available for booking at the moment. Please check the available options below.')
                 ->with('car_picture', session('car_picture'));
         }
     
