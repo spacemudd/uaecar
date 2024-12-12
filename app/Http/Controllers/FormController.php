@@ -255,6 +255,8 @@ class FormController extends Controller
             }
         
             // عرض البيانات المخزنة في الجلسة (يمكنك طباعة البيانات أو استخدامها في العرض)
+
+            dd(session('car_data'));
         }
         
         
