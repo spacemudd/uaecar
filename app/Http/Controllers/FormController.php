@@ -98,13 +98,7 @@ class FormController extends Controller
     {
 
         session()->flush();
-        if (!$car) {
-            // إذا كانت السيارة غير موجودة في النظام
-            return redirect()->route('index')->with('error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber)
-            ->with('car_picture', session('car_picture'));
 
-            
-        }
     
         if ($car['status'] == 'Available') {
             session()->flush();
@@ -190,7 +184,13 @@ class FormController extends Controller
         
         
 
+        if (!$car) {
+            // إذا كانت السيارة غير موجودة في النظام
+            return redirect()->route('index')->with('error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber)
+            ->with('car_picture', session('car_picture'));
 
+            
+        }
         // إرسال صورة السيارة في الجلسة
         $carImage = $request->input('car_picture');
         session(['car_picture' => $carImage]);
