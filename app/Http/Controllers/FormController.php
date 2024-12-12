@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use App\Exceptions\NodeSystemException;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Car;
 
@@ -97,8 +98,7 @@ class FormController extends Controller
         // التحقق إذا كانت السيارة محجوزة
         foreach ($reservations as $reservation) {
             if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
-                throw new NodeSystemException('This car is already reserved with a confirmed status.');
-            }
+                return Redirect::route('index')->with('error', 'هذه السيارة محجوزة بالفعل.');            }
         }
 
         // الحصول على قائمة السيارات المتوفرة
