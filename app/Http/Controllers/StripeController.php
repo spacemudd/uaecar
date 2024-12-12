@@ -42,14 +42,15 @@ class StripeController extends Controller
             'customer_email' => $request->customer_email,
             'customer_phone' => $request->customer_phone,
             'city' => $request->customer_city,
-            'pickup_date' => $request->pickup_date,
-            'return_date' => $request->return_date,
+            'pickup_date' => session('pickup_date'),
+            'return_date' => session('return_date'),
             'creation_date' => now(),
             'description' => "This is a new Car",
-            'car_daily_price' => "10.2",
-            'total_days' => 12,
+            'car_daily_price' => session('daily_price'),
+            'total_days' => \Carbon\Carbon::parse(session('return_date'))
+            ->diffInDays(\Carbon\Carbon::parse(session('pickup_date'))),
             'total_amount' => $request->total,
-            'tax' => 0,
+            'tax' => 1000,
             'status' => 'Payment Recieved',
         ]);
 
