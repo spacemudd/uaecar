@@ -99,6 +99,7 @@ class FormController extends Controller
         session()->flush();
         $carImage = $request->input('car_picture');
         session('car_img', $carImage);
+        dd(session($carImage));
         
         if (!$car) {
             // إذا كانت السيارة غير موجودة في النظام
