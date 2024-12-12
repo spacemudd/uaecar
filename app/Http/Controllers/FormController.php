@@ -124,7 +124,7 @@ class FormController extends Controller
                     return [
                         'car_name' => $car['make'] . ' ' . $car['model'],
                         'price_daily' => $car['rate_daily'],
-                        'car_picture' => $car['image_url']
+                        'car_picture' => $car['car_picture']
                     ];
                 });
             }
