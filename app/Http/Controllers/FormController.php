@@ -96,7 +96,6 @@ class FormController extends Controller
 
     private function respondCarStatus($car, $plateNumber, $request)
     {
-        session()->flush();
         $carImage = $request->input('car_picture');
         session('car_img', $carImage);
         dd(session($carImage));
@@ -110,7 +109,6 @@ class FormController extends Controller
         }
     
         if ($car['status'] == 'Available') {
-            session()->flush();
 
             // إذا كانت السيارة متاحة
             session([
