@@ -124,7 +124,7 @@ class FormController extends Controller
         $carImage = $request->input('car_picture');
         $token = Cache::get('node_api_token') ?? $this->authenticate();
 
-        dd($car);
+        dd($plateNumber);
     
         // إذا كانت السيارة غير موجودة أو غير متوفرة
         if (!$car || $car['status'] !== 'Available') {
