@@ -122,39 +122,10 @@ class FormController extends Controller
     private function respondCarStatus($car, $plateNumber, $request)
     {
         $carImage = $request->input('car_picture');
-
-        $carImage = $request->input('car_picture');
-     
-        if (!$car) {
-            // إذا كانت السيارة غير موجودة في النظام
-            return redirect()->route('index')
-                ->with('error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber)
-                ->with('car_picture', $carImage);
-        }
-    
-        if ($car['status'] == 'Available') {
-            // إذا كانت السيارة متاحة
-            session([
-                'pickup_date' => $request->input('pickup_date'),
-                'return_date' => $request->input('return_date'),
-                'rate_daily' => $request->input('price_daily'),
-                'pickup_location' => '71',  // قيمة ثابتة
-                'return_location' => '71',  // قيمة ثابتة
-                'status' => 'pending_updates',
-                'vehicle_hint' => $request->input('carName'),
-                'customer_name' => $request->input('name'),
-                'customer_mobile' => $request->input('phone'),
-                'customer_email' => $request->input('email'),
-                'pickup_city' => $request->input('pickup_city'),
-                'car_image' => $car['image_url'] ?? null,
-                'new_id' => $request->input('car_id')
-            ]);
-    
-            // التوجيه إلى صفحة الدفع
-            return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
-        }
-    
+        
         $token = Cache::get('node_api_token') ?? $this->authenticate();
+
+        dd($plateNumber);
     
         // إذا كانت السيارة غير موجودة أو غير متوفرة
         if (!$car || $car['status'] !== 'Available') {
@@ -205,8 +176,7 @@ class FormController extends Controller
                 ->with('error_message', 'Car is not available for booking at the moment. Please check the available options below.')
                 ->with('car_picture', session('car_picture'))
                 ->with('car_data', session('car_data')); // تمرير البيانات للـ View
-        }
-    
+        }else{
         // إذا كانت السيارة متوفرة
         session([
             'pickup_date' => $request->input('pickup_date'),
@@ -225,6 +195,9 @@ class FormController extends Controller
         ]);
     
         return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
+        }
+    
+
     }
     
     

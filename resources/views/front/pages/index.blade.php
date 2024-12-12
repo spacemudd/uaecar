@@ -11,11 +11,16 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-@if(session('error_message_reservation'))
-    <div class="alert alert-danger">
-        {{ session('error_message') }}
-    </div>
+@if (session('error_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'This Car is currently booked !',
+                text: "",
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
 @endif
 
 
@@ -31,8 +36,6 @@
                     <div class="mt-4">
                         <h5>Recommended Cars</h5>
                         <div class="row">
-                        @if(session()->has('car_data') && is_array(session('car_data')))
-    @foreach(session('car_data') as $index => $car)
                             @foreach(session('car_data') as $index => $car)
                                 <div class="col-4 text-center">
                                     <a href="#" style="text-decoration: none; color: inherit;">
@@ -42,7 +45,6 @@
                                     </a>
                                 </div>
                             @endforeach
-                        <p>No recommended cars available.</p>
                         </div>
                     </div>
                 `,
