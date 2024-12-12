@@ -125,7 +125,6 @@ class FormController extends Controller
         
         $token = Cache::get('node_api_token') ?? $this->authenticate();
 
-        dd($plateNumber);
     
         // إذا كانت السيارة غير موجودة أو غير متوفرة
         if (!$car || $car['status'] !== 'Available') {
