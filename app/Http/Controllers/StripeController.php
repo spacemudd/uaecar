@@ -7,7 +7,7 @@ use Stripe\StripeClient;
 use App\Models\Car;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Http;
-use App\Mail\InvoiceEmail;
+use App\Mail\InvoiceCreated;
 use Illuminate\Support\Facades\Mail;
 
 class StripeController extends Controller
@@ -56,7 +56,7 @@ class StripeController extends Controller
             'status' => 'Payment Recieved',
         ]);
 
-        Mail::to($request->customer_email)->send(new InvoiceEmail($invoice));
+        Mail::to($invoice->customer_email)->send(new InvoiceCreated($invoice));
 
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
