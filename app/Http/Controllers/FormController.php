@@ -73,10 +73,8 @@ class FormController extends Controller
         $reservations = $reservationResponse->json()['data'];
     
         foreach ($reservations as $reservation) {
-            // إذا كانت السيارة محجوزة بنجاح
             if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
-                // في حالة الحجز المؤكد، استدعاء الميثود لجلب السيارات المقترحة
-                return $this->suggestAvailableCars($token); // تمرير التوكن لجلب السيارات المتاحة
+                throw new NodeSystemException('This car is already reserved with a confirmed status.');
             }
         }
         $vehicleListResponse = Http::withHeaders([
