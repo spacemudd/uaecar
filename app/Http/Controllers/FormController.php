@@ -171,6 +171,58 @@ class FormController extends Controller
     }
     
     
+    private function suggestAvailableCars($token)
+    {
+        $carImage = session('car_picture');
+        
+        // إرسال طلب ل API للحصول على جميع السيارات المتاحة
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->get('https://luxuria.crs.ae/api/v1/vehicles');
 
+        if ($response->successful()) {
+            $apiCars = $response->json();
+
+            // تصفية السيارات المتاحة
+            $availableCars = collect($apiCars['data'])->filter(function ($car) {
+                return isset($car['status']) && $car['status'] === 'Available';
+            });
+
+            // استخراج أرقام اللوحات
+            $plateNumbers = $availableCars->pluck('plate_number')->map(function ($plate) {
+                return preg_replace('/[^0-9]/', '', $plate);
+            });
+
+            // جلب السيارات من قاعدة البيانات
+            $carsFromDatabase = DB::table('cars')
+                ->whereIn(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumbers)
+                ->get();
+
+            // إذا كانت هناك 3 سيارات على الأقل
+            if ($carsFromDatabase->count() >= 3) {
+                $selectedCars = $carsFromDatabase->random(3);
+
+                // تجهيز بيانات السيارات المختارة
+                $carData = $selectedCars->map(function ($car) {
+                    return [
+                        'car_name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
+                        'price_daily' => $car->price_daily,
+                        'car_picture' => $car->car_picture,
+                    ];
+                });
+
+                // تخزين السيارات المقترحة في السيشن
+                session(['car_data' => $carData]);
+            }
+        }
+
+        // إرسال صورة السيارة الحالية مع الرسالة
+        session(['car_picture' => $carImage]);
+
+        return redirect()->route('index')
+            ->with('error_message', 'Car is not available for booking at the moment. Please check the available options below.')
+            ->with('car_picture', session('car_picture'))
+            ->with('car_data', session('car_data')); // تمرير البيانات للـ View
+    }
     
 }
