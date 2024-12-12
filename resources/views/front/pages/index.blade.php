@@ -42,7 +42,6 @@
                                     </a>
                                 </div>
                             @endforeach
-                            @else
                         <p>No recommended cars available.</p>
                         </div>
                     </div>
