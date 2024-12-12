@@ -137,6 +137,8 @@ class FormController extends Controller
                             'car_picture' => $car->car_picture,
                         ];
                     });
+
+                    dd($carData);
     
                     // تخزين السيارات المقترحة في الجلسة
                     session(['car_data' => $carData]);
