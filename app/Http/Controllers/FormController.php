@@ -138,12 +138,12 @@ class FormController extends Controller
 
     
                     // تخزين السيارات المقترحة في الجلسة
-                    session(['car_data' => $carData]);
                 } else {
                     session(['car_data' => []]); // إذا لم تكن هناك 3 سيارات
                 }
             }
-    
+            session(['car_data' => $carData]);
+
             // إرسال صورة السيارة الحالية مع الرسالة
             session(['car_picture' => $carImage]);
     
