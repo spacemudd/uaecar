@@ -6,23 +6,28 @@ use Illuminate\Http\Request;
 use Stripe\StripeClient;
 use App\Models\Car;
 use App\Models\Invoice;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\PDF; // إضافة الـ PDF
 
 class StripeController extends Controller
 {
     public $stripe;
+    protected $pdf; // تعريف الكائن PDF
 
-    public function __construct()
+    // تعديل constructor لحقن الكائن PDF
+    public function __construct(PDF $pdf)
     {
         $stripeSecretKey = env('STRIPE_SECRET_KEY');
         if (empty($stripeSecretKey)) {
             throw new \Exception('Stripe secret key is not set in the environment file.');
         }
         $this->stripe = new StripeClient($stripeSecretKey);
+        $this->pdf = $pdf; // تخزين الكائن PDF لاستخدامه لاحقًا
     }
 
     public function pay(Request $request)
     {
+        // تحقق البيانات المدخلة من المستخدم
         $request->validate([
             'car_id' => 'required|exists:cars,id',
             'price_daily' => 'required|numeric',
@@ -54,6 +59,7 @@ class StripeController extends Controller
             'status' => 'Payment Recieved',
         ]);
 
+        // إنشاء جلسة دفع باستخدام Stripe
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
             'success_url' => route('successview', ['session_id' => '{CHECKOUT_SESSION_ID}', 'invoice_id' => $invoice->id]),
@@ -85,21 +91,6 @@ class StripeController extends Controller
         return redirect($session->url);
     }
 
-    public function getAuthToken()
-    {
-        $loginUrl = 'https://luxuria.crs.ae/api/v1/auth/jwt/token';
-        $response = Http::post($loginUrl, [
-            'username' => 'info@rentluxuria.com',
-            'password' => ')ixLj(CQYSE84MRMqm*&dega',
-        ]);
-
-        if ($response->successful()) {
-            return $response->json()['token'];
-        }
-
-        return null;
-    }
-
     public function successView(Request $request)
     {
         $invoiceId = session('user_invoices');
@@ -113,36 +104,17 @@ class StripeController extends Controller
             return redirect()->route('payment.cancel');
         }
 
-        $token = $this->getAuthToken();
-        if (!$token) {
-            return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
-        }
-        $carId = Car::find(session('new_id'));
-        // dd($carId);
-        $carName = $carId->car_name;
-        $carModel = $carId->model;
-        $carYear = $carId->year;
-        $carPlateNumber = $carId->plate_number;
+        // إنشاء ملف PDF للفاتورة باستخدام الكائن الـ PDF المحقون
+        $pdf = $this->pdf->loadView('front.pages.stripe.invoice', ['invoice' => $invoice]);
 
-        $apiUrl = 'https://luxuria.crs.ae/api/v1/reservations';
-        $apiData = [
-            'customer_name' => $invoice->customer_name,
-            'customer_mobile' => $invoice->customer_phone,
-            'customer_email' => $invoice->customer_email,
-            'customer_nationality' => 'ARE',
-            'pickup_location' => '71',
-            'return_location' => '71',
-            'pickup_date' => session('pickup_date'),
-            'return_date' => session('return_date'),
-            'vehicle_hint' => $carName . ' ' . $carModel . ' ' . $carYear . ' ' . $carPlateNumber,
-            'rate_daily' => session('rate_daily'),
-            'status' => 'confirmed',
-        ];
+        // إرسال الفاتورة عبر البريد الإلكتروني
+        Mail::send('emails.invoice', ['invoice' => $invoice], function($message) use ($invoice, $pdf) {
+            $message->to($invoice->customer_email)
+                    ->subject('Your Invoice')
+                    ->attachData($pdf->output(), 'invoice_' . $invoice->id . '.pdf');
+        });
 
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->post($apiUrl, $apiData);
-
+        // إرسال إشعار بنجاح الدفع
         return view('front.pages.successView', compact('invoiceId'));
     }
 }
