@@ -56,9 +56,11 @@ class StripeController extends Controller
             'status' => 'Payment Recieved',
         ]);
 
+        dd($invoice);
+
         Mail::to($request->customer_email)->send(new InvoiceEmail($invoice));
 
-        
+
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
             'success_url' => route('successview', ['session_id' => '{CHECKOUT_SESSION_ID}', 'invoice_id' => $invoice->id]),
