@@ -130,7 +130,7 @@ class FormController extends Controller
     
                     $carData = $selectedCars->map(function ($car) {
                         return [
-                            'car_name' => $car->make . ' ' . $car->model . ' ' . $car->year,
+                            'car_name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
                             'price_daily' => $car->price_daily,
                             'car_picture' => $car->car_picture,
                         ];
