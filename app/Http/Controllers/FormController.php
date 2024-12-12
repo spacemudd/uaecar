@@ -96,6 +96,8 @@ class FormController extends Controller
 
     private function respondCarStatus($car, $plateNumber, $request)
     {
+
+        session()->flush();
         if (!$car) {
             // إذا كانت السيارة غير موجودة في النظام
             return redirect()->route('index')->with('error_message', 'Car not found in the Node system. Plate number: ' . $plateNumber);
