@@ -5,7 +5,7 @@ namespace App\Mail;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InvoiceCreated extends Mailable
+class InvoiceEmail extends Mailable
 {
     use SerializesModels;
 
@@ -18,6 +18,7 @@ class InvoiceCreated extends Mailable
 
     public function build()
     {
-        return $this->subject('Invoice Created')->view('emails.invoice_created');
+        return $this->view('email.invoice') // استخدم اسم الـ view هنا
+                    ->with('invoice', $this->invoice); // تمرير المتغير إلى الـ view
     }
 }
