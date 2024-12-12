@@ -138,7 +138,6 @@ class FormController extends Controller
                         ];
                     });
 
-                    dd($carData);
     
                     // تخزين السيارات المقترحة في الجلسة
                     session(['car_data' => $carData]);
