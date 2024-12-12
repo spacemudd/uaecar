@@ -123,6 +123,7 @@ class FormController extends Controller
     {
         $carImage = $request->input('car_picture');
 
+        $carImage = $request->input('car_picture');
      
         if (!$car) {
             // إذا كانت السيارة غير موجودة في النظام
@@ -205,7 +206,25 @@ class FormController extends Controller
                 ->with('car_picture', session('car_picture'))
                 ->with('car_data', session('car_data')); // تمرير البيانات للـ View
         }
-
+    
+        // إذا كانت السيارة متوفرة
+        session([
+            'pickup_date' => $request->input('pickup_date'),
+            'return_date' => $request->input('return_date'),
+            'rate_daily' => $request->input('price_daily'),
+            'pickup_location' => '71', // Static value
+            'return_location' => '71', // Static value
+            'status' => 'pending_updates',
+            'vehicle_hint' => $request->input('carName'),
+            'customer_name' => $request->input('name'),
+            'customer_mobile' => $request->input('phone'),
+            'customer_email' => $request->input('email'),
+            'pickup_city' => $request->input('pickup_city'),
+            'car_image' => $car['image_url'] ?? null,
+            'new_id' => $request->input('car_id'),
+        ]);
+    
+        return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
     }
     
     
