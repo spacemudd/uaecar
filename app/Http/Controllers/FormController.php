@@ -72,16 +72,14 @@ class FormController extends Controller
     
         $reservations = $reservationResponse->json()['data'];
     
-         foreach ($reservations as $reservation) {
-        // إذا كانت السيارة محجوزة بنجاح
-        if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
-            // في حالة الحجز المؤكد، استدعاء الميثود لجلب السيارات المقترحة
-            return redirect()->route('index')
-            ->with('error_message', 'Car is not available for booking at the moment. Please check the available options below.')
-            ->with('car_picture', session('car_picture'))
-            ->with('car_data', session('car_data')); // تمرير البيانات للـ View
+        foreach ($reservations as $reservation) {
+            if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
+                // بدلاً من رمي الاستثناء، نقوم بإعادة التوجيه مع رسالة.
+                return redirect()->route('index')  // أو أي route ترغب في إعادة التوجيه إليها
+                    ->with('error_message', 'This car is already reserved with a confirmed status.');
+            }
         }
-    }
+        
         $vehicleListResponse = Http::withHeaders([
             'Authorization' => "Bearer $token"
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
