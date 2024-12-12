@@ -31,6 +31,8 @@
                     <div class="mt-4">
                         <h5>Recommended Cars</h5>
                         <div class="row">
+                        @if(session()->has('car_data') && is_array(session('car_data')))
+    @foreach(session('car_data') as $index => $car)
                             @foreach(session('car_data') as $index => $car)
                                 <div class="col-4 text-center">
                                     <a href="#" style="text-decoration: none; color: inherit;">
@@ -40,6 +42,9 @@
                                     </a>
                                 </div>
                             @endforeach
+                            @else
+    <p>No recommended cars available.</p>
+@endif
                         </div>
                     </div>
                 `,
