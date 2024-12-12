@@ -139,7 +139,6 @@ class FormController extends Controller
     
                     // تخزين السيارات المقترحة في الجلسة
                     session(['car_data' => $carData]);
-                    dd(session('car_data'));
                 } else {
                     session(['car_data' => []]); // إذا لم تكن هناك 3 سيارات
                 }
