@@ -268,7 +268,6 @@ class FormController extends Controller
         
         
 
-        dd(session('car_data'));
 
 
 // // استخراج أرقام اللوحات فقط من بيانات الـ API

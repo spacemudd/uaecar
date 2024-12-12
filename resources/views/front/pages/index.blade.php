@@ -36,15 +36,19 @@
                     <div class="mt-4">
                         <h5>Recommended Cars</h5>
                         <div class="row">
-                            @foreach(session('car_data') as $index => $car)
-                                <div class="col-4 text-center">
-                                    <a href="#" style="text-decoration: none; color: inherit;">
-                                        <img src="{{ asset('storage/' . $car['car_picture']) }}" alt="Car {{ $index + 1 }}" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
-                                        <h6>{{ $car['car_name'] }}</h6>
-                                        <p>{{ $car['price_daily'] }} AED</p>
-                                    </a>
-                                </div>
-                            @endforeach
+                            @if(session('car_data') && is_array(session('car_data')))
+                                @foreach(session('car_data') as $index => $car)
+                                    <div class="col-4 text-center">
+                                        <a href="#" style="text-decoration: none; color: inherit;">
+                                            <img src="{{ asset('storage/' . $car['car_picture']) }}" alt="Car {{ $index + 1 }}" class="img-fluid" style="max-width: 70%; height: auto; margin-bottom: 10px;">
+                                            <h6>{{ $car['car_name'] }}</h6>
+                                            <p>{{ $car['price_daily'] }} AED</p>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p>No recommended cars available.</p>
+                            @endif
                         </div>
                     </div>
                 `,
