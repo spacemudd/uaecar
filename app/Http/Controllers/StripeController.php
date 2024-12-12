@@ -47,8 +47,8 @@ class StripeController extends Controller
             'creation_date' => now(),
             'description' => "This is a new Car",
             'car_daily_price' => session('rate_daily'),
-            'total_days' => \Carbon\Carbon::parse(session('return_date'))
-            ->diffInDays(\Carbon\Carbon::parse(session('pickup_date'))),
+            'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
+            ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
             'total_amount' => $request->total,
             'tax' => 1000,
             'status' => 'Payment Recieved',
