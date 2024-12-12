@@ -150,7 +150,8 @@ class FormController extends Controller
     
             return redirect()->route('index')
                 ->with('error_message', 'Car is not available for booking at the moment. Please check the available options below.')
-                ->with('car_picture', session('car_picture'));
+                ->with('car_picture', session('car_picture'))
+                ->with('car_data', session('car_data')); // تمرير البيانات للـ View
         }
     
         // إذا كانت السيارة متوفرة
