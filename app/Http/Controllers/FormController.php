@@ -125,7 +125,7 @@ class FormController extends Controller
                     ->get();
     
                 // إذا كانت هناك 3 سيارات على الأقل
-                if ($carsFromDatabase->count() >= 3) {
+                
                     $selectedCars = $carsFromDatabase->random(3);
     
                     $carData = $selectedCars->map(function ($car) {
@@ -137,12 +137,9 @@ class FormController extends Controller
                     });
 
     
-                    // تخزين السيارات المقترحة في الجلسة
-                } else {
-                    session(['car_data' => []]); // إذا لم تكن هناك 3 سيارات
-                }
+                    session(['car_data' => $carData]);
+
             }
-            session(['car_data' => $carData]);
 
             // إرسال صورة السيارة الحالية مع الرسالة
             session(['car_picture' => $carImage]);
