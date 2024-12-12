@@ -97,6 +97,7 @@ class FormController extends Controller
     private function respondCarStatus($car, $plateNumber, $request)
     {
         $carImage = $request->input('car_picture');
+        dd($carImage);
         session('car_img', $carImage);
         dd(session($carImage));
         
