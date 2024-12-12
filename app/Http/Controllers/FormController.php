@@ -97,20 +97,15 @@ class FormController extends Controller
     private function respondCarStatus($car, $plateNumber, $request)
     {
         $carImage = $request->input('car_picture');
+        $token = Cache::get('node_api_token') ?? $this->authenticate();
     
-        // إذا كانت السيارة غير موجودة أو غير متاحة
+        // إذا كانت السيارة غير موجودة أو غير متوفرة
         if (!$car || $car['status'] !== 'Available') {
-            $token = Cache::get('node_api_token');
-    
-            if (!$token) {
-                $token = $this->authenticate();
-            }
-    
+            // جلب جميع السيارات من API
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
             ])->get('https://luxuria.crs.ae/api/v1/vehicles');
     
-            $suggestedCars = [];
             if ($response->successful()) {
                 $apiCars = $response->json();
     
@@ -119,33 +114,52 @@ class FormController extends Controller
                     return isset($car['status']) && $car['status'] === 'Available';
                 });
     
-                // اختيار 3 سيارات مقترحة
-                $suggestedCars = $availableCars->take(3)->map(function ($car) {
-                    return [
-                        'car_name' => $car['make'] . ' ' . $car['model'],
-                        'price_daily' => $car['rate_daily'],
-                        'car_picture' => $car['car_picture']
-                    ];
+                // استخراج أرقام اللوحات
+                $plateNumbers = $availableCars->pluck('plate_number')->map(function ($plate) {
+                    return preg_replace('/[^0-9]/', '', $plate);
                 });
+    
+                // جلب السيارات من قاعدة البيانات
+                $carsFromDatabase = DB::table('cars')
+                    ->whereIn(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumbers)
+                    ->get();
+    
+                // إذا كانت هناك 3 سيارات على الأقل
+                if ($carsFromDatabase->count() >= 3) {
+                    $selectedCars = $carsFromDatabase->random(3);
+    
+                    $carData = $selectedCars->map(function ($car) {
+                        return [
+                            'car_name' => $car->make . ' ' . $car->model,
+                            'model' => $car->model,
+                            'year' => $car->year,
+                            'price_daily' => $car->price_daily,
+                            'car_picture' => $car->car_picture,
+                        ];
+                    });
+    
+                    // تخزين السيارات المقترحة في الجلسة
+                    session(['car_data' => $carData]);
+                } else {
+                    session(['car_data' => []]); // إذا لم تكن هناك 3 سيارات
+                }
             }
     
-            // تخزين السيارات المقترحة في الجلسة
-            session(['car_data' => $suggestedCars]);
+            // إرسال صورة السيارة الحالية مع الرسالة
             session(['car_picture' => $carImage]);
     
-            // توجيه المستخدم مع رسالة الخطأ
             return redirect()->route('index')
-                ->with('error_message', 'The car is either not available or not found in the system. Please check the suggested cars below.')
+                ->with('error_message', 'Car is not available for booking at the moment or not found in the Node system. Please check the available options below.')
                 ->with('car_picture', session('car_picture'));
         }
     
-        // إذا كانت السيارة متاحة
+        // إذا كانت السيارة متوفرة
         session([
             'pickup_date' => $request->input('pickup_date'),
             'return_date' => $request->input('return_date'),
             'rate_daily' => $request->input('price_daily'),
-            'pickup_location' => '71',  // قيمة ثابتة
-            'return_location' => '71',  // قيمة ثابتة
+            'pickup_location' => '71', // Static value
+            'return_location' => '71', // Static value
             'status' => 'pending_updates',
             'vehicle_hint' => $request->input('carName'),
             'customer_name' => $request->input('name'),
@@ -153,13 +167,11 @@ class FormController extends Controller
             'customer_email' => $request->input('email'),
             'pickup_city' => $request->input('pickup_city'),
             'car_image' => $car['image_url'] ?? null,
-            'new_id' => $request->input('car_id')
+            'new_id' => $request->input('car_id'),
         ]);
     
-        // التوجيه إلى صفحة الدفع
         return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
     }
-    
     
     
 
