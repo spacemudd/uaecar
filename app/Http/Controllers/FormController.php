@@ -76,7 +76,10 @@ class FormController extends Controller
         // إذا كانت السيارة محجوزة بنجاح
         if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
             // في حالة الحجز المؤكد، استدعاء الميثود لجلب السيارات المقترحة
-            return $this->suggestAvailableCars(Cache::get('node_api_token') ?? $this->authenticate());
+            return redirect()->route('index')
+            ->with('error_message', 'Car is not available for booking at the moment. Please check the available options below.')
+            ->with('car_picture', session('car_picture'))
+            ->with('car_data', session('car_data')); // تمرير البيانات للـ View
         }
     }
         $vehicleListResponse = Http::withHeaders([
