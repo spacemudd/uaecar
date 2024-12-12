@@ -6,29 +6,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use App\Exceptions\NodeSystemException;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Models\Car;
 
 class FormController extends Controller
 {
+    /**
+     * تقديم الطلب للتحقق من السيارة وحجزها.
+     */
     public function submit(Request $request)
     {
-        // تخزين معرّف السيارة في السيشن
+        // حفظ car_id في السيشن
         session(['new_id' => $request->input('car_id')]);
 
-        // استخراج رقم اللوحة من الطلب
-        $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $request->input('plate_number'));
+        // تنظيف رقم اللوحة لإزالة أي إضافات
+        $plateNumber = $this->sanitizePlateNumber($request->input('plate_number'));
 
-        // الحصول على التوكن
+        // الحصول على التوكن من الـ Cache أو المصادقة إذا لم يكن موجود
         $token = $this->getAuthToken();
 
-        // الحصول على تفاصيل السيارة
+        // الحصول على تفاصيل السيارة عبر رقم اللوحة
         $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
 
-        // الاستجابة بناءً على حالة السيارة
+        // الرد بناءً على حالة السيارة
         return $this->respondCarStatus($car, $plateNumber, $request);
     }
 
+    /**
+     * مسح رقم اللوحة لتجنب الحروف الزائدة.
+     */
+    private function sanitizePlateNumber($plateNumber)
+    {
+        return preg_replace('/^(?:[A-Z]-|CC-)/', '', $plateNumber);
+    }
+
+    /**
+     * الحصول على التوكن من الـ Cache أو طلب توكن جديد.
+     */
     private function getAuthToken()
     {
         $token = Cache::get('node_api_token');
@@ -38,6 +53,9 @@ class FormController extends Controller
         return $token;
     }
 
+    /**
+     * مصادقة المستخدم للحصول على توكن جديد.
+     */
     private function authenticate()
     {
         $username = 'info@rentluxuria.com';
@@ -61,6 +79,9 @@ class FormController extends Controller
         throw new NodeSystemException('Authentication failed: ' . ($response->json()['message'] ?? 'Unknown error.'));
     }
 
+    /**
+     * الحصول على تفاصيل السيارة عبر رقم اللوحة.
+     */
     private function getCarDetailsByPlateNumber($plateNumber, $token)
     {
         // التحقق من حالة الحجز
@@ -72,15 +93,16 @@ class FormController extends Controller
             throw new NodeSystemException('Failed to communicate with the Reservations API.');
         }
 
-        // التحقق من حالة السيارة إذا كانت محجوزة
         $reservations = $reservationResponse->json()['data'];
+
+        // التحقق إذا كانت السيارة محجوزة
         foreach ($reservations as $reservation) {
             if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint']) && str_contains($reservation['vehicle_hint'], $plateNumber)) {
                 throw new NodeSystemException('This car is already reserved with a confirmed status.');
             }
         }
 
-        // جلب السيارات من API
+        // الحصول على قائمة السيارات المتوفرة
         $vehicleListResponse = Http::withHeaders([
             'Authorization' => "Bearer $token"
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
@@ -89,30 +111,68 @@ class FormController extends Controller
             throw new NodeSystemException('Failed to communicate with the Node system.');
         }
 
-        // البحث عن السيارة برقم اللوحة
         $vehicles = $vehicleListResponse->json()['data'];
+
+        // البحث عن السيارة برقم اللوحة
         return collect($vehicles)->firstWhere('plate_number', $plateNumber);
     }
 
+    /**
+     * التعامل مع حالة السيارة بعد التحقق من حالتها.
+     */
     private function respondCarStatus($car, $plateNumber, $request)
     {
+        // جلب صورة السيارة من الطلب
         $carImage = $request->input('car_picture');
         $token = Cache::get('node_api_token') ?? $this->authenticate();
 
-        // إذا كانت السيارة غير موجودة أو غير متوفرة
-        if (!$car || $car['status'] !== 'Available') {
-            return $this->handleCarUnavailable($carImage, $request, $token);
+        // تحديد الرسالة بناءً على حالة السيارة
+        if (!$car) {
+            $errorMessage = 'Car not found. Please check the available options below.';
+        } elseif ($car['status'] !== 'Available') {
+            $errorMessage = 'Car is not available for booking at the moment. Please check the available options below.';
+        } else {
+            // إذا كانت السيارة متاحة، حفظ بيانات الحجز
+            $this->storeReservationData($request, $car);
+            return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
         }
 
-        // إذا كانت السيارة متوفرة
-        $this->storeReservationSessionData($request, $car);
-
-        return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);
+        // إذا كانت السيارة غير متاحة، إظهار السيارات البديلة
+        $this->handleCarNotAvailable($token, $carImage);
+        return redirect()->route('index')
+            ->with('error_message', $errorMessage)
+            ->with('car_picture', session('car_picture'))
+            ->with('car_data', session('car_data'));
     }
 
-    private function handleCarUnavailable($carImage, $request, $token)
+    /**
+     * حفظ بيانات الحجز في السيشن.
+     */
+    private function storeReservationData($request, $car)
     {
-        // جلب جميع السيارات المتاحة من API
+        session([
+            'pickup_date' => $request->input('pickup_date'),
+            'return_date' => $request->input('return_date'),
+            'rate_daily' => $request->input('price_daily'),
+            'pickup_location' => '71', // Static value
+            'return_location' => '71', // Static value
+            'status' => 'pending_updates',
+            'vehicle_hint' => $request->input('carName'),
+            'customer_name' => $request->input('name'),
+            'customer_mobile' => $request->input('phone'),
+            'customer_email' => $request->input('email'),
+            'pickup_city' => $request->input('pickup_city'),
+            'car_image' => $car['image_url'] ?? null,
+            'new_id' => $request->input('car_id'),
+        ]);
+    }
+
+    /**
+     * التعامل مع حالة السيارة غير المتوفرة وإظهار السيارات البديلة.
+     */
+    private function handleCarNotAvailable($token, $carImage)
+    {
+        // جلب قائمة السيارات المتاحة
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
@@ -130,11 +190,12 @@ class FormController extends Controller
                 return preg_replace('/[^0-9]/', '', $plate);
             });
 
-            // جلب السيارات من قاعدة البيانات
+            // جلب السيارات البديلة من قاعدة البيانات
             $carsFromDatabase = DB::table('cars')
                 ->whereIn(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumbers)
                 ->get();
 
+            // إذا كانت هناك سيارات بديلة
             if ($carsFromDatabase->count() >= 3) {
                 $selectedCars = $carsFromDatabase->random(3);
 
@@ -146,36 +207,12 @@ class FormController extends Controller
                     ];
                 });
 
+                // حفظ السيارات البديلة في السيشن
                 session(['car_data' => $carData]);
             }
         }
 
-        // إرسال صورة السيارة الحالية مع الرسالة
+        // حفظ صورة السيارة الحالية في السيشن
         session(['car_picture' => $carImage]);
-
-        return redirect()->route('index')
-            ->with('error_message', 'Car is not available for booking at the moment. Please check the available options below.')
-            ->with('car_picture', session('car_picture'))
-            ->with('car_data', session('car_data')); // تمرير البيانات للـ View
-    }
-
-    private function storeReservationSessionData($request, $car)
-    {
-        // تخزين بيانات الحجز في السيشن
-        session([
-            'pickup_date' => $request->input('pickup_date'),
-            'return_date' => $request->input('return_date'),
-            'rate_daily' => $request->input('price_daily'),
-            'pickup_location' => '71', // Static value
-            'return_location' => '71', // Static value
-            'status' => 'pending_updates',
-            'vehicle_hint' => $request->input('carName'),
-            'customer_name' => $request->input('name'),
-            'customer_mobile' => $request->input('phone'),
-            'customer_email' => $request->input('email'),
-            'pickup_city' => $request->input('pickup_city'),
-            'car_image' => $car['image_url'] ?? null,
-            'new_id' => $request->input('car_id'),
-        ]);
     }
 }
