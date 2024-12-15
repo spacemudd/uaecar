@@ -47,7 +47,7 @@
                 </div>
                 <div class="modal-body">
                     <strong>{{ $ad->message }}</strong>
-                    <img src="{{ asset($ad->image) }}" alt="Promotion Image" class="img-fluid mt-3">
+                    <img src="{{ asset('storage/' . $ad->image) }}" alt="Promotion Image" class="img-fluid mt-3">
                 </div>
             </div>
         </div>
