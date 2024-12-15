@@ -56,7 +56,7 @@ class StripeController extends Controller
             'status' => 'Payment Recieved',
         ]);
 
-        dd($invoice);
+        // dd($invoice);
 
         Mail::to($request->customer_email)->send(new InvoiceEmail($invoice));
 
