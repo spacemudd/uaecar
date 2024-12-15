@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use Illuminate\Support\Facades\Http;
 use App\Mail\InvoiceEmail;
 use Illuminate\Support\Facades\Mail;
+use Pdf;
 
 class StripeController extends Controller
 {
@@ -50,17 +51,13 @@ class StripeController extends Controller
             'description' => "This is a new Car",
             'car_daily_price' => session('rate_daily'),
             'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
-            ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
+                ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
             'total_amount' => $request->total,
             'tax' => 1000,
-            'status' => 'Payment Recieved',
+            'status' => 'Payment Received',
         ]);
 
-        // dd($invoice);
-
-        Mail::to($request->customer_email)->send(new InvoiceEmail($invoice));
-
-
+        // قم بإنشاء جلسة الدفع في Stripe
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
             'success_url' => route('successview', ['session_id' => '{CHECKOUT_SESSION_ID}', 'invoice_id' => $invoice->id]),
@@ -110,27 +107,36 @@ class StripeController extends Controller
     public function successView(Request $request)
     {
         $invoiceId = session('user_invoices');
-
+    
         if (!$invoiceId) {
             return redirect()->route('payment.cancel');
         }
-
+    
         $invoice = Invoice::find($invoiceId);
         if (!$invoice) {
             return redirect()->route('payment.cancel');
         }
-
+    
+        // توليد ملف PDF للفاتورة
+        // $pdf = PDF::loadView('invoices.pdf', compact('invoice'))->setPaper('a4', 'portrait');
+        // $pdfFilePath = storage_path("app/public/invoice_{$invoice->id}.pdf");
+        // $pdf->save($pdfFilePath);
+    
+        // إرسال البريد الإلكتروني للمستخدم مع إرفاق الفاتورة PDF
+        Mail::to($invoice->customer_email)->send(new InvoiceEmail($invoice));
+    
+        // إرسال البيانات إلى الـ API (إذا كنت بحاجة لذلك)
         $token = $this->getAuthToken();
         if (!$token) {
             return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
         }
+    
         $carId = Car::find(session('new_id'));
-        // dd($carId);
         $carName = $carId->car_name;
         $carModel = $carId->model;
         $carYear = $carId->year;
         $carPlateNumber = $carId->plate_number;
-
+    
         $apiUrl = 'https://luxuria.crs.ae/api/v1/reservations';
         $apiData = [
             'customer_name' => $invoice->customer_name,
@@ -145,11 +151,13 @@ class StripeController extends Controller
             'rate_daily' => session('rate_daily'),
             'status' => 'confirmed',
         ];
-
+    
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
         ])->post($apiUrl, $apiData);
-
+    
+        // العودة إلى صفحة العرض
         return view('front.pages.successView', compact('invoiceId'));
     }
+    
 }
