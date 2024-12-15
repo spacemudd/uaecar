@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 
 use Illuminate\Http\Request;
+use app\Models\Ad;
 
 class indexController extends Controller
 {
@@ -39,7 +40,8 @@ class indexController extends Controller
     public function showVisibleCars()
     {
         $cars = Car::where('is_visible', true)->orderBy('price_daily', 'desc')->get();
-        return view("front.pages.index", compact("cars"));
+        $ad = Ad::first();
+        return view("front.pages.index", compact("cars", "ad"));
     }
 
 }

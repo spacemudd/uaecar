@@ -219,6 +219,14 @@ class CarController extends Controller
     return redirect()->back()->with('success', 'Image deleted successfully.');
 }
 
+
+public function showAd()
+{
+    $ad = Ad::first();
+    
+    return view('welcome', compact('ad')); 
+}
+
     
 
 }
