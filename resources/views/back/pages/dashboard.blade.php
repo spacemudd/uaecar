@@ -49,12 +49,7 @@
                                           <i class="far fa-check-circle"></i>
                                       </div>
                                   </div>
-                                  <div class="col col-stats ms-3 ms-sm-0">
-                                      <div class="numbers">
-                                          <p class="card-category">Total Booking Orders</p>
-                                          <h4 class="card-title">{{ $booking }}</h4>
-                                      </div>
-                                  </div>
+
                               </div>
                           </div>
                       </div>
@@ -71,12 +66,7 @@
                                           <i class="far fa-check-circle"></i>
                                       </div>
                                   </div>
-                                  <div class="col col-stats ms-3 ms-sm-0">
-                                      <div class="numbers">
-                                          <p class="card-category">Total Pending Orders</p>
-                                          <h4 class="card-title">{{ $pendingBookings }}</h4>
-                                      </div>
-                                  </div>
+
                               </div>
                           </div>
                       </div>
@@ -93,12 +83,7 @@
                                           <i class="far fa-check-circle"></i>
                                       </div>
                                   </div>
-                                  <div class="col col-stats ms-3 ms-sm-0">
-                                      <div class="numbers">
-                                          <p class="card-category">Total Approved Orders</p>
-                                          <h4 class="card-title">{{ $approvedBookings }}</h4>
-                                      </div>
-                                  </div>
+
                               </div>
                           </div>
                       </div>
@@ -114,12 +99,7 @@
                                           <i class="far fa-check-circle"></i>
                                       </div>
                                   </div>
-                                  <div class="col col-stats ms-3 ms-sm-0">
-                                      <div class="numbers">
-                                          <p class="card-category">Total Canceled Orders</p>
-                                          <h4 class="card-title">{{ $canceledBookings }}</h4>
-                                      </div>
-                                  </div>
+
                               </div>
                           </div>
                       </div>
