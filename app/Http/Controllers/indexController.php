@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 
 use Illuminate\Http\Request;
-use app\Models\Ad;
+use App\Models\Ad;
 
 class indexController extends Controller
 {
