@@ -334,7 +334,8 @@
                                     <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix" id="bookingForm">
                                         @csrf
                                         <input type="hidden" name="car_id" value="{{ $car->id }}">
-                                        <input type="hidden" name="car_picture" value="{{ asset('storage/' . $car->car_picture) }}"> <!-- Hidden input for the car picture -->
+                                        <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture" />
+<input type="hidden" name="car_picture" value="{{ asset('storage/' . $car->car_picture) }}">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
