@@ -32,14 +32,17 @@
 </head>
 <body>
 
-       <!-- Check if there's an ad and display it -->
-       @if($ad)
-        <div class="ad-box">
-            <h3>{{ $ad->title }}</h3>
-            <p>{{ $ad->message }}</p>
-            <img src="{{ asset('storage/' . $ad->image) }}" alt="Ad Image">
-        </div>
+    @php
+        $ad = \App\Models\Ad::first(); // Fetch the first ad from the database
+    @endphp
+
+    @if ($ad)
+    <div class="alert alert-warning alert-dismissible fade show position-fixed w-100" role="alert" style="top: 0; left: 0; z-index: 1050;">
+        <strong>Special Offer!</strong> {{ $ad->message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
+
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
