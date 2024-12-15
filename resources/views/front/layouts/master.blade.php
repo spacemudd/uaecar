@@ -27,31 +27,46 @@
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" />
+    <!-- Bootstrap JS and Popper.js (for modal functionality) -->
+
+
+    
     
 </head>
+
+<style>
+    .enlarged-image {
+    max-width: 100%; /* تحديد أقصى عرض للصورة */
+    max-height: 400px; /* تحديد أقصى ارتفاع للصورة */
+    margin: 0 auto; /* توسيط الصورة */
+    display: block;
+}
+
+</style>
 <body>
 
+
     <!-- Promotion Modal -->
-    @php
+    <!-- @php
         $ad = \App\Models\Ad::first(); // Fetch the first ad from the database
     @endphp
 
     @if ($ad)
-    <div class="modal fade show" id="promotionModal" tabindex="-1" aria-labelledby="promotionModalLabel" aria-hidden="true" style="display: block;">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="promotionModalLabel">عرض خاص!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <strong>{{ $ad->message }}</strong>
-                    <img src="{{ asset('storage/' . $ad->image) }}" alt="Promotion Image" class="img-fluid mt-3">
-                </div>
+<div class="modal fade show" id="promotionModal" tabindex="-1" aria-labelledby="promotionModalLabel" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog modal-dialog-centered custom-modal-width">
+        <div class="modal-content">
+            <div class="modal-header bg-black">
+                <h5 class="modal-title" id="promotionModalLabel">Hi There</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white;"></button>
+            </div>
+            <div class="modal-body">
+                <img src="{{ asset('storage/' . $ad->image) }}" alt="Promotion Image" class="img-fluid mt-3 enlarged-image">
             </div>
         </div>
     </div>
-    @endif
+</div>
+@endif -->
+
 
 
 <nav class="navbar navbar-expand-lg">

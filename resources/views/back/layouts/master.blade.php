@@ -35,6 +35,8 @@
     
     <!-- Demo CSS (just for demonstration purposes, don't include it in your project) -->
     <link rel="stylesheet" href="{{ asset('back/assets/css/demo.css') }}" />
+
+    
 </head>
 
 <body>
@@ -125,6 +127,13 @@
                   <a href={{ route('invoice.list') }}>
                       <i class="fas fa-cog"></i>
                       <p>Invoices</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href={{ route('ad.screen') }}>
+                      <i class="fas fa-cog"></i>
+                      <p>Ad Screen</p>
                   </a>
               </li>
             </ul>

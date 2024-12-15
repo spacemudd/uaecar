@@ -23,6 +23,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\Tabby\TabbyController;
 use App\Http\Controllers\Tabby\CheckoutController;
+use App\Http\Controllers\Admin\adController;
 
 // Services
 use App\Services\TabbyService;
@@ -43,7 +44,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\adController;
 
 // Public Routes
 Route::get('/', [indexController::class, 'showVisibleCars'])->name('index');
@@ -123,6 +123,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::patch('admin/cars/{id}', [CarController::class, 'update'])->name('admin.cars.update');
     Route::delete('admin/cars/gallery/{id}', [CarController::class, 'deleteGalleryImage'])->name('admin.cars.gallery.delete');
     Route::get('admin/InvoiceList', [InvoiceController::class, 'invoiceList'])->name('invoice.list');
+    Route::get('admin/ad-screen', [adController::class, 'settings'])->name('ad.screen');
+    Route::put('/ads/{id}', [AdController::class, 'update'])->name('ads.update');
+
 });
 
 // Category Routes
