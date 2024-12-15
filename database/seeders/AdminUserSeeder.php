@@ -17,10 +17,10 @@ class AdminUserSeeder extends Seeder
     {
         // Create a default admin user
         AdminUser::create([
-            'username' => 'admin',
-            'email' => 'admin@luxuria.com',
+            'username' => ' maricar@rentluxuria.com',
+            'email' => ' maricar@rentluxuria.com',
             'password' => Hash::make('password123'), // Remember to hash passwords!
-            'role' => 'admin',
+            'role' => 'stuff',
         ]);
     }
 }
