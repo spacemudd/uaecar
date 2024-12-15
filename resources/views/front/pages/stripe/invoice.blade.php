@@ -76,7 +76,7 @@
                         <div class="col-xl-3">
                             <ul class="list-unstyled">
                                 <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>{{ $invoice->total_amount }} AED</li>
-                                <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax (15%)</span>AED {{ $invoice->tax }}</li>
+                                <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Deposit</span>AED {{ $invoice->tax }}</li>
                             </ul>
                             <p class="text-black float-start"><span class="text-black me-3">Total Amount</span><span style="font-size: 25px;">{{ $invoice->total_amount + $invoice->tax }} AED</span></p>
                         </div>
