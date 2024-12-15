@@ -68,10 +68,11 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
                         ],
-                        'unit_amount' => $request->total + 10000 * 100,
+                        'unit_amount' => ($request->total + 1000) * 100,
                     ],
                     'quantity' => 1,
                 ],
+                'notes' => 'Deposit of 1000 AED', // Adding a note for the deposit
             ],
             'metadata' => [
                 'pickup_date' => $request->pickup_date,
