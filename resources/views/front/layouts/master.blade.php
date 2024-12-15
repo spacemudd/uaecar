@@ -32,7 +32,14 @@
 </head>
 <body>
 
-
+       <!-- Check if there's an ad and display it -->
+       @if($ad)
+        <div class="ad-box">
+            <h3>{{ $ad->title }}</h3>
+            <p>{{ $ad->message }}</p>
+            <img src="{{ asset('storage/' . $ad->image) }}" alt="Ad Image">
+        </div>
+    @endif
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
