@@ -48,7 +48,6 @@ use App\Http\Controllers\adController;
 // Public Routes
 Route::get('/', [indexController::class, 'showVisibleCars'])->name('index');
 Route::get('/home', [indexController::class, 'showVisibleCars'])->name('index');
-Route::get('/', [AdController::class, 'showAd']);
 
 // Contact & Car Routes
 Route::get('/contact-us', [CompanyController::class, 'showContact'])->name('contact');

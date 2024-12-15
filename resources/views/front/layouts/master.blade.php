@@ -32,14 +32,25 @@
 </head>
 <body>
 
+    <!-- Promotion Modal -->
     @php
         $ad = \App\Models\Ad::first(); // Fetch the first ad from the database
     @endphp
 
     @if ($ad)
-    <div class="alert alert-warning alert-dismissible fade show position-fixed w-100" role="alert" style="top: 0; left: 0; z-index: 1050;">
-        <strong>Special Offer!</strong> {{ $ad->message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="modal fade show" id="promotionModal" tabindex="-1" aria-labelledby="promotionModalLabel" aria-hidden="true" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="promotionModalLabel">عرض خاص!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>{{ $ad->message }}</strong>
+                    <img src="{{ asset($ad->image) }}" alt="Promotion Image" class="img-fluid mt-3">
+                </div>
+            </div>
+        </div>
     </div>
     @endif
 
