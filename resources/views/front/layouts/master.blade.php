@@ -47,7 +47,7 @@
 
 
     <!-- Promotion Modal -->
-    @php
+    <!-- @php
         $ad = \App\Models\Ad::first(); // Fetch the first ad from the database
     @endphp
 
@@ -65,7 +65,7 @@
         </div>
     </div>
 </div>
-@endif
+@endif -->
 
 
 
