@@ -68,11 +68,21 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
                         ],
-                        'unit_amount' => ($request->total + 1000) * 100,
+                        'unit_amount' => $request->total * 100, // المبلغ الأصلي
                     ],
                     'quantity' => 1,
                 ],
-                'notes' => 'Deposit of 1000 AED', // Adding a note for the deposit
+                // إضافة مبلغ التأمين
+                [
+                    'price_data' => [
+                        'currency' => 'AED',
+                        'product_data' => [
+                            'name' => 'Deposit (Security)',
+                        ],
+                        'unit_amount' => 1000 * 100, // 1000 درهم تأمين
+                    ],
+                    'quantity' => 1,
+                ],
             ],
             'metadata' => [
                 'pickup_date' => $request->pickup_date,
@@ -84,6 +94,7 @@ class StripeController extends Controller
                 'pickup_city' => $request->customer_city,
             ],
         ]);
+        
 
         session(['user_invoices' => $invoice->id]);
 
