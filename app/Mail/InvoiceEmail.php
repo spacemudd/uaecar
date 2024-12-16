@@ -8,10 +8,12 @@ use Illuminate\Mail\Mailable;
 class InvoiceEmail extends Mailable
 {
     public $invoice;
+    public $pdfPath;
 
-    public function __construct($invoice)
+    public function __construct($invoice, $pdfPath)
     {
         $this->invoice = $invoice;
+        $this->pdfPath = $pdfPath;
     }
 
     public function build()
@@ -20,6 +22,10 @@ class InvoiceEmail extends Mailable
                     ->subject('Your Invoice from RentLuxuria')
                     ->with([
                         'invoice' => $this->invoice,
+                    ])
+                    ->attach($this->pdfPath, [
+                        'mime' => 'application/pdf',
                     ]);
     }
+    
 }
