@@ -90,6 +90,8 @@ Route::get('/payment/cancel', function () {
     return 'Payment was canceled.';
 })->name('payment.cancel');
 
+Route::post('/coupon', [PaymentController::class, 'applyCoupon'])->name('coupon');
+
 // Invoice Access Routes
 Route::get('/grant-access/{id}', function ($id) {
     Session::put('allowed_invoice_id', $id);
