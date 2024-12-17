@@ -257,7 +257,7 @@
                     <!-- Centered Title -->
                     <div id="text-container">
                         <div id="line-one">
-                            <h1 class="display-3 mb-4" style="color:white;">LUXURY</h1>
+                            <h1 class="display-3 mb-4" style="color:white;">Luxury Cars</h1>
                         </div>
                     </div>
                 </div>
