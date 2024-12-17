@@ -70,8 +70,7 @@ class StripeController extends Controller
                         'currency' => 'AED',
                         'product_data' => [
                             'name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
-                            'images' => [session('car_image')], // صورة المنتج
-                        ],
+                            'images' => [asset('storage' . $car->car_picture)],                        ],
                         'unit_amount' => $request->total * 100, // المبلغ الأصلي
                     ],
                     'quantity' => 1,
