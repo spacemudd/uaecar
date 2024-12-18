@@ -410,8 +410,8 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Admin</h4>
-                            <p class="text-muted">info@rentluxuria.com</p>
+                            <h4>{{ auth()->user()->name}}</h4>
+                            <p class="text-muted">{{ auth()->user()->email }}</p>
                             <a
                               href="profile.html"
                               class="btn btn-xs btn-secondary btn-sm"
