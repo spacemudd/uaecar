@@ -57,7 +57,8 @@ class CarController extends Controller
             'node_system_id' => 'nullable|string|max:255',
             'color' => 'nullable|string|max:50',
             'gear' => 'nullable|string|max:50',
-            'doors' => 'required|integer', // Add validation for gear
+            'doors' => 'required|integer',
+            'categories' => 'required|string|in:Luxury,Premium,Economy,Sports,Vans', // إضافة التحقق للفئة // Add validation for gear
              // Add validation for color // Add validation for node_system_id
 
         ]);
@@ -81,6 +82,7 @@ class CarController extends Controller
         $car->node_id = $request->node_system_id; 
         $car->color = $request->color;
         $car->gear = $request->gear;
+        $car->categories = $request->categories;
         $car->doors = $request->doors; // Add this line // Add this line to update the gear // Add this line to update the color
         // Save node_system_id
         // Save kilo daily
@@ -220,12 +222,12 @@ class CarController extends Controller
 }
 
 
-public function showAd()
-{
-    $ad = Ad::first();
+// public function showAd()
+// {
+//     $ad = Ad::first();
     
-    return view('welcome', compact('ad')); 
-}
+//     return view('welcome', compact('ad')); 
+// }
 
     
 

@@ -43,12 +43,11 @@
                                     <option value="Luxury">Luxury</option>
                                     <option value="Premium">Mid Range</option>
                                     <option value="Economy">Economy</option>
-                                    <option value="Economy">Sports and Exotics</option>
-                                    <option value="Economy">Vans and Buses</option>
-
-
+                                    <option value="Sports">Sports and Exotics</option>
+                                    <option value="Vans">Vans and Buses</option>
                                 </select>
                             </div>
+
                             <div class="form-group col-md-6 col-lg-4">
                                 <label for="seats">Seats:</label>
                                 <input type="number" class="form-control" id="seats" name="seats" required>
