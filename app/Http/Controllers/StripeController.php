@@ -11,7 +11,7 @@ use App\Mail\InvoiceEmail;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Illuminate\Support\Facades\Log;
-
+use App\Jobs\SendInvoiceEmailJob;
 
 
 class StripeController extends Controller
@@ -118,6 +118,9 @@ class StripeController extends Controller
         return null;
     }
 
+
+
+
     public function successView(Request $request)
     {
         $invoiceId = session('user_invoices');
@@ -131,13 +134,11 @@ class StripeController extends Controller
             return redirect()->route('payment.cancel');
         }
     
-        // احصل على التوكن من API
         $token = $this->getAuthToken();
         if (!$token) {
             return redirect()->route('payment.cancel')->with('error', 'فشل في الحصول على توكن المصادقة');
         }
     
-        // إرسال بيانات السيارة
         $carId = Car::find(session('new_id'));
         $carName = $carId->car_name;
         $carModel = $carId->model;
@@ -163,20 +164,7 @@ class StripeController extends Controller
             'Authorization' => 'Bearer ' . $token,
         ])->post($apiUrl, $apiData);
     
-        // $pdf = PDF::loadView('emails.invoice', compact('invoice'))
-        // ->setPaper('a4', 'portrait');
-
-        // // حفظ الـ PDF
-        // $pdfPath = storage_path('app/public/invoice_' . $invoice->id . '.pdf');
-        // $pdf->save($pdfPath);
-
-        // try {
-        //     Mail::to($invoice->customer_email)->send(new InvoiceEmail($invoice, $pdfPath));
-        // } catch (\Exception $e) {
-        //     Log::error('Failed to send email: ' . $e->getMessage()); // استخدام Log بشكل صحيح
-        // }
-    
-        // العودة إلى صفحة العرض
+        SendInvoiceEmailJob::dispatch($invoice);      
         return view('front.pages.successView', compact('invoiceId'));
     }
     

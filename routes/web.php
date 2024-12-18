@@ -2,48 +2,52 @@
 
 // Controllers
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\adController;
 use App\Http\Controllers\AppointmentsController;
+use App\Http\Controllers\back\adminDashboardController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\indexController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SellYourCarController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\Tabby\CheckoutController;
+use App\Http\Controllers\Tabby\TabbyController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\Webhooks\AutoTraderReceiverController;
 use App\Http\Controllers\WhyUsController;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\back\adminDashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\StripeController;
-use App\Http\Controllers\Tabby\TabbyController;
-use App\Http\Controllers\Tabby\CheckoutController;
-use App\Http\Controllers\Admin\adController;
+use App\Http\Middleware\SessionAuth;
+use App\Http\Middleware\VerifyInvoiceAccess;
 
 // Services
-use App\Services\TabbyService;
-use App\Services\AutoTraderService;
+use App\Mail\MailgunTest;
+use App\Mail\TestEmail;
 
 // Models
 use App\Models\Car;
 
 // Mail
-use App\Mail\TestEmail;
+use App\Services\AutoTraderService;
 
 // Middleware
-use App\Http\Middleware\VerifyInvoiceAccess;
-use App\Http\Middleware\SessionAuth;
+use App\Services\TabbyService;
+use Illuminate\Contracts\Mail\Mailable;
 
 // Inertia
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
+
 
 // Public Routes
 Route::get('/', [indexController::class, 'showVisibleCars'])->name('index');
@@ -142,3 +146,9 @@ Route::get('/admin/invoice/{id}', [InvoiceController::class, 'view'])->name('adm
 Route::get('admin/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('login.custom');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+
+Route::get('/send-test',function(){
+    Mail::to('abdelrahmanyouseff@gmail.com')->send(new MailgunTest('hi this is test message from laravel app'));
+    return 'message sent succefully';
+});

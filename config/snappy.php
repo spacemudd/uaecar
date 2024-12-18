@@ -35,16 +35,16 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_PDF_BINARY', '/usr/bin/wkhtmltopdf'),
-        'timeout' => 200,
+        'binary'  => '/usr/bin/wkhtmltopdf',
+        'timeout' => 500,
         'options' => [],
         'env'     => [],
     ],
     
     'image' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage'),
-        'timeout' => false,
+        'binary'  => '/usr/bin/wkhtmltoimage',
+        'timeout' => 500,
         'options' => [],
         'env'     => [],
     ],
