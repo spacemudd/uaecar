@@ -41,8 +41,12 @@
                                 <label for="categories">Categories:</label>
                                 <select class="form-control" id="categories" name="categories">
                                     <option value="Luxury">Luxury</option>
-                                    <option value="Premium">Premium</option>
+                                    <option value="Premium">Mid Range</option>
                                     <option value="Economy">Economy</option>
+                                    <option value="Economy">Sports and Exotics</option>
+                                    <option value="Economy">Vans and Buses</option>
+
+
                                 </select>
                             </div>
                             <div class="form-group col-md-6 col-lg-4">
