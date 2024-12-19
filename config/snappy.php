@@ -35,7 +35,7 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary'  => 'wk/wkhtmltopdf',
+        'binary'  => '/var/www/html/uaecar-2/uaecar/wk/wkhtmltopdf',
         'timeout' => 500,
         'options' => [],
         'env'     => [],
@@ -43,7 +43,7 @@ return [
     
     'image' => [
         'enabled' => true,
-        'binary'  => 'wk/wkhtmltoimage',
+        'binary'  => '/var/www/html/uaecar-2/uaecar/wk/wkhtmltoimage',
         'timeout' => 500,
         'options' => [],
         'env'     => [],
