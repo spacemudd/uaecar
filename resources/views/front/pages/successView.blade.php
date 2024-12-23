@@ -1,4 +1,16 @@
 @extends('front.layouts.master')
+<head>
+<!-- Event snippet for Purchase conversion page -->
+<script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-11504797989/p_aeCOvbl_kZEKWS9e0q',
+        'value': $invoiceId,
+        'currency': 'SAR',
+        'transaction_id': ''
+    });
+</script>
+
+</head>
 
 @section('content')
 <div class="preloader-bg"></div>

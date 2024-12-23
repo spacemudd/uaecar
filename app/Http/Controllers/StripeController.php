@@ -60,6 +60,7 @@ class StripeController extends Controller
             'status' => 'Payment Received',
         ]);
 
+
         // قم بإنشاء جلسة الدفع في Stripe
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
