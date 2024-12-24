@@ -1,14 +1,6 @@
 @extends('front.layouts.master')
 <head>
 <!-- Event snippet for Purchase conversion page -->
-<script>
-    gtag('event', 'conversion', {
-        'send_to': 'AW-11504797989/p_aeCOvbl_kZEKWS9e0q',
-        'value': $invoiceId,
-        'currency': 'SAR',
-        'transaction_id': ''
-    });
-</script>
 
 </head>
 
@@ -138,5 +130,12 @@
 <footer class="footer">
     <!-- Your footer content here -->
 </footer>
-
+<script>
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11504797989/p_aeCOvbl_kZEKWS9e0q',
+            'value': 100,  <!-- قيمة التحويل -->
+            'currency': 'SAR',
+            'transaction_id': '12345'  
+        });
+    </script>
 @endsection
