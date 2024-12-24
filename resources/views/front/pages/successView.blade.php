@@ -133,7 +133,7 @@
 <script>
         gtag('event', 'conversion', {
             'send_to': 'AW-11504797989/p_aeCOvbl_kZEKWS9e0q',
-            'value': 100,  <!-- قيمة التحويل -->
+            'value': 100,
             'currency': 'SAR',
             'transaction_id': '12345'  
         });
