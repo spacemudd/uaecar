@@ -61,6 +61,7 @@ class FormController extends Controller
 
     private function getCarDetailsByPlateNumber($plateNumber, $token)
     {
+        // الخطوة الأولى: التحقق من حالة الحجز
         $reservationResponse = Http::withHeaders([
             'Authorization' => "Bearer $token"
         ])->get('https://luxuria.crs.ae/api/v1/reservations/');
