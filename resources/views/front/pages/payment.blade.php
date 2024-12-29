@@ -119,7 +119,7 @@
 
 
         <!-- Tabby -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+        <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
             <form action="{{ route('create.checkout') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
                 @csrf
                 <input type="hidden" name="amount" value="{{ $total }}"> 
@@ -142,7 +142,7 @@
 
                 <button type="submit" class="btn btn-primary mt-2">Pay Now</button>
             </form>
-        </div>
+        </div> -->
 
 
         <!-- Tamara -->
