@@ -100,6 +100,7 @@ Route::post('/coupon', [PaymentController::class, 'applyCoupon'])->name('coupon'
 Route::get('/grant-access/{id}', function ($id) {
     Session::put('allowed_invoice_id', $id);
     return redirect()->route('invoice.show', ['id' => $id]);
+    
 })->name('grant-access');
 Route::get('/invoice/{id}', [InvoiceController::class, 'show'])->middleware(VerifyInvoiceAccess::class)->name('invoice.show');
 Route::get('/revoke-access', function () {

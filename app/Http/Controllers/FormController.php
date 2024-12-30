@@ -9,6 +9,7 @@ use App\Exceptions\NodeSystemException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\Car;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -197,6 +198,33 @@ class FormController extends Controller
         }
     
 
+    }
+
+
+
+    public function sendContactEmail(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // Prepare email data
+        $data = $request->only(['name', 'email', 'phone', 'subject', 'message']);
+
+        // Send email
+        Mail::send('emails.contact', $data, function ($message) use ($data) {
+            $message->to('info@rentluxuria.com') // Replace with your email address
+                ->subject($data['subject'])
+                ->replyTo($data['email'], $data['name']);
+        });
+
+        // Provide a response or redirect
+        return back()->with('success', 'Your message has been sent successfully!');
     }
     
     
