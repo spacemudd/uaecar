@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
-    /* Change the color of disabled (past) dates */
 .ui-datepicker .ui-state-disabled {
     color: #b0b0b0; /* Gray color */
     background-color: #f0f0f0; /* Light gray background */
@@ -201,7 +200,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="bookingModalLabel{{ $car->id }}">Booking Form for {{ $car->car_name }}</h5>
+                            <h5 class="modal-title" id="bookingModalLabel{{ $car->id }}">Booking Form for {{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -217,14 +216,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-12">
+                                            <!-- <div class="col-lg-6 col-md-12">
                                                 <label>Car Name</label>
                                                 <input name="carName" type="text" class="form-control" value="{{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}" readonly>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12">
+                                            </div> -->
+                                            <!-- <div class="col-lg-6 col-md-12">
                                                 <label>Car ID</label>
                                                 <input type="text" class="form-control" value="{{ $car->id }}" name="carID" readonly>
-                                            </div>
+                                            </div> -->
                                             <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
                                             <input type="hidden" name="price_daily" value="{{ $car->price_daily }}">
                                             <div class="col-lg-6 col-md-12">

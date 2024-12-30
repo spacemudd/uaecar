@@ -136,6 +136,13 @@
                       <p>Ad Screen</p>
                   </a>
               </li>
+
+              <!-- <li class="nav-item">
+                  <a href={{ route('instagram') }}>
+                      <i class="fas fa-cog"></i>
+                      <p>Instagram Settings</p>
+                  </a>
+              </li> -->
             </ul>
           </div>
         </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\BookingRequest;
+use App\Models\InstagramPost;
 
 class adminDashboardController extends Controller
 {
@@ -36,4 +37,24 @@ class adminDashboardController extends Controller
 
         return view('back.pages.carlist', compact("cars"));
     }
+
+    public function showInstagramForm()
+    {
+        $posts = InstagramPost::all();
+    
+        return view('back.pages.instagram', compact('posts'));
+    }
+    
+    public function storeInstagramPost(Request $request)
+    {
+        // معالجة البيانات المستلمة وتحديث السجلات أو إضافتها إلى قاعدة البيانات
+        InstagramPost::updateOrCreate([
+            'post_id' => $request->post_id,
+        ], [
+            'url' => $request->url,
+        ]);
+    
+        return redirect()->route('instagram.form')->with('success', 'Instagram posts updated successfully!');
+    }
+    
 }

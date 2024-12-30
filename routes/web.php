@@ -132,6 +132,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('admin/InvoiceList', [InvoiceController::class, 'invoiceList'])->name('invoice.list');
     Route::get('admin/ad-screen', [adController::class, 'settings'])->name('ad.screen');
     Route::put('/ads/{id}', [AdController::class, 'update'])->name('ads.update');
+    Route::get('/instagram/', [adminDashboardController::class, 'showInstagramForm'])->name('instagram');
+    Route::post('/instagram', [adminDashboardController::class, 'store'])->name('instagram.store');
+
 
 });
 
