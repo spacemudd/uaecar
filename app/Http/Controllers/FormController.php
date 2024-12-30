@@ -225,7 +225,6 @@ class FormController extends Controller
         return back()->with('success', 'Your message has been sent successfully!');
     }
     
-    
 
     
 }

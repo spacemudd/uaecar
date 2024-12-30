@@ -118,15 +118,12 @@ class CarController extends Controller
         $car = Car::findOrFail($id); // Get the car
         $images = $car->gallery;
     
-        // Directly get the categories from the car instance
-        $categoryValue = $car->categories; // Assuming this is the column name for categories
+        $categoryValue = $car->categories; 
     
-        // Define the colors array
 
         $colors = ['Red', 'Blue', 'Green', 'Black', 'White', 'Gray'];
 
-        // Get the car's current color
-        $currentColor = $car->color; // Assuming 'color' is a column on the Car model
+        $currentColor = $car->color; 
 
 
 
