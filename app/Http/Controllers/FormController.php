@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\Car;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
+
 
 
 
@@ -213,15 +215,11 @@ class FormController extends Controller
             'message' => 'required|string',
         ]);
 
-        // Prepare email data
+        // Prepare the data for the email
         $data = $request->only(['name', 'email', 'phone', 'subject', 'message']);
 
-        // Send email
-        Mail::send('emails.contact', $data, function ($message) use ($data) {
-            $message->to('info@rentluxuria.com') // Replace with your email address
-                ->subject($data['subject'])
-                ->replyTo($data['email'], $data['name']);
-        });
+        // Send the email using ContactMail
+        Mail::to('support@rentluxuria.com')->send(new ContactMail($data));
 
         // Provide a response or redirect
         return back()->with('success', 'Your message has been sent successfully!');
