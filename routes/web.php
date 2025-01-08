@@ -117,7 +117,7 @@ Route::post('/tabby/webhook', [TabbyController::class, 'webhookHandler']);
 
 // Admin Routes
 Route::middleware('auth:admin')->group(function () {
-    // Admin Dashboard Routes
+    // Admin Dashboardss
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/add-new-car', [AdminDashboardController::class, 'addCars'])->name('admin.form');
     Route::get('/admin/carlist', [AdminDashboardController::class, 'showCarList'])->name('admin.carlist'); 
