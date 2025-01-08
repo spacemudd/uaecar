@@ -147,13 +147,13 @@
     <section class="cars2 section-padding my-0 py-0 px-3 mx-auto">
         <div class="row">
     <div class="col-12 text-left"> <!-- Changed from text-center to text-left -->
-        <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif;">Premium Cars</h2>
+        <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif;">Mid Range</h2>
     </div>
 </div>
 
         <div class="row gy-2">
             @foreach($cars as $car)
-            @if(in_array(strtolower($car->categories), ['premium'])) <!-- Check if category is 'economy' or 'premium' -->
+            @if(in_array(strtolower($car->categories), ['mid range'])) <!-- Check if category is 'economy' or 'premium' -->
                 <!-- Car Card -->
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 " style="text-decoration: none;">
                     <div class="card3 w-100">

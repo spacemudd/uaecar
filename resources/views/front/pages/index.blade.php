@@ -1100,7 +1100,7 @@
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="premium-tab" data-bs-toggle="pill" href="#premium" role="tab" aria-controls="premium" aria-selected="false">
-                    PREMIUM
+                    Mid Range
                 </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -1132,7 +1132,7 @@
                         <img src="{{ asset('front/img/premium.png') }}" alt="Premium Car" class="img-fluid rounded w-100">
                         <div class="overlay position-absolute w-100 h-100 bg-dark opacity-50 rounded"></div>
                         <div class="text-center position-absolute">
-                            <h4 class="text-white" style="font-size: 2.5rem; font-weight: bold; text-transform: uppercase;">PREMIUM</h4>
+                            <h4 class="text-white" style="font-size: 2.5rem; font-weight: bold; text-transform: uppercase;">Mid Range</h4>
                         </div>
                     </div>
                 </a>

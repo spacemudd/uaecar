@@ -140,7 +140,7 @@ Route::middleware('auth:admin')->group(function () {
 
 // Category Routes
 Route::get('/luxury', [CategoryController::class, 'showLuxury'])->name('luxury.page');
-Route::get('/premium', [CategoryController::class, 'showPremium'])->name('premium.page');
+Route::get('/mid-range', [CategoryController::class, 'showPremium'])->name('premium.page');
 Route::get('/economy', [CategoryController::class, 'showEconomy'])->name('economy.page');
 
 // Admin Invoice Routes
