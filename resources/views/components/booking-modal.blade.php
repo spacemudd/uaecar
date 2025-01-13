@@ -1,5 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- CSS مكتبة Flatpickr -->
+<!-- CSS مكتبة Flatpickrr -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <!-- JavaScript مكتبة Flatpickr -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
