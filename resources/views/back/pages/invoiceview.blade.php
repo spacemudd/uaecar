@@ -35,7 +35,9 @@
                                 <li class="text-muted">Invoice To: <span style="color:#5d9fc5;">{{ $invoice->customer_name }}</span></li>
                                 <li class="text-muted">Pickup City: {{ $invoice->city }}</li>
                                 <li class="text-muted">Pickup Date: {{ $invoice->pickup_date }}</li>
-                                <li class="text-muted">Pick up Location: {{ $invoice->customer_phone }}</li>
+                                <li class="text-muted">Return Date: {{ $invoice->return_date }}</li>
+                                <li class="text-muted">Phone Number: {{ $invoice->customer_phone }}</li>
+
 
                             </ul>
                         </div>
@@ -55,7 +57,6 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Total Days</th>
-                                    <th scope="col">Daily Price</th>
                                     <th scope="col">Amount</th>
                                 </tr>
                             </thead>
@@ -64,7 +65,6 @@
                                     <th scope="row">1</th>
                                     <td>{{ $invoiceId = session('vehicle_hint');  }}</td>
                                     <td>{{ $invoice->total_days }}</td>
-                                    <td>{{ $invoice->car_daily_price }} AED</td>
                                     <td>{{ $invoice->total_amount }} AED</td>
                                 </tr>
                             </tbody>
