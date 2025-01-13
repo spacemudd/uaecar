@@ -44,4 +44,16 @@ class indexController extends Controller
         return view("front.pages.index", compact("cars", "ad"));
     }
 
+    public function updateBookingDuration(Request $request)
+    {
+        $carId = $request->input('car_id');
+        $bookingDuration = $request->input('booking_duration');
+
+        // معالجة البيانات أو تخزينها حسب الحاجة
+        // على سبيل المثال: تحديث الحجز في قاعدة البيانات
+
+        // رد البيانات إلى الـ AJAX
+        return response()->json(['message' => 'Booking duration updated successfully']);
+    }
+
 }

@@ -87,6 +87,7 @@ class StripeController extends Controller
                     ],
                     'quantity' => 1,
                 ],
+                
             ],
             'metadata' => [
                 'pickup_date' => $request->pickup_date,

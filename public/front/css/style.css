@@ -5241,7 +5241,6 @@ height: 100% !important;
 }
 .input1_inner:after {
     content: '';
-    display: block;
     position: absolute;
     right: 20px;
     top: 24px;
@@ -5254,7 +5253,6 @@ height: 100% !important;
     z-index: 99999;
 }
 .input1_inner input {
-    display: block;
     width: 100%;
     font-size: 14px;
     color: black;
@@ -5268,14 +5266,12 @@ height: 100% !important;
 .input1_inner input::placeholder {
     font-size: 14px;
     color: black;
-     !important;
 }
 .input1_inner input:focus {
     outline: none;
     box-shadow: none;
     background: #fff;
     color: #555;
-     !important;
 }
 .select1_wrapper {
     margin-bottom: 0;
@@ -5285,7 +5281,6 @@ height: 100% !important;
 }
 .select1_inner:after {
     content: '';
-    display: block;
     position: absolute;
     right: 20px;
     top: 24px;
@@ -6305,24 +6300,7 @@ height: 100% !important;
     position: relative;
     margin: 0;
 }
-.not-found .search-form .form-group input[type="text"],
-.not-found .search-form .form-group input[type="search"],
-.not-found .search-form .form-group input[type="email"] {
-    position: relative;
-    width: 100%;
-    line-height: 30px;
-    padding: 10px 100px 10px 20px;
-    height: 60px;
-    display: block;
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    background: transparent;
-    color: #1b1b1b;
-    border-radius: 0px;
-    border: 1px solid #f5b754;
-    transition: all 300ms ease;
-    border-radius: 30px;
-}
+
 .not-found .search-form .form-group input[type="text"]:focus,
 .not-found .search-form .form-group input[type="email"]:focus,
 .not-found .search-form .form-group input[type="search"]:focus {
@@ -7107,10 +7085,10 @@ height: 100% !important;
     font-size: 24px;
     color: white;
 }
-.modal-body .input1_inner input {
+/* .modal-body .input1_inner input {
     position: relative;
     z-index: 99999;
-}
+} */
 .modal-header .btn-close:focus,
 .modal-header .btn-close:active {
     outline: none;

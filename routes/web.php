@@ -156,3 +156,14 @@ Route::get('/send-test',function(){
     Mail::to('abdelrahmanyouseff@gmail.com')->send(new MailgunTest('hi this is test message from laravel app'));
     return 'message sent succefully';
 });
+
+
+
+Route::post('/update-booking-duration', [indexController::class, 'updateBookingDuration'])->name('update.booking.duration');
+Route::get('/clear-session', function () {
+    // Clear the session
+    session()->flush();
+
+    // Redirect or return a message
+    return redirect()->back()->with('message', 'Session cleared successfully.');
+});

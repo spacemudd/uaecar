@@ -26,6 +26,12 @@ class PaymentController extends Controller
         $priceDaily = $car->price_daily;
         $days = $this->calculateRentalDays($pickupDate, $returnDate);
         $total = $rateDaily * $days;
+        if (session('booking_duration') == 'Weekly') {
+            $total = session('rate_weekly');
+        }
+        if (session('booking_duration') == 'Monthly') {
+            $total = session('rate_monthly');
+        }
         $similarProducts = Car::whereBetween('price_daily', [$priceDaily - 20, $priceDaily + 20])
             ->where('id', '!=', $id)
             ->get();

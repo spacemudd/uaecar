@@ -11,23 +11,56 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Car;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
+use Carbon\Carbon;
 
 
 
 
 class FormController extends Controller
 {
-    public function submit(Request $request)
-    {
-        session('new_id', $request->input('car_id'));
-        $plateNumber = $request->input('plate_number');
-        $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $plateNumber);    
-        $token = $this->getAuthToken();
-    
-        $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
-    
-        return $this->respondCarStatus($car, $plateNumber, $request);
+
+public function submit(Request $request)
+{
+    session('new_id', $request->input('car_id'));
+    $plateNumber = $request->input('plate_number');
+    $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $plateNumber);    
+    $token = $this->getAuthToken();
+
+    $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
+
+    // Check if 'booking_duration' is Weekly or Monthly
+    if ($request->input('booking_duration') == 'Weekly') {
+        // Ensure pickup_date exists and parse it
+        if ($request->has('pickup_date')) {
+            // Parse the pickup_date and add 6 days
+            $pickupDate = Carbon::parse($request->input('pickup_date'));
+            $returnDate = $pickupDate->addDays(7)->format('Y-m-d 12:00:00');
+            session(['return_date'=>$returnDate]);
+        } else {
+            // Handle case where pickup_date is missing
+            $returnDate = null; // Or handle accordingly
+        }
+    } elseif ($request->input('booking_duration') == 'Monthly') {
+        // If booking_duration is Monthly, add 30 days
+        if ($request->has('pickup_date')) {
+            // Parse the pickup_date and add 30 days
+            $pickupDate = Carbon::parse($request->input('pickup_date'));
+            $returnDate = $pickupDate->addDays(30)->format('Y-m-d 12:00:00');
+            session(['return_date'=>$returnDate]);
+
+        } else {
+            // Handle case where pickup_date is missing
+            $returnDate = null; // Or handle accordingly
+        }
+    } else {
+        $returnDate = null; // Handle other booking durations if needed
     }
+
+    // You can now pass $returnDate to the response if needed
+    return $this->respondCarStatus($car, $plateNumber, $request, $returnDate);
+}
+
+    
     
 
     private function getAuthToken()
@@ -182,11 +215,13 @@ class FormController extends Controller
         // إذا كانت السيارة متوفرة
         session([
             'pickup_date' => $request->input('pickup_date'),
-            'return_date' => $request->input('return_date'),
             'rate_daily' => $request->input('price_daily'),
+            'rate_weekly' => $request->input('price_weekly'),
+            'rate_monthly' => $request->input('price_monthly'),
             'pickup_location' => '71', // Static value
             'return_location' => '71', // Static value
             'status' => 'pending_updates',
+            'booking_duration' => $request->input('booking_duration'),
             'vehicle_hint' => $request->input('carName'),
             'customer_name' => $request->input('name'),
             'customer_mobile' => $request->input('phone'),
