@@ -35,7 +35,7 @@
                                 <li class="text-muted">Invoice To: <span style="color:#5d9fc5;">{{ $invoice->customer_name }}</span></li>
                                 <li class="text-muted">Pickup City: {{ $invoice->city }}</li>
                                 <li class="text-muted">Pickup Date: {{ $invoice->pickup_date }}</li>
-                                <li class="text-muted">Rturn Date: {{ $invoice->return_date }}</li>
+                                <li class="text-muted">Return Date: {{ $invoice->return_date }}</li>
                                 <li class="text-muted">Phone Number: {{ $invoice->customer_phone }}</li>
 
 
