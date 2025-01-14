@@ -141,7 +141,7 @@
 </header>
 
     <!-- Clients Section -->
-<section class="clients mt-4">
+<section class="clients mt-1 my-0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -158,9 +158,9 @@
 </section>
 
 <!-- Luxury Cars Section -->
-<section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
+<section class=" my-0 py-0 px-3 mx-auto">
         
-            <div class="row mt-4">
+            <div class="row ">
                 <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: black; width: 100vw;">
                     <!-- Centered Title -->
                     <div id="text-container">
