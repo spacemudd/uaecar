@@ -17,6 +17,9 @@
                         <form method="post" action="{{ route('form.submit') }}" class="form1 contact__form clearfix" id="bookingForm{{ $car->id }}">
                             @csrf
                             <input type="hidden" name="car_id" value="{{ $car->id }}">
+                            <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
+
+
                             <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture" />
                             <input type="hidden" name="car_picture" value="{{ asset('storage/' . $car->car_picture) }}">
                             <div class="row">

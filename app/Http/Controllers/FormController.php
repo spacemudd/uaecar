@@ -27,14 +27,13 @@ public function submit(Request $request)
     $token = $this->getAuthToken();
 
     $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
-
     // Check if 'booking_duration' is Weekly or Monthly
     if ($request->input('booking_duration') == 'Weekly') {
         // Ensure pickup_date exists and parse it
         if ($request->has('pickup_date')) {
             // Parse the pickup_date and add 6 days
             $pickupDate = Carbon::parse($request->input('pickup_date'));
-            $returnDate = $pickupDate->addDays(7)->format('Y-m-d 12:00:00');
+            $returnDate = $pickupDate->addDays(7);
             session(['return_date'=>$returnDate]);
         } else {
             // Handle case where pickup_date is missing
@@ -45,7 +44,7 @@ public function submit(Request $request)
         if ($request->has('pickup_date')) {
             // Parse the pickup_date and add 30 days
             $pickupDate = Carbon::parse($request->input('pickup_date'));
-            $returnDate = $pickupDate->addDays(30)->format('Y-m-d 12:00:00');
+            $returnDate = $pickupDate->addDays(30);
             session(['return_date'=>$returnDate]);
 
         } else {

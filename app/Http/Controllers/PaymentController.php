@@ -31,10 +31,7 @@ class PaymentController extends Controller
         if (session('booking_duration') == 'Monthly') {
             $total = session('rate_monthly');
         }
-        if (session('booking_duration') == 'Daily') {
-            $total = $rateDaily * $days;
 
-        }
         $similarProducts = Car::whereBetween('price_daily', [$priceDaily - 20, $priceDaily + 20])
             ->where('id', '!=', $id)
             ->get();
