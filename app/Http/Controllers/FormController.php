@@ -25,9 +25,10 @@ public function submit(Request $request)
     $plateNumber = $request->input('plate_number');
     $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $plateNumber);    
     $token = $this->getAuthToken();
-
+    
     $car = $this->getCarDetailsByPlateNumber($plateNumber, $token);
-    // Check if 'booking_duration' is Weekly or Monthly
+    
+    // Check if 'booking_duration' is Weekly, Monthly, or Daily
     if ($request->input('booking_duration') == 'Weekly') {
         // Ensure pickup_date exists and parse it
         if ($request->has('pickup_date')) {
@@ -46,17 +47,26 @@ public function submit(Request $request)
             $pickupDate = Carbon::parse($request->input('pickup_date'));
             $returnDate = $pickupDate->addDays(30);
             session(['return_date'=>$returnDate]);
-
         } else {
             // Handle case where pickup_date is missing
+            $returnDate = null; // Or handle accordingly
+        }
+    } elseif ($request->input('booking_duration') == 'Daily') {
+        // If booking_duration is Daily, use the return_date input directly
+        if ($request->has('return_date')) {
+            $returnDate = Carbon::parse($request->input('return_date'));
+            session(['return_date'=>$returnDate]);
+        } else {
+            // Handle case where return_date is missing
             $returnDate = null; // Or handle accordingly
         }
     } else {
         $returnDate = null; // Handle other booking durations if needed
     }
-
+    
     // You can now pass $returnDate to the response if needed
     return $this->respondCarStatus($car, $plateNumber, $request, $returnDate);
+    
 }
 
     

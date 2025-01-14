@@ -24,12 +24,18 @@ class PaymentController extends Controller
         $returnDate = session('return_date');
         $rateDaily = session('rate_daily');
         $priceDaily = $car->price_daily;
-        $days = $this->calculateRentalDays($pickupDate, $returnDate);
+       
+
         if (session('booking_duration') == 'Weekly') {
             $total = session('rate_weekly');
         }
         if (session('booking_duration') == 'Monthly') {
             $total = session('rate_monthly');
+        }
+
+        if (session('booking_duration') == 'Daily') {
+            $days = $this->calculateRentalDays($pickupDate, $returnDate);
+            $total = $rateDaily * $days;
         }
 
         $similarProducts = Car::whereBetween('price_daily', [$priceDaily - 20, $priceDaily + 20])

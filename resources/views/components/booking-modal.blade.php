@@ -18,6 +18,10 @@
                             @csrf
                             <input type="hidden" name="car_id" value="{{ $car->id }}">
                             <input type="hidden" name="plate_number" value="{{ $car->plate_number }}">
+                            <input type="hidden" name="price_daily" value="{{ $car->price_daily}}">
+                            <input type="hidden" name="price_weekly" value="{{ $car->price_weekly}}">
+                            <input type="hidden" name="price_monthly" value="{{ $car->price_monthly}}">
+
 
 
                             <img src="{{ asset('storage/' . $car->car_picture) }}" alt="Car Picture" />
