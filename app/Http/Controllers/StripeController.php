@@ -146,6 +146,8 @@ class StripeController extends Controller
         $carModel = $carId->model;
         $carYear = $carId->year;
         $carPlateNumber = $carId->plate_number;
+        $pickupDate = \Carbon\Carbon::parse(session('pickup_date'))->format('Y-m-d H:i:s');
+        $returnDate = \Carbon\Carbon::parse(session('return_date'))->format('Y-m-d H:i:s');
     
         $apiUrl = 'https://luxuria.crs.ae/api/v1/reservations';
         $apiData = [
@@ -155,8 +157,8 @@ class StripeController extends Controller
             'customer_nationality' => 'ARE',
             'pickup_location' => '71',
             'return_location' => '71',
-            'pickup_date' => session('pickup_date'),
-            'return_date' => session('return_date'),
+            'pickup_date' => $pickupDate,
+            'return_date' => $returnDate,
             'vehicle_hint' => $carName . ' ' . $carModel . ' ' . $carYear . ' ' . $carPlateNumber,
             'rate_daily' => session('rate_daily'),
             'status' => 'confirmed',
