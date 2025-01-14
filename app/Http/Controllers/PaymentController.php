@@ -27,9 +27,13 @@ class PaymentController extends Controller
        
 
         if (session('booking_duration') == 'Weekly') {
+            $days = $this->calculateRentalDays($pickupDate, $returnDate);
+
             $total = session('rate_weekly');
         }
         if (session('booking_duration') == 'Monthly') {
+            $days = $this->calculateRentalDays($pickupDate, $returnDate);
+
             $total = session('rate_monthly');
         }
 
