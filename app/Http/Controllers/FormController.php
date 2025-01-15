@@ -238,6 +238,7 @@ public function submit(Request $request)
             'pickup_city' => $request->input('pickup_city'),
             'car_image' => $car['image_url'] ?? null,
             'new_id' => $request->input('car_id'),
+            'car_name' => $request->input('car_name'),
         ]);
     
         return redirect()->route('cars.checkout', ['id' => $request->input('car_id')]);

@@ -20,10 +20,10 @@ class TabbyController extends Controller
     public function __construct()
     {
         $this->tabbyService = new TabbyService(
-            merchantCode: env('TABBY_MERCHANT_CODE'),
-            publicKey: env('TABBY_PUBLIC_KEY'),
-            secretKey: env('TABBY_SECRET_KEY'),
-            currency: env('TABBY_CURRENCY', 'AED')
+            merchantCode: 'LCRUAE',
+            publicKey: 'pk_test_01931b02-3220-d834-30ad-578f01330b70',
+            secretKey: 'sk_test_01931b02-3220-d834-30ad-578f65ed8f27',
+            currency: 'AED',
         );
     }
 
@@ -31,21 +31,29 @@ class TabbyController extends Controller
     public function createCheckout()
 {
     $customerPhone = session('customer_mobile');
+    $customerName = session('customer_name');
+    $customerEmail = session('customer_email');
+    $carId = session('car_id');
+    $booking_duration = session('booking_duration');
+    if ($booking_duration == 'Weekly'){
+        $totalPrice = $carId->price_weekly + 1000;
+    }
+    
   
     try {
-        $buyer = new Buyer('500000001', 'card.success@tabby.ai', 'John Doe', '1990-01-01');
+        $buyer = new Buyer('500000001', 'card.success@tabby.ai', $customerName, '1990-01-01');
         $quantity = (int) '1';
 
         $order = new Order('order-001', [
             new OrderItem(
-                'Product Name',     
-                'electronics',       
+                $carId->car_name . $carId->model,     
+                $carId->categories,       
                 100,                 
                 0.00,                
                 $quantity,           
                 false,               
                 'Product Description',
-                'user-phone-'. session('customer_mobile')
+                'user-phone-'. $customerPhone
             )
         ]);
 

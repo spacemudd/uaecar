@@ -1,11 +1,72 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11504797989"></script>
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-11504797989');
 </script>
+
+<script>document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById('showPopup').addEventListener('click', function() {
+    Swal.fire({
+      title: `<div style="text-align: left; position: relative;"><br>
+          <img src="{{ asset('front/img/tabbylogo.png') }}" alt="Logo" style="position: absolute; top: 10px; left: 10px; width: 150px; height: auto;">
+            Divide it into 4 installments without interest.
+            </div><br>`,
+      
+      html: `
+          <div style="text-align: left; direction: ltr;">
+            <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+              <!-- Icon first, then text -->
+              <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
+                <div style="position: absolute; top: 0; left: 0; width: 50%; height: 58%; background: #54545C;"></div>
+              </div>
+              <span style="font-size: 14px; margin-left: 10px;">Today (0.00)</span>
+            </div>
+          </div>
+        <br>
+        <div style="text-align: left; direction: ltr;">
+          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+            <!-- Icon first, then text -->
+            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
+              <div style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; background: #54545C;"></div>
+            </div>
+            <span style="font-size: 14px; margin-left: 10px;">After 1 month (0.00)</span>
+          </div>
+        </div>
+         <br>
+        <div style="text-align: left; direction: ltr;">
+        <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+          <!-- Icon first, then text -->
+          <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: conic-gradient(#54545C 0deg 270deg, #fff 270deg 360deg);">
+          </div>
+          <span style="font-size: 14px; margin-left: 10px;">After 2 months (0.00) </span>
+        </div>
+      </div>
+         <br>
+        <div style="text-align: left; direction: ltr;">
+          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+            <!-- Icon first, then text -->
+            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #54545C;"></div>
+            </div>
+            <span style="font-size: 14px; margin-left: 10px;">After 3 months (0.00)</span>
+          </div>
+        </div>`,
+        
+      confirmButtonText: 'OK',
+      showCloseButton: true,
+      width: '700px'  // Increase the width of the message
+    });
+  });
+});
+
+</script>
+
 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -119,7 +180,7 @@
 
 
         <!-- Tabby -->
-        <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
             <form action="{{ route('create.checkout') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
                 @csrf
                 <input type="hidden" name="amount" value="{{ $total }}"> 
@@ -142,8 +203,13 @@
 
                 <button type="submit" class="btn btn-primary mt-2">Pay Now</button>
             </form>
-        </div> -->
+        </div>
 
+        <!-- الزر الذي سيظهر الرسالة عند الضغط عليه -->
+<!-- <button id="showPopup" class="btn btn-primary">اضغط هنا</button> -->
+
+
+        
 
         <!-- Tamara -->
         <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">

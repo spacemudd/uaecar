@@ -26,6 +26,8 @@ use App\Http\Controllers\Webhooks\AutoTraderReceiverController;
 use App\Http\Controllers\WhyUsController;
 use App\Http\Middleware\SessionAuth;
 use App\Http\Middleware\VerifyInvoiceAccess;
+use Illuminate\Support\Facades\Redirect;
+
 
 // Services
 use App\Mail\MailgunTest;
@@ -165,5 +167,5 @@ Route::get('/clear-session', function () {
     session()->flush();
 
     // Redirect or return a message
-    return redirect()->back()->with('message', 'Session cleared successfully.');
+return \Illuminate\Support\Facades\Redirect::back()->with('message', 'Session cleared successfully.');
 });

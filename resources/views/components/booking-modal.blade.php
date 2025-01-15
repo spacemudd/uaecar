@@ -21,6 +21,11 @@
                             <input type="hidden" name="price_daily" value="{{ $car->price_daily}}">
                             <input type="hidden" name="price_weekly" value="{{ $car->price_weekly}}">
                             <input type="hidden" name="price_monthly" value="{{ $car->price_monthly}}">
+                            <input type="hidden" name="car_name" value="{{ $car->car_name . ' ' . $car->model}}">
+                            <input type="hidden" name="car_category" value="{{ $car->categories }}">
+
+
+
 
 
 
