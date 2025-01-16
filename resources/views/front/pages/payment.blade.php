@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
     payNowButton.addEventListener('click', () => {
       // مباشرة إرسال البيانات بدون تأكيد
       const form = document.createElement('form');
-      form.method = 'POST';
+      form.method = 'GET';
       form.action = "{{ route('create.checkout') }}"; // رابط الـ route
 
       const csrfToken = document.createElement('input');

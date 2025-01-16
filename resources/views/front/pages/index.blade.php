@@ -32,44 +32,6 @@
     </script>
 @endif
 
-@if (session('cancel_message'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: 'Payment has been Canceled',
-                text: "Your request has been canceled, please check back later",
-                icon: 'error',
-                confirmButtonText: 'close'
-            });
-        });
-    </script>
-@endif
-
-@if (session('failure_message'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: 'Payment has been Failed',
-                text: "Your request has been Failed, please check back later",
-                icon: 'error',
-                confirmButtonText: 'close'
-            });
-        });
-    </script>
-@endif
-
-
-@if (session('error_message'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: 'This Car is currently booked !',
-                text: "",
-                confirmButtonText: 'OK'
-            });
-        });
-    </script>
-@endif
 
 
 @if (session('error_message'))

@@ -66,8 +66,8 @@ class TabbyController extends Controller
             $shippingAddress,
             'Order description',
             url('/home'), // Success URL
-            url('/home'),  // Cancel URL
-            url('/home')  // Failure URL
+            url('/cancel'),  // Cancel URL
+            url('/failed')  // Failure URL
         );
 
         session()->flash('success_message', 'تمت العملية بنجاح!');
