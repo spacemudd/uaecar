@@ -111,7 +111,7 @@ Route::get('/revoke-access', function () {
 });
 
 // Tabby Payment Routess
-Route::get('/tabby/create-checkout', [TabbyController::class, 'createCheckout'])->name('create.checkout');
+Route::post('/tabby/create-checkout', [TabbyController::class, 'createCheckout'])->name('create.checkout');
 Route::get('/payment/success', [TabbyController::class, 'paymentSuccess']);
 Route::get('/payment/cancel', [TabbyController::class, 'paymentCancel']);
 Route::get('/payment/failure', [TabbyController::class, 'paymentFailure']);
