@@ -65,10 +65,15 @@ class TabbyController extends Controller
             $order,
             $shippingAddress,
             'Order description',
-            url('/payment/success'), // Success URL
-            url('/payment/cancel'),  // Cancel URL
-            url('/payment/failure')  // Failure URL
+            url('/home'), // Success URL
+            url('/home'),  // Cancel URL
+            url('/home')  // Failure URL
         );
+
+        session()->flash('success_message', 'تمت العملية بنجاح!');
+        session()->flash('cancel_message', 'تم رفض العملية!');
+        session()->flash('failure_message', 'فشل العملية');
+
 
         return redirect($checkoutSession->getPaymentUrl());
 
@@ -80,7 +85,7 @@ class TabbyController extends Controller
 
 public function paymentSuccess(Request $request)
 {
-    // Handle successful payment logic here
+    dd('hello');
     return response()->json(['message' => 'Payment successful!']);
 }
 

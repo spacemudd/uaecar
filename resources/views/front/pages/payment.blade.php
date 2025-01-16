@@ -10,8 +10,43 @@
   gtag('config', 'AW-11504797989');
 </script>
 
-<script>document.addEventListener("DOMContentLoaded", function() {
+<script>
+document.addEventListener("DOMContentLoaded", function() {
   document.getElementById('showPopup').addEventListener('click', function() {
+    
+    // استخدم منطق الـ PHP لاختيار السعر بناءً على مدة الحجز
+    let bookingDuration = "{{ session('booking_duration') }}";
+    let rateWeekly = "{{ session('rate_weekly') }}";
+    let rateMonthly = "{{ session('rate_monthly') }}";
+    let rateDaily = "{{ session('rate_daily') }}";
+    
+    let rentAmount = 0;
+    let totalAmount = 0;
+    let installement = 0;
+    // المنطق لاختيار السعر بناءً على مدة الحجز
+    if (bookingDuration == 'Weekly') {
+        rentAmount = Number(rateWeekly);  // تحويل القيمة إلى رقم
+        totalAmount = (rentAmount + 1000) * 1.07;
+        installementAmount = totalAmount / 4;
+
+    } else if (bookingDuration == 'Monthly') {
+        rentAmount = Number(rateMonthly);
+        totalAmount = (rateMonthly + 1000) * 1.07;
+        installementAmount = totalAmount / 4;
+
+    } else if (bookingDuration == 'Daily') {
+        let pickupDate = new Date("{{ session('pickup_date') }}");
+        let returnDate = new Date("{{ session('return_date') }}");
+
+        let timeDiff = returnDate - pickupDate;
+        let daysDifference = timeDiff / (1000 * 3600 * 24); // تحويل الفرق بالميلي ثانية إلى أيام
+
+        rentAmount = rateDaily * daysDifference;
+        totalAmount = (rentAmount + 1000) * 1.07
+        installementAmount = totalAmount / 4;
+
+    }
+
     Swal.fire({
       title: `<div style="text-align: left; position: relative;"><br>
           <img src="{{ asset('front/img/tabbylogo.png') }}" alt="Logo" style="position: absolute; top: 10px; left: 10px; width: 150px; height: auto;">
@@ -19,53 +54,79 @@
             </div><br>`,
       
       html: `
-          <div style="text-align: left; direction: ltr;">
-            <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
-              <!-- Icon first, then text -->
-              <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
-                <div style="position: absolute; top: 0; left: 0; width: 50%; height: 58%; background: #54545C;"></div>
-              </div>
-              <span style="font-size: 14px; margin-left: 10px;">Today (0.00)</span>
-            </div>
-          </div>
-        <br>
         <div style="text-align: left; direction: ltr;">
+          <p>The total amount is <strong>${totalAmount} AED </strong>, which is broken down as follows:</p>
+          <ul>
+            <li><strong>Rent:</strong> ${rentAmount} AED</li>
+            <li><strong>Refundable Deposit:</strong> 1000 AED</li>
+            <li><strong>Tabby Service Fee (7%):</strong> 154 AED</li>
+          </ul>
+          <br>
           <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
             <!-- Icon first, then text -->
+            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
+              <div style="position: absolute; top: 0; left: 0; width: 50%; height: 58%; background: #54545C;"></div>
+            </div>
+            <span style="font-size: 14px; margin-left: 10px;">Today ${installementAmount.toFixed(2)} AED</span>
+          </div>
+          <br>
+          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
             <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
               <div style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; background: #54545C;"></div>
             </div>
-            <span style="font-size: 14px; margin-left: 10px;">After 1 month (0.00)</span>
+            <span style="font-size: 14px; margin-left: 10px;">After 1 month ${installementAmount.toFixed(2)} AED</span>
           </div>
-        </div>
-         <br>
-        <div style="text-align: left; direction: ltr;">
-        <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
-          <!-- Icon first, then text -->
-          <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: conic-gradient(#54545C 0deg 270deg, #fff 270deg 360deg);">
-          </div>
-          <span style="font-size: 14px; margin-left: 10px;">After 2 months (0.00) </span>
-        </div>
-      </div>
-         <br>
-        <div style="text-align: left; direction: ltr;">
+          <br>
           <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
-            <!-- Icon first, then text -->
+            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: conic-gradient(#54545C 0deg 270deg, #fff 270deg 360deg);">
+            </div>
+            <span style="font-size: 14px; margin-left: 10px;">After 2 months ${installementAmount.toFixed(2)} AED</span>
+          </div>
+          <br>
+          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
             <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
               <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #54545C;"></div>
             </div>
-            <span style="font-size: 14px; margin-left: 10px;">After 3 months (0.00)</span>
+            <span style="font-size: 14px; margin-left: 10px;">After 3 months ${installementAmount.toFixed(2)} AED</span>
           </div>
         </div>`,
         
-      confirmButtonText: 'OK',
-      showCloseButton: true,
-      width: '700px'  // Increase the width of the message
+        showCloseButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Close',
+      cancelButtonText: 'Pay Now',
+      width: '700px',  // Increase the width of the message
+      
+      // عند الضغط على "Pay Now"، سيتم تحويل المستخدم إلى صفحة الدفع باستخدام POST
+      cancelButtonColor: 'rgb(30, 204, 124)',
+      confirmButtonColor: '#8a8aff',
+      didOpen: () => {
+        const payNowButton = Swal.getCancelButton();
+        payNowButton.addEventListener('click', () => {
+          
+          // إنشاء form مخفي لإرسال طلب POST إلى route('create.checkout')
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = "{{ route('create.checkout') }}"; // رابط الـ route
+
+          // إضافة توكن CSRF كـ input مخفي
+          const csrfToken = document.createElement('input');
+          csrfToken.type = 'hidden';
+          csrfToken.name = '_token';
+          csrfToken.value = "{{ csrf_token() }}"; // توكن الـ CSRF من Laravel
+          form.appendChild(csrfToken);
+
+          // إرسال الفورم
+          document.body.appendChild(form);
+          form.submit();
+        });
+      }
     });
   });
 });
-
 </script>
+
+
 
 
 
@@ -181,35 +242,20 @@
 
         <!-- Tabby -->
         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-            <form action="{{ route('create.checkout') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
-                @csrf
-                <input type="hidden" name="amount" value="{{ $total }}"> 
-                <input type="hidden" name="currency" value="AED">
-
-                <div class="d-flex align-items-center mb-3">
-                    <div class="image">
-                        <img src="{{ asset('front/img/icons/tabby01.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
-                    </div>
-                    <div class="text ms-3 flex-grow-1">
-                        <span class="fw-bold">Tabby</span>
-                    </div>
-                </div>
-                <div class="paragraph mt-auto">
-                    Pay in 4 interest-free payments of <br>
-                    <span style="font-weight: bold;" id="tabby-payment-amount"></span> AED
-                </div>
-
-                <div id="tabby-promo-widget"></div>
-
-                <button type="submit" class="btn btn-primary mt-2">Pay Now</button>
-            </form>
+    <div id="showPopup" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+        <div class="d-flex align-items-left mb-3">
+            <div class="image">
+                <img src="{{ asset('front/img/icons/tabby01.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 100px; height: 50px; object-fit: cover;">
+            </div>
+            <div class="text ms-3">
+                <span class="fw-bold" style="font-size: 20px;">Tabby</span>
+                <p style="font-size: 12px; font-weight: lighter; color: #6c757d;">Split your payments into 4 interest-free installments</p>
+            </div>
         </div>
+        <!-- لا حاجة لإضافة زر هنا بعد الآن -->
+    </div>
+</div>
 
-        <!-- الزر الذي سيظهر الرسالة عند الضغط عليه -->
-<!-- <button id="showPopup" class="btn btn-primary">اضغط هنا</button> -->
-
-
-        
 
         <!-- Tamara -->
         <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">

@@ -19,6 +19,46 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if (session('success_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Payment has been Accepted',
+                text: "Thanks for your payment, We will contact you as soon as possible",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+@endif
+
+@if (session('cancel_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Payment has been Canceled',
+                text: "Your request has been canceled, please check back later",
+                icon: 'error',
+                confirmButtonText: 'close'
+            });
+        });
+    </script>
+@endif
+
+@if (session('failure_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Payment has been Failed',
+                text: "Your request has been Failed, please check back later",
+                icon: 'error',
+                confirmButtonText: 'close'
+            });
+        });
+    </script>
+@endif
+
+
 @if (session('error_message'))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
