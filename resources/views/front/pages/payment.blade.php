@@ -48,80 +48,77 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     Swal.fire({
-      title: `<div style="text-align: left; position: relative;"><br>
-          <img src="{{ asset('front/img/tabbylogo.png') }}" alt="Logo" style="position: absolute; top: 10px; left: 10px; width: 150px; height: auto;">
-            Divide it into 4 installments without interest.
-            </div><br>`,
-      
-      html: `
-        <div style="text-align: left; direction: ltr;">
-          <p>The total amount is <strong>${totalAmount} AED </strong>, which is broken down as follows:</p>
-          <ul>
-            <li><strong>Rent:</strong> ${rentAmount} AED</li>
-            <li><strong>Refundable Deposit:</strong> 1000 AED</li>
-            <li><strong>Tabby Service Fee (7%):</strong> 154 AED</li>
-          </ul>
-          <br>
-          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
-            <!-- Icon first, then text -->
-            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
-              <div style="position: absolute; top: 0; left: 0; width: 50%; height: 58%; background: #54545C;"></div>
-            </div>
-            <span style="font-size: 14px; margin-left: 10px;">Today ${installementAmount.toFixed(2)} AED</span>
-          </div>
-          <br>
-          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
-            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
-              <div style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; background: #54545C;"></div>
-            </div>
-            <span style="font-size: 14px; margin-left: 10px;">After 1 month ${installementAmount.toFixed(2)} AED</span>
-          </div>
-          <br>
-          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
-            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: conic-gradient(#54545C 0deg 270deg, #fff 270deg 360deg);">
-            </div>
-            <span style="font-size: 14px; margin-left: 10px;">After 2 months ${installementAmount.toFixed(2)} AED</span>
-          </div>
-          <br>
-          <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
-            <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
-              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #54545C;"></div>
-            </div>
-            <span style="font-size: 14px; margin-left: 10px;">After 3 months ${installementAmount.toFixed(2)} AED</span>
-          </div>
-        </div>`,
-        
-        showCloseButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Close',
-      cancelButtonText: 'Pay Now',
-      width: '700px',  // Increase the width of the message
-      
-      // عند الضغط على "Pay Now"، سيتم تحويل المستخدم إلى صفحة الدفع باستخدام POST
-      cancelButtonColor: 'rgb(30, 204, 124)',
-      confirmButtonColor: '#8a8aff',
-      didOpen: () => {
-        const payNowButton = Swal.getCancelButton();
-        payNowButton.addEventListener('click', () => {
-          
-          // إنشاء form مخفي لإرسال طلب POST إلى route('create.checkout')
-          const form = document.createElement('form');
-          form.method = 'POST';
-          form.action = "{{ route('create.checkout') }}"; // رابط الـ route
+  title: `<div style="text-align: left; position: relative;"><br>
+      <img src="{{ asset('front/img/tabbylogo.png') }}" alt="Logo" style="position: absolute; top: 10px; left: 10px; width: 150px; height: auto;">
+        Divide it into 4 installments without interest.
+      </div><br>`,
+  
+  html: `
+    <div style="text-align: left; direction: ltr;">
+      <p>The total amount is <strong>${totalAmount} AED </strong>, which is broken down as follows:</p>
+      <ul>
+        <li><strong>Rent:</strong> ${rentAmount} AED</li>
+        <li><strong>Refundable Deposit:</strong> 1000 AED</li>
+        <li><strong>Tabby Service Fee (7%):</strong> 154 AED</li>
+      </ul>
+      <br>
+      <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+        <!-- Icon first, then text -->
+        <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
+          <div style="position: absolute; top: 0; left: 0; width: 50%; height: 58%; background: #54545C;"></div>
+        </div>
+        <span style="font-size: 14px; margin-left: 10px;">Today ${installementAmount.toFixed(2)} AED</span>
+      </div>
+      <br>
+      <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+        <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
+          <div style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; background: #54545C;"></div>
+        </div>
+        <span style="font-size: 14px; margin-left: 10px;">After 1 month ${installementAmount.toFixed(2)} AED</span>
+      </div>
+      <br>
+      <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+        <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: conic-gradient(#54545C 0deg 270deg, #fff 270deg 360deg);">
+        </div>
+        <span style="font-size: 14px; margin-left: 10px;">After 2 months ${installementAmount.toFixed(2)} AED</span>
+      </div>
+      <br>
+      <div style="display: flex; align-items: center; justify-content: flex-start; margin-top: 10px;">
+        <div style="display: block; height: 20px; width: 20px; border-radius: 100%; border: 1px solid #54545C; overflow: hidden; position: relative; background: #fff;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #54545C;"></div>
+        </div>
+        <span style="font-size: 14px; margin-left: 10px;">After 3 months ${installementAmount.toFixed(2)} AED</span>
+      </div>
+    </div>`,
+  
+  showCloseButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Close',
+  cancelButtonText: 'Pay Now',
+  width: '700px',  // Increase the width of the message
+  cancelButtonColor: 'rgb(30, 204, 124)',
+  confirmButtonColor: '#8a8aff',
+  didOpen: () => {
+    const payNowButton = Swal.getCancelButton();
+    payNowButton.addEventListener('click', () => {
+      // مباشرة إرسال البيانات بدون تأكيد
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = "{{ route('create.checkout') }}"; // رابط الـ route
 
-          // إضافة توكن CSRF كـ input مخفي
-          const csrfToken = document.createElement('input');
-          csrfToken.type = 'hidden';
-          csrfToken.name = '_token';
-          csrfToken.value = "{{ csrf_token() }}"; // توكن الـ CSRF من Laravel
-          form.appendChild(csrfToken);
+      const csrfToken = document.createElement('input');
+      csrfToken.type = 'hidden';
+      csrfToken.name = '_token';
+      csrfToken.value = "{{ csrf_token() }}"; // توكن الـ CSRF من Laravel
+      form.appendChild(csrfToken);
 
-          // إرسال الفورم
-          document.body.appendChild(form);
-          form.submit();
-        });
-      }
+      // إرسال الفورم
+      document.body.appendChild(form);
+      form.submit();
     });
+  }
+});
+
   });
 });
 </script>
