@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <div class="alert alert-danger" style="margin-top: 10px;">
-            Note: There will be an additional fee of 1000 SAR + 7% if the Tabby or Tamara service is selected.
+            Note: There will be an additional fee of 1000 AED + 7% if the Tabby or Tamara service is selected.
         </div>
 
            
