@@ -485,16 +485,14 @@ let bookingDuration = "{{ session('booking_duration') }}";
 </div>
 
 
-<section>
+<!-- <section>
   <div id="carouselExampleCaptions" class="carousel slide">
-    <div class="carousel-inner"> <!-- The Carousel Container -->
-      <!-- Carousel Item 1 -->
+    <div class="carousel-inner"> 
       <div class="carousel-item active">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-1 justify-content-center">
           @foreach($similarProducts as $car)
           <div class="col d-flex justify-content-center">
             <div class="card shadow-sm mx-8 my-5">
-              <!-- Image Section -->
               <img src="{{ asset('storage/' . $car->car_picture) }}" 
                    class="card-img-top" 
                    alt="Car Image" 
@@ -512,14 +510,14 @@ let bookingDuration = "{{ session('booking_duration') }}";
                   <small class="text-bg-warning px-2 rounded">{{ $car->price_daily }} AED</small>
                 </div>
               </div>
-            </div><!-- End of card -->
+            </div>
           </div>
           @endforeach
-        </div><!-- End of row -->
-      </div><!-- End of carousel-item -->
-    </div><!-- End of carousel-inner -->
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</section> -->
 
 </div>
 
