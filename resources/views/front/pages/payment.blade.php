@@ -193,17 +193,14 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
-            <div class="payment__title">
-            Payment Method
-            </div>
+           
 
 
-            <div class="container">
+<!-- <div class="container">
     <div class="row g-3">
-        <!-- Credit/Debit Card -->
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <form action="{{ route('stripe.payment') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
-        @csrf <!-- Include this for Laravel CSRF protection -->
+        @csrf 
 
         <div class="d-flex align-items-center mb-3">
             <div class="image">
@@ -217,7 +214,6 @@ document.addEventListener("DOMContentLoaded", function() {
             Pay with Visa or Mastercard, debit, or credit.
         </div>
 
-          <!-- Hidden inputs to pass required data -->
     <input type="hidden" name="car_id" value="{{ $car->id }}">
     <input type="hidden" name="price_daily" value="{{ $price_daily }}">
     <input type="hidden" name="days" value="{{ $days }}">
@@ -225,20 +221,125 @@ document.addEventListener("DOMContentLoaded", function() {
     <input type="hidden" name="pickup_date" value="{{ $pickup_date }}">
     <input type="hidden" name="return_date" value="{{ $return_date }}">
     
-    <!-- Add hidden inputs for customer information -->
     <input type="hidden" name="customer_name" value="{{ $customer_name }}">
     <input type="hidden" name="customer_email" value="{{ $customer_email }}">
     <input type="hidden" name="customer_phone" value="{{ $customer_mobile }}">
     <input type="hidden" name="customer_city" value="{{ $pickup_city }}">
         <button type="submit" class="btn btn-primary mt-3">Pay Now</button>
     </form>
+</div> -->
+<div class="container text-center mt-1">
+    <div class="d-flex flex-column align-items-start mt-4">
+
+        <!-- صندوق لاحتواء خيارات الدفع -->
+        <div class="payment-options border rounded p-3 mb-2">
+            <label class="radio-btn d-flex align-items-center">
+                <input type="radio" name="selective" value="Point 1" style="margin-right: 10px;">
+                <div class="border rounded p-2" style="width: 100%;">
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">Credit/Debit Card</span>
+                    </div>
+                    <div class="text-start" style="margin-top: 5px;">
+                        <img src="{{ asset('front/img/icons/visa.png') }}" alt="Visa" style="width: 30px; height: 20px; margin-right: 5px;">
+                        <img src="{{ asset('front/img/icons/MasterCard_Logo.svg.png') }}" alt="Mastercard" style="width: 30px; height: 20px; margin-right: 5px;">
+                        <img src="{{ asset('front/img/icons/شعار-مدى.png') }}" alt="Mastercard" style="width: 30px; height: 20px; margin-right: 5px;">
+                        <span>You can pay with debit or credit.</span>
+                    </div>
+                </div>
+            </label>
+
+            <label class="radio-btn d-flex align-items-center mt-3 text-start">
+                <input type="radio" name="selective" value="Point 2" style="margin-right: 10px;">
+                <div class="border rounded p-2" style="width: 100%;">
+                    <img src="{{ asset('front/img/icons/tabby.png') }}" alt="Tabby" style="width: 70px; height: 30px; margin-right: 10px;">
+                    <span>Pay in 4. No interest, no fees.</span>
+                </div>
+            </label>
+            <div id="TabbyPromo" class="mt-3"></div>
+        </div>
+
+        <!-- نموذج Checkout -->
+        <form id="checkoutForm" action="{{ route('stripe.payment') }}" method="POST">
+            @csrf <!-- إضافة توكن CSRF لحماية النموذج -->
+            
+            <!-- Hidden inputs for passing data -->
+            <input type="hidden" name="car_id" value="{{ $car->id }}">
+            <input type="hidden" name="price_daily" value="{{ $price_daily }}">
+            <input type="hidden" name="days" value="{{ $days }}">
+            <input type="hidden" name="total" value="{{ $total }}">
+            <input type="hidden" name="pickup_date" value="{{ $pickup_date }}">
+            <input type="hidden" name="return_date" value="{{ $return_date }}">
+            <input type="hidden" name="customer_name" value="{{ $customer_name }}">
+            <input type="hidden" name="customer_email" value="{{ $customer_email }}">
+            <input type="hidden" name="customer_phone" value="{{ $customer_mobile }}">
+            <input type="hidden" name="customer_city" value="{{ $pickup_city }}">
+
+            <button type="submit" class="btn btn-primary mt-3">Checkout</button>
+        </form>
+    </div>
 </div>
 
+<style>
+    .payment-options {
+        border: 1px solid #ccc; /* حدود خفيفة */
+        border-radius: 5px; /* زوايا مستديرة */
+        padding: 15px; /* حشوة داخل الصندوق */
+    }
+    .payment-options:hover {
+        border-color: #007bff; /* تغيير لون الحدود عند التحويم */
+    }
+    .radio-btn > div {
+        border: 1px solid #ccc; /* حدود خفيفة للصندوق الداخلي */
+        border-radius: 5px; /* زوايا مستديرة للصندوق الداخلي */
+        padding: 10px; /* حشوة داخل الصندوق */
+        width: 100%; /* عرض كامل للصندوق الداخلي */
+    }
+</style>
+
+<script>
+    // تحديد جميع الراديوهات
+    const radioButtons = document.querySelectorAll('.radio-btn');
+
+    // إضافة حدث للزر Checkout
+    document.getElementById('checkoutForm').addEventListener('submit', (event) => {
+        const selectedValue = document.querySelector('input[name="selective"]:checked');
+        if (!selectedValue) {
+            event.preventDefault(); // منع تقديم النموذج إذا لم يتم اختيار طريقة الدفع
+            alert('يرجى اختيار طريقة الدفع أولاً.');
+        } else {
+            // التحقق مما إذا كانت طريقة الدفع هي "Tabby"
+            if (selectedValue.value === "Point 2") { // تأكد من استخدام القيمة الصحيحة
+                event.preventDefault(); // منع تقديم النموذج بشكل افتراضي
+                const form = event.target;
+                form.action = "{{ route('create.checkout') }}"; // تغيير الإجراء إلى الروت المطلوب
+                form.method = "POST"; // تأكد من أن الطريقة هي POST
+                form.submit(); // تقديم النموذج بعد تغيير الإجراء
+            }
+            // إذا كانت طريقة الدفع مختلفة، فسيتم تقديم النموذج إلى الإجراء الافتراضي
+        }
+    });
+</script>
+
+
+
+
+<script src="https://checkout.tabby.ai/tabby-promo.js"></script>
+<script>
+  new TabbyPromo({
+    selector: '#TabbyPromo', // يجب أن يتطابق مع المعرف أعلاه
+    currency: 'AED', // العملة المطلوبة (AED|SAR|KWD)
+    price: '1200.00', // سعر المنتج
+    lang: 'en', // اللغة (en|ar)
+    source: 'product', // المصدر (product أو cart)
+    publicKey: 'YOUR_PUBLIC_API_KEY', // مفتاحك العام
+    merchantCode: 'YOUR_MERCHANT_CODE' // كود المتجر الخاص بك
+  });
+</script>
 
 
 
         <!-- Tabby -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+        <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
     <div id="showPopup" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
         <div class="d-flex align-items-left mb-3">
             <div class="image">
@@ -249,9 +350,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p style="font-size: 12px; font-weight: lighter; color: #6c757d;">Split your payments into 4 interest-free installments</p>
             </div>
         </div>
-        <!-- لا حاجة لإضافة زر هنا بعد الآن -->
     </div>
-</div>
+</div> -->
 
 
         <!-- Tamara -->
