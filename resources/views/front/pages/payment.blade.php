@@ -325,15 +325,64 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script src="https://checkout.tabby.ai/tabby-promo.js"></script>
 <script>
-  new TabbyPromo({
-    selector: '#TabbyPromo', // يجب أن يتطابق مع المعرف أعلاه
-    currency: 'AED', // العملة المطلوبة (AED|SAR|KWD)
-    price: '1200.00', // سعر المنتج
-    lang: 'en', // اللغة (en|ar)
-    source: 'product', // المصدر (product أو cart)
-    publicKey: 'YOUR_PUBLIC_API_KEY', // مفتاحك العام
-    merchantCode: 'YOUR_MERCHANT_CODE' // كود المتجر الخاص بك
-  });
+
+let bookingDuration = "{{ session('booking_duration') }}";
+    let rateWeekly = "{{ session('rate_weekly') }}";
+    let rateMonthly = "{{ session('rate_monthly') }}";
+    let rateDaily = "{{ session('rate_daily') }}";
+    
+    let rentAmount = 0;
+    let totalAmount = 0;
+    let installement = 0;
+    // المنطق لاختيار السعر بناءً على مدة الحجز
+    if (bookingDuration == 'Weekly') {
+        rentAmount = Number(rateWeekly);  // تحويل القيمة إلى رقم
+        totalAmount = (rentAmount + 1000) * 1.07;
+        new TabbyPromo({
+        selector: '#TabbyPromo', // يجب أن يتطابق مع المعرف أعلاه
+        currency: 'AED', // العملة المطلوبة (AED|SAR|KWD)
+        price: totalAmount, // سعر المنتج
+        lang: 'en', // اللغة (en|ar)
+        source: 'product', // المصدر (product أو cart)
+        publicKey: 'YOUR_PUBLIC_API_KEY', // مفتاحك العام
+        merchantCode: 'YOUR_MERCHANT_CODE' // كود المتجر الخاص بك
+      });
+
+    } else if (bookingDuration == 'Monthly') {
+        rentAmount = Number(rateMonthly);
+        totalAmount = (rateMonthly + 1000) * 1.07;
+        new TabbyPromo({
+        selector: '#TabbyPromo', // يجب أن يتطابق مع المعرف أعلاه
+        currency: 'AED', // العملة المطلوبة (AED|SAR|KWD)
+        price: totalAmount, // سعر المنتج
+        lang: 'en', // اللغة (en|ar)
+        source: 'product', // المصدر (product أو cart)
+        publicKey: 'YOUR_PUBLIC_API_KEY', // مفتاحك العام
+        merchantCode: 'YOUR_MERCHANT_CODE' // كود المتجر الخاص بك
+      });
+
+    } else if (bookingDuration == 'Daily') {
+        let pickupDate = new Date("{{ session('pickup_date') }}");
+        let returnDate = new Date("{{ session('return_date') }}");
+
+        let timeDiff = returnDate - pickupDate;
+        let daysDifference = timeDiff / (1000 * 3600 * 24); // تحويل الفرق بالميلي ثانية إلى أيام
+
+        rentAmount = rateDaily * daysDifference;
+        totalAmount = (rentAmount + 1000) * 1.07
+        new TabbyPromo({
+        selector: '#TabbyPromo', // يجب أن يتطابق مع المعرف أعلاه
+        currency: 'AED', // العملة المطلوبة (AED|SAR|KWD)
+        price: totalAmount, // سعر المنتج
+        lang: 'en', // اللغة (en|ar)
+        source: 'product', // المصدر (product أو cart)
+        publicKey: 'YOUR_PUBLIC_API_KEY', // مفتاحك العام
+        merchantCode: 'YOUR_MERCHANT_CODE' // كود المتجر الخاص بك
+      });
+
+    }
+
+
 </script>
 
 
