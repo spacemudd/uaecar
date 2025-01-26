@@ -1,3 +1,7 @@
+@extends('front.layouts.master')
+@section('content')
+
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11504797989"></script>
 <!-- SweetAlert -->
@@ -540,3 +544,4 @@ let bookingDuration = "{{ session('booking_duration') }}";
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+@endsection
