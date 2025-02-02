@@ -49,7 +49,9 @@
                                                 <option value="" disabled selected>Select a City</option>
                                                 <option value="Dubai">Dubai</option>
                                                 <option value="Sharjah">Sharjah</option>
+                                                <option value="Alain">Ajman</option>
                                                 <option value="Alain">Alain</option>
+
                                             </select>
                                         </div>
                                     </div>
