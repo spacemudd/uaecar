@@ -107,46 +107,46 @@ public function submit(Request $request)
     private function getCarDetailsByPlateNumber($plateNumber, $token)
     {
         // الخطوة الأولى: التحقق من حالة الحجز
-        $reservationResponse = Http::withHeaders([
-            'Authorization' => "Bearer $token"
-        ])->get('https://luxuria.crs.ae/api/v1/reservations/');
+        // $reservationResponse = Http::withHeaders([
+        //     'Authorization' => "Bearer $token"
+        // ])->get('https://luxuria.crs.ae/api/v1/reservations/');
     
-        if (!$reservationResponse->successful()) {
-            throw new NodeSystemException('Failed to communicate with the Reservations API.');
-        }
+        // if (!$reservationResponse->successful()) {
+        //     throw new NodeSystemException('Failed to communicate with the Reservations API.');
+        // }
     
-        $reservations = $reservationResponse->json()['data'];
+        // $reservations = $reservationResponse->json()['data'];
     
-        foreach ($reservations as $reservation) {
-            // التحقق إذا كانت السيارة محجوزة ومؤكدة
-            if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint'])) {
-                $plateNumber = preg_replace('/[^0-9]/', '', $reservation['vehicle_hint']); // استخراج رقم اللوحة
+        // foreach ($reservations as $reservation) {
+        //     // التحقق إذا كانت السيارة محجوزة ومؤكدة
+        //     if ($reservation['status'] === 'Confirmed' && isset($reservation['vehicle_hint'])) {
+        //         $plateNumber = preg_replace('/[^0-9]/', '', $reservation['vehicle_hint']); // استخراج رقم اللوحة
     
-                // البحث عن السيارة في قاعدة البيانات باستخدام رقم اللوحة
-                $carFromDatabase = DB::table('cars')
-                    ->where(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumber)
-                    ->first();
+        //         // البحث عن السيارة في قاعدة البيانات باستخدام رقم اللوحة
+        //         $carFromDatabase = DB::table('cars')
+        //             ->where(DB::raw("REGEXP_REPLACE(plate_number, '[^0-9]', '')"), $plateNumber)
+        //             ->first();
     
-                if ($carFromDatabase) {
-                    // إذا تم العثور على السيارة في قاعدة البيانات
-                    $carData = [
-                        'car_name' => $carFromDatabase->car_name,
-                        'price_daily' => $carFromDatabase->price_daily,
-                        'model' => $carFromDatabase->model,
-                        'car_picture' => $carFromDatabase->car_picture,
-                    ];
+        //         if ($carFromDatabase) {
+        //             // إذا تم العثور على السيارة في قاعدة البيانات
+        //             $carData = [
+        //                 'car_name' => $carFromDatabase->car_name,
+        //                 'price_daily' => $carFromDatabase->price_daily,
+        //                 'model' => $carFromDatabase->model,
+        //                 'car_picture' => $carFromDatabase->car_picture,
+        //             ];
     
-                    // حفظ بيانات السيارة في الجلسة
-                    session(['car_reserved' => true]);
-                    session(['reserved_car_data' => $carData]);
+        //             // حفظ بيانات السيارة في الجلسة
+        //             session(['car_reserved' => true]);
+        //             session(['reserved_car_data' => $carData]);
     
-                    // إرجاع رسالة بأن السيارة محجوزة مع بيانات السيارة
-                    return redirect()->route('index')
-                        ->with('success_message', 'This car is confirmed reserved. Here are the car details.')
-                        ->with('car_details', $carData);
-                }
-            }
-        }
+        //             // إرجاع رسالة بأن السيارة محجوزة مع بيانات السيارة
+        //             return redirect()->route('index')
+        //                 ->with('success_message', 'This car is confirmed reserved. Here are the car details.')
+        //                 ->with('car_details', $carData);
+        //         }
+        //     }
+        // }
         $vehicleListResponse = Http::withHeaders([
             'Authorization' => "Bearer $token"
         ])->get('https://luxuria.crs.ae/api/v1/vehicles');
