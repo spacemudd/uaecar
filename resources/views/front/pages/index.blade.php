@@ -566,7 +566,7 @@
                             ECONOMY
                         </a>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <a class="nav-link" id="economy-tab" data-bs-toggle="pill" href="#economy" role="tab" aria-controls="economy" aria-selected="false">
                             SPORTS
                         </a>
@@ -575,7 +575,7 @@
                         <a class="nav-link" id="economy-tab" data-bs-toggle="pill" href="#economy" role="tab" aria-controls="economy" aria-selected="false">
                             VANS AND BUS
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <!-- Tab Content -->
