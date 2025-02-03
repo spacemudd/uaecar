@@ -60,6 +60,14 @@ class StripeController extends Controller
             'status' => 'Payment Received',
         ]);
 
+        $deposite_amount = 0;
+
+        if ($car->categories == "Economy"){
+            $deposite_amount = 1000;
+        }else{
+            $deposite_amount = 0;
+        }
+
 
         // قم بإنشاء جلسة الدفع في Stripe
         $session = $this->stripe->checkout->sessions->create([
@@ -83,7 +91,7 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => 'Deposit (Security)',
                         ],
-                        'unit_amount' => 1000 * 100, // 1000 درهم تأمين
+                        'unit_amount' => $deposite_amount * 100, // 1000 درهم تأمين
                     ],
                     'quantity' => 1,
                 ],

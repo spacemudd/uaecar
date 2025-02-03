@@ -194,45 +194,12 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
-<div class="alert alert-danger" style="margin-top: 10px;">
-            Note: There will be an additional fee of 1000 AED + 7% if the Tabby or Tamara service is selected.
-        </div>
-
-           
-
-
-<!-- <div class="container">
-    <div class="row g-3">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <form action="{{ route('stripe.payment') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
-        @csrf 
-
-        <div class="d-flex align-items-center mb-3">
-            <div class="image">
-                <img src="{{ asset('front/img/icons/visa.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
-            </div>
-            <div class="text ms-3 flex-grow-1">
-                <span class="fw-bold">Credit/Debit Card</span>
-            </div>
-        </div>
-        <div class="paragraph mt-auto">
-            Pay with Visa or Mastercard, debit, or credit.
-        </div>
-
-    <input type="hidden" name="car_id" value="{{ $car->id }}">
-    <input type="hidden" name="price_daily" value="{{ $price_daily }}">
-    <input type="hidden" name="days" value="{{ $days }}">
-    <input type="hidden" name="total" value="{{ $total }}">
-    <input type="hidden" name="pickup_date" value="{{ $pickup_date }}">
-    <input type="hidden" name="return_date" value="{{ $return_date }}">
-    
-    <input type="hidden" name="customer_name" value="{{ $customer_name }}">
-    <input type="hidden" name="customer_email" value="{{ $customer_email }}">
-    <input type="hidden" name="customer_phone" value="{{ $customer_mobile }}">
-    <input type="hidden" name="customer_city" value="{{ $pickup_city }}">
-        <button type="submit" class="btn btn-primary mt-3">Pay Now</button>
-    </form>
-</div> -->
+@if($car->categories == 'Economy')
+      <div class="alert alert-danger" style="margin-top: 10px;">
+        Note: There will be an additional fee of 1000 AED + 7% if the Tabby or Tamara service is selected.
+      </div>
+    @endif
+        
 <div class="container text-center mt-1">
     <div class="d-flex flex-column align-items-start mt-4">
 
@@ -523,12 +490,6 @@ let bookingDuration = "{{ session('booking_duration') }}";
 </div>
 
 </section>
-
-
-
-
-
-
 <div class="actions">
         <!-- <a href="#" class="backBtn">Choose different payment method</a> -->
     </div>
