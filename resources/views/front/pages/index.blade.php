@@ -673,42 +673,6 @@
 
 
 
-<section class="newsletter-section bg-light" style="min-height: 500px; position: relative; background-image: url('front/img/newss.jpg'); background-size: cover; background-position: center center; display: flex; justify-content: center; align-items: center;">
-   <!-- Dark overlay -->
-   <div class="overlay"></div>
 
-   <div class="container text-center position-relative">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h2 class="display-4 mb-4" style="font-family: 'Calisto MT', serif; color: white; font-size: 50px;">Subscribe To Our Newsletter</h2>
-                
-                <form action="#" method="post">
-                    @csrf
-                    <div class="input-group input-group-lg">
-                        <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
-
-
-                    </div>
-                    <button class="btn btn-primary" type="submit">
-                                <i class="fas fa-paper-plane"></i> Subscribe
-                            </button>   
-
-
-                </form>
-                
-                <!-- Optional success or error messages -->
-                @if(session('success'))
-                    <div class="alert alert-success mt-4">
-                        {{ session('success') }}
-                    </div>
-                @elseif(session('error'))
-                    <div class="alert alert-danger mt-4">
-                        {{ session('error') }}
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-</section>
 
 @endsection
