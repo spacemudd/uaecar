@@ -182,13 +182,11 @@
                                 <span class="px-4 py-3" style="display: inline-block;">
                                     <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
                                     <br>
-                                    <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
                                 </span>
                                 <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                                     <span>{{ $car->seats . ' Seats' }}</span>
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
-                                    <span style="background-color: #1B1B1B; color: white;">LUXURY</span>
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
                                     <div>
@@ -262,13 +260,11 @@
                             <span class="px-4 py-3" style="display: inline-block;">
                                 <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
                                 <br>
-                                <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
                             </span>
                             <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                                 <span>{{ $car->seats . ' Seats' }}</span>
                                 <span>{{ $car->doors . ' Doors' }}</span>
                                 <span>Automatic</span>
-                                <span style="background-color: green; color: white;">Mid Range</span>
                             </div>
                             <a href="{{ route('cars.show', $car->id) }}">
                                 <div>
@@ -337,13 +333,11 @@
                                 <span class="px-4 py-3" style="display: inline-block;">
                                     <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
                                     <br>
-                                    <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
                                 </span>
                                 <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                                     <span>{{ $car->seats . ' Seats' }}</span>
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
-                                    <span style="background-color: orange; color: white;">Economy</span>
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
                                     <div>
@@ -414,13 +408,11 @@
                                 <span class="px-4 py-3" style="display: inline-block;">
                                     <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
                                     <br>
-                                    <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
                                 </span>
                                 <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                                     <span>{{ $car->seats . ' Seats' }}</span>
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
-                                    <span style="background-color: #1B1B1B; color: white;">Sport</span>
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
                                     <div>
@@ -490,13 +482,11 @@
                                 <span class="px-4 py-3" style="display: inline-block;">
                                     <h3 class="car_name" style="display: inline-block; margin: 0; font-size: 23px; font-family: 'Calisto MT', serif;">{{ $car->car_name . ' ' . $car->model}}</h3>
                                     <br>
-                                    <h4 class="car_name" style="display:inline-block; margin:0; font-family: 'Calisto MT', serif;">{{ $car->year }}</h4>
                                 </span>
                                 <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                                     <span>{{ $car->seats . ' Seats' }}</span>
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
-                                    <span style="background-color: blue; color: white;">Vans and Buses</span>
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
                                     <div>
