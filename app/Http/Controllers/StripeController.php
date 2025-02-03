@@ -60,9 +60,9 @@ class StripeController extends Controller
             'status' => 'Payment Received',
         ]);
 
+        
         $deposite_amount = 0;
-
-        if ($car->categories == "Economy"){
+        if ($car->price_daily < 349){
             $deposite_amount = 1000;
         }else{
             $deposite_amount = 0;

@@ -194,11 +194,11 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
-@if($car->categories == 'Economy')
-      <div class="alert alert-danger" style="margin-top: 10px;">
+@if($car->price_daily < 349)
+    <div class="alert alert-danger" style="margin-top: 10px;">
         Note: There will be an additional fee of 1000 AED + 7% if the Tabby or Tamara service is selected.
-      </div>
-    @endif
+    </div>
+@endif
         
 <div class="container text-center mt-1">
     <div class="d-flex flex-column align-items-start mt-4">
