@@ -626,11 +626,12 @@
 
 
 <!--Instagram-->
+<!-- 
+
 <section class="instagram-posts-section py-5 my-5">
     <div class="container text-center">
         <h2 class="display-4 mb-4">Latest Instagram Posts</h2>
         <div class="row">
-            <!-- Instagram Post 1 -->
             <div class="col-md-4 mb-4">
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DD6dgN8NQKO/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:100%;">
                     <div style="padding:16px;">
@@ -641,7 +642,6 @@
                 </blockquote>
             </div>
 
-            <!-- Instagram Post 2 -->
             <div class="col-md-4 mb-4">
 
             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DDo2C9jtymG/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
@@ -655,7 +655,6 @@
 
 
 
-            <!-- Instagram Post 3 -->
             <div class="col-md-4 mb-4">
             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DDrSsW2tkFG/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
                 <div style="padding:16px;">
@@ -668,7 +667,7 @@
         </div>
     </div>
 </section>
-
+ -->
 
 
 
