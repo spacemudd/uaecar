@@ -118,6 +118,7 @@
 
 @section('content')
 
+@include('front.pages.adScreen')
 
     <!-- Preloader -->
 <div class="preloader-bg"></div>

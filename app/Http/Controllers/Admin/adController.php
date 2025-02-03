@@ -37,4 +37,14 @@ class adController extends Controller
     }
 
 
+
+    public function index()
+    {
+        // استرجاع بيانات الإعلان من قاعدة البيانات
+        $ad = \App\Models\Ad::first(); // أو استخدم طريقة معينة لاسترجاع الإعلان بناءً على الحاجة
+        
+        return view('front.pages.adScreen', compact('ad'));
+    }
+
+
 }
