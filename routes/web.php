@@ -27,6 +27,7 @@ use App\Http\Controllers\WhyUsController;
 use App\Http\Middleware\SessionAuth;
 use App\Http\Middleware\VerifyInvoiceAccess;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\PromotionController;
 
 
 // Services
@@ -109,6 +110,9 @@ Route::get('/revoke-access', function () {
     Session::forget('allowed_invoice_id');
     return redirect('/');
 });
+
+
+Route::get('/promotion', [PromotionController::class, 'index'])->name('promotion.index');
 
 // Tabby Payment Routess
 Route::post('/tabby/create-checkout', [TabbyController::class, 'createCheckout'])->name('create.checkout');
