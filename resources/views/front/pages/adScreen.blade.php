@@ -1,7 +1,8 @@
-<div class="ad-container" id="ad-container">
+<div class="ad-container d-flex justify-content-center align-items-center" id="ad-container">
     <span class="close-btn" id="close-btn">X</span>
     <a href="{{ route('promotion.index') }}" target="_blank">
-    <img src="{{ asset('storage/' . $ad->image) }}" alt="Ads">    </a>
+        <img src="{{ asset('storage/' . $ad->image) }}" alt="Ads">
+    </a>
 </div>
 
 <style>
@@ -17,10 +18,12 @@
         text-align: center;
         z-index: 9999;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 80%; /* تحديد عرض الحاوية ليكون 80% */
+        max-width: 600px; /* تحديد الحد الأقصى للعرض */
     }
     .ad-container img {
-        max-width: 100%;
-        height: auto;
+        width: 100%;  /* جعل الصورة تتناسب مع عرض الحاوية */
+        height: auto; /* الحفاظ على الأبعاد الأصلية للصورة */
         cursor: pointer;
     }
     .close-btn {
