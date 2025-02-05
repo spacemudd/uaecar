@@ -112,7 +112,7 @@ Route::get('/revoke-access', function () {
 });
 
 
-Route::get('/promotion', [PromotionController::class, 'index'])->name('promotion.index');
+Route::get('/nodeposit', [PromotionController::class, 'index'])->name('promotion.index');
 
 // Tabby Payment Routess
 Route::post('/tabby/create-checkout', [TabbyController::class, 'createCheckout'])->name('create.checkout');

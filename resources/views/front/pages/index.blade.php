@@ -615,27 +615,22 @@
 </section> -->
 
 
-<section class="text-center my-5">
-    <!-- عنوان الصفحة في المنتصف -->
+<!-- <section class="text-center my-5">
     <h2 id="line-three" class="display-6 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">Check Our Promotions</h2>
 
-    <!-- Carousel -->
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <!-- الصورة الأولى -->
             <div class="carousel-item active">
                 <a href="https://your-link-here.com" target="_blank">
                     <img src="{{ asset('storage/' . $ad->image) }}" class="d-block w-100 carousel-img" alt="Image 1">
                 </a>
             </div>
-            <!-- الصورة الثانية -->
             <div class="carousel-item">
                 <a href="https://another-link-here.com" target="_blank">
                     <img src="{{ asset('front/img/cars/chevorlet malibu/png.png') }}" class="d-block w-100 carousel-img" alt="Image 2">
                 </a>
             </div>
         </div>
-        <!-- الأسطح للتنقل بين الصور -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -648,23 +643,21 @@
 </section>
 
 <style>
-    /* ضبط تنسيق h2 ليكون في المنتصف */
     #line-three {
-        text-align: center; /* جعل النص في المنتصف */
-        margin-top: 20vh;   /* رفع العنوان بمقدار 20% من ارتفاع الصفحة */
+        text-align: center; 
+        margin-top: 20vh;   
     }
 
-    /* تقليل ارتفاع الصور في السلايدر */
     .carousel-img {
-        object-fit: cover;  /* لجعل الصورة تملأ المساحة مع الحفاظ على التنسيق */
-        height: 600px;      /* تقليل الارتفاع */
+        object-fit: cover;  
+        height: 600px;     
     }
 
     .carousel-inner {
-        width: 1700px; /* تحديد عرض السلايدر */
-        margin: 0 auto; /* توسيط السلايدر في العنصر الأب */
+        width: 1700px; 
+        margin: 0 auto; 
     }
-</style>
+</style> -->
 
 
 

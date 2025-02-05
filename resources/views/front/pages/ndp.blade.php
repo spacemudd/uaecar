@@ -177,6 +177,9 @@
                                     <span>{{ $car->seats . ' Seats' }}</span>
                                     <span>{{ $car->doors . ' Doors' }}</span>
                                     <span>Automatic</span>
+                                    @if ($car->price_daily > 349)
+                                        <span style="background-color: green; color:white">No Deposit</span>
+                                    @endif
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
                                     <div>
