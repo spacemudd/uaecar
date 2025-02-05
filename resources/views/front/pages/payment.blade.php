@@ -226,13 +226,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </label>
 
-            <label class="radio-btn d-flex align-items-center mt-3 text-start">
+            <!-- <label class="radio-btn d-flex align-items-center mt-3 text-start">
                 <input type="radio" name="selective" value="Point 2" style="margin-right: 10px;">
                 <div class="border rounded p-2" style="width: 100%;">
                     <img src="{{ asset('front/img/icons/tabby.png') }}" alt="Tabby" style="width: 70px; height: 30px; margin-right: 10px;">
                     <span>Pay in 4. No interest, no fees.</span>
                 </div>
-            </label>
+            </label> -->
             <div id="TabbyPromo" class="mt-3"></div>
         </div>
 
@@ -300,8 +300,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-<script src="https://checkout.tabby.ai/tabby-promo.js"></script>
+<!-- 
+<script src="https://checkout.tabby.ai/tabby-promo.js"></script> -->
 <script>
 
 let bookingDuration = "{{ session('booking_duration') }}";
