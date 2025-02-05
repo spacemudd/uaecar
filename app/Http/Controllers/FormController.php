@@ -224,6 +224,8 @@ public function submit(Request $request)
         // إذا كانت السيارة متوفرة
         session([
             'pickup_date' => $request->input('pickup_date'),
+            'return_date' => $request->input('return_date'),
+
             'rate_daily' => $request->input('price_daily'),
             'rate_weekly' => $request->input('price_weekly'),
             'rate_monthly' => $request->input('price_monthly'),

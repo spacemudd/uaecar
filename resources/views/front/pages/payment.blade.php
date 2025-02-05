@@ -199,6 +199,12 @@ document.addEventListener("DOMContentLoaded", function() {
         Note: There will be an additional fee of 1000 AED + 7% if the Tabby or Tamara service is selected.
     </div>
 @endif
+
+<div>
+    {{ session('return_date') }}
+    {{ session('pickup_date') }}
+
+</div>
         
 <div class="container text-center mt-1">
     <div class="d-flex flex-column align-items-start mt-4">

@@ -77,11 +77,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="returnDateField{{ $car->id }}" class="col-lg-6 col-md-12" style="display: none;">
+                                <div class="col-lg-6 col-md-12">
                                     <div class="input1_wrapper">
                                         <label>Return Date and Time</label>
                                         <div class="input1_inner">
-                                            <input id="returnDate{{ $car->id }}" name="return_date" type="text" class="form-control input" placeholder="Return Date and Time">
+                                            <input id="return_date" name="return_date" type="text" class="form-control input" placeholder="Return Date and Time" required>
                                         </div>
                                     </div>
                                 </div>
@@ -99,46 +99,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        // Initialize Flatpickr on pickup_date
-        flatpickr("#pickup_date", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i"
-        });
-
-        $('[id^="bookingDuration"]').each(function () {
-            const bookingDuration = $(this);
-            const modalId = bookingDuration.attr('id').replace('bookingDuration', '');
-            const returnDateField = $('#returnDateField' + modalId);
-            const returnDateInput = $('#returnDate' + modalId);
-
-            // Update return date field visibility
-            function updateReturnDateField() {
-                if (bookingDuration.val() === 'Daily') {
-                    returnDateField.show();
-                    returnDateInput.prop('required', true);
-
-                    // Initialize Flatpickr dynamically
-                    flatpickr("#returnDate" + modalId, {
-                        enableTime: true,
-                        dateFormat: "Y-m-d H:i"
-                    });
-                } else {
-                    returnDateField.hide();
-                    returnDateInput.prop('required', false);
-                    returnDateInput.val('');
-                }
-            }
-
-            // On booking duration change
-            bookingDuration.change(function () {
-                updateReturnDateField();
-            });
-
-            // Initialize on page load
-            updateReturnDateField();
-        });
-    });
-</script>

@@ -173,3 +173,11 @@ Route::get('/clear-session', function () {
     // Redirect or return a message
 return \Illuminate\Support\Facades\Redirect::back()->with('message', 'Session cleared successfully.');
 });
+
+
+
+Route::get('/clear-session', function () {
+    session()->flush();  // مسح جميع بيانات الجلسة
+    return redirect('/'); // إعادة التوجيه إلى الصفحة الرئيسية أو أي صفحة ترغب فيها
+});
+
