@@ -1,8 +1,7 @@
-<div class="ad-container d-flex justify-content-center align-items-center" id="ad-container">
+<div class="ad-container" id="ad-container">
     <span class="close-btn" id="close-btn">X</span>
     <a href="{{ route('promotion.index') }}" target="_blank">
-        <img src="{{ asset('storage/' . $ad->image) }}" alt="Ads">
-    </a>
+    <img src="{{ asset('storage/' . $ad->image) }}" alt="Ads">    </a>
 </div>
 
 <style>
@@ -18,12 +17,10 @@
         text-align: center;
         z-index: 9999;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        width: 85%; /* زيادة العرض قليلاً */
-        max-width: 700px; /* زيادة الحد الأقصى للعرض */
     }
     .ad-container img {
-        width: 100%;  /* جعل الصورة تتناسب مع عرض الحاوية */
-        height: auto; /* الحفاظ على الأبعاد الأصلية للصورة */
+        max-width: 100%;
+        height: auto;
         cursor: pointer;
     }
     .close-btn {
@@ -42,7 +39,6 @@
 <script>
     // إغلاق الإعلان عند الضغط على X
     document.getElementById("close-btn").addEventListener("click", function() {
-        var adContainer = document.getElementById("ad-container");
-        adContainer.style.display = "none";  // إخفاء الإعلان
+        document.getElementById("ad-container").style.display = "none";
     });
 </script>
