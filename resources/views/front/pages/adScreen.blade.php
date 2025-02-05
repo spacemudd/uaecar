@@ -42,6 +42,7 @@
 <script>
     // إغلاق الإعلان عند الضغط على X
     document.getElementById("close-btn").addEventListener("click", function() {
-        document.getElementById("ad-container").style.display = "none";
+        var adContainer = document.getElementById("ad-container");
+        adContainer.style.display = "none";  // إخفاء الإعلان
     });
 </script>
