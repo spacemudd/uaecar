@@ -200,11 +200,18 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 @endif
 
-<div>
-    {{ session('return_date') }}
-    {{ session('pickup_date') }}
-
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Booking Details</h5>
+    <p class="card-text">
+      <strong>Pickup Date:</strong> {{ session('pickup_date') }}<br>
+      <strong>Return Date:</strong> {{ session('return_date') }}<br>
+      <strong>Total Days:</strong> 
+      {{ \Carbon\Carbon::parse(session('pickup_date'))->diffInDays(\Carbon\Carbon::parse(session('return_date'))) }} days
+    </p>
+  </div>
 </div>
+
         
 <div class="container text-center mt-1">
     <div class="d-flex flex-column align-items-start mt-4">

@@ -79,7 +79,11 @@ class StripeController extends Controller
                         'currency' => 'AED',
                         'product_data' => [
                             'name' => $car->car_name . ' ' . $car->model . ' ' . $car->year,
-                            'images' => [asset('storage/' . $car->car_picture)],                        ],
+                            'description' => 'Pickup Date: ' . $request->pickup_date,
+                            'description' => 'Return Date: ' . $request->return_date,
+
+                            'images' => [asset('storage/' . $car->car_picture)],                        
+                        ],
                         'unit_amount' => $request->total * 100, // المبلغ الأصلي
                     ],
                     'quantity' => 1,
@@ -95,7 +99,7 @@ class StripeController extends Controller
                     ],
                     'quantity' => 1,
                 ],
-                
+              
             ],
             'metadata' => [
                 'pickup_date' => $request->pickup_date,
