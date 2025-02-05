@@ -535,12 +535,10 @@
 </section>
 
 <!-- New Section with Centered Title and Clickable Labels -->
-<section class="py-5 mt-5">
+<!-- <section class="py-5 mt-5">
             <div class="container text-center">
-                <!-- Section Title -->
                 <h2 id="line-three" class="display-4 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">RENT ANY CAR YOU LIKE</h2>
 
-                <!-- Tab Navigation for Smaller Screens -->
                 <ul class="nav nav-pills justify-content-center mb-4" id="carTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="luxury-tab" data-bs-toggle="pill" href="#luxury" role="tab" aria-controls="luxury" aria-selected="true">
@@ -557,21 +555,10 @@
                             ECONOMY
                         </a>
                     </li>
-                    <!-- <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="economy-tab" data-bs-toggle="pill" href="#economy" role="tab" aria-controls="economy" aria-selected="false">
-                            SPORTS
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="economy-tab" data-bs-toggle="pill" href="#economy" role="tab" aria-controls="economy" aria-selected="false">
-                            VANS AND BUS
-                        </a>
-                    </li> -->
+                   
                 </ul>
 
-                <!-- Tab Content -->
                 <div class="tab-content" id="carTabsContent">
-                    <!-- Luxury Tab -->
                     <div class="tab-pane fade show active" id="luxury" role="tabpanel" aria-labelledby="luxury-tab">
                         <a href="{{ route('luxury.page') }}" class="d-block text-decoration-none text-dark">
                             <div class="d-flex align-items-center justify-content-center position-relative rounded mb-4">
@@ -584,7 +571,6 @@
                         </a>
                     </div>
 
-                    <!-- Premium Tab -->
                     <div class="tab-pane fade" id="premium" role="tabpanel" aria-labelledby="premium-tab">
                         <a href="{{ route('premium.page') }}" class="d-block text-decoration-none text-dark">
                             <div class="d-flex align-items-center justify-content-center position-relative rounded mb-4">
@@ -597,7 +583,6 @@
                         </a>
                     </div>
 
-                    <!-- Economy Tab -->
                     <div class="tab-pane fade" id="economy" role="tabpanel" aria-labelledby="economy-tab">
                         <a href="{{ route('economy.page') }}" class="d-block text-decoration-none text-dark">
                             <div class="d-flex align-items-center justify-content-center position-relative rounded mb-4">
@@ -611,7 +596,59 @@
                     </div>
                 </div>
             </div>
-        </section>
+</section> -->
+
+
+<section class="text-center my-5">
+    <!-- عنوان الصفحة في المنتصف -->
+    <h2 id="line-three" class="display-6 mb-4" style="font-family: 'Calisto MT', serif; color:#0F2026;">Check Our Promotions</h2>
+
+    <!-- Carousel -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- الصورة الأولى -->
+            <div class="carousel-item active">
+                <a href="https://your-link-here.com" target="_blank">
+                    <img src="{{ asset('storage/' . $ad->image) }}" class="d-block w-100 carousel-img" alt="Image 1">
+                </a>
+            </div>
+            <!-- الصورة الثانية -->
+            <div class="carousel-item">
+                <a href="https://another-link-here.com" target="_blank">
+                    <img src="{{ asset('front/img/cars/chevorlet malibu/png.png') }}" class="d-block w-100 carousel-img" alt="Image 2">
+                </a>
+            </div>
+        </div>
+        <!-- الأسطح للتنقل بين الصور -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+<style>
+    /* ضبط تنسيق h2 ليكون في المنتصف */
+    #line-three {
+        text-align: center; /* جعل النص في المنتصف */
+        margin-top: 20vh;   /* رفع العنوان بمقدار 20% من ارتفاع الصفحة */
+    }
+
+    /* تقليل ارتفاع الصور في السلايدر */
+    .carousel-img {
+        object-fit: cover;  /* لجعل الصورة تملأ المساحة مع الحفاظ على التنسيق */
+        height: 600px;      /* تقليل الارتفاع */
+    }
+
+    .carousel-inner {
+        width: 1700px; /* تحديد عرض السلايدر */
+        margin: 0 auto; /* توسيط السلايدر في العنصر الأب */
+    }
+</style>
 
 
 

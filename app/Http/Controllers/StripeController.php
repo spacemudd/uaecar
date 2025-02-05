@@ -43,22 +43,43 @@ class StripeController extends Controller
         ]);
 
         $car = Car::find($request->car_id);
-        $invoice = Invoice::create([
-            'customer_name' => $request->customer_name,
-            'customer_email' => $request->customer_email,
-            'customer_phone' => $request->customer_phone,
-            'city' => $request->customer_city,
-            'pickup_date' => session('pickup_date'),
-            'return_date' => session('return_date'),
-            'creation_date' => now(),
-            'description' => "This is a new Car",
-            'car_daily_price' => session('rate_daily'),
-            'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
-                ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
-            'total_amount' => $request->total,
-            'tax' => 1000,
-            'status' => 'Payment Received',
-        ]);
+
+        if(session('rate_daily') >= 348){
+            $invoice = Invoice::create([
+                'customer_name' => $request->customer_name,
+                'customer_email' => $request->customer_email,
+                'customer_phone' => $request->customer_phone,
+                'city' => $request->customer_city,
+                'pickup_date' => session('pickup_date'),
+                'return_date' => session('return_date'),
+                'creation_date' => now(),
+                'description' => "This is a new Car",
+                'car_daily_price' => session('rate_daily'),
+                'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
+                    ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
+                'total_amount' => $request->total,
+                'tax' => 0,
+                'status' => 'Payment Received',
+            ]);
+        }else{
+            $invoice = Invoice::create([
+                'customer_name' => $request->customer_name,
+                'customer_email' => $request->customer_email,
+                'customer_phone' => $request->customer_phone,
+                'city' => $request->customer_city,
+                'pickup_date' => session('pickup_date'),
+                'return_date' => session('return_date'),
+                'creation_date' => now(),
+                'description' => "This is a new Car",
+                'car_daily_price' => session('rate_daily'),
+                'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
+                    ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
+                'total_amount' => $request->total,
+                'tax' => 1000,
+                'status' => 'Payment Received',
+            ]);
+        }
+        
 
         
         $deposite_amount = 0;
@@ -67,8 +88,6 @@ class StripeController extends Controller
         }else{
             $deposite_amount = 0;
         }
-
-
         // قم بإنشاء جلسة الدفع في Stripe
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',

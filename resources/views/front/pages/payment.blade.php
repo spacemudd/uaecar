@@ -266,41 +266,39 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <style>
     .payment-options {
-        border: 1px solid #ccc; /* حدود خفيفة */
-        border-radius: 5px; /* زوايا مستديرة */
-        padding: 15px; /* حشوة داخل الصندوق */
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        padding: 15px; 
     }
     .payment-options:hover {
-        border-color: #007bff; /* تغيير لون الحدود عند التحويم */
+        border-color: #007bff; 
     }
     .radio-btn > div {
-        border: 1px solid #ccc; /* حدود خفيفة للصندوق الداخلي */
-        border-radius: 5px; /* زوايا مستديرة للصندوق الداخلي */
-        padding: 10px; /* حشوة داخل الصندوق */
-        width: 100%; /* عرض كامل للصندوق الداخلي */
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        padding: 10px; 
+        width: 100%; 
     }
 </style>
 
 <script>
-    // تحديد جميع الراديوهات
     const radioButtons = document.querySelectorAll('.radio-btn');
 
-    // إضافة حدث للزر Checkout
     document.getElementById('checkoutForm').addEventListener('submit', (event) => {
         const selectedValue = document.querySelector('input[name="selective"]:checked');
         if (!selectedValue) {
-            event.preventDefault(); // منع تقديم النموذج إذا لم يتم اختيار طريقة الدفع
+            event.preventDefault(); 
             alert('يرجى اختيار طريقة الدفع أولاً.');
         } else {
-            // التحقق مما إذا كانت طريقة الدفع هي "Tabby"
-            if (selectedValue.value === "Point 2") { // تأكد من استخدام القيمة الصحيحة
-                event.preventDefault(); // منع تقديم النموذج بشكل افتراضي
+           
+            if (selectedValue.value === "Point 2") { 
+                event.preventDefault(); 
                 const form = event.target;
-                form.action = "{{ route('create.checkout') }}"; // تغيير الإجراء إلى الروت المطلوب
-                form.method = "POST"; // تأكد من أن الطريقة هي POST
-                form.submit(); // تقديم النموذج بعد تغيير الإجراء
+                form.action = "{{ route('create.checkout') }}"; 
+                form.method = "POST"; 
+                form.submit(); 
             }
-            // إذا كانت طريقة الدفع مختلفة، فسيتم تقديم النموذج إلى الإجراء الافتراضي
+            
         }
     });
 </script>
