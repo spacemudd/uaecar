@@ -71,7 +71,7 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>{{ $invoiceId = session('vehicle_hint');  }}</td>
+                                    <td>{{ $invoice->description  }}</td>
                                     <td>{{ $invoice->total_days }}</td>
                                     <td>{{ $invoice->total_amount }} AED</td>
                                 </tr>

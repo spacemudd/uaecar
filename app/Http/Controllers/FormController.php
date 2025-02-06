@@ -78,6 +78,7 @@ public function submit(Request $request)
         if (!$token) {
             $token = $this->authenticate();
         }
+
         return $token;
     }
 

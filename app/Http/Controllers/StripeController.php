@@ -70,7 +70,7 @@ class StripeController extends Controller
                 'pickup_date' => session('pickup_date'),
                 'return_date' => session('return_date'),
                 'creation_date' => now(),
-                'description' => "This is a new Car",
+                'description' => session('car_name'),
                 'car_daily_price' => session('rate_daily'),
                 'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
                     ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
