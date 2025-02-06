@@ -80,7 +80,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 // Media Routes
 Route::get('media/{id}', [MediaController::class, 'show'])->name('media.show');
 
-// Stripe Routes
+// Stripe Routess
 Route::get('/successview', [StripeController::class, 'successView'])->name('successview');
 Route::get('/stripe/payment/{car_id}/{rate_daily}/{days}/{total}/{pickup_date}/{return_date}/{customer_name}/{customer_email}/{customer_phone}/{customer_city}', [StripeController::class, 'pay'])->name('stripe.payment');
 
