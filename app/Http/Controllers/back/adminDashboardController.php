@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\BookingRequest;
 use App\Models\InstagramPost;
+use App\Models\Invoice;
+use App\Models\Order;
 
 class adminDashboardController extends Controller
 {
@@ -15,6 +17,8 @@ class adminDashboardController extends Controller
     public function index(){
 
         $car_count = Car::count();
+        $invoice_count = Invoice::count();
+        $order_count = Order::count();
         $pendingBookings = BookingRequest::where('status', 'Pending')->count();
         $approvedBookings = BookingRequest::where('status', 'Approved')->count();
         $canceledBookings = BookingRequest::where('status', 'Canceled')->count();
@@ -23,7 +27,7 @@ class adminDashboardController extends Controller
 
         $booking = BookingRequest::count();
 
-        return view('back.pages.dashboard', compact('car_count', 'booking','pendingBookings', 'approvedBookings', 'canceledBookings'));
+        return view('back.pages.dashboard', compact('car_count', 'booking','pendingBookings', 'approvedBookings', 'canceledBookings', 'invoice_count', 'order_count'));
     }
 
 
