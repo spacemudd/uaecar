@@ -131,7 +131,7 @@
                     <div class="card about-card">
                         <div class="card-body">
                             <h1 class="fs-3" style="font-family: 'Calisto MT', serif;">
-                                {{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}
+                                {{ $car->car_name . ' ' . $car->model}}
                             </h1>
                             <p class="text-end my-0 py-0 pe-1 fw-bold fs-6">
                                 Daily Cost: <span class="fs-4" style="font-family: 'Calisto MT', serif;">{{ $car->price_daily }} AED </span>
