@@ -9,7 +9,7 @@ use App\Jobs\SendInvoiceEmailJob; // تأكد من إضافة هذا السطر
 class Kernel extends ConsoleKernel
 {
     /**
-     * Define the application's command schedule.
+     * Define the application's command schedulee.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
