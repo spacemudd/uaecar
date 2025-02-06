@@ -107,7 +107,7 @@ class StripeController extends Controller
                     ],
                     'quantity' => 1,
                 ],
-                // إضافة مبلغ التأمين
+                // إضاeفة مبلغ التأمين
                 [
                     'price_data' => [
                         'currency' => 'AED',
