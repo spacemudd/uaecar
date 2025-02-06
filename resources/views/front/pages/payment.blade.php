@@ -124,10 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-
-
-
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -194,25 +190,72 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
-@if($car->price_daily < 349)
-    <div class="alert alert-danger" style="margin-top: 10px;">
-        Note: There will be an additional fee of 1000 AED + 7% if the Tabby or Tamara service is selected.
-    </div>
-@endif
+<div class="alert alert-danger" style="margin-top: 10px;">
+            Note: There will be an additional fee of 1000 AED + 7% if the Tabby or Tamara service is selected.
+        </div>
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Booking Details</h5>
-    <p class="card-text">
-      <strong>Pickup Date:</strong> {{ session('pickup_date') }}<br>
-      <strong>Return Date:</strong> {{ session('return_date') }}<br>
-      <strong>Total Days:</strong> 
-      {{ \Carbon\Carbon::parse(session('pickup_date'))->diffInDays(\Carbon\Carbon::parse(session('return_date'))) }} days
-    </p>
-  </div>
+        <div class="container mt-5">
+    <div class="row">
+        <!-- عرض التواريخ ومجموع الأيام -->
+        <div class="card">
+            <div class="card-body text-left">
+                <h4>Booking Information</h4>
+                <p><strong>Pickup Date:</strong>  {{ session('pickup_date') }}</p>
+                <p><strong>Return Date:</strong>  {{ session('return_date') }}</p>
+                <p><strong>Total Days:</strong> <span id="total-days"></span></p>
+            </div>
+        </div>
+    </div>
 </div>
 
-        
+<script>
+// الحصول على تواريخ الاستلام والعودة من الجلسة
+const pickupDate = new Date("{{ session('pickup_date') }}");
+const returnDate = new Date("{{ session('return_date') }}");
+
+// حساب فرق الأيام
+const timeDifference = returnDate - pickupDate;
+const totalDays = timeDifference / (1000 * 3600 * 24);
+
+// عرض عدد الأيام في العنصر المحدد
+document.getElementById('total-days').textContent = totalDays;
+</script>
+
+
+
+
+<!-- <div class="container">
+    <div class="row g-3">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <form action="{{ route('stripe.payment') }}" method="POST" class="pay-card card p-3 shadow-sm h-100 d-flex flex-column">
+        @csrf 
+
+        <div class="d-flex align-items-center mb-3">
+            <div class="image">
+                <img src="{{ asset('front/img/icons/visa.png') }}" alt="Image" class="img-fluid rounded-3" style="width: 30px; height: 30px; object-fit: cover;">
+            </div>
+            <div class="text ms-3 flex-grow-1">
+                <span class="fw-bold">Credit/Debit Card</span>
+            </div>
+        </div>
+        <div class="paragraph mt-auto">
+            Pay with Visa or Mastercard, debit, or credit.
+        </div>
+
+    <input type="hidden" name="car_id" value="{{ $car->id }}">
+    <input type="hidden" name="price_daily" value="{{ $price_daily }}">
+    <input type="hidden" name="days" value="{{ $days }}">
+    <input type="hidden" name="total" value="{{ $total }}">
+    <input type="hidden" name="pickup_date" value="{{ $pickup_date }}">
+    <input type="hidden" name="return_date" value="{{ $return_date }}">
+    
+    <input type="hidden" name="customer_name" value="{{ $customer_name }}">
+    <input type="hidden" name="customer_email" value="{{ $customer_email }}">
+    <input type="hidden" name="customer_phone" value="{{ $customer_mobile }}">
+    <input type="hidden" name="customer_city" value="{{ $pickup_city }}">
+        <button type="submit" class="btn btn-primary mt-3">Pay Now</button>
+    </form>
+</div> -->
 <div class="container text-center mt-1">
     <div class="d-flex flex-column align-items-start mt-4">
 
@@ -233,13 +276,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </label>
 
-            <!-- <label class="radio-btn d-flex align-items-center mt-3 text-start">
+            <label class="radio-btn d-flex align-items-center mt-3 text-start">
                 <input type="radio" name="selective" value="Point 2" style="margin-right: 10px;">
                 <div class="border rounded p-2" style="width: 100%;">
                     <img src="{{ asset('front/img/icons/tabby.png') }}" alt="Tabby" style="width: 70px; height: 30px; margin-right: 10px;">
                     <span>Pay in 4. No interest, no fees.</span>
                 </div>
-            </label> -->
+            </label>
             <div id="TabbyPromo" class="mt-3"></div>
         </div>
 
@@ -266,47 +309,49 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <style>
     .payment-options {
-        border: 1px solid #ccc; 
-        border-radius: 5px; 
-        padding: 15px; 
+        border: 1px solid #ccc; /* حدود خفيفة */
+        border-radius: 5px; /* زوايا مستديرة */
+        padding: 15px; /* حشوة داخل الصندوق */
     }
     .payment-options:hover {
-        border-color: #007bff; 
+        border-color: #007bff; /* تغيير لون الحدود عند التحويم */
     }
     .radio-btn > div {
-        border: 1px solid #ccc; 
-        border-radius: 5px; 
-        padding: 10px; 
-        width: 100%; 
+        border: 1px solid #ccc; /* حدود خفيفة للصندوق الداخلي */
+        border-radius: 5px; /* زوايا مستديرة للصندوق الداخلي */
+        padding: 10px; /* حشوة داخل الصندوق */
+        width: 100%; /* عرض كامل للصندوق الداخلي */
     }
 </style>
 
 <script>
+    // تحديد جميع الراديوهات
     const radioButtons = document.querySelectorAll('.radio-btn');
 
+    // إضافة حدث للزر Checkout
     document.getElementById('checkoutForm').addEventListener('submit', (event) => {
         const selectedValue = document.querySelector('input[name="selective"]:checked');
         if (!selectedValue) {
-            event.preventDefault(); 
+            event.preventDefault(); // منع تقديم النموذج إذا لم يتم اختيار طريقة الدفع
             alert('يرجى اختيار طريقة الدفع أولاً.');
         } else {
-           
-            if (selectedValue.value === "Point 2") { 
-                event.preventDefault(); 
+            // التحقق مما إذا كانت طريقة الدفع هي "Tabby"
+            if (selectedValue.value === "Point 2") { // تأكد من استخدام القيمة الصحيحة
+                event.preventDefault(); // منع تقديم النموذج بشكل افتراضي
                 const form = event.target;
-                form.action = "{{ route('create.checkout') }}"; 
-                form.method = "POST"; 
-                form.submit(); 
+                form.action = "{{ route('create.checkout') }}"; // تغيير الإجراء إلى الروت المطلوب
+                form.method = "POST"; // تأكد من أن الطريقة هي POST
+                form.submit(); // تقديم النموذج بعد تغيير الإجراء
             }
-            
+            // إذا كانت طريقة الدفع مختلفة، فسيتم تقديم النموذج إلى الإجراء الافتراضي
         }
     });
 </script>
 
 
 
-<!-- 
-<script src="https://checkout.tabby.ai/tabby-promo.js"></script> -->
+
+<script src="https://checkout.tabby.ai/tabby-promo.js"></script>
 <script>
 
 let bookingDuration = "{{ session('booking_duration') }}";
@@ -501,6 +546,12 @@ let bookingDuration = "{{ session('booking_duration') }}";
 </div>
 
 </section>
+
+
+
+
+
+
 <div class="actions">
         <!-- <a href="#" class="backBtn">Choose different payment method</a> -->
     </div>

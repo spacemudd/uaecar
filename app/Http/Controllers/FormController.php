@@ -21,6 +21,8 @@ class FormController extends Controller
 
 public function submit(Request $request)
 {
+
+    session(['form_completed' => true]);
     session('new_id', $request->input('car_id'));
     $plateNumber = $request->input('plate_number');
     $plateNumber = preg_replace('/^(?:[A-Z]-|CC-)/', '', $plateNumber);    
