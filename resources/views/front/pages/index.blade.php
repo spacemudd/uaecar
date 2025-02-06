@@ -161,7 +161,7 @@
 </section>
 
 <!-- Luxury Cars Section -->
-<section class=" my-0 py-0 px-3 mx-auto">
+<section class="cars2 section-padding my-0 py-0 px-3 mx-auto py-5 mt-5">
         
             <div class="row ">
                 <div class="col-12 position-relative d-flex justify-content-center align-items-center" style="background-color: black; width: 100vw;">
