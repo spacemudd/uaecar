@@ -83,7 +83,7 @@ class StripeController extends Controller
 
         
         $deposite_amount = 0;
-        if ($car->price_daily < 349){
+        if ($car->price_daily <= 349){
             $deposite_amount = 1000;
         }else{
             $deposite_amount = 0;
