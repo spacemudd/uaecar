@@ -1,0 +1,48 @@
+[90m= [39m[
+    {#5306
+      +"[1mTables_in_luxuriadbtest[22m": "[32madmin_users[39m",
+    },
+    {#5321
+      +"[1mTables_in_luxuriadbtest[22m": "[32mbooking_request[39m",
+    },
+    {#5320
+      +"[1mTables_in_luxuriadbtest[22m": "[32mcache[39m",
+    },
+    {#5312
+      +"[1mTables_in_luxuriadbtest[22m": "[32mcache_locks[39m",
+    },
+    {#5309
+      +"[1mTables_in_luxuriadbtest[22m": "[32mcar_gallery[39m",
+    },
+    {#5288
+      +"[1mTables_in_luxuriadbtest[22m": "[32mcars[39m",
+    },
+    {#5300
+      +"[1mTables_in_luxuriadbtest[22m": "[32mfailed_jobs[39m",
+    },
+    {#5318
+      +"[1mTables_in_luxuriadbtest[22m": "[32mjob_batches[39m",
+    },
+    {#5329
+      +"[1mTables_in_luxuriadbtest[22m": "[32mjobs[39m",
+    },
+    {#5303
+      +"[1mTables_in_luxuriadbtest[22m": "[32mmedia[39m",
+    },
+    {#5302
+      +"[1mTables_in_luxuriadbtest[22m": "[32mmigrations[39m",
+    },
+    {#5301
+      +"[1mTables_in_luxuriadbtest[22m": "[32mpassword_reset_tokens[39m",
+    },
+    {#5330
+      +"[1mTables_in_luxuriadbtest[22m": "[32mpersonal_access_tokens[39m",
+    },
+    {#5310
+      +"[1mTables_in_luxuriadbtest[22m": "[32msessions[39m",
+    },
+    {#5305
+      +"[1mTables_in_luxuriadbtest[22m": "[32musers[39m",
+    },
+  ]
+
