@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <!-- JavaScript مكتبة Flatpickr -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+
 
 <script>
   $(document).ready(function() {
