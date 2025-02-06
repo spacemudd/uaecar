@@ -33,7 +33,7 @@
         position: absolute;
         top: 10px;
         right: 13px;
-        font-size: 32px;
+        font-size: 25px;
         cursor: pointer;
         color: #000;
     }
