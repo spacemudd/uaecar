@@ -21,8 +21,6 @@ class adminDashboardController extends Controller
         $approvedBookings = BookingRequest::where('status', 'Approved')->count();
         $canceledBookings = BookingRequest::where('status', 'Canceled')->count();
 
-
-
         $booking = BookingRequest::count();
 
         return view('back.pages.dashboard', compact('car_count', 'booking','pendingBookings', 'approvedBookings', 'canceledBookings', 'invoice_count'));
@@ -36,14 +34,12 @@ class adminDashboardController extends Controller
     public function showCarList(){
 
         $cars = Car::all(); 
-
         return view('back.pages.carlist', compact("cars"));
     }
 
     public function showInstagramForm()
     {
         $posts = InstagramPost::all();
-    
         return view('back.pages.instagram', compact('posts'));
     }
     
