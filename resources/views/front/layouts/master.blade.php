@@ -89,6 +89,7 @@
     <div class="collapse navbar-collapse w-100" id="navbar">
         <ul class="navbar-nav me-auto w-100 d-flex justify-content-center ">
             <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('promotion.index') }}">Promotions</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
 
