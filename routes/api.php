@@ -3,12 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Tabby\CheckoutController;
+use App\Http\Controllers\Api\CarController;
 
-// Route لإنشاء جلسة Checkout
-Route::post('/tabby/checkout', [CheckoutController::class, 'postCheckout']);
 
-// Route لاسترجاع جلسة Checkout موجودة
-Route::get('/tabby/checkout/{id}', [CheckoutController::class, 'getCheckoutSession']);
 
 
 Route::get('/user', function (Request $request) {
@@ -17,3 +14,5 @@ Route::get('/user', function (Request $request) {
 
 
 
+
+Route::get('/cars', [CarController::class, 'index']);
