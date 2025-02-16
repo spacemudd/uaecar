@@ -184,7 +184,7 @@
                                 @endphp
 
                                 <div class="btn-double mt-30" data-grouptype="&amp;">
-                                    <a data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}" href="#0">Rent Now</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#bookingModal{{ $car->id }}" href="#0">Book Now</a>
                                     <a href="{{ $whatsappLink }}" target="_blank"><span class="fa-brands fa-whatsapp"></span> WhatsApp</a>
                                 </div>
                             </div>
