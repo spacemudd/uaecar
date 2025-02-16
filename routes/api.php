@@ -16,3 +16,9 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/cars', [CarController::class, 'index']);
+Route::get('/luxury', [CarController::class, 'luxury_cars']);
+Route::get('/mid', [CarController::class, 'mid_rang_cars']);
+Route::get('/economy', [CarController::class, 'economy_cars']);
+
+
+
