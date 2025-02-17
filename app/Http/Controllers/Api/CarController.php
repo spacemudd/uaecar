@@ -46,7 +46,7 @@ class CarController extends Controller
     
         return response()->json([
             'status' => true,
-            'message' => 'Luxury car list retrieved successfully',
+            'message' => 'Economy car list retrieved successfully',
             'data' => $cars
         ], 200);
     }
@@ -57,7 +57,19 @@ class CarController extends Controller
     
         return response()->json([
             'status' => true,
-            'message' => 'Luxury car list retrieved successfully',
+            'message' => 'Sports car list retrieved successfully',
+            'data' => $cars
+        ], 200);
+    }
+
+
+    public function vans_cars()
+    {
+        $cars = Car::where('categories', 'Vans and Buses')->get();
+    
+        return response()->json([
+            'status' => true,
+            'message' => 'Vans car list retrieved successfully',
             'data' => $cars
         ], 200);
     }
