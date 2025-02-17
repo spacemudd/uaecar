@@ -51,6 +51,17 @@ class CarController extends Controller
         ], 200);
     }
 
+    public function sport_cars()
+    {
+        $cars = Car::where('categories', 'Sports and Exotics')->get();
+    
+        return response()->json([
+            'status' => true,
+            'message' => 'Luxury car list retrieved successfully',
+            'data' => $cars
+        ], 200);
+    }
+
 
     
     
