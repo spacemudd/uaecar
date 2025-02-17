@@ -31,11 +31,11 @@ class CarController extends Controller
 
     public function mid_rang_cars()
     {
-        $cars = Car::where('categories', 'Mid Rang')->get();
+        $cars = Car::where('categories', 'Mid Range')->get();
     
         return response()->json([
             'status' => true,
-            'message' => 'Luxury car list retrieved successfully',
+            'message' => 'Mid Rang car list retrieved successfully',
             'data' => $cars
         ], 200);
     }
