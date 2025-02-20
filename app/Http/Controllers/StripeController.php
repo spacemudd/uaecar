@@ -39,15 +39,16 @@ class StripeController extends Controller
 
         $car = Car::find($request->car_id);
         
-        $deposite_amount = 0;
+        $deposit_amount = 0;
         if ($car->price_daily <= 349) {
-            $deposite_amount = 1000;
+            $deposit_amount = 1000;
         }
 
-        // قم بإنشاء جلسة الدفع في Stripe
+        // إنشاء جلسة الدفع في Stripe
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
             'success_url' => route('successview', ['session_id' => '{CHECKOUT_SESSION_ID}']),
+            'cancel_url' => route('cancelview'), // رابط للتراجع عن الدفع
             'line_items' => [
                 [
                     'price_data' => [
@@ -68,7 +69,7 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => 'Deposit (Security)',
                         ],
-                        'unit_amount' => $deposite_amount * 100, // 1000 درهم تأمين
+                        'unit_amount' => $deposit_amount * 100, // 1000 درهم تأمين
                     ],
                     'quantity' => 1,
                 ],
@@ -86,23 +87,9 @@ class StripeController extends Controller
         
         // تخزين معرف الجلسة في الجلسة
         session(['checkout_session_id' => $session->id]);
+        session(['customer_data' => $request->only(['customer_name', 'customer_email', 'customer_phone', 'customer_city', 'pickup_date', 'return_date'])]);
 
         return redirect($session->url);
-    }
-
-    public function getAuthToken()
-    {
-        $loginUrl = 'https://luxuria.crs.ae/api/v1/auth/jwt/token';
-        $response = Http::post($loginUrl, [
-            'username' => 'info@rentluxuria.com',
-            'password' => ')ixLj(CQYSE84MRMqm*&dega',
-        ]);
-
-        if ($response->successful()) {
-            return $response->json()['token'];
-        }
-
-        return null;
     }
 
     public function successView(Request $request)
@@ -114,42 +101,23 @@ class StripeController extends Controller
 
         // التحقق من نجاح الدفع
         if ($session->payment_status === 'paid') {
-            // الآن يمكنك إنشاء الفاتورة
-            if(session('rate_daily') >= 348){
-                $invoice = Invoice::create([
-                    'customer_name' => $request->customer_name,
-                    'customer_email' => $request->customer_email,
-                    'customer_phone' => $request->customer_phone,
-                    'city' => $request->customer_city,
-                    'pickup_date' => session('pickup_date'),
-                    'return_date' => session('return_date'),
-                    'creation_date' => now(),
-                    'description' => "This is a new Car",
-                    'car_daily_price' => session('rate_daily'),
-                    'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
-                        ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
-                    'total_amount' => $request->total,
-                    'tax' => 0,
-                    'status' => 'Payment Received',
-                ]);
-            }else{
-                $invoice = Invoice::create([
-                    'customer_name' => $request->customer_name,
-                    'customer_email' => $request->customer_email,
-                    'customer_phone' => $request->customer_phone,
-                    'city' => $request->customer_city,
-                    'pickup_date' => session('pickup_date'),
-                    'return_date' => session('return_date'),
-                    'creation_date' => now(),
-                    'description' => session('car_name'),
-                    'car_daily_price' => session('rate_daily'),
-                    'total_days' => \Carbon\Carbon::parse(session('pickup_date'))
-                        ->diffInDays(\Carbon\Carbon::parse(session('return_date'))),
-                    'total_amount' => $request->total,
-                    'tax' => 1000,
-                    'status' => 'Payment Received',
-                ]);
-            }
+            $customerData = session('customer_data');
+            $invoice = Invoice::create([
+                'customer_name' => $customerData['customer_name'],
+                'customer_email' => $customerData['customer_email'],
+                'customer_phone' => $customerData['customer_phone'],
+                'city' => $customerData['customer_city'],
+                'pickup_date' => $customerData['pickup_date'],
+                'return_date' => $customerData['return_date'],
+                'creation_date' => now(),
+                'description' => "Payment for Car Rental",
+                'car_daily_price' => $session->amount_total / 100, // استخدم المبلغ الإجمالي من الجلسة
+                'total_days' => \Carbon\Carbon::parse($customerData['pickup_date'])
+                    ->diffInDays(\Carbon\Carbon::parse($customerData['return_date'])),
+                'total_amount' => $session->amount_total / 100,
+                'tax' => 0, // إذا كان لديك ضريبة، قم بتحديث هذه القيمة
+                'status' => 'Payment Received',
+            ]);
 
             // إرسال البريد الإلكتروني مع الفاتورة
             SendInvoiceEmailJob::dispatch($invoice);
