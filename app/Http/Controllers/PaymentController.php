@@ -19,7 +19,6 @@ class PaymentController extends Controller
         $car = $this->getCarById($id);
         session(['car_id' => $car]);
 
-
         $pickupDate = session('pickup_date');
         $returnDate = session('return_date');
         $rateDaily = session('rate_daily');
@@ -36,6 +35,11 @@ class PaymentController extends Controller
             $rate = intval(session('rate_monthly') / 30);  
             $total = $days * $rate;
         }
+
+        // تسجيل قيمة التوتال في السيشن
+        session()->put('total', $total);
+
+
         
 
         $similarProducts = Car::whereBetween('price_daily', [$priceDaily - 20, $priceDaily + 20])

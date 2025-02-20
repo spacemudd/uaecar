@@ -12,9 +12,7 @@ use App\Models\Car;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
 use Carbon\Carbon;
-
-
-
+use Stripe\Customer;
 
 class FormController extends Controller
 {
@@ -238,6 +236,7 @@ public function submit(Request $request)
             'customer_name' => $request->input('name'),
             'customer_mobile' => $request->input('phone'),
             'customer_email' => $request->input('email'),
+            'customer_address' => $request->input('pickup_city'),
             'pickup_city' => $request->input('pickup_city'),
             'car_image' => $car['image_url'] ?? null,
             'new_id' => $request->input('car_id'),
