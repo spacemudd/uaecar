@@ -48,7 +48,7 @@ class StripeController extends Controller
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
             'success_url' => route('successview', ['session_id' => '{CHECKOUT_SESSION_ID}']),
-            'cancel_url' => route('cancelview'), // رابط للتراجع عن الدفع
+            'cancel_url' => route('index'), // رابط للتراجع عن الدفع
             'line_items' => [
                 [
                     'price_data' => [
