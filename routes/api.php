@@ -26,9 +26,6 @@ Route::get('/vans', [CarController::class, 'vans_cars']);
 
 Route::post('/users', [UserController::class, 'store']);
 
-Route::get('/users', function () {
-    return response()->json(['message' => 'API is working']);
-});
 
 
 
