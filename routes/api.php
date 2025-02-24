@@ -10,9 +10,6 @@ use App\Http\Controllers\UserController;
 
 
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
 
 
@@ -28,6 +25,10 @@ Route::get('/vans', [CarController::class, 'vans_cars']);
 
 
 Route::post('/users', [UserController::class, 'store']);
+
+Route::get('/users', function () {
+    return response()->json(['message' => 'API is working']);
+});
 
 
 
