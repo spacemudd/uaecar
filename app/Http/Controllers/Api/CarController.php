@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+use Illuminate\Support\Facades\Http;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
@@ -73,6 +74,40 @@ class CarController extends Controller
             'data' => $cars
         ], 200);
     }
+
+
+
+    public function reserveCar(Request $request)
+    {
+        $plate_number = $request->input('plate_number');
+        $pickup_date = $request->input('pickup_date');
+        $return_date = $request->input('return_date');
+    
+        $response = Http::post('https://demo.crs.ae/api/v1/auth/jwt/token', [
+            'username' => 'info@rentluxuria.com',
+            'password' => ')ixLj(CQYSE84MRMqm*&dega',
+        ]);
+    
+        if ($response->successful()) {
+            $token = $response->json()['token']; 
+            
+    
+            return response()->json([
+                'plate_number' => $plate_number,
+                'pickup_date' => $pickup_date,
+                'return_date' => $return_date,
+                'token' => $token, 
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Login failed',
+                'error' => $response->json(),
+            ], 401);
+        }
+    }
+    
+
 
 
     
