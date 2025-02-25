@@ -79,7 +79,7 @@ class CarController extends Controller
 
     public function authenticate()
     {
-        $response = Http::post('https://demo.crs.ae/api/v1/auth/jwt/token', [
+        $response = Http::post('https://luxuria.crs.ae/api/v1/auth/jwt/token', [
             'username' => 'info@rentluxuria.com',
             'password' => ')ixLj(CQYSE84MRMqm*&dega',
         ]);
