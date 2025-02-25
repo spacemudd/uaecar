@@ -25,6 +25,7 @@ Route::get('/vans', [CarController::class, 'vans_cars']);
 
 
 Route::post('/users', [UserController::class, 'store']);
+Route::post('/check-phone', [UserController::class, 'checkPhoneNumber']);
 
 
 

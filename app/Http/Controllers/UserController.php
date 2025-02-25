@@ -22,4 +22,27 @@ class UserController extends Controller
 
         return response()->json($user, 201);
     }
+
+    public function checkPhoneNumber(Request $request)
+        {
+            $request->validate([
+                'phone_number' => 'required|string|max:15',
+            ]);
+
+            $user = User::where('phone_number', $request->phone_number)->first();
+
+            if ($user) {
+                return response()->json([
+                    'exists' => true,
+                    'message' => 'رقم الهاتف موجود بالفعل.',
+                    'user' => $user
+                ], 200);
+            } else {
+                return response()->json([
+                    'exists' => false,
+                    'message' => 'رقم الهاتف غير مسجل.'
+                ], 404);
+            }
+        }
+
 }
