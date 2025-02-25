@@ -77,26 +77,16 @@ class CarController extends Controller
 
 
 
-    public function reserveCar(Request $request)
+    public function authenticate()
     {
-        $plate_number = $request->input('plate_number');
-        $pickup_date = $request->input('pickup_date');
-        $return_date = $request->input('return_date');
-    
         $response = Http::post('https://demo.crs.ae/api/v1/auth/jwt/token', [
             'username' => 'info@rentluxuria.com',
             'password' => ')ixLj(CQYSE84MRMqm*&dega',
         ]);
     
         if ($response->successful()) {
-            $token = $response->json()['token']; 
-            
-    
             return response()->json([
-                'plate_number' => $plate_number,
-                'pickup_date' => $pickup_date,
-                'return_date' => $return_date,
-                'token' => $token, 
+                'token' => $response->json()['token'],
             ], 200);
         } else {
             return response()->json([
@@ -106,6 +96,7 @@ class CarController extends Controller
             ], 401);
         }
     }
+    
     
 
 
