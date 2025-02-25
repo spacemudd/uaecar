@@ -24,25 +24,32 @@ class UserController extends Controller
     }
 
     public function checkPhoneNumber(Request $request)
-        {
-            $request->validate([
-                'phone_number' => 'required|string|max:15',
-            ]);
+{
+    $request->validate([
+        'phone_number' => 'required|string|max:15',
+    ]);
 
-            $user = User::where('phone_number', $request->phone_number)->first();
+    $user = User::where('phone_number', $request->phone_number)->first();
 
-            if ($user) {
-                return response()->json([
-                    'exists' => true,
-                    'message' => 'رقم الهاتف موجود بالفعل.',
-                    'user' => $user
-                ], 200);
-            } else {
-                return response()->json([
-                    'exists' => false,
-                    'message' => 'رقم الهاتف غير مسجل.'
-                ], 404);
-            }
-        }
+    if ($user) {
+        return response()->json([
+            'exists' => true,
+            'message' => 'رقم الهاتف موجود بالفعل.',
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'phone_number' => $user->phone_number,
+                'email_address' => $user->email_address,
+                'pickup_city' => $user->pickup_city,
+                'created_at' => $user->created_at,
+            ]
+        ], 200);
+    } else {
+        return response()->json([
+            'exists' => false,
+            'message' => 'رقم الهاتف غير مسجل.'
+        ], 404);
+    }
+}
 
 }
