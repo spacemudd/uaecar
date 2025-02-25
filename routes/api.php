@@ -29,5 +29,8 @@ Route::post('/check-phone', [UserController::class, 'checkPhoneNumber']);
 
 
 
+Route::post('/reserve-car', [CarController::class, 'reserveCar']);
+
+
 
 
