@@ -104,13 +104,26 @@ class CarController extends Controller
 
     public function getVehicleIdByPlateNumber(Request $request)
     {
-        $plateNumber = $request->input('plate_number');
-        $token = Session::get('auth_token') ?? $this->authenticate();
+        // دالة المصادقة مضمنة هنا
+        $credentials = [
+            'username' => 'info@rentluxuria.com',
+            'password' => ')ixLj(CQYSE84MRMqm*&dega',
+        ];
     
-        if (!$token) {
+        $response = Http::post('https://luxuria.crs.ae/api/v1/auth/jwt/token', $credentials);
+        Log::info('Auth Response:', $response->json());
+    
+        if ($response->successful()) {
+            $token = $response->json()['token'];
+            Session::put('auth_token', $token);
+        } else {
             return response()->json(['status' => false, 'message' => 'Unauthorized: Authentication failed.'], 401);
         }
     
+        // استخرج رقم اللوحة من الطلب
+        $plateNumber = $request->input('plate_number');
+    
+        // استخدم التوكن للحصول على معلومات السيارة
         $response = Http::withHeaders(['Authorization' => 'Bearer ' . $token])->get('https://luxuria.crs.ae/api/v1/vehicles');
         Log::info('Vehicle API Response:', $response->json());
     
@@ -126,6 +139,7 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Failed to retrieve vehicles', 'error' => $response->json()], $response->status());
     }
+    
 
 
 
