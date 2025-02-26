@@ -29,8 +29,10 @@ Route::post('/check-phone', [UserController::class, 'checkPhoneNumber']);
 
 
 
-Route::post('/reserve-car', [CarController::class, 'authenticate']);
+Route::get('/reserve-car', [CarController::class, 'authenticate']);
+
+Route::post('/get-vehicle-id', [CarController::class, 'getVehicleIdByPlateNumber']);
+Route::get('/vehicles/{vehicleId}', [CarController::class, 'getReservationByVehicleId']);Route::get('/reservations', [CarController::class, 'getAllReservations']);
 
 
-
-
+Route::post('/create-reservation', [CarController::class, 'createReservation']);
