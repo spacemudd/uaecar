@@ -36,3 +36,6 @@ Route::get('/vehicles/{vehicleId}', [CarController::class, 'getReservationByVehi
 
 
 Route::post('/create-reservation', [CarController::class, 'createReservation']);
+
+
+Route::get('/check-vehicle-availability/{vehicleId}', [CarController::class, 'checkVehicleAvailability']);

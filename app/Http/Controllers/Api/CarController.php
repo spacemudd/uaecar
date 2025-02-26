@@ -139,14 +139,38 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Failed to retrieve vehicles', 'error' => $response->json()], $response->status());
     }
+
+
+
+    public function checkVehicleAvailability($vehicleId)
+{
+    $token = Session::get('auth_token') ?? $this->authenticate();
+
+    if (!$token) {
+        return response()->json(['status' => false, 'message' => 'Unauthorized: Authentication failed.'], 401);
+    }
+
+    $response = Http::withToken($token)->get('https://luxuria.crs.ae/api/v1/vehicles');
+
+    if ($response->successful()) {
+        $vehicle = collect($response->json()['data'])->firstWhere('id', $vehicleId);
+
+        if ($vehicle) {
+            if (in_array($vehicle['status'], ['Available', 'Completed', 'Canceled'])) {
+                return response()->json(['status' => true, 'message' => 'The vehicle is available for booking.']);
+            }
+
+            return response()->json(['status' => false, 'message' => 'The vehicle is not available for booking.'], 403);
+        }
+
+        return response()->json(['status' => false, 'message' => 'Vehicle not found.'], 404);
+    }
+
+    return response()->json(['status' => false, 'message' => 'Error retrieving vehicle status: ' . $response->body()], $response->status());
+}
+
     
 
-
-
-
-
-
-    
     
     public function getReservationByVehicleId($vehicleId)
     {
@@ -174,6 +198,10 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Error retrieving vehicle status: ' . $response->body()], $response->status());
     }
+
+
+
+
     
     protected function createReservation($vehicle)
     {
