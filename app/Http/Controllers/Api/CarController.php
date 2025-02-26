@@ -180,24 +180,33 @@ class CarController extends Controller
         $pickupDate = now()->format('Y-m-d H:i:s'); // تاريخ pickup
         $returnDate = now()->addDays(1)->format('Y-m-d H:i:s'); // تاريخ return
     
+        // الحصول على البيانات المرسلة من الطلب
+        $customerName = request()->input('customer_name', 'Test'); // استخدام القيمة الافتراضية إذا لم يتم تقديمها
+        $customerNationality = request()->input('customer_nationality', 'ARE');
+        $customerMobile = request()->input('customer_mobile', '971501234567');
+        $customerEmail = request()->input('customer_email', 'test@node.ae');
+        $pickupLocation = request()->input('pickup_location', '71');
+        $returnLocation = request()->input('return_location', '71');
+    
         $demoData = [
-            'customer_name' => 'Test',
-            'customer_nationality' => 'ARE',
-            'customer_mobile' => '971501234567',
-            'customer_email' => 'test@node.ae',
+            'customer_name' => $customerName,
+            'customer_nationality' => $customerNationality,
+            'customer_mobile' => $customerMobile,
+            'customer_email' => $customerEmail,
             'vehicle_id' => $vehicle['id'],
             'vehicle_hint' => 'Toyota Corolla 2013',
             'pickup_date' => $pickupDate,
-            'pickup_location' => '71', // استخدم القيمة الصحيحة لموقع الاستلام
+            'pickup_location' => $pickupLocation,
             'return_date' => $returnDate,
-            'return_location' => '71', // استخدم القيمة الصحيحة لموقع الإرجاع
+            'return_location' => $returnLocation,
             'rate_daily' => $vehicle['rate_daily'],
             'status' => 'pending_updates',
         ];
     
+        // تابع العملية كما هو عليه...
         $token = Session::get('auth_token') ?? $this->authenticate();
         $reservationResponse = Http::withToken($token)->post('https://luxuria.crs.ae/api/v1/reservations', $demoData);
-    
+        
         if ($reservationResponse->successful()) {
             return response()->json([
                 'status' => true,
@@ -208,6 +217,7 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Error creating reservation: ' . $reservationResponse->body()], $reservationResponse->status());
     }
+    
     
     
 
