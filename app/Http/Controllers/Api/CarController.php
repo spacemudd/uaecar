@@ -143,50 +143,55 @@ class CarController extends Controller
 
 
 
-
     public function checkVehicleAvailability(Request $request)
-{
-    // دالة المصادقة مضمنة هنا
-    $credentials = [
-        'username' => 'info@rentluxuria.com',
-        'password' => ')ixLj(CQYSE84MRMqm*&dega',
-    ];
-
-    // الحصول على التوكن
-    $response = Http::post('https://luxuria.crs.ae/api/v1/auth/jwt/token', $credentials);
-    Log::info('Auth Response:', $response->json());
-
-    if ($response->successful()) {
-        $token = $response->json()['token'];
-        Session::put('auth_token', $token);
-    } else {
-        return response()->json(['status' => false, 'message' => 'Unauthorized: Authentication failed.'], 401);
-    }
-
-    // استخرج رقم اللوحة من الطلب
-    $plateNumber = $request->input('plate_number');
-
-    // استخدم التوكن للحصول على معلومات السيارة
-    $response = Http::withHeaders(['Authorization' => 'Bearer ' . $token])->get('https://luxuria.crs.ae/api/v1/vehicles');
-    Log::info('Vehicle API Response:', $response->json());
-
-    if ($response->successful()) {
-        $vehicle = collect($response->json()['data'])->firstWhere('plate_number', $plateNumber);
-
-        if ($vehicle) {
-            // تحقق من حالة توفر السيارة (افترض أن هناك حقل يسمى 'available' في استجابة الـ API)
-            if ($vehicle['available']) {
-                return response()->json(['status' => true, 'message' => 'Vehicle is available']);
-            } else {
-                return response()->json(['status' => false, 'message' => 'Vehicle is not available']);
-            }
+    {
+        // تحقق من وجود حقل plate_number في الطلب
+        $request->validate([
+            'plate_number' => 'required|string',
+        ]);
+    
+        // دالة المصادقة مضمنة هنا
+        $credentials = [
+            'username' => 'info@rentluxuria.com',
+            'password' => ')ixLj(CQYSE84MRMqm*&dega',
+        ];
+    
+        // الحصول على التوكن
+        $response = Http::post('https://luxuria.crs.ae/api/v1/auth/jwt/token', $credentials);
+        Log::info('Auth Response:', $response->json());
+    
+        if ($response->successful()) {
+            $token = $response->json()['token'];
+            Session::put('auth_token', $token);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Unauthorized: Authentication failed.'], 401);
         }
-
-        return response()->json(['status' => false, 'message' => 'Vehicle not found'], 404);
+    
+        // استخرج رقم اللوحة من الطلب
+        $plateNumber = $request->input('plate_number');
+    
+        // استخدم التوكن للحصول على معلومات السيارة
+        $response = Http::withHeaders(['Authorization' => 'Bearer ' . $token])->get('https://luxuria.crs.ae/api/v1/vehicles');
+        Log::info('Vehicle API Response:', $response->json());
+    
+        if ($response->successful()) {
+            $vehicle = collect($response->json()['data'])->firstWhere('plate_number', $plateNumber);
+    
+            if ($vehicle) {
+                // تحقق من حالة توفر السيارة (افترض أن هناك حقل يسمى 'available' في استجابة الـ API)
+                if (isset($vehicle['available']) && $vehicle['available']) {
+                    return response()->json(['status' => true, 'message' => 'Vehicle is available']);
+                } else {
+                    return response()->json(['status' => false, 'message' => 'Vehicle is not available']);
+                }
+            }
+    
+            return response()->json(['status' => false, 'message' => 'Vehicle not found'], 404);
+        }
+    
+        return response()->json(['status' => false, 'message' => 'Failed to retrieve vehicles', 'error' => $response->json()], $response->status());
     }
-
-    return response()->json(['status' => false, 'message' => 'Failed to retrieve vehicles', 'error' => $response->json()], $response->status());
-}
+    
 
 
 
