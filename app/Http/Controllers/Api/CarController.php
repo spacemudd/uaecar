@@ -304,17 +304,21 @@ class CarController extends Controller
             'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), // استخدم مفتاح السر
         ])->asForm()->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
     
-        if ($response->successful()) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Checkout session created successfully.',
-                'session_id' => $response->json()['id'],
-                'checkout_url' => $response->json()['url'], // 🔥 إضافة رابط الدفع المباشر
-            ], 200);
-        }
-    
-        return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
+          if ($response->successful()) {
+        // تخزين session_id في الجلسة
+        session(['stripe_session_id' => $response->json()['id']]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Checkout session created successfully.',
+            'session_id' => $response->json()['id'],
+            'checkout_url' => $response->json()['url'],
+        ], 200);
     }
+
+    return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
+}
+
     
     
     
