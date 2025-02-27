@@ -309,6 +309,7 @@ class CarController extends Controller
                 'status' => true,
                 'message' => 'Checkout session created successfully.',
                 'session_id' => $response->json()['id'],
+                'checkout_url' => $response->json()['url'], // 🔥 إضافة رابط الدفع المباشر
             ], 200);
         }
     
