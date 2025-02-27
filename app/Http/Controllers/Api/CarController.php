@@ -142,7 +142,6 @@ class CarController extends Controller
 
 
 
-
     public function checkVehicleAvailability(Request $request)
     {
         // تحقق من وجود حقل plate_number في الطلب
@@ -178,8 +177,8 @@ class CarController extends Controller
             $vehicle = collect($response->json()['data'])->firstWhere('plate_number', $plateNumber);
     
             if ($vehicle) {
-                // تحقق من حالة توفر السيارة (افترض أن هناك حقل يسمى 'available' في استجابة الـ API)
-                if (isset($vehicle['Available']) && $vehicle['Available']) {
+                // تحقق من حالة توفر السيارة باستخدام الحقل 'status'
+                if (isset($vehicle['status']) && $vehicle['status'] === 'Available') {
                     return response()->json(['status' => true, 'message' => 'Vehicle is available']);
                 } else {
                     return response()->json(['status' => false, 'message' => 'Vehicle is not available']);
@@ -192,8 +191,6 @@ class CarController extends Controller
         return response()->json(['status' => false, 'message' => 'Failed to retrieve vehicles', 'error' => $response->json()], $response->status());
     }
     
-
-
 
     
 
