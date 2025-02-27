@@ -179,7 +179,7 @@ class CarController extends Controller
     
             if ($vehicle) {
                 // تحقق من حالة توفر السيارة (افترض أن هناك حقل يسمى 'available' في استجابة الـ API)
-                if (isset($vehicle['available']) && $vehicle['available']) {
+                if (isset($vehicle['Available']) && $vehicle['Available']) {
                     return response()->json(['status' => true, 'message' => 'Vehicle is available']);
                 } else {
                     return response()->json(['status' => false, 'message' => 'Vehicle is not available']);
