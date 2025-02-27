@@ -77,3 +77,7 @@ Route::post('/webhook/stripe', function (Request $request) {
 
     return response()->json(['status' => 'success']);
 });
+
+
+
+Route::get('/payment/success', [CarController::class, 'paymentSuccess'])->name('payment.success');
