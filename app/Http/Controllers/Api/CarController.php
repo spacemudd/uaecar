@@ -286,11 +286,11 @@ class CarController extends Controller
             'payment_method_types[]' => 'card',
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'AED', // قم بتغيير العملة حسب الحاجة
+                    'currency' => 'AED',
                     'product_data' => [
-                        'name' => 'Rental Car', // قم بتغيير الاسم حسب الحاجة
+                        'name' => 'Rental Car',
                     ],
-                    'unit_amount' => $totalAmount * 100, // Stripe يأخذ المبلغ بالعملة الفرعية (سنتات)
+                    'unit_amount' => intval($totalAmount * 100), // تأكد من أنه عدد صحيح
                 ],
                 'quantity' => 1,
             ]],
