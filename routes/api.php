@@ -39,3 +39,6 @@ Route::post('/create-reservation', [CarController::class, 'createReservation']);
 
 
 Route::post('/check-vehicle-availability', [CarController::class, 'checkVehicleAvailability']);
+
+
+Route::post('/create-checkout-session', [CarController::class, 'createStripeCheckoutSession']);

@@ -268,6 +268,54 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Error creating reservation: ' . $reservationResponse->body()], $reservationResponse->status());
     }
+
+
+
+
+
+    public function createStripeCheckoutSession(Request $request)
+{
+    // تحقق من وجود حقل total_amount في الطلب
+    $request->validate([
+        'total_amount' => 'required|numeric',
+    ]);
+
+    $totalAmount = $request->input('total_amount');
+
+    // إعداد البيانات المطلوبة لإنشاء جلسة Checkout في Stripe
+    $stripeData = [
+        'payment_method_types' => ['card'],
+        'line_items' => [[
+            'price_data' => [
+                'currency' => 'AED', // قم بتغيير العملة حسب الحاجة
+                'product_data' => [
+                    'name' => 'Rental Car', // قم بتغيير الاسم حسب الحاجة
+                ],
+                'unit_amount' => $totalAmount * 100, // Stripe يأخذ المبلغ بالعملة الفرعية (سنتات)
+            ],
+            'quantity' => 1,
+        ]],
+        'mode' => 'payment',
+        'success_url' => '', // قم بتغيير الرابط حسب الحاجة
+        'cancel_url' => '', // قم بتغيير الرابط حسب الحاجة
+    ];
+
+    // إجراء الطلب إلى Stripe API
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . env('STRIPE_PUBLIC_KEY'),
+            ])->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
+
+    if ($response->successful()) {
+        return response()->json([
+            'status' => true,
+            'message' => 'Checkout session created successfully.',
+            'session_id' => $response->json()['id'],
+        ], 200);
+    }
+
+    return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
+}
+
     
     
     
