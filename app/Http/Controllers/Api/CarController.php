@@ -318,7 +318,7 @@ class CarController extends Controller
     
     public function paymentSuccess()
 {
-    return response()->json(['message' => 'Payment Success'], 200);
+    return view('front.mobile.success');
 }
 
     
