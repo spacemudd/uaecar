@@ -289,7 +289,7 @@ class CarController extends Controller
         $pickupDate = $request->input('pickupDate');
         $returnDate = $request->input('returnDate');
         $totalDays = $request->input('totalDays');
-        $carPlateNumber = $request->input('car_plate_number');
+        $carPlateNumber = $request->input('plate_number');
     
         // حفظ البيانات في الجلسة
         session([
