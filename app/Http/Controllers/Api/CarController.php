@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\Models\Booking;
 class CarController extends Controller
 {
     public function index()
@@ -289,16 +288,7 @@ class CarController extends Controller
         $pickupDate = $request->input('pickupDate');
         $returnDate = $request->input('returnDate');
         $totalDays = $request->input('totalDays');
-        $carPlateNumber = $request->input('plate_number');
-    
-        // حفظ البيانات في الجلسة
-        session([
-            'userID' => $userID,
-            'user_pickupDate' => $pickupDate,
-            'user_returnDate' => $returnDate,
-            'user_totalDays' => $totalDays,
-            'user_car_plate_number' => $carPlateNumber,
-        ]);
+        $carPlateNumber = $request->input('car_plate_number');
     
         // إعداد البيانات المطلوبة لإنشاء جلسة Checkout في Stripe
         $stripeData = [
@@ -336,35 +326,10 @@ class CarController extends Controller
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }
     
-    
     public function paymentSuccess()
-{
-    // استرجاع القيم من الجلسة
-    $userId = session('user_id');
-    $carId = session('car_id');
-    $pickupDate = session('pickup_date');
-    $returnDate = session('return_date');
-    $totalDays = session('total_days');
-    $totalAmount = session('total_amount');
-
-
-
-    // إنشاء سجل حجز جديد
-    $booking = Booking::create([
-        'user_id' => $userId,
-        'car_id' => $carId,
-        'pickup_date' => $pickupDate,
-        'return_date' => $returnDate,
-        'total_days' => $totalDays,
-        'total_amount' => $totalAmount,
-    ]);
-
-    dd($booking); // سيعرض السجل الذي تم إنشاؤه ويوقف تنفيذ الكود
-
-
-    return view('front.mobile.success', compact('booking'));
-}
-
+    {
+        return view('front.mobile.success');
+    }
 
     
 
