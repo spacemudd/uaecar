@@ -274,21 +274,12 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
+        // تحقق من وجود حقل total_amount في الطلب
         $request->validate([
             'total_amount' => 'required|numeric',
-            'userID' => 'required|string', // تأكد من وجود userID
-            'pickupDate' => 'required|date', // تأكد من وجود pickupDate
-            'returnDate' => 'required|date', // تأكد من وجود returnDate
-            'totalDays' => 'required|integer', // تأكد من وجود totalDays
-            'car_plate_number' => 'required|string', // تأكد من وجود car plate number
         ]);
     
         $totalAmount = $request->input('total_amount');
-        $userID = $request->input('userID');
-        $pickupDate = $request->input('pickupDate');
-        $returnDate = $request->input('returnDate');
-        $totalDays = $request->input('totalDays');
-        $carPlateNumber = $request->input('car_plate_number');
     
         // إعداد البيانات المطلوبة لإنشاء جلسة Checkout في Stripe
         $stripeData = [
@@ -298,7 +289,6 @@ class CarController extends Controller
                     'currency' => 'AED',
                     'product_data' => [
                         'name' => 'Rental Car',
-                        'description' => 'Car Plate Number: ' . $carPlateNumber, // إضافة رقم لوحة السيارة
                     ],
                     'unit_amount' => intval($totalAmount * 100), // تأكد من أنه عدد صحيح
                 ],
