@@ -295,8 +295,8 @@ class CarController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => 'https://your-domain.com/success', // قم بتغيير الرابط حسب الحاجة
-            'cancel_url' => 'https://your-domain.com/cancel', // قم بتغيير الرابط حسب الحاجة
+            'success_url' => route('payment.success'), // قم بتغيير الرابط حسب الحاجة
+            'cancel_url' => route('payment.cancel'), // قم بتغيير الرابط حسب الحاجة
         ];
     
         // إجراء الطلب إلى Stripe API
@@ -315,6 +315,14 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }
+    
+
+
+    public function paymentSuccess()
+{
+    return response()->json(['message' => 'Payment Success'], 200);
+}
+
     
     
     
