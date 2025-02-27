@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Tabby\CheckoutController;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\UserController;
+use Stripe\Stripe;
+use Stripe\Webhook;
 
 
 
@@ -42,3 +44,36 @@ Route::post('/check-vehicle-availability', [CarController::class, 'checkVehicleA
 
 
 Route::post('/create-checkout-session', [CarController::class, 'createStripeCheckoutSession']);
+
+
+Route::post('/webhook/stripe', function (Request $request) {
+    Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
+    $endpoint_secret = env('STRIPE_WEBHOOK_SECRET');
+    $payload = $request->getContent();
+    $sig_header = $request->header('Stripe-Signature');
+
+    try {
+        $event = Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
+    } catch (\UnexpectedValueException $e) {
+        return response()->json(['error' => 'Invalid payload'], 400);
+    } catch (\Stripe\Exception\SignatureVerificationException $e) {
+        return response()->json(['error' => 'Invalid signature'], 400);
+    }
+
+    // تحقق من نوع الحدث
+    if ($event->type === 'checkout.session.completed') {
+        $session = $event->data->object;
+
+        // استرجاع session_id من الجلسة
+        $storedSessionId = session('stripe_session_id');
+
+        // تحقق مما إذا كان session_id المتلقاة تتطابق مع تلك المخزنة في الجلسة
+        if ($storedSessionId === $session->id) {
+            // هنا يمكنك إجراء العمليات اللازمة بعد تأكيد الدفع
+            // على سبيل المثال، يمكنك إرسال إشعار أو تحديث حالة في واجهة المستخدم
+        }
+    }
+
+    return response()->json(['status' => 'success']);
+});
