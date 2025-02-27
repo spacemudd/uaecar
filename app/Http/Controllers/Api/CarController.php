@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\Booking;
 class CarController extends Controller
 {
     public function index()
@@ -274,12 +275,30 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
-        // تحقق من وجود حقل total_amount في الطلب
         $request->validate([
             'total_amount' => 'required|numeric',
+            'userID' => 'required|string', // تأكد من وجود userID
+            'pickupDate' => 'required|date', // تأكد من وجود pickupDate
+            'returnDate' => 'required|date', // تأكد من وجود returnDate
+            'totalDays' => 'required|integer', // تأكد من وجود totalDays
+            'car_plate_number' => 'required|string', // تأكد من وجود car plate number
         ]);
     
         $totalAmount = $request->input('total_amount');
+        $userID = $request->input('userID');
+        $pickupDate = $request->input('pickupDate');
+        $returnDate = $request->input('returnDate');
+        $totalDays = $request->input('totalDays');
+        $carPlateNumber = $request->input('car_plate_number');
+    
+        // حفظ البيانات في الجلسة
+        session([
+            'userID' => $userID,
+            'user_pickupDate' => $pickupDate,
+            'user_returnDate' => $returnDate,
+            'user_totalDays' => $totalDays,
+            'user_car_plate_number' => $carPlateNumber,
+        ]);
     
         // إعداد البيانات المطلوبة لإنشاء جلسة Checkout في Stripe
         $stripeData = [
@@ -289,6 +308,7 @@ class CarController extends Controller
                     'currency' => 'AED',
                     'product_data' => [
                         'name' => 'Rental Car',
+                        'description' => 'Car Plate Number: ' . $carPlateNumber, // إضافة رقم لوحة السيارة
                     ],
                     'unit_amount' => intval($totalAmount * 100), // تأكد من أنه عدد صحيح
                 ],
@@ -316,10 +336,35 @@ class CarController extends Controller
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }
     
+    
     public function paymentSuccess()
 {
-    return view('front.mobile.success');
+    // استرجاع القيم من الجلسة
+    $userId = session('user_id');
+    $carId = session('car_id');
+    $pickupDate = session('pickup_date');
+    $returnDate = session('return_date');
+    $totalDays = session('total_days');
+    $totalAmount = session('total_amount');
+
+
+
+    // إنشاء سجل حجز جديد
+    $booking = Booking::create([
+        'user_id' => $userId,
+        'car_id' => $carId,
+        'pickup_date' => $pickupDate,
+        'return_date' => $returnDate,
+        'total_days' => $totalDays,
+        'total_amount' => $totalAmount,
+    ]);
+
+    dd($booking); // سيعرض السجل الذي تم إنشاؤه ويوقف تنفيذ الكود
+
+
+    return view('front.mobile.success', compact('booking'));
 }
+
 
     
 

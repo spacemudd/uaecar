@@ -36,17 +36,20 @@ class Car extends Model
         'kilo_monthly',
         'navigation',
         'is_visible',
-
     ];
-
 
     public function gallery(): HasMany
     {
         return $this->hasMany(CarImage::class, 'car_id');
     }
 
-    public function bookingRequests()
+    public function bookingRequests(): HasMany
     {
         return $this->hasMany(BookingRequest::class, 'car_id');
+    }
+
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class, 'car_id');
     }
 }
