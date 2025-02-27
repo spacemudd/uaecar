@@ -288,7 +288,7 @@ class CarController extends Controller
                 'price_data' => [
                     'currency' => 'AED',
                     'product_data' => [
-                        'name' => 'Rental Car',
+                        'name' => '',
                     ],
                     'unit_amount' => intval($totalAmount * 100), // تأكد من أنه عدد صحيح
                 ],
