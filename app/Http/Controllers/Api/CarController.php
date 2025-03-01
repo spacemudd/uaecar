@@ -272,23 +272,10 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
-        // تحقق من وجود الحقول المطلوبة في الطلب
-        $request->validate([
+        // تحقق من وجود حقل total_amount في الطلب
+        $request->
+        validate([
             'total_amount' => 'required|numeric',
-            'user_id' => 'required|string', // التحقق من user_id
-            'pickup_date' => 'required|date', // التحقق من pickup_date
-            'return_date' => 'required|date', // التحقق من return_date
-            'total_days' => 'required|integer', // التحقق من total_days
-            'car_id' => 'required|string', // التحقق من car_id
-        ]);
-    
-        // حفظ البيانات في الجلسة
-        session([
-            'user_id' => $request->input('user_id'),
-            'pickup_date' => $request->input('pickup_date'),
-            'return_date' => $request->input('return_date'),
-            'total_days' => $request->input('total_days'),
-            'car_id' => $request->input('car_id'),
         ]);
     
         $totalAmount = $request->input('total_amount');
@@ -326,8 +313,7 @@ class CarController extends Controller
         }
     
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
-    }
-    
+    }    
     
     public function paymentSuccess()
     {
