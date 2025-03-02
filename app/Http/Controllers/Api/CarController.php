@@ -321,7 +321,6 @@ class CarController extends Controller
 
     public function bookings(Request $request)
     {
-        // التحقق من صحة البيانات المدخلة
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'car_id' => 'required|integer|exists:cars,id',
@@ -333,11 +332,9 @@ class CarController extends Controller
             return response()->json($validator->errors(), 422);
         }
     
-        // حساب total_days و total_amount (قيم ثابتة)
-        $totalDays = 5; // القيمة الثابتة لـ total_days
-        $totalAmount = 500; // القيمة الثابتة لـ total_amount
+        $totalDays = "5"; 
+        $totalAmount = "500"; 
     
-        // إنشاء الحجز الجديد
         $booking = Booking::create([
             'user_id' => $request->user_id,
             'car_id' => $request->car_id,
@@ -345,7 +342,7 @@ class CarController extends Controller
             'return_date' => $request->return_date,
             'total_days' => $totalDays,
             'total_amount' => $totalAmount,
-            'status' => 'pending', // قيمة افتراضية لـ status
+            'status' => 'pending', 
         ]);
     
         return response()->json([
