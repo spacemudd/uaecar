@@ -335,15 +335,21 @@ class CarController extends Controller
         $totalDays = "5"; 
         $totalAmount = "500"; 
     
-        $booking = Booking::create([
-            'user_id' => $request->user_id,
-            'car_id' => $request->car_id,
-            'pickup_date' => $request->pickup_date,
-            'return_date' => $request->return_date,
-            'total_days' => $totalDays,
-            'total_amount' => $totalAmount,
-            'status' => 'pending', 
-        ]);
+        try {
+            // إنشاء الحجز الجديد
+            $booking = Booking::create([
+                'user_id' => $request->user_id,
+                'car_id' => $request->car_id,
+                'pickup_date' => $request->pickup_date,
+                'return_date' => $request->return_date,
+                'total_days' => $totalDays,
+                'total_amount' => $totalAmount,
+                'status' => 'pending', // قيمة افتراضية لـ status
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+        
     
         return response()->json([
             'message' => 'Booking created successfully.',
