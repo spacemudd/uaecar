@@ -323,7 +323,6 @@ class CarController extends Controller
         // تحقق من صحة البيانات المدخلة
         $request->validate([
             'customer_name' => 'required|string|max:255',
-            'customer_nationality' => 'required|string|max:255',
             'customer_mobile' => 'required|string|max:20',
             'customer_email' => 'required|email|max:255',
             'user_id' => 'required|exists:users,id',
@@ -342,7 +341,7 @@ class CarController extends Controller
         // استخرج بيانات الحجز
         $demoData = [
             'customer_name' => $request->input('customer_name'),
-            'customer_nationality' => $request->input('customer_nationality'),
+            'customer_nationality' => 'Egypt',
             'customer_mobile' => $request->input('customer_mobile'),
             'customer_email' => $request->input('customer_email'),
             'vehicle_id' => $vehicle->id,
