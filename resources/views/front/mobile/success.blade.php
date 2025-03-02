@@ -28,6 +28,9 @@
             <h1>Payment Successful!</h1>
             <p>Thank you for using our services. You will receive a confirmation email shortly.</p>
             <a href="{{ url('/') }}" class="btn btn-success btn-lg">Return to Home</a>
+            <p>الحجز ناجح للمستخدم: {{ $userId }}</p>
+            <p>السيارة المحجوزة: {{ $carId }}</p>
+
         </div>
     </div>
 

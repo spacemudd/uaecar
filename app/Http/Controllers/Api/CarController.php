@@ -228,11 +228,10 @@ class CarController extends Controller
     
     protected function createReservation($vehicle)
     {
-        $pickupDate = now()->format('Y-m-d H:i:s'); // تاريخ pickup
-        $returnDate = now()->addDays(1)->format('Y-m-d H:i:s'); // تاريخ return
+        $pickupDate = now()->format('Y-m-d H:i:s'); 
+        $returnDate = now()->addDays(1)->format('Y-m-d H:i:s'); 
     
-        // الحصول على البيانات المرسلة من الطلب
-        $customerName = request()->input('customer_name', 'Test'); // استخدام القيمة الافتراضية إذا لم يتم تقديمها
+        $customerName = request()->input('customer_name', 'Test');
         $customerNationality = request()->input('customer_nationality', 'ARE');
         $customerMobile = request()->input('customer_mobile', '971501234567');
         $customerEmail = request()->input('customer_email', 'test@node.ae');
@@ -254,7 +253,6 @@ class CarController extends Controller
             'status' => 'pending_updates',
         ];
     
-        // تابع العملية كما هو عليه...
         $token = Session::get('auth_token') ?? $this->authenticate();
         $reservationResponse = Http::withToken($token)->post('https://luxuria.crs.ae/api/v1/reservations', $demoData);
         
@@ -272,15 +270,16 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
-        // تحقق من وجود حقل total_amount في الطلب
-        $request->
-        validate([
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'car_id' => 'required|exists:cars,id',
             'total_amount' => 'required|numeric',
         ]);
     
+        $userId = $request->input('user_id');
+        $carId = $request->input('car_id');
         $totalAmount = $request->input('total_amount');
     
-        // إعداد البيانات المطلوبة لإنشاء جلسة Checkout في Stripe
         $stripeData = [
             'payment_method_types[]' => 'card',
             'line_items' => [[
@@ -289,18 +288,17 @@ class CarController extends Controller
                     'product_data' => [
                         'name' => 'Rental Car',
                     ],
-                    'unit_amount' => intval($totalAmount * 100), // تأكد من أنه عدد صحيح
+                    'unit_amount' => intval($totalAmount * 100), 
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('payment.success'), // قم بتغيير الرابط حسب الحاجة
-            'cancel_url' => 'https://your-domain.com/cancel', // قم بتغيير الرابط حسب الحاجة
+            'success_url' => route('payment.success', ['user_id' => $userId, 'car_id' => $carId]),
+            'cancel_url' => 'https://your-domain.com/cancel', 
         ];
     
-        // إجراء الطلب إلى Stripe API
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), // استخدم مفتاح السر
+            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), 
         ])->asForm()->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
     
         if ($response->successful()) {
@@ -308,18 +306,27 @@ class CarController extends Controller
                 'status' => true,
                 'message' => 'Checkout session created successfully.',
                 'session_id' => $response->json()['id'],
-                'checkout_url' => $response->json()['url'], // 🔥 إضافة رابط الدفع المباشر
+                'checkout_url' => $response->json()['url'], 
+                'user_id' => $userId, 
+                'car_id' => $carId, 
             ], 200);
         }
     
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
-    }    
-    
-    public function paymentSuccess()
-    {
-        return view('front.mobile.success');
     }
-
+    
+    
+    public function paymentSuccess(Request $request)
+    {
+        $userId = $request->query('user_id');
+        $carId = $request->query('car_id');
+    
+        // يمكنك حفظ البيانات في الجلسة (Session) إذا احتجت استخدامها لاحقًا
+        session(['user_id' => $userId, 'car_id' => $carId]);
+    
+        return view('front.mobile.success', compact('userId', 'carId'));
+    }
+    
     
 
 }
