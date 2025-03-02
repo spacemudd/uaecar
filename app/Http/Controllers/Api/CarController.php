@@ -318,22 +318,21 @@ class CarController extends Controller
     {
         return view('front.mobile.success');
     }
-
     public function bookings(Request $request)
     {
+        // التحقق من صحة البيانات المدخلة
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
-            'car_id' => 'required|integer|exists:cars,id',
+            'car_id' => 'required|double|exists:cars,id',
             'pickup_date' => 'required|date',
             'return_date' => 'required|date|after:pickup_date',
+            'total_days' => 'required|integer|min:1', // تحقق من أن total_days مطلوب وأن يكون عدد صحيح
+            'total_amount' => 'required|numeric|min:0', // تحقق من أن total_amount مطلوب وأن يكون رقم
         ]);
     
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-    
-        $totalDays = "5"; 
-        $totalAmount = "500"; 
     
         try {
             // إنشاء الحجز الجديد
@@ -342,14 +341,13 @@ class CarController extends Controller
                 'car_id' => $request->car_id,
                 'pickup_date' => $request->pickup_date,
                 'return_date' => $request->return_date,
-                'total_days' => $totalDays,
-                'total_amount' => $totalAmount,
+                'total_days' => $request->total_days, // استخدام القيمة من الـ request
+                'total_amount' => $request->total_amount, // استخدام القيمة من الـ request
                 'status' => 'pending', // قيمة افتراضية لـ status
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-        
     
         return response()->json([
             'message' => 'Booking created successfully.',
