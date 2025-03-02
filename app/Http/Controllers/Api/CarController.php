@@ -345,9 +345,13 @@ class CarController extends Controller
             'return_date' => $request->return_date,
             'total_days' => $totalDays,
             'total_amount' => $totalAmount,
+            'status' => 'pending', // قيمة افتراضية لـ status
         ]);
     
-        return response()->json($booking, 201);
+        return response()->json([
+            'message' => 'Booking created successfully.',
+            'booking' => $booking,
+        ], 201);
     }
     
 
