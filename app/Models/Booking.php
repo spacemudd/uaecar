@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+    
+    protected $table = 'booking'; // إضافة هذه السطر لتحديد اسم الجدول
 
     protected $fillable = [
         'user_id',
