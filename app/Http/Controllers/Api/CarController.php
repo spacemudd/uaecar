@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Models\Car;
+use App\Models\Booking;
+
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Validator;
 class CarController extends Controller
 {
     public function index()
@@ -316,44 +319,35 @@ class CarController extends Controller
         return view('front.mobile.success');
     }
 
-
-
-    public function createBooking(Request $request)
+    public function bookings(Request $request)
     {
-        // تحقق من صحة البيانات المدخلة
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'car_id' => 'required|exists:vehicles,id', // استخدام car_id هنا
+        // التحقق من صحة البيانات المدخلة
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer|exists:users,id',
+            'car_id' => 'required|integer|exists:cars,id',
             'pickup_date' => 'required|date',
             'return_date' => 'required|date|after:pickup_date',
         ]);
     
-        // احصل على السيارة بناءً على car_id
-        $vehicle = Car::find($request->input('car_id')); // استخدام car_id هنا
-    
-        if (!$vehicle) {
-            return response()->json(['status' => false, 'message' => 'Vehicle not found'], 404);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
     
-        // استخرج بيانات الحجز
-        $demoData = [
-            'status' => 'pending_updates',
-            'total_days' => '16'
-        ];
+        // حساب total_days و total_amount (قيم ثابتة)
+        $totalDays = 5; // القيمة الثابتة لـ total_days
+        $totalAmount = 500; // القيمة الثابتة لـ total_amount
     
-        // إنشاء الحجز
-        $token = Session::get('auth_token') ?? $this->authenticate();
-        $reservationResponse = Http::withToken($token)->post('https://luxuria.crs.ae/api/v1/reservations', $demoData);
+        // إنشاء الحجز الجديد
+        $booking = Booking::create([
+            'user_id' => $request->user_id,
+            'car_id' => $request->car_id,
+            'pickup_date' => $request->pickup_date,
+            'return_date' => $request->return_date,
+            'total_days' => $totalDays,
+            'total_amount' => $totalAmount,
+        ]);
     
-        if ($reservationResponse->successful()) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Vehicle reserved successfully.',
-                'reservation' => $reservationResponse->json(),
-            ]);
-        }
-    
-        return response()->json(['status' => false, 'message' => 'Error creating reservation: ' . $reservationResponse->body()], $reservationResponse->status());
+        return response()->json($booking, 201);
     }
     
 
