@@ -266,20 +266,16 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Error creating reservation: ' . $reservationResponse->body()], $reservationResponse->status());
     }
+
+
     public function createStripeCheckoutSession(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|string|exists:users,id', // التأكيد على أنه سترينج
-            'car_id' => 'required|string|exists:cars,id',
-            'total_amount' => 'required|string', // تأكيد أنه سترينج
+        $request->
+        validate([
+            'total_amount' => 'required|numeric',
         ]);
     
-        $userId = (string) $request->input('user_id'); // تأكيد أنه سترينج
-        $carId = (string) $request->input('car_id');
-        $totalAmount = $request->input('total_amount'); // سيبقى نصًا
-    
-        // تحويل إلى float لحساب الوحدة
-        $totalAmountFloat = floatval($totalAmount); 
+        $totalAmount = $request->input('total_amount');
     
         $stripeData = [
             'payment_method_types[]' => 'card',
@@ -289,17 +285,18 @@ class CarController extends Controller
                     'product_data' => [
                         'name' => 'Rental Car',
                     ],
-                    'unit_amount' => intval($totalAmountFloat * 100), // تحويله إلى int للمبلغ الإجمالي
+                    'unit_amount' => intval($totalAmount * 100), 
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('payment.success', ['user_id' => $userId, 'car_id' => $carId]),
-            'cancel_url' => 'https://your-domain.com/cancel',
+            'success_url' => route('payment.success'), 
+            'cancel_url' => 'https://your-domain.com/cancel', 
         ];
     
+        
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'),
+            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), 
         ])->asForm()->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
     
         if ($response->successful()) {
@@ -307,27 +304,18 @@ class CarController extends Controller
                 'status' => true,
                 'message' => 'Checkout session created successfully.',
                 'session_id' => $response->json()['id'],
-                'checkout_url' => $response->json()['url'],
-                'user_id' => $userId,
-                'car_id' => $carId,
+                'checkout_url' => $response->json()['url'], 
             ], 200);
         }
     
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
-    }
+    }    
     
-    
-    public function paymentSuccess(Request $request)
+    public function paymentSuccess()
     {
-        $userId = $request->query('user_id');
-        $carId = $request->query('car_id');
-    
-        // يمكنك حفظ البيانات في الجلسة (Session) إذا احتجت استخدامها لاحقًا
-        session(['user_id' => $userId, 'car_id' => $carId]);
-    
-        return view('front.mobile.success', compact('userId', 'carId'));
+        return view('front.mobile.success');
     }
-    
+
     
 
 }
