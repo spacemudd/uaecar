@@ -266,18 +266,16 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Error creating reservation: ' . $reservationResponse->body()], $reservationResponse->status());
     }
-
-
     public function createStripeCheckoutSession(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'car_id' => 'required|exists:cars,id',
+            'user_id' => 'required|string|exists:users,id', // بدل exists:users,id بدون رقم
+            'car_id' => 'required|string|exists:cars,id',
             'total_amount' => 'required|numeric',
         ]);
     
-        $userId = $request->input('user_id');
-        $carId = $request->input('car_id');
+        $userId = (string) $request->input('user_id'); // تأكيد أنه سترينج
+        $carId = (string) $request->input('car_id');
         $totalAmount = $request->input('total_amount');
     
         $stripeData = [
@@ -288,17 +286,17 @@ class CarController extends Controller
                     'product_data' => [
                         'name' => 'Rental Car',
                     ],
-                    'unit_amount' => intval($totalAmount * 100), 
+                    'unit_amount' => intval($totalAmount * 100),
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
             'success_url' => route('payment.success', ['user_id' => $userId, 'car_id' => $carId]),
-            'cancel_url' => 'https://your-domain.com/cancel', 
+            'cancel_url' => 'https://your-domain.com/cancel',
         ];
     
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), 
+            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'),
         ])->asForm()->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
     
         if ($response->successful()) {
@@ -306,9 +304,9 @@ class CarController extends Controller
                 'status' => true,
                 'message' => 'Checkout session created successfully.',
                 'session_id' => $response->json()['id'],
-                'checkout_url' => $response->json()['url'], 
-                'user_id' => $userId, 
-                'car_id' => $carId, 
+                'checkout_url' => $response->json()['url'],
+                'user_id' => $userId,
+                'car_id' => $carId,
             ], 200);
         }
     
