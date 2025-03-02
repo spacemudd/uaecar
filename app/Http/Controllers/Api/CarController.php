@@ -269,14 +269,17 @@ class CarController extends Controller
     public function createStripeCheckoutSession(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|string|exists:users,id', // بدل exists:users,id بدون رقم
+            'user_id' => 'required|string|exists:users,id', // التأكيد على أنه سترينج
             'car_id' => 'required|string|exists:cars,id',
-            'total_amount' => 'required|numeric',
+            'total_amount' => 'required|string', // تأكيد أنه سترينج
         ]);
     
         $userId = (string) $request->input('user_id'); // تأكيد أنه سترينج
         $carId = (string) $request->input('car_id');
-        $totalAmount = $request->input('total_amount');
+        $totalAmount = $request->input('total_amount'); // سيبقى نصًا
+    
+        // تحويل إلى float لحساب الوحدة
+        $totalAmountFloat = floatval($totalAmount); 
     
         $stripeData = [
             'payment_method_types[]' => 'card',
@@ -286,7 +289,7 @@ class CarController extends Controller
                     'product_data' => [
                         'name' => 'Rental Car',
                     ],
-                    'unit_amount' => intval($totalAmount * 100),
+                    'unit_amount' => intval($totalAmountFloat * 100), // تحويله إلى int للمبلغ الإجمالي
                 ],
                 'quantity' => 1,
             ]],
