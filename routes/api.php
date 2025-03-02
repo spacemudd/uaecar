@@ -81,3 +81,5 @@ Route::post('/webhook/stripe', function (Request $request) {
 
 
 Route::get('/payment/success', [CarController::class, 'paymentSuccess'])->name('payment.success');
+
+Route::post('/bookings', [CarController::class, 'createBooking']);

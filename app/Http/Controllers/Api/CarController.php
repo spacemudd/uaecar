@@ -316,6 +316,56 @@ class CarController extends Controller
         return view('front.mobile.success');
     }
 
+
+
+    public function createBooking(Request $request)
+{
+    // تحقق من صحة البيانات المدخلة
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'vehicle_id' => 'required|exists:vehicles,id',
+        // أضف أي حقول أخرى تحتاج للتحقق منها
+    ]);
+
+    // احصل على السيارة بناءً على vehicle_id
+    $vehicle = Car::find($request->input('vehicle_id'));
+    
+    if (!$vehicle) {
+        return response()->json(['status' => false, 'message' => 'Vehicle not found'], 404);
+    }
+
+    // استخرج بيانات الحجز
+    $pickupDate = now()->format('Y-m-d H:i:s');
+    $returnDate = now()->addDays(1)->format('Y-m-d H:i:s');
+
+    $demoData = [
+        'customer_name' => $request->input('customer_name', 'Test'),
+        'customer_nationality' => $request->input('customer_nationality', 'ARE'),
+        'customer_mobile' => $request->input('customer_mobile', '971501234567'),
+        'customer_email' => $request->input('customer_email', 'test@node.ae'),
+        'vehicle_id' => $vehicle->id,
+        'pickup_date' => $pickupDate,
+        'return_date' => $returnDate,
+        'status' => 'pending_updates',
+        'user_id' => $request->input('user_id'), // رابط الحجز بالمستخدم
+    ];
+
+    // إنشاء الحجز
+    $token = Session::get('auth_token') ?? $this->authenticate();
+    $reservationResponse = Http::withToken($token)->post('https://luxuria.crs.ae/api/v1/reservations', $demoData);
+
+    if ($reservationResponse->successful()) {
+        return response()->json([
+            'status' => true,
+            'message' => 'Vehicle reserved successfully.',
+            'reservation' => $reservationResponse->json(),
+        ]);
+    }
+
+    return response()->json(['status' => false, 'message' => 'Error creating reservation: ' . $reservationResponse->body()], $reservationResponse->status());
+}
+
+
     
 
 }
