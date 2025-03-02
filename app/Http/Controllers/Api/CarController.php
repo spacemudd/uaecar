@@ -322,33 +322,23 @@ class CarController extends Controller
     {
         // تحقق من صحة البيانات المدخلة
         $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_mobile' => 'required|string|max:20',
-            'customer_email' => 'required|email|max:255',
             'user_id' => 'required|exists:users,id',
-            'vehicle_id' => 'required|exists:vehicles,id',
+            'car_id' => 'required|exists:vehicles,id', // استخدام car_id هنا
             'pickup_date' => 'required|date',
-            'return_date' => 'required|date|after:pickup_date', // تأكد من أن تاريخ العودة بعد تاريخ الاستلام
+            'return_date' => 'required|date|after:pickup_date',
         ]);
     
-        // احصل على السيارة بناءً على vehicle_id
-        $vehicle = Car::find($request->input('vehicle_id'));
-        
+        // احصل على السيارة بناءً على car_id
+        $vehicle = Car::find($request->input('car_id')); // استخدام car_id هنا
+    
         if (!$vehicle) {
             return response()->json(['status' => false, 'message' => 'Vehicle not found'], 404);
         }
     
         // استخرج بيانات الحجز
         $demoData = [
-            'customer_name' => $request->input('customer_name'),
-            'customer_nationality' => 'Egypt',
-            'customer_mobile' => $request->input('customer_mobile'),
-            'customer_email' => $request->input('customer_email'),
-            'vehicle_id' => $vehicle->id,
-            'pickup_date' => $request->input('pickup_date'), // استخدم التاريخ المدخل
-            'return_date' => $request->input('return_date'), // استخدم التاريخ المدخل
             'status' => 'pending_updates',
-            'user_id' => $request->input('user_id'), // رابط الحجز بالمستخدم
+            'total_days' => '16'
         ];
     
         // إنشاء الحجز
@@ -365,9 +355,6 @@ class CarController extends Controller
     
         return response()->json(['status' => false, 'message' => 'Error creating reservation: ' . $reservationResponse->body()], $reservationResponse->status());
     }
-    
-
-
     
 
 }
