@@ -191,6 +191,8 @@
                                     @if ($car->price_daily > 349)
                                         <span style="background-color: green; color:white">No Deposit</span>
                                     @endif
+                                    <span style="background-color: red; color:white">25% Discount Applied</span>
+
 
                                 </div>
                                 <a href="{{ route('cars.show', $car->id) }}">
@@ -273,6 +275,8 @@
                                 @if ($car->price_daily > 349)
                                         <span style="background-color: green; color:white">No Deposit</span>
                                     @endif
+                                <span style="background-color: red; color:white">25% Discount Applied</span>
+
                             </div>
                             <a href="{{ route('cars.show', $car->id) }}">
                                 <div>
