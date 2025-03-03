@@ -187,7 +187,6 @@
                                 <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                                     <span>{{ $car->seats . ' Seats' }}</span>
                                     <span>{{ $car->doors . ' Doors' }}</span>
-                                    <span>Automatic</span>
                                     @if ($car->price_daily > 349)
                                         <span style="background-color: green; color:white">No Deposit</span>
                                     @endif
@@ -236,7 +235,6 @@
                         <!-- Booking Modal -->
                          <!-- استدعاء مكون الحجز -->
                         <x-booking-modal :car="$car" />
-                        
                     @endif
                 @endforeach
             </div>
@@ -271,7 +269,6 @@
                             <div class="span-group px-3 fw-bold" style="font-size: 12px; font-family: 'Calisto MT', serif;">
                                 <span>{{ $car->seats . ' Seats' }}</span>
                                 <span>{{ $car->doors . ' Doors' }}</span>
-                                <span>Automatic</span>
                                 @if ($car->price_daily > 349)
                                         <span style="background-color: green; color:white">No Deposit</span>
                                     @endif
