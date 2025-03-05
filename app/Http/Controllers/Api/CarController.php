@@ -326,7 +326,7 @@ class CarController extends Controller
             'car_id' => 'required|integer|exists:cars,id',
             'pickup_date' => 'required|date',
             'return_date' => 'required|date|after:pickup_date',
-            'status' => 'required|in:pending,confirmed',
+            'status' => 'required|pending,confirmed',
         ]);
     
         if ($validator->fails()) {
