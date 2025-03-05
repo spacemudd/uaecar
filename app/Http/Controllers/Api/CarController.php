@@ -326,7 +326,6 @@ class CarController extends Controller
             'car_id' => 'required|integer|exists:cars,id',
             'pickup_date' => 'required|date',
             'return_date' => 'required|date|after:pickup_date',
-            'status' => 'required|pending,confirmed',
         ]);
     
         if ($validator->fails()) {
@@ -337,27 +336,26 @@ class CarController extends Controller
         $totalAmount = "500"; 
     
         try {
+            // إنشاء الحجز مع حالة "pending"
             $booking = Booking::create([
-                
                 'user_id' => $request->user_id,
                 'car_id' => $request->car_id,
                 'pickup_date' => $request->pickup_date,
                 'return_date' => $request->return_date,
                 'total_days' => $totalDays,
                 'total_amount' => $totalAmount,
-                'status' => 'pending', 
+                'status' => 'pending', // تعيين الحالة إلى "pending"
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-        
     
         return response()->json([
             'message' => 'Booking created successfully.',
             'booking' => $booking,
         ], 201);
     }
-
+    
 
 
     public function getBookingsByUser($user_id)
