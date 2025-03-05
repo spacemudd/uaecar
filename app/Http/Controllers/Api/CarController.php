@@ -385,6 +385,31 @@ class CarController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+
+    public function deleteBooking($booking_id)
+{
+    $validator = Validator::make(['booking_id' => $booking_id], [
+        'booking_id' => 'required|integer|exists:bookings,id',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
+
+    try {
+        // البحث عن الحجز
+        $booking = Booking::find($booking_id);
+
+        // حذف الحجز
+        $booking->delete();
+
+        return response()->json(['message' => 'Booking deleted successfully.'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
     
 
     
