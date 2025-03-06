@@ -317,14 +317,18 @@ class CarController extends Controller
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }    
     
-    public function paymentSuccess()
+    public function paymentSuccess(Request $request)
     {
-        // استرداد بيانات الحجز من الجلسة
-        $booking = session('booking');
-
-        dd($booking);
+        dd($request);
+        // استرجاع معرف الحجز من الطلب (يفترض أنك قد أرسلت معرف الحجز في الطلب)
+        $bookingId = $request->input('booking_id');
     
-        
+        // البحث عن الحجز في قاعدة البيانات
+        $booking = Booking::find($bookingId);
+    
+        if (!$booking) {
+            return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
+        }
     
         // استخراج البيانات من الحجز
         $userId = $booking->user_id;
@@ -333,7 +337,6 @@ class CarController extends Controller
         $totalDays = $booking->total_days;
         $pickupDate = $booking->pickup_date;
         $returnDate = $booking->return_date;
-        $status = $booking->status;
     
         // إنشاء فاتورة جديدة في جدول mobile_invoices
         try {
@@ -346,7 +349,8 @@ class CarController extends Controller
                 'return_date' => $returnDate,
             ]);
         } catch (\Exception $e) {
-            return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);        }
+            return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
+        }
     
         // استدعاء دالة createReservation لعمل حجز
         $vehicle = [
@@ -359,10 +363,11 @@ class CarController extends Controller
     
         // إذا كانت الاستجابة ناجحة، يمكنك إعادة توجيه المستخدم إلى صفحة النجاح بدون تمرير البيانات
         if ($reservationResponse->getStatusCode() === 200) {
-            return response()->json(['status' => true, 'message' => 'Invoice created and reservation successful.']);        }
+            return response()->json(['status' => true, 'message' => 'Invoice created and reservation successful.']);
+        }
     
-            return response()->json(['status' => false, 'message' => 'Failed to create reservation: ' . $reservationResponse->getBody()], $reservationResponse->getStatusCode());    }
-    
+        return response()->json(['status' => false, 'message' => 'Failed to create reservation: ' . $reservationResponse->getBody()], $reservationResponse->getStatusCode());
+    }
     
 
     
@@ -399,7 +404,6 @@ class CarController extends Controller
             ]);
     
             // تخزين بيانات الحجز في الجلسة
-            session(['booking' => $booking]);
     
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -407,7 +411,7 @@ class CarController extends Controller
     
         return response()->json([
             'message' => 'Booking created successfully.',
-            'booking' => $booking,
+            'booking_id' => $booking->id, // أضف معرف الحجز إلى الاستجابة
         ], 201);
     }
     
