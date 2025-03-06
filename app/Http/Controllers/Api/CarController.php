@@ -321,6 +321,8 @@ class CarController extends Controller
     {
         // استرداد بيانات الحجز من الجلسة
         $booking = session('booking');
+
+        dd($booking);
     
         
     
