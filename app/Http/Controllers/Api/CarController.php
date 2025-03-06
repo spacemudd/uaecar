@@ -322,9 +322,7 @@ class CarController extends Controller
         // استرداد بيانات الحجز من الجلسة
         $booking = session('booking');
     
-        // التحقق من وجود بيانات الحجز
-        if (!$booking) {
-            return response()->json(['status' => false, 'message' => 'No booking found.'], 404);        }
+        
     
         // استخراج البيانات من الحجز
         $userId = $booking->user_id;
