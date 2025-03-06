@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Models\Car;
 use App\Models\Booking;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -314,10 +315,60 @@ class CarController extends Controller
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }    
     
-    public function paymentSuccess()
+    public function paymentSuccess(Request $request)
     {
-        return view('front.mobile.success');
+        // تحقق من وجود user_id في جسم الطلب
+        $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+        ]);
+    
+        // استرجاع user_id من جسم الطلب
+        $user_id = $request->input('user_id');
+    
+        // البحث عن بيانات المستخدم
+        $user = User::find($user_id);
+    
+        if (!$user) {
+            return response()->json(['error' => 'User not found.'], 404);
+        }
+    
+        // إرجاع بيانات المستخدم كاستجابة JSON
+        return response()->json([
+            'message' => 'User retrieved successfully.',
+            'user' => $user,
+        ], 200);
     }
+    
+    
+
+
+    public function getBookingsByUser($user_id)
+    {
+        $validator = Validator::make(['user_id' => $user_id], [
+            'user_id' => 'required|integer|exists:users,id',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+    
+        try {
+            // جلب الحجوزات الخاصة بالمستخدم
+            $bookings = Booking::where('user_id', $user_id)->get();
+    
+            if ($bookings->isEmpty()) {
+                return response()->json(['message' => 'No bookings found for this user.'], 404);
+            }
+    
+            return response()->json([
+                'message' => 'Bookings retrieved successfully.',
+                'bookings' => $bookings,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    
 
     public function bookings(Request $request)
     {
@@ -358,32 +409,7 @@ class CarController extends Controller
     
 
 
-    public function getBookingsByUser($user_id)
-    {
-        $validator = Validator::make(['user_id' => $user_id], [
-            'user_id' => 'required|integer|exists:users,id',
-        ]);
-    
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-    
-        try {
-            // جلب الحجوزات الخاصة بالمستخدم
-            $bookings = Booking::where('user_id', $user_id)->get();
-    
-            if ($bookings->isEmpty()) {
-                return response()->json(['message' => 'No bookings found for this user.'], 404);
-            }
-    
-            return response()->json([
-                'message' => 'Bookings retrieved successfully.',
-                'bookings' => $bookings,
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
+
 
 
     public function deleteBooking($booking_id)

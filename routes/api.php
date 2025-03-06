@@ -86,3 +86,6 @@ Route::post('/bookings', [CarController::class, 'bookings']);
 
 Route::get('/bookings/user/{user_id}', [CarController::class, 'getBookingsByUser']);
 Route::delete('/bookings/{booking_id}', [CarController::class, 'deleteBooking']);
+
+
+Route::post('/api/paymentSuccess', [CarController::class, 'paymentSuccess']);
