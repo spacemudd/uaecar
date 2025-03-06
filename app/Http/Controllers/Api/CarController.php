@@ -319,7 +319,7 @@ class CarController extends Controller
     
     public function paymentSuccess(Request $request)
     {
-        dd($request);
+        dd(session('booking_id'));
         // استرجاع معرف الحجز من الطلب (يفترض أنك قد أرسلت معرف الحجز في الطلب)
         $bookingId = $request->input('booking_id');
     
@@ -403,7 +403,8 @@ class CarController extends Controller
                 'status' => 'pending', // تعيين الحالة إلى "pending"
             ]);
     
-            // تخزين بيانات الحجز في الجلسة
+            // تخزين معرف الحجز في الجلسة
+            session(['booking_id' => $booking->id]); // حفظ booking_id في الجلسة
     
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -414,6 +415,7 @@ class CarController extends Controller
             'booking_id' => $booking->id, // أضف معرف الحجز إلى الاستجابة
         ], 201);
     }
+    
     
     
 
