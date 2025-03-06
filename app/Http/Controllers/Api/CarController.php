@@ -276,47 +276,52 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
+        // تحقق من المدخلات
         $request->validate([
-            'total_amount' => 'required|numeric',
+            'total_amount' => 'required|numeric', // التحقق من وجود المبلغ الإجمالي
             'booking_id' => 'required|integer|exists:bookings,id', // تحقق من وجود معرف الحجز
         ]);
     
+        // الحصول على المبلغ الإجمالي ومعرف الحجز من الطلب
         $totalAmount = $request->input('total_amount');
-        $bookingId = $request->input('booking_id'); // الحصول على معرف الحجز
+        $bookingId = $request->input('booking_id');
     
+        // إعداد بيانات Stripe
         $stripeData = [
             'payment_method_types[]' => 'card',
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'AED',
+                    'currency' => 'AED', // العملة
                     'product_data' => [
-                        'name' => 'Rental Car',
+                        'name' => 'Rental Car', // اسم المنتج
                     ],
-                    'unit_amount' => intval($totalAmount * 100), 
+                    'unit_amount' => intval($totalAmount * 100), // تحويل المبلغ إلى وحدة الـ cents
                 ],
-                'quantity' => 1,
+                'quantity' => 1, // عدد الكمية
             ]],
-            'mode' => 'payment',
+            'mode' => 'payment', // وضع الدفع
             'success_url' => route('payment.success', ['booking_id' => $bookingId]), // تمرير معرف الحجز إلى رابط النجاح
-            'cancel_url' => 'https://your-domain.com/cancel', 
+            'cancel_url' => 'https://your-domain.com/cancel', // رابط الإلغاء
         ];
     
+        // إرسال الطلب إلى Stripe
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), 
+            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), // استخدام مفتاح سري لـ Stripe
         ])->asForm()->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
     
+        // معالجة الاستجابة
         if ($response->successful()) {
             return response()->json([
                 'status' => true,
                 'message' => 'Checkout session created successfully.',
-                'session_id' => $response->json()['id'],
-                'checkout_url' => $response->json()['url'], 
+                'session_id' => $response->json()['id'], // معرف الجلسة
+                'checkout_url' => $response->json()['url'], // رابط الدفع
             ], 200);
         }
     
+        // معالجة الأخطاء في حال عدم نجاح الطلب
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }
-    
     
     public function paymentSuccess(Request $request)
     {
