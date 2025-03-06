@@ -276,12 +276,13 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
-        $request->
-        validate([
+        $request->validate([
             'total_amount' => 'required|numeric',
+            'booking_id' => 'required|integer|exists:bookings,id', // تحقق من وجود معرف الحجز
         ]);
     
         $totalAmount = $request->input('total_amount');
+        $bookingId = $request->input('booking_id'); // الحصول على معرف الحجز
     
         $stripeData = [
             'payment_method_types[]' => 'card',
@@ -296,11 +297,10 @@ class CarController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('payment.success'), 
+            'success_url' => route('payment.success', ['booking_id' => $bookingId]), // تمرير معرف الحجز إلى رابط النجاح
             'cancel_url' => 'https://your-domain.com/cancel', 
         ];
     
-        
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), 
         ])->asForm()->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
@@ -315,12 +315,12 @@ class CarController extends Controller
         }
     
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
-    }    
+    }
+    
     
     public function paymentSuccess(Request $request)
     {
-        dd(session('booking_id'));
-        // استرجاع معرف الحجز من الطلب (يفترض أنك قد أرسلت معرف الحجز في الطلب)
+        // استرجاع معرف الحجز من الطلب
         $bookingId = $request->input('booking_id');
     
         // البحث عن الحجز في قاعدة البيانات
@@ -352,22 +352,9 @@ class CarController extends Controller
             return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
         }
     
-        // استدعاء دالة createReservation لعمل حجز
-        $vehicle = [
-            'id' => session('vehicle_id'), // استرجاع vehicle_id من الجلسة
-            'rate_daily' => $totalAmount / $totalDays, // حساب السعر اليومي بناءً على المبلغ الإجمالي والأيام
-        ];
-        
-        // استدعاء دالة createReservation
-        $reservationResponse = $this->createReservation($vehicle);
-    
-        // إذا كانت الاستجابة ناجحة، يمكنك إعادة توجيه المستخدم إلى صفحة النجاح بدون تمرير البيانات
-        if ($reservationResponse->getStatusCode() === 200) {
-            return response()->json(['status' => true, 'message' => 'Invoice created and reservation successful.']);
-        }
-    
-        return response()->json(['status' => false, 'message' => 'Failed to create reservation: ' . $reservationResponse->getBody()], $reservationResponse->getStatusCode());
+        return response()->json(['status' => true, 'message' => 'Invoice created successfully.']);
     }
+    
     
 
     
@@ -404,7 +391,6 @@ class CarController extends Controller
             ]);
     
             // تخزين معرف الحجز في الجلسة
-            session(['booking_id' => $booking->id]); // حفظ booking_id في الجلسة
     
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
