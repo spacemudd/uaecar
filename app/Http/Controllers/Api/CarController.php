@@ -319,7 +319,7 @@ class CarController extends Controller
     
     public function paymentSuccess(Request $request)
     {
-        dd($request);
+        dd($request->all);
         // استرجاع معرف الحجز من الطلب (يفترض أنك قد أرسلت معرف الحجز في الطلب)
         $bookingId = $request->input('booking_id');
     
