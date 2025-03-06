@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Models\Car;
 use App\Models\Booking;
+use App\Models\MobileInvoice;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -182,6 +183,9 @@ class CarController extends Controller
             if ($vehicle) {
                 // تحقق من حالة توفر السيارة باستخدام الحقل 'status'
                 if (isset($vehicle['status']) && $vehicle['status'] === 'Available') {
+                    // احفظ vehicle_id في الجلسة
+                    session(['vehicle_id' => $vehicle['id']]); // تأكد من أن لديك الحقل 'id' في البيانات
+            
                     return response()->json(['status' => true, 'message' => 'Vehicle is available']);
                 } else {
                     return response()->json(['status' => false, 'message' => 'Vehicle is not available']);
@@ -233,7 +237,6 @@ class CarController extends Controller
     {
         $pickupDate = now()->format('Y-m-d H:i:s'); 
         $returnDate = now()->addDays(1)->format('Y-m-d H:i:s'); 
-    
         $customerName = request()->input('customer_name', 'Test');
         $customerNationality = request()->input('customer_nationality', 'ARE');
         $customerMobile = request()->input('customer_mobile', '971501234567');
@@ -316,13 +319,63 @@ class CarController extends Controller
     
     public function paymentSuccess()
     {
-        return view('front.mobile.success');
+        // استرداد بيانات الحجز من الجلسة
+        $booking = session('booking');
+    
+        // التحقق من وجود بيانات الحجز
+        if (!$booking) {
+            return redirect()->route('home')->with('error', 'No booking found.');
+        }
+    
+        // استخراج البيانات من الحجز
+        $userId = $booking->user_id;
+        $carId = $booking->car_id;
+        $totalAmount = $booking->total_amount;
+        $totalDays = $booking->total_days;
+        $pickupDate = $booking->pickup_date;
+        $returnDate = $booking->return_date;
+        $status = $booking->status;
+    
+        // إنشاء فاتورة جديدة في جدول mobile_invoices
+        try {
+            $invoice = MobileInvoice::create([
+                'user_id' => $userId,
+                'car_id' => $carId,
+                'total_amount' => $totalAmount,
+                'total_days' => $totalDays,
+                'pickup_date' => $pickupDate,
+                'return_date' => $returnDate,
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('home')->with('error', 'Failed to create invoice: ' . $e->getMessage());
+        }
+    
+        // استدعاء دالة createReservation لعمل حجز
+        $vehicle = [
+            'id' => session('vehicle_id'), // استرجاع vehicle_id من الجلسة
+            'rate_daily' => $totalAmount / $totalDays, // حساب السعر اليومي بناءً على المبلغ الإجمالي والأيام
+        ];
+        
+        // استدعاء دالة createReservation
+        $reservationResponse = $this->createReservation($vehicle);
+    
+        // إذا كانت الاستجابة ناجحة، يمكنك إعادة توجيه المستخدم إلى صفحة النجاح بدون تمرير البيانات
+        if ($reservationResponse->getStatusCode() === 200) {
+            return redirect()->route('success.page'); // استبدل 'success.page' بالمسار الصحيح لصفحة النجاح
+        }
+    
+        return redirect()->route('home')->with('error', 'Failed to create reservation: ' . $reservationResponse->getBody());
     }
+    
+    
+
+    
 
     
 
     public function bookings(Request $request)
     {
+        // التحقق من صحة البيانات
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'car_id' => 'required|integer|exists:cars,id',
@@ -348,6 +401,10 @@ class CarController extends Controller
                 'total_amount' => $totalAmount,
                 'status' => 'pending', // تعيين الحالة إلى "pending"
             ]);
+    
+            // تخزين بيانات الحجز في الجلسة
+            session(['booking' => $booking]);
+    
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -357,6 +414,7 @@ class CarController extends Controller
             'booking' => $booking,
         ], 201);
     }
+    
     
 
 
