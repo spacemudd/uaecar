@@ -324,8 +324,7 @@ class CarController extends Controller
     
         // التحقق من وجود بيانات الحجز
         if (!$booking) {
-            return redirect()->route('home')->with('error', 'No booking found.');
-        }
+            return response()->json(['status' => false, 'message' => 'No booking found.'], 404);        }
     
         // استخراج البيانات من الحجز
         $userId = $booking->user_id;
@@ -347,8 +346,7 @@ class CarController extends Controller
                 'return_date' => $returnDate,
             ]);
         } catch (\Exception $e) {
-            return redirect()->route('home')->with('error', 'Failed to create invoice: ' . $e->getMessage());
-        }
+            return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);        }
     
         // استدعاء دالة createReservation لعمل حجز
         $vehicle = [
@@ -361,11 +359,9 @@ class CarController extends Controller
     
         // إذا كانت الاستجابة ناجحة، يمكنك إعادة توجيه المستخدم إلى صفحة النجاح بدون تمرير البيانات
         if ($reservationResponse->getStatusCode() === 200) {
-            return redirect()->route('success.page'); // استبدل 'success.page' بالمسار الصحيح لصفحة النجاح
-        }
+            return response()->json(['status' => true, 'message' => 'Invoice created and reservation successful.']);        }
     
-        return redirect()->route('home')->with('error', 'Failed to create reservation: ' . $reservationResponse->getBody());
-    }
+            return response()->json(['status' => false, 'message' => 'Failed to create reservation: ' . $reservationResponse->getBody()], $reservationResponse->getStatusCode());    }
     
     
 
