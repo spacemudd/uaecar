@@ -21,4 +21,9 @@ class User extends Model
     {
         return $this->hasMany(Booking::class, 'user_id');
     }
+
+    public function mobileInvoices(): HasMany
+    {
+        return $this->hasMany(MobileInvoice::class, 'user_id');
+    }
 }

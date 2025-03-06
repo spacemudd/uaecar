@@ -52,4 +52,10 @@ class Car extends Model
     {
         return $this->hasMany(Booking::class, 'car_id');
     }
+
+    public function mobileInvoices(): HasMany
+    {
+        return $this->hasMany(MobileInvoice::class, 'car_id');
+    }
+
 }
