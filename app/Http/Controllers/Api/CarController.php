@@ -474,8 +474,32 @@ class CarController extends Controller
         }
     }
     
-    
+    public function prebooking(Request $request)
+    {
+        // التحقق من صحة البيانات
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer',
+            'car_name' => 'required|string',
+            'car_model' => 'required|string',
+            'car_daily_price' => 'required|numeric',
+            'car_weekly_price' => 'required|numeric',
+            'car_monthly_price' => 'required|numeric',
+            'total_days' => 'required|integer|min:1',
+            'total_amount' => 'required|numeric',
+            'plate_number' => 'required|string|unique:pre_booking,plate_number',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        // إنشاء سجل جديد
+        $preBooking = PreBooking::create($request->all());
+
+        return response()->json(['message' => 'تم الحجز بنجاح', 'data' => $preBooking], 201);
+    }
+
+    
     
 
 }
