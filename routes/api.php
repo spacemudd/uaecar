@@ -44,6 +44,7 @@ Route::post('/check-vehicle-availability', [CarController::class, 'checkVehicleA
 
 
 Route::post('/create-checkout-session', [CarController::class, 'createStripeCheckoutSession']);
+Route::post('/pre-booking', [CarController::class, 'prebooking']);
 
 
 Route::post('/webhook/stripe', function (Request $request) {
