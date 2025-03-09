@@ -476,6 +476,8 @@ class CarController extends Controller
     
     public function prebooking(Request $request)
     {
+
+        dd($request->all()); // طباعة البيانات قبل الحفظ
         // التحقق من صحة البيانات
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
