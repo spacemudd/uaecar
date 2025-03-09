@@ -335,30 +335,43 @@ class CarController extends Controller
             return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
         }
     
-        // استخراج البيانات من الحجز
-        $userId = $booking->user_id;
-        $carId = $booking->car_id;
-        $totalAmount = $booking->total_amount;
-        $totalDays = $booking->total_days;
-        $pickupDate = $booking->pickup_date;
-        $returnDate = $booking->return_date;
+        // استخراج بيانات السيارة
+        $vehicle = [
+            'id' => $booking->car_id,
+            'rate_daily' => $booking->total_amount / max($booking->total_days, 1), // احتساب المعدل اليومي إذا لم يكن موجودًا
+        ];
     
-        // إنشاء فاتورة جديدة في جدول mobile_invoices
-        try {
-            $invoice = MobileInvoice::create([
-                'user_id' => $userId,
-                'car_id' => $carId,
-                'total_amount' => $totalAmount,
-                'total_days' => $totalDays,
-                'pickup_date' => $pickupDate,
-                'return_date' => $returnDate,
+        // استدعاء createReservation وتمرير بيانات السيارة
+        $reservationResponse = $this->createReservation($vehicle);
+    
+        // إذا نجح الحجز، إنشاء الفاتورة
+        if ($reservationResponse->getData()->status) {
+            try {
+                $invoice = MobileInvoice::create([
+                    'user_id' => $booking->user_id,
+                    'car_id' => $booking->car_id,
+                    'total_amount' => $booking->total_amount,
+                    'total_days' => $booking->total_days,
+                    'pickup_date' => $booking->pickup_date,
+                    'return_date' => $booking->return_date,
+                ]);
+            } catch (\Exception $e) {
+                return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
+            }
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'Invoice and reservation created successfully.',
+                'reservation' => $reservationResponse->getData(),
             ]);
-        } catch (\Exception $e) {
-            return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
         }
     
-        return response()->json(['status' => true, 'message' => 'Invoice created successfully.']);
+        return response()->json([
+            'status' => false,
+            'message' => 'Reservation failed: ' . $reservationResponse->getData()->message,
+        ]);
     }
+    
     
     
 
