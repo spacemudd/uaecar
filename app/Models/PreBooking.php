@@ -9,7 +9,7 @@ class PreBooking extends Model
 {
     use HasFactory;
 
-    protected $table = 'pre_booking';
+    protected $table = 'pre_booking'; // تأكد من أن اسم الجدول صحيح
 
     protected $fillable = [
         'user_id',
