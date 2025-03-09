@@ -279,12 +279,10 @@ class CarController extends Controller
         // تحقق من المدخلات
         $request->validate([
             'total_amount' => 'required|numeric', // التحقق من وجود المبلغ الإجمالي
-            'booking_id' => 'required|integer|exists:bookings,id', // تحقق من وجود معرف الحجز
         ]);
     
         // الحصول على المبلغ الإجمالي ومعرف الحجز من الطلب
         $totalAmount = $request->input('total_amount');
-        $bookingId = $request->input('booking_id');
     
         // إعداد بيانات Stripe
         $stripeData = [
@@ -300,7 +298,7 @@ class CarController extends Controller
                 'quantity' => 1, // عدد الكمية
             ]],
             'mode' => 'payment', // وضع الدفع
-            'success_url' => route('payment.success', ['booking_id' => $bookingId]), // تمرير معرف الحجز إلى رابط النجاح
+            'success_url' => route('payment.success'), // تمرير معرف الحجز إلى رابط النجاح
             'cancel_url' => 'https://your-domain.com/cancel', // رابط الإلغاء
         ];
     
