@@ -276,12 +276,14 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
+
+        dd('test');
         // تحقق من المدخلات
         $request->validate([
             'total_amount' => 'required|numeric',
             'title' => 'required|string',
             'model' => 'required|string',
-            'client_name' => 'required|string', // تحقق من اسم العميل
+            'customer_name' => 'required|string', // تحقق من اسم العميل
             'phone_number' => 'required|string', // تحقق من رقم الهاتف
             'email' => 'required|email', // تحقق من البريد الإلكتروني
             'plate_number' => 'required|string', // تحقق من رقم لوحة السيارة
