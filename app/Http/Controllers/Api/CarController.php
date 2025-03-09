@@ -276,57 +276,35 @@ class CarController extends Controller
 
     public function createStripeCheckoutSession(Request $request)
     {
-
-        dd('test');
         // تحقق من المدخلات
         $request->validate([
-            'total_amount' => 'required|numeric',
-            'title' => 'required|string',
-            'model' => 'required|string',
-            'customer_name' => 'required|string', // تحقق من اسم العميل
-            'phone_number' => 'required|string', // تحقق من رقم الهاتف
-            'email' => 'required|email', // تحقق من البريد الإلكتروني
-            'plate_number' => 'required|string', // تحقق من رقم لوحة السيارة
-            'pickup_date' => 'required|date', // تحقق من تاريخ الاستلام
-            'return_date' => 'required|date', // تحقق من تاريخ الإرجاع
-            'pickup_time' => 'required|string', // تحقق من وقت الاستلام
-            'return_time' => 'required|string', // تحقق من وقت الإرجاع
+            'total_amount' => 'required|numeric', // التحقق من وجود المبلغ الإجمالي
         ]);
     
-        // الحصول على المدخلات
+        // الحصول على المبلغ الإجمالي ومعرف الحجز من الطلب
         $totalAmount = $request->input('total_amount');
-        $title = $request->input('title');
-        $model = $request->input('model');
-        $clientName = $request->input('client_name');
-        $phoneNumber = $request->input('phone_number');
-        $email = $request->input('email');
-        $plateNumber = $request->input('plate_number');
-        $pickupDate = $request->input('pickup_date');
-        $returnDate = $request->input('return_date');
-        $pickupTime = $request->input('pickup_time');
-        $returnTime = $request->input('return_time');
     
         // إعداد بيانات Stripe
         $stripeData = [
             'payment_method_types[]' => 'card',
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'AED',
+                    'currency' => 'AED', // العملة
                     'product_data' => [
-                        'name' => 'Rental Car: ' . $title . ' ' . $model,
+                        'name' => 'Rental Car', // اسم المنتج
                     ],
-                    'unit_amount' => intval($totalAmount * 100),
+                    'unit_amount' => intval($totalAmount * 100), // تحويل المبلغ إلى وحدة الـ cents
                 ],
-                'quantity' => 1,
+                'quantity' => 1, // عدد الكمية
             ]],
-            'mode' => 'payment',
-            'success_url' => route('payment.success'),
-            'cancel_url' => 'https://your-domain.com/cancel',
+            'mode' => 'payment', // وضع الدفع
+            'success_url' => route('payment.success'), // تمرير معرف الحجز إلى رابط النجاح
+            'cancel_url' => 'https://your-domain.com/cancel', // رابط الإلغاء
         ];
     
         // إرسال الطلب إلى Stripe
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'),
+            'Authorization' => 'Bearer ' . env('STRIPE_SECRET_KEY'), // استخدام مفتاح سري لـ Stripe
         ])->asForm()->post('https://api.stripe.com/v1/checkout/sessions', $stripeData);
     
         // معالجة الاستجابة
@@ -334,13 +312,62 @@ class CarController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Checkout session created successfully.',
-                'session_id' => $response->json()['id'],
-                'checkout_url' => $response->json()['url'],
+                'session_id' => $response->json()['id'], // معرف الجلسة
+                'checkout_url' => $response->json()['url'], // رابط الدفع
             ], 200);
         }
     
         // معالجة الأخطاء في حال عدم نجاح الطلب
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
+    }
+    
+    public function paymentSuccess(Request $request)
+    {
+        // استرجاع معرف الحجز من الطلب
+        $bookingId = $request->input('booking_id');
+    
+        // البحث عن الحجز في قاعدة البيانات
+        $booking = Booking::find($bookingId);
+    
+        if (!$booking) {
+            return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
+        }
+    
+        // استخراج بيانات السيارة
+        $vehicle = [
+            'id' => $booking->car_id,
+            'rate_daily' => $booking->total_amount / max($booking->total_days, 1), // احتساب المعدل اليومي إذا لم يكن موجودًا
+        ];
+    
+        // استدعاء createReservation وتمرير بيانات السيارة
+        $reservationResponse = $this->createReservation($vehicle);
+    
+        // إذا نجح الحجز، إنشاء الفاتورة
+        if ($reservationResponse->getData()->status) {
+            try {
+                $invoice = MobileInvoice::create([
+                    'user_id' => $booking->user_id,
+                    'car_id' => $booking->car_id,
+                    'total_amount' => $booking->total_amount,
+                    'total_days' => $booking->total_days,
+                    'pickup_date' => $booking->pickup_date,
+                    'return_date' => $booking->return_date,
+                ]);
+            } catch (\Exception $e) {
+                return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
+            }
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'Invoice and reservation created successfully.',
+                'reservation' => $reservationResponse->getData(),
+            ]);
+        }
+    
+        return response()->json([
+            'status' => false,
+            'message' => 'Reservation failed: ' . $reservationResponse->getData()->message,
+        ]);
     }
     
     
