@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Car;
 use App\Models\Booking;
 use App\Models\MobileInvoice;
+use App\Models\prebooking;
+
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -477,26 +479,17 @@ class CarController extends Controller
     public function prebooking(Request $request)
     {
 
-        dd($request->all()); // طباعة البيانات قبل الحفظ
-        // التحقق من صحة البيانات
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
-            'car_name' => 'required|string',
-            'car_model' => 'required|string',
-            'car_daily_price' => 'required|numeric',
-            'car_weekly_price' => 'required|numeric',
-            'car_monthly_price' => 'required|numeric',
-            'total_days' => 'required|integer|min:1',
-            'total_amount' => 'required|numeric',
-            'plate_number' => 'required|string|unique:pre_booking,plate_number',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
-
-        // إنشاء سجل جديد
-        $preBooking = PreBooking::create($request->all());
+        $preBooking = new PreBooking();
+        $preBooking->user_id = $request->user_id;
+        $preBooking->car_name = $request->car_name;
+        $preBooking->car_model = $request->car_model;
+        $preBooking->car_daily_price = $request->car_daily_price;
+        $preBooking->car_weekly_price = $request->car_weekly_price;
+        $preBooking->car_monthly_price = $request->car_monthly_price;
+        $preBooking->total_days = $request->total_days;
+        $preBooking->total_amount = $request->total_amount;
+        $preBooking->plate_number = $request->plate_number;
+        $preBooking->save();
 
         return response()->json(['message' => 'تم الحجز بنجاح', 'data' => $preBooking], 201);
     }
