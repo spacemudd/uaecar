@@ -88,4 +88,3 @@ Route::get('/bookings/user/{user_id}', [CarController::class, 'getBookingsByUser
 Route::delete('/bookings/{booking_id}', [CarController::class, 'deleteBooking']);
 
 
-Route::post('/paymentSuccess', [CarController::class, 'paymentSuccess']);
