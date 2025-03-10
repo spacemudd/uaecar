@@ -350,7 +350,7 @@ class CarController extends Controller
             'email_address' => $user->email,
         ];
 
-        dd($user->phone);
+        dd($user->phone_number);
     
         return response()->json(['status' => true, 'user' => $userData]);
     }
