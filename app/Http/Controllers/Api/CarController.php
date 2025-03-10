@@ -289,7 +289,6 @@ class CarController extends Controller
         $totalAmount = $request->input('total_amount');
         $bookingId = $request->input('booking_id'); // استلام booking_id
 
-        dd($bookingId); // تحقق من القيمة هنا
     
         // إعداد بيانات Stripe
         $stripeData = [
