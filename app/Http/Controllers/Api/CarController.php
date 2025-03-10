@@ -357,15 +357,15 @@ class CarController extends Controller
         // إعداد بيانات الحجز للنظام الخارجي
         $reservationData = [
             'customer_name' => $user->name,  // اسم العميل
-            'customer_nationality' => $user->nationality,  // الجنسية
-            'customer_mobile' => $user->phone,  // رقم الهاتف
-            'customer_email' => $user->email,  // البريد الإلكتروني
+            'customer_nationality' => "",  // الجنسية
+            'customer_mobile' => $user->phone_number,  // رقم الهاتف
+            'customer_email' => $user->email_address,  // البريد الإلكتروني
             'vehicle_id' => $car->id,  // ID السيارة
-            'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year,  // مثال: "Toyota Corolla 2013"
+            'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year, ' ' , $car->plate_number,  // مثال: "Toyota Corolla 2013"
             'pickup_date' => $booking->pickup_date,  // تاريخ الاستلام
-            'pickup_location' => $booking->pickup_location,  // مكان الاستلام
+            'pickup_location' => '71',  // مكان الاستلام
             'return_date' => $booking->return_date,  // تاريخ الإرجاع
-            'return_location' => $booking->return_location,  // مكان الإرجاع
+            'return_location' => '71',  // مكان الإرجاع
             'rate_daily' => $car->rate_daily,  // السعر اليومي
             'status' => 'pending_updates',  // حالة الحجز
         ];
