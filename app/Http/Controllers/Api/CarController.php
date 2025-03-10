@@ -281,11 +281,13 @@ class CarController extends Controller
     {
         // تحقق من المدخلات
         $request->validate([
-            'total_amount' => 'required|numeric', 
+            'total_amount' => 'required|numeric',
+            'booking_id' => 'required|string', // التحقق من معرف الحجز كـ string
         ]);
     
         // الحصول على المبلغ الإجمالي ومعرف الحجز من الطلب
         $totalAmount = $request->input('total_amount');
+        $bookingId = $request->input('booking_id'); // استلام booking_id
     
         // إعداد بيانات Stripe
         $stripeData = [
@@ -301,7 +303,7 @@ class CarController extends Controller
                 'quantity' => 1, // عدد الكمية
             ]],
             'mode' => 'payment', // وضع الدفع
-            'success_url' => route('payment.success'), // تمرير معرف الحجز إلى رابط النجاح
+            'success_url' => route('payment.success', ['booking_id' => $bookingId]), // تمرير معرف الحجز إلى رابط النجاح
             'cancel_url' => 'https://your-domain.com/cancel', // رابط الإلغاء
         ];
     
@@ -323,6 +325,7 @@ class CarController extends Controller
         // معالجة الأخطاء في حال عدم نجاح الطلب
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }
+    
     
     public function paymentSuccess(Request $request)
     {
@@ -468,43 +471,6 @@ class CarController extends Controller
     }
     
 
-    public function savedDataprebooking(Request $request)
-    {
-        // التحقق من صحة البيانات قبل التخزين
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'customer_name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:15',
-            'email' => 'nullable|email|max:255',
-            'pickup_city' => 'required|string|max:255',
-            'pickup_date' => 'required|date',
-            'return_date' => 'required|date|after_or_equal:pickup_date',
-            'car_details' => 'required|string',
-            'total_days' => 'required|integer|min:1',
-            'deposite_amount' => 'required|numeric|min:0',
-            'total_amount' => 'required|numeric|min:0',
-        ]);
 
-        // حفظ البيانات في الجدول
-        $prebooking = Prebooking::create([
-            'user_id' => $request->user_id,
-            'customer_name' => $request->customer_name,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'pickup_city' => $request->pickup_city,
-            'pickup_date' => $request->pickup_date,
-            'return_date' => $request->return_date,
-            'car_details' => $request->car_details,
-            'total_days' => $request->total_days,
-            'deposite_amount' => $request->deposite_amount,
-            'total_amount' => $request->total_amount,
-        ]);
-
-        // إرجاع استجابة بعد نجاح العملية
-        return response()->json([
-            'message' => 'تم حفظ الحجز بنجاح!',
-            'data' => $prebooking
-        ], 201);
-    }
 
 }
