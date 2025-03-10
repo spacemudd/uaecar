@@ -360,9 +360,9 @@ class CarController extends Controller
             'customer_email' => $user->email_address,  // البريد الإلكتروني
             'vehicle_id' => "",  // ID السيارة
             'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,  // مثال: "Toyota Corolla 2013"
-            'pickup_date' => $booking->pickup_date,  // تاريخ الاستلام
+            'pickup_date' => $booking->pickup_date . ' ' . $booking->pickup_time,  // تاريخ الاستلام
             'pickup_location' => '71',  // مكان الاستلام
-            'return_date' => $booking->return_date,  // تاريخ الإرجاع
+            'return_date' => $booking->return_date . ' ' . $booking->return_time,  // تاريخ الإرجاع
             'return_location' => '71',  // مكان الإرجاع
             'rate_daily' => $car->price_daily,  // السعر اليومي
             'status' => 'pending_updates',  // حالة الحجز
