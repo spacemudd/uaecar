@@ -339,7 +339,6 @@ class CarController extends Controller
         }
     
         $user_id = $booking->user_id;
-    
         $user = User::find($user_id);
     
         if (!$user) {
@@ -347,7 +346,6 @@ class CarController extends Controller
         }
     
         $car_id = $booking->car_id;
-    
         $car = Car::find($car_id);
     
         if (!$car) {
@@ -361,7 +359,7 @@ class CarController extends Controller
             'customer_mobile' => $user->phone_number,  // رقم الهاتف
             'customer_email' => $user->email_address,  // البريد الإلكتروني
             'vehicle_id' => $car->id,  // ID السيارة
-            'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year, ' ' , $car->plate_number,  // مثال: "Toyota Corolla 2013"
+            'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,  // مثال: "Toyota Corolla 2013"
             'pickup_date' => $booking->pickup_date,  // تاريخ الاستلام
             'pickup_location' => '71',  // مكان الاستلام
             'return_date' => $booking->return_date,  // تاريخ الإرجاع
@@ -370,18 +368,27 @@ class CarController extends Controller
             'status' => 'pending_updates',  // حالة الحجز
         ];
     
-        // إرسال طلب الحجز إلى النظام الخارجي
+        // تسجيل الدخول للحصول على الـ token
+        $token = $this->authenticate();
+        if (!$token) {
+            return response()->json(['status' => false, 'message' => 'Authentication failed.'], 401);
+        }
+    
+        // إنشاء عميل Guzzle
         $client = new Client();
         try {
             $response = $client->post('https://luxuria.crs.ae/api/v1/reservations', [
                 'json' => $reservationData,
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,  // إضافة الـ token إلى الهيدرز
+                ],
             ]);
     
             // معالجة الاستجابة
             $responseData = json_decode($response->getBody(), true);
-            
+    
             // تحقق مما إذا كانت الاستجابة تدل على نجاح الحجز
-            if ($response->getStatusCode() === 200 && $responseData['status'] === 'success') {
+            if ($response->getStatusCode() === 200 && isset($responseData['status']) && $responseData['status'] === 'success') {
                 dd('تم الحجز بنجاح!', $responseData); // عرض الرسالة مع بيانات الاستجابة
             } else {
                 dd('فشل الحجز.', $responseData); // عرض رسالة الفشل مع بيانات الاستجابة
