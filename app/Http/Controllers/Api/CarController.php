@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Car;
 use App\Models\Booking;
 use App\Models\Prebooking;
+use App\Models\User;
 
 use App\Models\MobileInvoice;
 
@@ -337,54 +338,27 @@ class CarController extends Controller
         if (!$booking) {
             return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
         }
-    
-        // إعداد بيانات السيارة
-        $vehicle = [
-            'id' => $booking->car_id,
-            'rate_daily' => $booking->total_amount / max($booking->total_days, 1), // احتساب المعدل اليومي
-        ];
-    
-        // استدعاء createReservation وتمرير بيانات السيارة
-        $reservationResponse = $this->createReservation($vehicle);
-    
-        if ($reservationResponse->getData()->status) {
-            try {
-                // إنشاء الفاتورة
-                $invoice = MobileInvoice::create([
-                    'user_id' => $booking->user_id,
-                    'car_id' => $booking->car_id,
-                    'total_amount' => $booking->total_amount,
-                    'total_days' => $booking->total_days,
-                    'pickup_date' => $booking->pickup_date,
-                    'return_date' => $booking->return_date,
-                ]);
-    
-                // طباعة تفاصيل الفاتورة
-                dd('تم إنشاء الفاتورة بنجاح:', $invoice);
-    
-            } catch (\Exception $e) {
-                return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
-            }
-    
-            return response()->json([
-                'status' => true,
-                'message' => 'Invoice and reservation created successfully.',
-                'reservation' => $reservationResponse->getData(),
-            ]);
+        $user_id = $booking->user_id;
+        $user = User::find($user_id);
+        if (!$user) {
+            return response()->json(['status' => false, 'message' => 'User not found.'], 404);
         }
+
+        $userData = [
+            'name' => $user->name,
+            'phone_number' => $user->phone,
+            'email_address' => $user->email,
+        ];
+
+        dd($userData['email_address']);
     
-        return response()->json([
-            'status' => false,
-            'message' => 'Reservation failed: ' . $reservationResponse->getData()->message,
-        ]);
+        return response()->json(['status' => true, 'user' => $userData]);
     }
-    
     
     
    
     public function bookings(Request $request)
     {
-        // التحقق من صحة البيانات
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'car_id' => 'required|integer|exists:cars,id',
