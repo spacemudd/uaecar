@@ -331,6 +331,7 @@ class CarController extends Controller
 {
     // استرجاع معرف الحجز من الطلب
     $bookingId = $request->input('booking_id');
+    dd($bookingId); // طباعة booking_id للتحقق من قيمته
 
     // البحث عن الحجز في قاعدة البيانات
     $booking = Booking::find($bookingId);
