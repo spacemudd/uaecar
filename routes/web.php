@@ -183,4 +183,3 @@ Route::get('/clear-session', function () {
 
 
 
-Route::get('/payment/success/{booking_id}', [CarController::class, 'paymentSuccess'])->name('payment.success');
