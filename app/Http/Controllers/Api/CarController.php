@@ -406,34 +406,37 @@ class CarController extends Controller
             'user_id' => 'required|integer|exists:users,id',
             'car_id' => 'required|integer|exists:cars,id',
             'pickup_date' => 'required|date',
+            'pickup_time' => 'required|date_format:H:i', // إضافة التحقق لوقت الاستلام
             'return_date' => 'required|date|after:pickup_date',
+            'return_time' => 'required|date_format:H:i', // إضافة التحقق لوقت الإرجاع
         ]);
-    
+        
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-    
+        
         $totalDays = "5"; 
         $totalAmount = "500"; 
-    
+        
         try {
             // إنشاء الحجز مع حالة "pending"
             $booking = Booking::create([
                 'user_id' => $request->user_id,
                 'car_id' => $request->car_id,
                 'pickup_date' => $request->pickup_date,
+                'pickup_time' => $request->pickup_time, // إضافة وقت الاستلام
                 'return_date' => $request->return_date,
+                'return_time' => $request->return_time, // إضافة وقت الإرجاع
                 'total_days' => $totalDays,
                 'total_amount' => $totalAmount,
                 'status' => 'pending', // تعيين الحالة إلى "pending"
             ]);
-    
-            // تخزين معرف الحجز في الجلسة
-    
+        
+            // تابع العملية حسب الحاجة...
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['status' => false, 'message' => 'Booking creation failed: ' . $e->getMessage()], 500);
         }
-    
+        
         return response()->json([
             'message' => 'Booking created successfully.',
             'booking_id' => $booking->id, // أضف معرف الحجز إلى الاستجابة
