@@ -297,7 +297,7 @@ class CarController extends Controller
                 'price_data' => [
                     'currency' => 'AED', // العملة
                     'product_data' => [
-                        'name' => 'Rental Car', // اسم المنتج
+                        'name' => $bookingId, // اسم المنتج
                     ],
                     'unit_amount' => intval($totalAmount * 100), // تحويل المبلغ إلى وحدة الـ cents
                 ],
