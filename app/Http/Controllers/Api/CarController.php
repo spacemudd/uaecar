@@ -345,17 +345,51 @@ class CarController extends Controller
         if (!$user) {
             return response()->json(['status' => false, 'message' => 'User not found.'], 404);
         }
+    
         $car_id = $booking->car_id;
     
         $car = Car::find($car_id);
     
-        dd($car->plate_number);
+        if (!$car) {
+            return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
+        }
     
-       
+        // إعداد بيانات الحجز للنظام الخارجي
+        $reservationData = [
+            'customer_name' => $user->name,  // اسم العميل
+            'customer_nationality' => $user->nationality,  // الجنسية
+            'customer_mobile' => $user->phone,  // رقم الهاتف
+            'customer_email' => $user->email,  // البريد الإلكتروني
+            'vehicle_id' => $car->id,  // ID السيارة
+            'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year,  // مثال: "Toyota Corolla 2013"
+            'pickup_date' => $booking->pickup_date,  // تاريخ الاستلام
+            'pickup_location' => $booking->pickup_location,  // مكان الاستلام
+            'return_date' => $booking->return_date,  // تاريخ الإرجاع
+            'return_location' => $booking->return_location,  // مكان الإرجاع
+            'rate_daily' => $car->rate_daily,  // السعر اليومي
+            'status' => 'pending_updates',  // حالة الحجز
+        ];
     
-        return response()->json(['status' => true, 'user' => "userData", 'car' => ""]);
+        // إرسال طلب الحجز إلى النظام الخارجي
+        $client = new Client();
+        try {
+            $response = $client->post('https://luxuria.crs.ae/api/v1/reservations', [
+                'json' => $reservationData,
+            ]);
+    
+            // معالجة الاستجابة
+            $responseData = json_decode($response->getBody(), true);
+            
+            // تحقق مما إذا كانت الاستجابة تدل على نجاح الحجز
+            if ($response->getStatusCode() === 200 && $responseData['status'] === 'success') {
+                dd('تم الحجز بنجاح!', $responseData); // عرض الرسالة مع بيانات الاستجابة
+            } else {
+                dd('فشل الحجز.', $responseData); // عرض رسالة الفشل مع بيانات الاستجابة
+            }
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'message' => 'External booking failed: ' . $e->getMessage()], 500);
+        }
     }
-    
     
     
    
