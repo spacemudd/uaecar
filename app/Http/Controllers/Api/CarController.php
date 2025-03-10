@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Car;
 use App\Models\Booking;
 use App\Models\MobileInvoice;
-use App\Models\prebooking;
 
 
 use Illuminate\Http\Request;
@@ -280,7 +279,7 @@ class CarController extends Controller
     {
         // تحقق من المدخلات
         $request->validate([
-            'total_amount' => 'required|numeric', // التحقق من وجود المبلغ الإجمالي
+            'total_amount' => 'required|numeric', 
         ]);
     
         // الحصول على المبلغ الإجمالي ومعرف الحجز من الطلب
@@ -372,12 +371,6 @@ class CarController extends Controller
         ]);
     }
     
-    
-    
-
-    
-
-    
 
     public function bookings(Request $request)
     {
@@ -420,10 +413,6 @@ class CarController extends Controller
         ], 201);
     }
     
-    
-    
-
-
     public function getBookingsByUser($user_id)
     {
         $validator = Validator::make(['user_id' => $user_id], [
@@ -476,25 +465,7 @@ class CarController extends Controller
         }
     }
     
-    public function prebooking(Request $request)
-    {
 
-        $preBooking = new PreBooking();
-        $preBooking->user_id = $request->user_id;
-        $preBooking->car_name = $request->car_name;
-        $preBooking->car_model = $request->car_model;
-        $preBooking->car_daily_price = $request->car_daily_price;
-        $preBooking->car_weekly_price = $request->car_weekly_price;
-        $preBooking->car_monthly_price = $request->car_monthly_price;
-        $preBooking->total_days = $request->total_days;
-        $preBooking->total_amount = $request->total_amount;
-        $preBooking->plate_number = $request->plate_number;
-        $preBooking->save();
-
-        return response()->json(['message' => 'تم الحجز بنجاح', 'data' => $preBooking], 201);
-    }
-
-    
     
 
 }
