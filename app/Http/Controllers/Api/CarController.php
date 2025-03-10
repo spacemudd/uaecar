@@ -351,6 +351,8 @@ class CarController extends Controller
         if (!$car) {
             return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
         }
+
+        dd($booking->pickup_date);
     
         // إعداد بيانات الحجز للنظام الخارجي
         $reservationData = [
@@ -358,13 +360,12 @@ class CarController extends Controller
             'customer_nationality' => "",  // الجنسية
             'customer_mobile' => $user->phone_number,  // رقم الهاتف
             'customer_email' => $user->email_address,  // البريد الإلكتروني
-            'vehicle_id' => "",  // ID السيارة
             'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,  // مثال: "Toyota Corolla 2013"
-            'pickup_date' => $booking->pickup_date . ' ' . $booking->pickup_time,  // تاريخ الاستلام
+            'pickup_date' => $booking->pickup_date . ' ' . $booking->pickup_time->format('H:i:s'),  // تأكد من أن pickup_time هو كائن DateTime
             'pickup_location' => '71',  // مكان الاستلام
-            'return_date' => $booking->return_date . ' ' . $booking->return_time,  // تاريخ الإرجاع
+            'return_date' => $booking->return_date . ' ' . $booking->return_time->format('H:i:s'),  // تأكد من أن return_time هو كائن DateTime
             'return_location' => '71',  // مكان الإرجاع
-            'rate_daily' => $car->price_daily,  // السعر اليومي
+            'rate_daily' => $car->rate_daily,  // السعر اليومي
             'status' => 'pending_updates',  // حالة الحجز
         ];
     
