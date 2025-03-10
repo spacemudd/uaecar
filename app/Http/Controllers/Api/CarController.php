@@ -288,6 +288,8 @@ class CarController extends Controller
         // الحصول على المبلغ الإجمالي ومعرف الحجز من الطلب
         $totalAmount = $request->input('total_amount');
         $bookingId = $request->input('booking_id'); // استلام booking_id
+
+        dd($bookingId); // تحقق من القيمة هنا
     
         // إعداد بيانات Stripe
         $stripeData = [
@@ -325,8 +327,9 @@ class CarController extends Controller
         // معالجة الأخطاء في حال عدم نجاح الطلب
         return response()->json(['status' => false, 'message' => 'Error creating checkout session: ' . $response->body()], $response->status());
     }
-    
-    
+
+
+
     public function paymentSuccess($booking_id)
 {
     // استرجاع معرف الحجز من الطلب
@@ -374,7 +377,9 @@ class CarController extends Controller
     // ]);
 }
 
-
+    
+    
+   
     public function bookings(Request $request)
     {
         // التحقق من صحة البيانات
