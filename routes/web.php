@@ -181,3 +181,6 @@ Route::get('/clear-session', function () {
     return redirect('/'); // إعادة التوجيه إلى الصفحة الرئيسية أو أي صفحة ترغب فيها
 });
 
+
+
+Route::get('/payment/success/{booking_id}', [CarController::class, 'paymentSuccess'])->name('payment.success');

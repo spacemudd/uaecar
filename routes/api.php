@@ -80,7 +80,6 @@ Route::post('/webhook/stripe', function (Request $request) {
 
 
 
-Route::get('/payment/success/{booking_id}', [CarController::class, 'paymentSuccess'])->name('payment.success');
 
 Route::post('/bookings', [CarController::class, 'bookings']);
 
