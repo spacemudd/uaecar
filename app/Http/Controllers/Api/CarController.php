@@ -358,7 +358,7 @@ class CarController extends Controller
             'customer_nationality' => "",  // الجنسية
             'customer_mobile' => $user->phone_number,  // رقم الهاتف
             'customer_email' => $user->email_address,  // البريد الإلكتروني
-            'vehicle_id' => $car->id,  // ID السيارة
+            'vehicle_id' => "",  // ID السيارة
             'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,  // مثال: "Toyota Corolla 2013"
             'pickup_date' => $booking->pickup_date,  // تاريخ الاستلام
             'pickup_location' => '71',  // مكان الاستلام
