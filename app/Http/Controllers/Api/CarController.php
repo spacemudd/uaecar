@@ -303,8 +303,8 @@ class CarController extends Controller
                 'quantity' => 1, // عدد الكمية
             ]],
             'mode' => 'payment', // وضع الدفع
-            'success_url' => route('payment.success', ['booking_id' => $bookingId]), // تمرير معرف الحجز إلى رابط النجاح
-            'cancel_url' => 'https://your-domain.com/cancel', // رابط الإلغاء
+            'success_url' => route('payment.success', ['booking_id' => $bookingId]),
+            'cancel_url' => 'https://your-domain.com/cancel', 
         ];
     
         // إرسال الطلب إلى Stripe
@@ -328,54 +328,58 @@ class CarController extends Controller
     
     
     public function paymentSuccess(Request $request)
-    {
-        // استرجاع معرف الحجز من الطلب
-        $bookingId = $request->input('booking_id');
-    
-        // البحث عن الحجز في قاعدة البيانات
-        $booking = Booking::find($bookingId);
-    
-        if (!$booking) {
-            return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
-        }
-    
-        // استخراج بيانات السيارة
-        $vehicle = [
-            'id' => $booking->car_id,
-            'rate_daily' => $booking->total_amount / max($booking->total_days, 1), // احتساب المعدل اليومي إذا لم يكن موجودًا
-        ];
-    
-        // استدعاء createReservation وتمرير بيانات السيارة
-        $reservationResponse = $this->createReservation($vehicle);
-    
-        // إذا نجح الحجز، إنشاء الفاتورة
-        if ($reservationResponse->getData()->status) {
-            try {
-                $invoice = MobileInvoice::create([
-                    'user_id' => $booking->user_id,
-                    'car_id' => $booking->car_id,
-                    'total_amount' => $booking->total_amount,
-                    'total_days' => $booking->total_days,
-                    'pickup_date' => $booking->pickup_date,
-                    'return_date' => $booking->return_date,
-                ]);
-            } catch (\Exception $e) {
-                return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
-            }
-    
-            return response()->json([
-                'status' => true,
-                'message' => 'Invoice and reservation created successfully.',
-                'reservation' => $reservationResponse->getData(),
+{
+    // استرجاع معرف الحجز من الطلب
+    $bookingId = $request->input('booking_id');
+
+    // البحث عن الحجز في قاعدة البيانات
+    $booking = Booking::find($bookingId);
+
+    if (!$booking) {
+        return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
+    }
+
+    // استخراج بيانات السيارة
+    $vehicle = [
+        'id' => $booking->car_id,
+        'rate_daily' => $booking->total_amount / max($booking->total_days, 1), // احتساب المعدل اليومي إذا لم يكن موجودًا
+    ];
+
+    // استدعاء createReservation وتمرير بيانات السيارة
+    $reservationResponse = $this->createReservation($vehicle);
+
+    // إذا نجح الحجز، إنشاء الفاتورة
+    if ($reservationResponse->getData()->status) {
+        try {
+            $invoice = MobileInvoice::create([
+                'user_id' => $booking->user_id,
+                'car_id' => $booking->car_id,
+                'total_amount' => $booking->total_amount,
+                'total_days' => $booking->total_days,
+                'pickup_date' => $booking->pickup_date,
+                'return_date' => $booking->return_date,
             ]);
+
+            // طباعة رسالة عند إنشاء الفاتورة
+            dd('تم إنشاء الفاتورة بنجاح', $invoice); // يمكنك إضافة أي معلومات إضافية هنا
+
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
         }
-    
+
         return response()->json([
-            'status' => false,
-            'message' => 'Reservation failed: ' . $reservationResponse->getData()->message,
+            'status' => true,
+            'message' => 'Invoice and reservation created successfully.',
+            'reservation' => $reservationResponse->getData(),
         ]);
     }
-    
+
+    return response()->json([
+        'status' => false,
+        'message' => 'Reservation failed: ' . $reservationResponse->getData()->message,
+    ]);
+}
+
 
     public function bookings(Request $request)
     {
