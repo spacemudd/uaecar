@@ -352,12 +352,12 @@ class CarController extends Controller
             return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
         }
 
-        dd($booking->pickup_date);
+        dd($booking->pickup_time);
     
         // إعداد بيانات الحجز للنظام الخارجي
         $reservationData = [
             'customer_name' => $user->name,  // اسم العميل
-            'customer_nationality' => "",  // الجنسية
+            'customer_nationality' => "ARE",  // الجنسية
             'customer_mobile' => $user->phone_number,  // رقم الهاتف
             'customer_email' => $user->email_address,  // البريد الإلكتروني
             'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,  // مثال: "Toyota Corolla 2013"
