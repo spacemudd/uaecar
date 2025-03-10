@@ -332,28 +332,30 @@ class CarController extends Controller
 
     public function paymentSuccess($booking_id)
     {
-        // استرجاع الحجز بناءً على booking_id
         $booking = Booking::find($booking_id);
     
         if (!$booking) {
             return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
         }
+    
         $user_id = $booking->user_id;
+    
         $user = User::find($user_id);
+    
         if (!$user) {
             return response()->json(['status' => false, 'message' => 'User not found.'], 404);
         }
-
-        $userData = [
-            'name' => $user->name,
-            'phone_number' => $user->phone,
-            'email_address' => $user->email,
-        ];
-
-        dd($user->phone_number);
+        $car_id = $booking->car_id;
     
-        return response()->json(['status' => true, 'user' => $userData]);
+        $car = Car::find($car_id);
+    
+        dd($car->plate_number);
+    
+       
+    
+        return response()->json(['status' => true, 'user' => "userData", 'car' => ""]);
     }
+    
     
     
    
