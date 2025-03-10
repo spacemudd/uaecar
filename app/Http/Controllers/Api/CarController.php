@@ -333,52 +333,46 @@ class CarController extends Controller
     $bookingId = $request->input('booking_id');
     dd($bookingId); // طباعة booking_id للتحقق من قيمته
 
-    // البحث عن الحجز في قاعدة البيانات
-    $booking = Booking::find($bookingId);
+    // $booking = Booking::find($bookingId);
 
-    if (!$booking) {
-        return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
-    }
+    // if (!$booking) {
+    //     return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
+    // }
+    // $vehicle = [
+    //     'id' => $booking->car_id,
+    //     'rate_daily' => $booking->total_amount / max($booking->total_days, 1), // احتساب المعدل اليومي إذا لم يكن موجودًا
+    // ];
 
-    // استخراج بيانات السيارة
-    $vehicle = [
-        'id' => $booking->car_id,
-        'rate_daily' => $booking->total_amount / max($booking->total_days, 1), // احتساب المعدل اليومي إذا لم يكن موجودًا
-    ];
+    // $reservationResponse = $this->createReservation($vehicle);
 
-    // استدعاء createReservation وتمرير بيانات السيارة
-    $reservationResponse = $this->createReservation($vehicle);
+    // if ($reservationResponse->getData()->status) {
+    //     try {
+    //         $invoice = MobileInvoice::create([
+    //             'user_id' => $booking->user_id,
+    //             'car_id' => $booking->car_id,
+    //             'total_amount' => $booking->total_amount,
+    //             'total_days' => $booking->total_days,
+    //             'pickup_date' => $booking->pickup_date,
+    //             'return_date' => $booking->return_date,
+    //         ]);
 
-    // إذا نجح الحجز، إنشاء الفاتورة
-    if ($reservationResponse->getData()->status) {
-        try {
-            $invoice = MobileInvoice::create([
-                'user_id' => $booking->user_id,
-                'car_id' => $booking->car_id,
-                'total_amount' => $booking->total_amount,
-                'total_days' => $booking->total_days,
-                'pickup_date' => $booking->pickup_date,
-                'return_date' => $booking->return_date,
-            ]);
+    //         dd('تم إنشاء الفاتورة بنجاح', $invoice); 
 
-            // طباعة رسالة عند إنشاء الفاتورة
-            dd('تم إنشاء الفاتورة بنجاح', $invoice); // يمكنك إضافة أي معلومات إضافية هنا
+    //     } catch (\Exception $e) {
+    //         return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
+    //     }
 
-        } catch (\Exception $e) {
-            return response()->json(['status' => false, 'message' => 'Failed to create invoice: ' . $e->getMessage()], 500);
-        }
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => 'Invoice and reservation created successfully.',
+    //         'reservation' => $reservationResponse->getData(),
+    //     ]);
+    // }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Invoice and reservation created successfully.',
-            'reservation' => $reservationResponse->getData(),
-        ]);
-    }
-
-    return response()->json([
-        'status' => false,
-        'message' => 'Reservation failed: ' . $reservationResponse->getData()->message,
-    ]);
+    // return response()->json([
+    //     'status' => false,
+    //     'message' => 'Reservation failed: ' . $reservationResponse->getData()->message,
+    // ]);
 }
 
 
