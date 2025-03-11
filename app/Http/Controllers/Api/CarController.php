@@ -370,30 +370,26 @@ class CarController extends Controller
             'status' => 'pending_updates',  // حالة الحجز
         ];
     
-        // تسجيل الدخول للحصول على الـ token
         $token = $this->authenticate();
         if (!$token) {
             return response()->json(['status' => false, 'message' => 'Authentication failed.'], 401);
         }
     
-        // إنشاء عميل Guzzle
         $client = new Client();
         try {
             $response = $client->post('https://luxuria.crs.ae/api/v1/reservations', [
                 'json' => $reservationData,
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $token,  // إضافة الـ token إلى الهيدرز
+                    'Authorization' => 'Bearer ' . $token, 
                 ],
             ]);
     
-            // معالجة الاستجابة
             $responseData = json_decode($response->getBody(), true);
     
-            // تحقق مما إذا كانت الاستجابة تدل على نجاح الحجز
             if ($response->getStatusCode() === 200 && isset($responseData['status']) && $responseData['status'] === 'success') {
-                dd('تم الحجز بنجاح!', $responseData); // عرض الرسالة مع بيانات الاستجابة
+                dd('تم الحجز بنجاح!', $responseData);
             } else {
-                dd('فشل الحجز.', $responseData); // عرض رسالة الفشل مع بيانات الاستجابة
+                dd('فشل الحجز.', $responseData);
             }
         } catch (\Exception $e) {
             return response()->json(['status' => false, 'message' => 'External booking failed: ' . $e->getMessage()], 500);
@@ -407,9 +403,10 @@ class CarController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'car_id' => 'required|integer|exists:cars,id',
-            'pickup_date' => 'required|date_format:Y-m-d H:i:s',
+            'pickup_date' => 'required|date_format:Y-m-d H:i:s', // تأكد من استخدام هذا
             'return_date' => 'required|date_format:Y-m-d H:i:s|after:pickup_date',
         ]);
+
         
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
