@@ -352,7 +352,6 @@ class CarController extends Controller
             return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
         }
 
-        dd($booking->pickup_date);
 
     
         // إعداد بيانات الحجز للنظام الخارجي
