@@ -8,7 +8,7 @@ class ChangePickupReturnDateColumnsInBookingsTable extends Migration
 {
     public function up()
     {
-        Schema::table('bookings', function (Blueprint $table) {
+        Schema::table('booking', function (Blueprint $table) {
             $table->dateTime('pickup_date')->change();
             $table->dateTime('return_date')->change();
         });
@@ -16,7 +16,7 @@ class ChangePickupReturnDateColumnsInBookingsTable extends Migration
 
     public function down()
     {
-        Schema::table('bookings', function (Blueprint $table) {
+        Schema::table('booking', function (Blueprint $table) {
             $table->date('pickup_date')->change();
             $table->date('return_date')->change();
         });
