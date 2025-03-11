@@ -360,9 +360,9 @@ class CarController extends Controller
             'customer_mobile' => $user->phone_number,  // رقم الهاتف
             'customer_email' => $user->email_address,  // البريد الإلكتروني
             'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,  // مثال: "Toyota Corolla 2013"
-            'pickup_date' => $booking->pickup_date . ' ' . $booking->pickup_time->format('H:i:s'),  // تأكد من أن pickup_time هو كائن DateTime
+            'pickup_date' => $booking->pickup_date,  // تأكد من أن pickup_time هو كائن DateTime
             'pickup_location' => '71',  // مكان الاستلام
-            'return_date' => $booking->return_date . ' ' . $booking->return_time->format('H:i:s'),  // تأكد من أن return_time هو كائن DateTime
+            'return_date' => $booking->return_date,  // تأكد من أن return_time هو كائن DateTime
             'return_location' => '71',  // مكان الإرجاع
             'rate_daily' => $car->rate_daily,  // السعر اليومي
             'status' => 'pending_updates',  // حالة الحجز
