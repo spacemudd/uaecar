@@ -407,9 +407,7 @@ class CarController extends Controller
             'user_id' => 'required|integer|exists:users,id',
             'car_id' => 'required|integer|exists:cars,id',
             'pickup_date' => 'required|date',
-            'pickup_time' => 'required|date_format:H:i', // إضافة التحقق لوقت الاستلام
             'return_date' => 'required|date|after:pickup_date',
-            'return_time' => 'required|date_format:H:i', // إضافة التحقق لوقت الإرجاع
         ]);
         
         if ($validator->fails()) {
