@@ -407,8 +407,8 @@ class CarController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'car_id' => 'required|integer|exists:cars,id',
-            'pickup_date' => 'required|date',
-            'return_date' => 'required|date|after:pickup_date',
+            'pickup_date' => 'required|date_format:Y-m-d H:i:s',
+            'return_date' => 'required|date_format:Y-m-d H:i:s|after:pickup_date',
         ]);
         
         if ($validator->fails()) {
