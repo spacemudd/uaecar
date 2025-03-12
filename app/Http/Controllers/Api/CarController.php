@@ -379,8 +379,32 @@ class CarController extends Controller
 
         $responseData = json_decode($response->getBody(), true);
 
-        if ($response->getStatusCode() === 200 && isset($responseData['status']) && $responseData['status'] === 'success') {
-            return response()->json(['status' => true, 'message' => 'تم الحجز بنجاح!', 'data' => $responseData], 200);
+        if ($response->getStatusCode() === 201 && isset($responseData['status']) && $responseData['status'] === 'success') {
+
+            if ($car->price_daily <= 349){
+                $securityDeposit = 1000;
+            }else{
+                $securityDeposit = 0;
+            }
+
+            $mobileInvoice = MobileInvoice::create([
+                'user_id' => $user->id,
+                'car_id' => $car->id,
+                'total_amount' => $booking->total_amount,
+                'total_days' => $booking->total_days,
+                'security_deposit' => $securityDeposit,
+                'pickup_date' => $booking->pickup_date,
+                'return_date' => $booking->return_date,
+            ]);
+            return response()->json([
+                'status' => true, 
+                'message' => 'تم الحجز بنجاح!', 
+                'data' => $responseData], 201); return response()->json([
+                    'status' => true,
+                    'message' => 'تم الحجز وإنشاء الفاتورة بنجاح!',
+                    'reservation_data' => $responseData,
+                    'mobile_invoice' => $mobileInvoice,
+                ], 201);
         } else {
             return response()->json([
                 'status' => false,
