@@ -415,12 +415,7 @@ class CarController extends Controller
                 'return_date' => $booking->return_date,
             ]);
     
-            return response()->json([
-                'status' => true,
-                'message' => 'تم الحجز وإنشاء الفاتورة بنجاح!',
-                'reservation_data' => $responseData,
-                'mobile_invoice' => $mobileInvoice,
-            ], 201);
+            return view('front.mobile.success');
         } else { // أي كود غير 200 أو 201
             return response()->json([
                 'status' => false,
