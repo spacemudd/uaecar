@@ -576,6 +576,35 @@ class CarController extends Controller
 }
 
 
+public function getCarById($car_id)
+{
+    // تحقق من صحة car_id
+    $validator = Validator::make(['invoice_id' => $car_id], [
+        'car_id' => 'required|integer|exists:mobile_invoices,id', // تحقق من وجود الفاتورة في جدول car
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
+
+    try {
+        // استرجاع الفاتورة باستخدام car
+        $cars = Car::find($car_id);
+
+        if (!$cars) {
+            return response()->json(['message' => 'car not found.'], 404);
+        }
+
+        return response()->json([
+            'message' => 'car retrieved successfully.',
+            'car' => $cars,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
+
 
 
 
