@@ -579,7 +579,7 @@ class CarController extends Controller
 public function getCarById($car_id)
 {
     // تحقق من صحة car_id
-    $validator = Validator::make(['invoice_id' => $car_id], [
+    $validator = Validator::make(['car_id' => $car_id], [
         'car_id' => 'required|integer|exists:mobile_invoices,id', // تحقق من وجود الفاتورة في جدول car
     ]);
 
