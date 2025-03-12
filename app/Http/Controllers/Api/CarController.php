@@ -520,7 +520,7 @@ class CarController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
+
 
     public function getInvoicesByUser($user_id){
         $validator = Validator::make(['user_id' => $user_id], [
@@ -545,6 +545,38 @@ class CarController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+
+    public function getInvoiceById($invoice_id)
+{
+    // تحقق من صحة invoice_id
+    $validator = Validator::make(['invoice_id' => $invoice_id], [
+        'invoice_id' => 'required|integer|exists:mobile_invoices,id', // تحقق من وجود الفاتورة في جدول mobile_invoices
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
+
+    try {
+        // استرجاع الفاتورة باستخدام invoice_id
+        $mobileInvoice = MobileInvoice::find($invoice_id);
+
+        if (!$mobileInvoice) {
+            return response()->json(['message' => 'Invoice not found.'], 404);
+        }
+
+        return response()->json([
+            'message' => 'Invoice retrieved successfully.',
+            'invoice' => $mobileInvoice,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
+
+
 
 
     public function deleteBooking($booking_id)

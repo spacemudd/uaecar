@@ -89,3 +89,4 @@ Route::delete('/bookings/{booking_id}', [CarController::class, 'deleteBooking'])
 Route::get('/payment/success/{booking_id}', [CarController::class, 'paymentSuccess'])->name('payment.success');
 
 Route::get('/invoices/user/{user_id}', [CarController::class, 'getInvoicesByUser']);
+Route::get('/invoices/{invoice_id}', [CarController::class, 'getInvoiceById']);
