@@ -433,7 +433,7 @@ class CarController extends Controller
             $totalAmount = $totalDays * $car->price_daily;
         }
 
-        if ($totalDays <= 28){
+        if ($totalDays >= 7 && $totalDays <= 29){
             $daily_price = $car->price_weekly / 7; 
             $totalAmount = $totalDays * $daily_price;
         }
