@@ -429,18 +429,21 @@ class CarController extends Controller
 
         $car = Car::find($request->car_id);
 
-        if($totalDays <= 6){
-            $totalAmount = $totalDays * $car->price_daily;
-        }
+        $totalAmount = 0; // تعيين قيمة ابتدائية للمبلغ الإجمالي
 
-        if ($totalDays >= 7 && $totalDays <= 29){
-            $daily_price = $car->price_weekly / 7; 
-            $totalAmount = $totalDays * $daily_price;
+        if ($totalDays <= 6) {
+            // حساب المبلغ اليومي إذا كانت الأيام أقل من أو تساوي 6
+            $totalAmount = $totalDays * $car->price_daily;
+        } elseif ($totalDays >= 7 && $totalDays <= 29) {
+            // حساب المبلغ الأسبوعي إذا كانت الأيام بين 7 و 29
+            $dailyPrice = $car->price_weekly / 7; 
+            $totalAmount = $totalDays * $dailyPrice;
+        } elseif ($totalDays >= 30) {
+            // حساب المبلغ الشهري إذا كانت الأيام 30 أو أكثر
+            $dailyPrice = $car->price_monthly / 30;
+            $totalAmount = $totalDays * $dailyPrice;
         }
-        if ($totalDays <= 30){
-            $daily_price = $car->price_monthly / 30;
-            $totalAmount = $totalDays * $daily_price;
-        }
+        
     
         
         try {
