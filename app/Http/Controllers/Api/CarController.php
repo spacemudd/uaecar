@@ -331,44 +331,41 @@ class CarController extends Controller
 
 
     public function paymentSuccess($booking_id)
-{
-    $booking = Booking::find($booking_id);
-
-    if (!$booking) {
-        return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
-    }
-
-    $user = User::find($booking->user_id);
-    if (!$user) {
-        return response()->json(['status' => false, 'message' => 'User not found.'], 404);
-    }
-
-    $car = Car::find($booking->car_id);
-    if (!$car) {
-        return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
-    }
-
-    // بيانات الحجز
-    $reservationData = [
-        'customer_name' => $user->name,
-        'customer_nationality' => "ARE",
-        'customer_mobile' => $user->phone_number,
-        'customer_email' => $user->email_address,
-        'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,
-        'pickup_date' => $booking->pickup_date,
-        'pickup_location' => '71',
-        'return_date' => $booking->return_date,
-        'return_location' => '71',
-        'rate_daily' => $car->price_daily,
-        'status' => 'pending_updates',
-    ];
-
-    $token = $this->authenticate();
-    if (!$token) {
-        return response()->json(['status' => false, 'message' => 'Authentication failed.'], 401);
-    }
-
-    try {
+    {
+        $booking = Booking::find($booking_id);
+        if (!$booking) {
+            return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
+        }
+    
+        $user = User::find($booking->user_id);
+        if (!$user) {
+            return response()->json(['status' => false, 'message' => 'User not found.'], 404);
+        }
+    
+        $car = Car::find($booking->car_id);
+        if (!$car) {
+            return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
+        }
+    
+        $reservationData = [
+            'customer_name' => $user->name,
+            'customer_nationality' => "ARE",
+            'customer_mobile' => $user->phone_number,
+            'customer_email' => $user->email_address,
+            'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,
+            'pickup_date' => $booking->pickup_date,
+            'pickup_location' => '71',
+            'return_date' => $booking->return_date,
+            'return_location' => '71',
+            'rate_daily' => $car->price_daily,
+            'status' => 'pending_updates',
+        ];
+    
+        $token = $this->authenticate();
+        if (!$token) {
+            return response()->json(['status' => false, 'message' => 'Authentication failed.'], 401);
+        }
+    
         $client = new Client();
         $response = $client->post('https://luxuria.crs.ae/api/v1/reservations', [
             'json' => $reservationData,
@@ -376,17 +373,13 @@ class CarController extends Controller
                 'Authorization' => 'Bearer ' . $token, 
             ],
         ]);
-
+    
         $responseData = json_decode($response->getBody(), true);
-
-        if ($response->getStatusCode() === 201 && isset($responseData['status']) && $responseData['status'] === 'success') {
-
-            if ($car->price_daily <= 349){
-                $securityDeposit = 1000;
-            }else{
-                $securityDeposit = 0;
-            }
-
+        $statusCode = $response->getStatusCode();
+    
+        if (in_array($statusCode, [200, 201])) { // لو كود الاستجابة 200 أو 201
+            $securityDeposit = ($car->price_daily <= 349) ? 1000 : 0;
+    
             $mobileInvoice = MobileInvoice::create([
                 'user_id' => $user->id,
                 'car_id' => $car->id,
@@ -396,41 +389,23 @@ class CarController extends Controller
                 'pickup_date' => $booking->pickup_date,
                 'return_date' => $booking->return_date,
             ]);
+    
             return response()->json([
-                'status' => true, 
-                'message' => 'تم الحجز بنجاح!', 
-                'data' => $responseData], 201); return response()->json([
-                    'status' => true,
-                    'message' => 'تم الحجز وإنشاء الفاتورة بنجاح!',
-                    'reservation_data' => $responseData,
-                    'mobile_invoice' => $mobileInvoice,
-                ], 201);
-        } else {
+                'status' => true,
+                'message' => 'تم الحجز وإنشاء الفاتورة بنجاح!',
+                'reservation_data' => $responseData,
+                'mobile_invoice' => $mobileInvoice,
+            ], 201);
+        } else { // أي كود غير 200 أو 201
             return response()->json([
                 'status' => false,
                 'message' => 'فشل الحجز.',
-                'error_details' => $responseData, // تفاصيل الفشل
-                'status_code' => $response->getStatusCode(),
-            ], $response->getStatusCode());
+                'error_details' => $responseData,
+                'status_code' => $statusCode,
+            ], $statusCode);
         }
-
-    } catch (\GuzzleHttp\Exception\RequestException $e) {
-        // إذا كان هناك استجابة في الخطأ، نعرضها
-        $responseBody = $e->hasResponse() ? (string) $e->getResponse()->getBody() : 'No response body';
-        return response()->json([
-            'status' => false,
-            'message' => 'External booking failed.',
-            'error' => $e->getMessage(),
-            'response' => $responseBody, // عرض استجابة الخطأ إن وجدت
-        ], 500);
-    } catch (\Exception $e) {
-        return response()->json([
-            'status' => false,
-            'message' => 'Unexpected error occurred.',
-            'error' => $e->getMessage(),
-        ], 500);
     }
-}
+    
 
     
    
