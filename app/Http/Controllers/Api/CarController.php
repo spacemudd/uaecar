@@ -331,70 +331,82 @@ class CarController extends Controller
 
 
     public function paymentSuccess($booking_id)
-    {
-        $booking = Booking::find($booking_id);
-    
-        if (!$booking) {
-            return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
-        }
-    
-        $user_id = $booking->user_id;
-        $user = User::find($user_id);
-    
-        if (!$user) {
-            return response()->json(['status' => false, 'message' => 'User not found.'], 404);
-        }
-    
-        $car_id = $booking->car_id;
-        $car = Car::find($car_id);
-    
-        if (!$car) {
-            return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
-        }
+{
+    $booking = Booking::find($booking_id);
 
-
-    
-        // إعداد بيانات الحجز للنظام الخارجي
-        $reservationData = [
-            'customer_name' => $user->name,  // اسم العميل
-            'customer_nationality' => "ARE",  // الجنسية
-            'customer_mobile' => $user->phone_number,  // رقم الهاتف
-            'customer_email' => $user->email_address,  // البريد الإلكتروني
-            'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,  // مثال: "Toyota Corolla 2013"
-            'pickup_date' => $booking->pickup_date,  // تأكد من أن pickup_time هو كائن DateTime
-            'pickup_location' => '71',  // مكان الاستلام
-            'return_date' => $booking->return_date,  // تأكد من أن return_time هو كائن DateTime
-            'return_location' => '71',  // مكان الإرجاع
-            'rate_daily' => $car->price_daily,  // السعر اليومي
-            'status' => 'pending_updates',  // حالة الحجز
-        ];
-    
-        $token = $this->authenticate();
-        if (!$token) {
-            return response()->json(['status' => false, 'message' => 'Authentication failed.'], 401);
-        }
-    
-        $client = new Client();
-        try {
-            $response = $client->post('https://luxuria.crs.ae/api/v1/reservations', [
-                'json' => $reservationData,
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $token, 
-                ],
-            ]);
-    
-            $responseData = json_decode($response->getBody(), true);
-    
-            if ($response->getStatusCode() === 200 && isset($responseData['status']) && $responseData['status'] === 'success') {
-                dd('تم الحجز بنجاح!', $responseData);
-            } else {
-                dd('فشل الحجز.', $responseData);
-            }
-        } catch (\Exception $e) {
-            return response()->json(['status' => false, 'message' => 'External booking failed: ' . $e->getMessage()], 500);
-        }
+    if (!$booking) {
+        return response()->json(['status' => false, 'message' => 'Booking not found.'], 404);
     }
-    
+
+    $user = User::find($booking->user_id);
+    if (!$user) {
+        return response()->json(['status' => false, 'message' => 'User not found.'], 404);
+    }
+
+    $car = Car::find($booking->car_id);
+    if (!$car) {
+        return response()->json(['status' => false, 'message' => 'Car not found.'], 404);
+    }
+
+    // بيانات الحجز
+    $reservationData = [
+        'customer_name' => $user->name,
+        'customer_nationality' => "ARE",
+        'customer_mobile' => $user->phone_number,
+        'customer_email' => $user->email_address,
+        'vehicle_hint' => $car->make . ' ' . $car->model . ' ' . $car->year . ' ' . $car->plate_number,
+        'pickup_date' => $booking->pickup_date,
+        'pickup_location' => '71',
+        'return_date' => $booking->return_date,
+        'return_location' => '71',
+        'rate_daily' => $car->price_daily,
+        'status' => 'pending_updates',
+    ];
+
+    $token = $this->authenticate();
+    if (!$token) {
+        return response()->json(['status' => false, 'message' => 'Authentication failed.'], 401);
+    }
+
+    try {
+        $client = new Client();
+        $response = $client->post('https://luxuria.crs.ae/api/v1/reservations', [
+            'json' => $reservationData,
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token, 
+            ],
+        ]);
+
+        $responseData = json_decode($response->getBody(), true);
+
+        if ($response->getStatusCode() === 200 && isset($responseData['status']) && $responseData['status'] === 'success') {
+            return response()->json(['status' => true, 'message' => 'تم الحجز بنجاح!', 'data' => $responseData], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'فشل الحجز.',
+                'error_details' => $responseData, // تفاصيل الفشل
+            ], $response->getStatusCode());
+        }
+
+    } catch (\GuzzleHttp\Exception\RequestException $e) {
+        // إذا كان هناك استجابة في الخطأ، نعرضها
+        $responseBody = $e->hasResponse() ? (string) $e->getResponse()->getBody() : 'No response body';
+        return response()->json([
+            'status' => false,
+            'message' => 'External booking failed.',
+            'error' => $e->getMessage(),
+            'response' => $responseBody, // عرض استجابة الخطأ إن وجدت
+        ], 500);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Unexpected error occurred.',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
     
    
     public function bookings(Request $request)
