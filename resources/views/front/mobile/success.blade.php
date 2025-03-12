@@ -27,8 +27,8 @@
             </div>
             <h1>Payment Successful!</h1>
             <p>Thank you for using our services. You will receive a confirmation email shortly.</p>
-            <a href="{{ url('/') }}" class="btn btn-success btn-lg">Return to Home</a>
-            
+            <p>Your Booking ID: <strong>{{ $booking_id }}</strong></p>
+            <p>Your Invoice ID: <strong>{{ $invoice_id }}</strong></p>            
         </div>
     </div>
 
