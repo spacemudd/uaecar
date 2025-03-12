@@ -385,6 +385,7 @@ class CarController extends Controller
             
             // حساب الأيام الكاملة بين تاريخي الاستلام والإرجاع
             $totalDays = $pickupDate->diffInDays($returnDate);
+            $totalDays = intval($totalDays); // تحويل الناتج إلى رقم صحيح
             
             $totalAmount = 0;
             
