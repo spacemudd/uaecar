@@ -401,12 +401,14 @@ class CarController extends Controller
                 $dailyPrice = intval($car->price_monthly / 30);
                 $totalAmount = intval($totalDays * $dailyPrice); // تحويل الناتج إلى رقم صحيح
             }
+
+            $total = $totalAmount + $securityDeposit;
             
     
             $mobileInvoice = MobileInvoice::create([
                 'user_id' => $user->id,
                 'car_id' => $car->id,
-                'total_amount' => $totalAmount,
+                'total_amount' => $total,
                 'total_days' => $totalDays,
                 'security_deposit' => $securityDeposit,
                 'pickup_date' => $booking->pickup_date,
