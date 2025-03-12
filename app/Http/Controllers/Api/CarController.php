@@ -379,12 +379,32 @@ class CarController extends Controller
     
         if (in_array($statusCode, [200, 201])) { // لو كود الاستجابة 200 أو 201
             $securityDeposit = ($car->price_daily <= 349) ? 1000 : 0;
+
+            $pickupDate = \Carbon\Carbon::parse($booking->pickup_date);
+            $returnDate = \Carbon\Carbon::parse($booking->return_date);
+            $totalDays = $pickupDate->diffInDays($returnDate);
+
+
+            $totalAmount = 0;
+
+            if ($totalDays <= 6) {
+                // حساب المبلغ اليومي إذا كانت الأيام أقل من أو تساوي 6
+                $totalAmount = $totalDays * $car->price_daily;
+            } elseif ($totalDays >= 7 && $totalDays <= 29) {
+                // حساب المبلغ الأسبوعي إذا كانت الأيام بين 7 و 29
+                $dailyPrice = $car->price_weekly / 7; 
+                $totalAmount = $totalDays * $dailyPrice;
+            } elseif ($totalDays >= 30) {
+                // حساب المبلغ الشهري إذا كانت الأيام 30 أو أكثر
+                $dailyPrice = $car->price_monthly / 30;
+                $totalAmount = $totalDays * $dailyPrice;
+            }
     
             $mobileInvoice = MobileInvoice::create([
                 'user_id' => $user->id,
                 'car_id' => $car->id,
-                'total_amount' => $booking->total_amount,
-                'total_days' => $booking->total_days,
+                'total_amount' => $totalAmount,
+                'total_days' => $totalDays,
                 'security_deposit' => $securityDeposit,
                 'pickup_date' => $booking->pickup_date,
                 'return_date' => $booking->return_date,
