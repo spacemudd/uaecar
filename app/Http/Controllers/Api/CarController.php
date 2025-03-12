@@ -382,11 +382,12 @@ class CarController extends Controller
 
             $pickupDate = \Carbon\Carbon::parse($booking->pickup_date);
             $returnDate = \Carbon\Carbon::parse($booking->return_date);
+            
+            // حساب الأيام الكاملة بين تاريخي الاستلام والإرجاع
             $totalDays = $pickupDate->diffInDays($returnDate);
-
-
+            
             $totalAmount = 0;
-
+            
             if ($totalDays <= 6) {
                 // حساب المبلغ اليومي إذا كانت الأيام أقل من أو تساوي 6
                 $totalAmount = intval($totalDays * $car->price_daily); // تحويل الناتج إلى رقم صحيح
