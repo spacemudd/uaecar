@@ -415,7 +415,10 @@ class CarController extends Controller
                 'return_date' => $booking->return_date,
             ]);
     
-            return view('front.mobile.success');
+            return view('front.mobile.success', [
+                'booking_id' => $booking->id,
+                'invoice_id' => $mobileInvoice->id,
+            ]);
         } else { // أي كود غير 200 أو 201
             return response()->json([
                 'status' => false,
