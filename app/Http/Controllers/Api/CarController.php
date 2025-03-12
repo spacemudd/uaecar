@@ -389,16 +389,17 @@ class CarController extends Controller
 
             if ($totalDays <= 6) {
                 // حساب المبلغ اليومي إذا كانت الأيام أقل من أو تساوي 6
-                $totalAmount = $totalDays * $car->price_daily;
+                $totalAmount = intval($totalDays * $car->price_daily); // تحويل الناتج إلى رقم صحيح
             } elseif ($totalDays >= 7 && $totalDays <= 29) {
                 // حساب المبلغ الأسبوعي إذا كانت الأيام بين 7 و 29
-                $dailyPrice = $car->price_weekly / 7; 
-                $totalAmount = $totalDays * $dailyPrice;
+                $dailyPrice = intval($car->price_weekly / 7); 
+                $totalAmount = intval($totalDays * $dailyPrice); // تحويل الناتج إلى رقم صحيح
             } elseif ($totalDays >= 30) {
                 // حساب المبلغ الشهري إذا كانت الأيام 30 أو أكثر
-                $dailyPrice = $car->price_monthly / 30;
-                $totalAmount = $totalDays * $dailyPrice;
+                $dailyPrice = intval($car->price_monthly / 30);
+                $totalAmount = intval($totalDays * $dailyPrice); // تحويل الناتج إلى رقم صحيح
             }
+            
     
             $mobileInvoice = MobileInvoice::create([
                 'user_id' => $user->id,
