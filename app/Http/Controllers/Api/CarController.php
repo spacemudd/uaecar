@@ -423,8 +423,25 @@ class CarController extends Controller
             return response()->json($validator->errors(), 422);
         }
         
-        $totalDays = "5"; 
-        $totalAmount = "500"; 
+        $pickupDate = \Carbon\Carbon::parse($request->pickup_date);
+        $returnDate = \Carbon\Carbon::parse($request->return_date);
+        $totalDays = $pickupDate->diffInDays($returnDate);
+
+        $car = Car::find($request->car_id);
+
+        if($totalDays <= 6){
+            $totalAmount = $totalDays * $car->price_daily;
+        }
+
+        if ($totalDays <= 28){
+            $daily_price = $car->price_weekly / 7; 
+            $totalAmount = $totalDays * $daily_price;
+        }
+        if ($totalDays <= 30){
+            $daily_price = $car->price_monthly / 30;
+            $totalAmount = $totalDays * $daily_price;
+        }
+    
         
         try {
             // إنشاء الحجز مع حالة "pending"
@@ -435,8 +452,8 @@ class CarController extends Controller
                 'pickup_time' => $request->pickup_time, // إضافة وقت الاستلام
                 'return_date' => $request->return_date,
                 'return_time' => $request->return_time, // إضافة وقت الإرجاع
-                'total_days' => $request->total_days,
-                'total_amount' => $request->total_amount,
+                'total_days' => $totalDays,
+                'total_amount' => $totalAmount,
                 'status' => 'pending', // تعيين الحالة إلى "pending"
             ]);
         
