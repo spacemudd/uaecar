@@ -386,6 +386,7 @@ class CarController extends Controller
                 'status' => false,
                 'message' => 'فشل الحجز.',
                 'error_details' => $responseData, // تفاصيل الفشل
+                'status_code' => $response->getStatusCode(),
             ], $response->getStatusCode());
         }
 
