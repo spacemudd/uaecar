@@ -520,6 +520,31 @@ class CarController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    
+
+    public function getInvoicesByUser($user_id){
+        $validator = Validator::make(['user_id' => $user_id], [
+            'user_id' => 'required|integer|exists:users,id',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
+
+        try {
+            $mobileInvoice = MobileInvoice::where('user_id', $user_id)->get();
+
+            if ($mobileInvoice->isEmpty()) {
+                return response()->json(['message' => 'No invoices found for this user.'], 404);
+            }
+            return response()->json([
+                'message' => 'Invoices retrieved successfully.',
+                'invoices' => $mobileInvoice,
+            ], 200);
+        } catch(\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 
 
     public function deleteBooking($booking_id)
