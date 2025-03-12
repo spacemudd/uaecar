@@ -580,7 +580,7 @@ public function getCarById($car_id)
 {
     // تحقق من صحة car_id
     $validator = Validator::make(['car_id' => $car_id], [
-        'car_id' => 'required|integer|exists:mobile_invoices,id', // تحقق من وجود الفاتورة في جدول car
+        'car_id' => 'required|integer|exists:cars,id', // تحقق من وجود الفاتورة في جدول car
     ]);
 
     if ($validator->fails()) {
