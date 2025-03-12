@@ -435,8 +435,8 @@ class CarController extends Controller
                 'pickup_time' => $request->pickup_time, // إضافة وقت الاستلام
                 'return_date' => $request->return_date,
                 'return_time' => $request->return_time, // إضافة وقت الإرجاع
-                'total_days' => $totalDays,
-                'total_amount' => $totalAmount,
+                'total_days' => $request->total_days,
+                'total_amount' => $request->total_amount,
                 'status' => 'pending', // تعيين الحالة إلى "pending"
             ]);
         
