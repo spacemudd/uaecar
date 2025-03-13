@@ -182,4 +182,6 @@ Route::get('/clear-session', function () {
 });
 
 
-
+Route::get('/privacy', function () {
+    return view('front.pages.privacy');
+});
