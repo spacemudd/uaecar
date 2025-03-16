@@ -98,7 +98,7 @@
                 <div class="icon me-2"><i class="flaticon-phone-call"></i></div>
                 <div class="text">
                     <p class="mb-0">Need help?</p>
-                    <h5 class="mb-0"><a href="tel:+971542700030">05 4270 0030</a></h5>
+                    <h5 class="mb-0"><a href="tel:+971502711549">05 0271 1549</a></h5>
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6 style="font-family: 'Calisto MT', serif;">Call us</h6>
-                                    <p style="font-family:'Calisto MT', serif;">+971 54-270-0030</p>
+                                    <p style="font-family:'Calisto MT', serif;">+971502711549</p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
