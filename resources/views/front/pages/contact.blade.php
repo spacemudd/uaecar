@@ -142,7 +142,7 @@
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item active"> <span class="icon omfi-phone"></span>
                         <h5 style="font-family: 'Calisto MT', serif;">Call us</h5>
-                        <p style="font-family: 'Calisto MT', serif;">+971 54-270-0030</p> <i class="numb omfi-phone"></i>
+                        <p style="font-family: 'Calisto MT', serif;">+971502711549</p> <i class="numb omfi-phone"></i>
                     </div>
                 </div>
             </div>
