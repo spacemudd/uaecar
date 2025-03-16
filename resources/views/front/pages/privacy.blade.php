@@ -73,7 +73,7 @@
         <p>If you have any questions, contact us:</p>
         <p><strong>Luxuria Rent Cars</strong><br>
         Mehalat Al Sheebani - Shop No. 2 - Al Rashidiya 3 - Ajman - UAE<br>
-        📞 +971 54-270-0030<br>
+        📞 +971502711549<br>
         📧 <a href="mailto:info@rentluxuria.com">info@rentluxuria.com</a></p>
         
         <h2>9. Policy Updates</h2>
