@@ -130,8 +130,8 @@
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item"> <span class="icon omfi-location"></span>
                         <h5 style="font-family: 'Calisto MT', serif;">Our address</h5>
-                        <p style="font-family: 'Calisto MT', serif;">Dubai Address - Shop No 9 - Dr Murad Building - Hor Al Anz East - Abu Hail - Dubai - UAE</p> <i class="numb omfi-location"></i><br>
-                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Ajman Address - Al Rashidiya 3 - Ajman - United Arab Emirates</p>
+                        <p style="font-family: 'Calisto MT', serif;">Address 1- Shop No 9 - Dr Murad Building - Hor Al Anz East - Abu Hail - Dubai - UAE</p> <i class="numb omfi-location"></i><br>
+                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Address 2- Al Rashidiya 3 - Ajman - United Arab Emirates</p>
 
                     </div>
                 </div>

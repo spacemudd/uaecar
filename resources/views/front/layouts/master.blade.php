@@ -173,8 +173,8 @@
                                     </div>
                                     <div class="footer-contact-link-content ms-2">
                                         <h6 class="mb-0" style="font-family: 'Calisto MT', serif;">Address</h6>
-                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Dubai Address - Shop No 9 - Dr Murad Building - Hor Al Anz East - Abu Hail - Dubai - UAE</p>
-                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Ajman Address - Al Rashidiya 3 - Ajman - United Arab Emirates</p>
+                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Address 1- Shop No 9 - Dr Murad Building - Hor Al Anz East - Abu Hail - Dubai - UAE</p>
+                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Address 2- Al Rashidiya 3 - Ajman - United Arab Emirates</p>
 
                                     </div>
                                 </a>
