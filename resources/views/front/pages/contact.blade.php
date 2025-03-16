@@ -130,7 +130,7 @@
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                     <div class="item"> <span class="icon omfi-location"></span>
                         <h5 style="font-family: 'Calisto MT', serif;">Our address</h5>
-                        <p style="font-family: 'Calisto MT', serif;">Mehalat Al Sheebani - Shop number 2 - Al Rashidiya 3 - Ajman - United Arab Emirates</p> <i class="numb omfi-location"></i>
+                        <p style="font-family: 'Calisto MT', serif;">Shop No 9 - Dr Murad Building - Hor Al Anz East - Abu Hail - Dubai - United Arab Emirates</p> <i class="numb omfi-location"></i>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
