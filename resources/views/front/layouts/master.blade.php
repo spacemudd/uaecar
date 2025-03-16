@@ -98,7 +98,7 @@
                 <div class="icon me-2"><i class="flaticon-phone-call"></i></div>
                 <div class="text">
                     <p class="mb-0">Need help?</p>
-                    <h5 class="mb-0"><a href="tel:+971502711549">05 0271 1549</a></h5>
+                    <h5 class="mb-0"><a href="tel:+971542700030">05 4270 0030</a></h5>
                 </div>
             </div>
         </div>
@@ -149,7 +149,8 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6 style="font-family: 'Calisto MT', serif;">Call us</h6>
-                                    <p style="font-family:'Calisto MT', serif;">+971502711549</p>
+                                    <p style="font-family:'Calisto MT', serif;">+971502711549</p><br>
+                                    <p style="font-family:'Calisto MT', serif;">+971542700030</p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
@@ -173,8 +174,7 @@
                                     </div>
                                     <div class="footer-contact-link-content ms-2">
                                         <h6 class="mb-0" style="font-family: 'Calisto MT', serif;">Address</h6>
-                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Address 1- Shop No 9 - Dr Murad Building - Hor Al Anz East - Abu Hail - Dubai - UAE</p>
-                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Address 2- Al Rashidiya 3 - Ajman - United Arab Emirates</p>
+                                        <p class="mb-0" style="font-family: 'Calisto MT', serif;">Shop No 9 - Dr Murad Building - Hor Al Anz East - Abu Hail - Dubai - UAE</p>
 
                                     </div>
                                 </a>
