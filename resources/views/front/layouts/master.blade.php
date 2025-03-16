@@ -199,8 +199,8 @@
                                     <li><a href="https://wa.me/971542700030"><i class="fa-brands fa-whatsapp"></i></a></li>
                                     <li><a href="https://www.facebook.com/profile.php?id=61566173455254&mibextid=JRoKGi"><i class="fa-brands fa-facebook-f"></i></a></li>
                                     <li><a href="https://www.instagram.com/luxuria_uae?igsh=MTYwNDNwcW9vNDV1Zw=="><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="https://www.instagram.com/luxuria_uae?igsh=MTYwNDNwcW9vNDV1Zw=="><i class="fa-brands fa-tiktok"></i></a></li>
-                                    <li><a href="https://x.com/luxuria_uae"><i class="fa-brands fa-x"></i></a></li>
+                                    <li><a href="https://www.tiktok.com/@rentluxuria_uae"><i class="fa-brands fa-tiktok"></i></a></li>
+                                    <li><a href="https://x.com/Luxuria_rent"><i class="fa-brands fa-x"></i></a></li>
 
 
                                 </ul>
