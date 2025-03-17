@@ -230,7 +230,7 @@ public function getLatestAd()
     }
 
     return response()->json([
-        'image' => asset($ad->image) // تحويل الصورة إلى رابط كامل
+        'image' => asset('storage/' . $ad->image)
     ], 200);
 }
 
