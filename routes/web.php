@@ -185,3 +185,5 @@ Route::get('/clear-session', function () {
 Route::get('/privacy', function () {
     return view('front.pages.privacy');
 });
+
+Route::get('/ads/latest', [CarController::class, 'getLatestAd']); // جلب أحدث إعلان

@@ -7,6 +7,7 @@ use App\Models\CarImage; // Ensure you have this model for handling car images
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Models\Ad;
 
 class CarController extends Controller
 {
@@ -219,13 +220,18 @@ class CarController extends Controller
 }
 
 
-// public function showAd()
-// {
-//     $ad = Ad::first();
-    
-//     return view('welcome', compact('ad')); 
-// }
 
-    
+public function getLatestAd()
+{
+    $ad = Ad::latest()->first(); // جلب أحدث إعلان
+
+    if (!$ad) {
+        return response()->json(['message' => 'No ads found'], 404);
+    }
+
+    return response()->json([
+        'image' => asset($ad->image) // تحويل الصورة إلى رابط كامل
+    ], 200);
+}
 
 }
