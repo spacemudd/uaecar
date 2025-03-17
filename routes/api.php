@@ -6,7 +6,6 @@ use App\Http\Controllers\Tabby\CheckoutController;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\UserController;
 
-// Routes for Cars
 Route::prefix('cars')->group(function () {
     Route::get('/', [CarController::class, 'index']);
     Route::get('/luxury', [CarController::class, 'luxury_cars']);
@@ -32,11 +31,9 @@ Route::prefix('cars')->group(function () {
     Route::get('/ads/latest', [CarController::class, 'getLatestAd']);
 });
 
-// Routes for Users
 Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'store']);
     Route::post('/check-phone', [UserController::class, 'checkPhoneNumber']);
 });
 
-// Authentication Route
 Route::get('/reserve-car', [CarController::class, 'authenticate']);
