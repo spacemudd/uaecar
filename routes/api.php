@@ -91,3 +91,5 @@ Route::get('/payment/success/{booking_id}', [CarController::class, 'paymentSucce
 Route::get('/invoices/user/{user_id}', [CarController::class, 'getInvoicesByUser']);
 Route::get('/invoices/{invoice_id}', [CarController::class, 'getInvoiceById']);
 Route::get('/cars/{car_id}', [CarController::class, 'getCarById']);
+
+Route::get('/ads/latest', [CarController::class, 'getLatestAd']); // جلب أحدث إعلان
