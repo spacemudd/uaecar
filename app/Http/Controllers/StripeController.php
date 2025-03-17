@@ -114,7 +114,6 @@ class StripeController extends Controller
 
     public function createInvoice(Request $request)
     {
-        dd(session()->all());
         
         if (session('rate_daily') >= 348) {
             return Invoice::create([
