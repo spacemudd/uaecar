@@ -643,8 +643,6 @@ public function getCarById($car_id)
         }
 
         return response()->json([
-            'id' => $ad->id,
-            'title' => $ad->title ?? '',
             'image' => asset('storage/' . $ad->image) // تحويل الصورة إلى رابط كامل
         ], 200);
     }
