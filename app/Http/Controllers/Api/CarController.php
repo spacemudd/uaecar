@@ -9,6 +9,7 @@ use App\Models\Car;
 use App\Models\Booking;
 use App\Models\Prebooking;
 use App\Models\User;
+use App\Models\Ad;
 
 use App\Models\MobileInvoice;
 
@@ -633,6 +634,20 @@ public function getCarById($car_id)
     }
     
 
+    public function getLatestAd()
+    {
+        $ad = Ad::latest()->first(); // جلب أحدث إعلان
+
+        if (!$ad) {
+            return response()->json(['message' => 'No ads found'], 404);
+        }
+
+        return response()->json([
+            'id' => $ad->id,
+            'title' => $ad->title ?? '',
+            'image' => asset('storage/' . $ad->image) // تحويل الصورة إلى رابط كامل
+        ], 200);
+    }
 
 
 }
