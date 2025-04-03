@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Tabby\CheckoutController;
@@ -28,7 +29,6 @@ Route::prefix('cars')->group(function () {
     Route::get('/payment/success/{booking_id}', [CarController::class, 'paymentSuccess'])->name('payment.success');
     Route::get('/invoices/user/{user_id}', [CarController::class, 'getInvoicesByUser']);
     Route::get('/invoices/{invoice_id}', [CarController::class, 'getInvoiceById']);
-    Route::get('/ads/latest', [CarController::class, 'getLatestAd']);
 });
 
 Route::prefix('users')->group(function () {
@@ -37,3 +37,4 @@ Route::prefix('users')->group(function () {
 });
 
 Route::get('/reserve-car', [CarController::class, 'authenticate']);
+Route::get('/ads/latest', [AdController::class, 'getLatestAd']);
