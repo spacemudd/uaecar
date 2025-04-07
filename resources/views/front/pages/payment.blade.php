@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="payment">
       <div class="payment__shipping">
     <div class="payment__title-car fs-1">
-        <i class="icon icon-car"></i> {{ $car->car_name . ' ' . $car->model . ' ' . $car->year }}
+        <i class="icon icon-car"></i> {{ $car->car_name }}
     </div>
     <div class="details__user">
         <div class="user__name">
@@ -207,6 +207,8 @@ document.addEventListener("DOMContentLoaded", function() {
       <strong>Pickup Date:</strong> {{ session('pickup_date') }}<br>
       <strong>Return Date:</strong> {{ session('return_date') }}<br>
       <strong>Total Days:</strong> 
+      <strong>Return Date:</strong> {{ session('plate_number') }}<br>
+
       {{ \Carbon\Carbon::parse(session('pickup_date'))->diffInDays(\Carbon\Carbon::parse(session('return_date'))) }} days
     </p>
   </div>
