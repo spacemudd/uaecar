@@ -31,14 +31,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" />
     <!-- Bootstrap JS and Popper.js (for modal functionality) -->
 
 
-    
-    
+
+
 </head>
 
 <style>
@@ -117,10 +117,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         </ul>
 
-      
+
     </div>
 
-    
+
 </nav>
 
 
@@ -136,8 +136,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="col-md-12 text-center">
                     <h6>Rent Your Car</h6>
                     <h5>Interested in Renting?</h5>
-                    <p>Don't hesitate and send us a message.</p> 
-                    <a href="https://wa.me/971542700030" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> 
+                    <p>Don't hesitate and send us a message.</p>
+                    <a href="https://wa.me/971542700030" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                     <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a> -->
                 </div>
             </div>
@@ -231,6 +231,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <li><a href="{{ route('index') }}">Home</a></li>
                             <li><a href="{{ route('about') }}">About</a></li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
+                            <li><a href="{{ url('/privacy') }}">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
