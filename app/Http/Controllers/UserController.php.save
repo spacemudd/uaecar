@@ -43,26 +43,13 @@ class UserController extends Controller
                 'pickup_city' => $user->pickup_city,
                 'created_at' => $user->created_at,
             ]
-        ], 200);
+e        ], 200);
     } else {
         return response()->json([
             'exists' => false,
             'message' => 'رقم الهاتف غير مسجل.'
         ], 404);
     }
-}
-
-
-public function deleteAccount(Request $request)
-{
-    $user = $request->user(); // أو auth()->user() لو شغال بـ Sanctum
-
-    if ($user) {
-        $user->delete();
-        return response()->json(['message' => 'Account deleted successfully'], 200);
-    }
-
-    return response()->json(['message' => 'User not found'], 404);
 }
 
 }

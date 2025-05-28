@@ -22,6 +22,7 @@
         "laravel/jetstream": "^5.1",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "maatwebsite/excel": "^1.1",
         "olsgreen/autotrader-api": "dev-psrlog",
         "sentry/sentry-laravel": "^4.8",
         "spatie/laravel-medialibrary": "^11.9",
