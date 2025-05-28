@@ -640,4 +640,11 @@ public function getCarById($car_id)
     }
 
 
+    public function getNoDepositCars(){
+        $cars = Car::where('price_daily', '>', 349)->get();
+        return response()->json($cars);
+
+    }
+
+
 }
