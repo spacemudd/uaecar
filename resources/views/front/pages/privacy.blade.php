@@ -28,7 +28,7 @@
 <body>
     <div class="container">
         <h1>Privacy Policy</h1>
-        <p><strong>Effective Date:</strong> [Insert Date]</p>
+        <p><strong>Effective Date:</strong> 5 Jan 2025</p>
         <p>Welcome to <strong>Luxuria Rent Cars</strong>! Your privacy is important to us, and we are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and protect your information when you use our website <a href="https://rentluxuria.com">rentluxuria.com</a>.</p>
         
         <h2>1. Information We Collect</h2>
