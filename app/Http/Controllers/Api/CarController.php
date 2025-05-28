@@ -640,4 +640,41 @@ public function getCarById($car_id)
     }
 
 
+    public function getAvailablePlateNumbers()
+    {
+        // بيانات المصادقة
+        $credentials = [
+            'username' => 'info@rentluxuria.com',
+            'password' => ')ixLj(CQYSE84MRMqm*&dega',
+        ];
+
+        // طلب التوكن
+        $response = Http::post('https://luxuria.crs.ae/api/v1/auth/jwt/token', $credentials);
+
+        if (!$response->successful()) {
+            return response()->json(['status' => false, 'message' => 'Authentication failed'], 401);
+        }
+
+        $token = $response->json()['token'];
+
+        // جلب بيانات السيارات
+        $vehicleResponse = Http::withToken($token)->get('https://luxuria.crs.ae/api/v1/vehicles');
+
+        if (!$vehicleResponse->successful()) {
+            return response()->json(['status' => false, 'message' => 'Failed to fetch vehicles'], 500);
+        }
+
+        $availablePlates = collect($vehicleResponse->json()['data'])
+            ->filter(function ($vehicle) {
+                return isset($vehicle['status']) && $vehicle['status'] === 'Available';
+            })
+            ->pluck('plate_number')
+            ->values();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Available plate numbers retrieved successfully',
+            'plate_numbers' => $availablePlates,
+        ]);
+    }
 }
