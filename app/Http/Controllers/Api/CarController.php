@@ -639,7 +639,6 @@ public function getCarById($car_id)
 
     }
 
-
     public function getAvailablePlateNumbers()
     {
         // بيانات المصادقة
@@ -657,24 +656,28 @@ public function getCarById($car_id)
 
         $token = $response->json()['token'];
 
-        // جلب بيانات السيارات
+        // جلب بيانات السيارات من API
         $vehicleResponse = Http::withToken($token)->get('https://luxuria.crs.ae/api/v1/vehicles');
 
         if (!$vehicleResponse->successful()) {
             return response()->json(['status' => false, 'message' => 'Failed to fetch vehicles'], 500);
         }
 
-        $availablePlates = collect($vehicleResponse->json()['data'])
+        $availablePlateNumbers = collect($vehicleResponse->json()['data'])
             ->filter(function ($vehicle) {
                 return isset($vehicle['status']) && $vehicle['status'] === 'Available';
             })
             ->pluck('plate_number')
-            ->values();
+            ->values()
+            ->toArray();
+
+        // البحث في قاعدة البيانات عن تفاصيل السيارات المطابقة
+        $cars = Car::whereIn('plate_number', $availablePlateNumbers)->get();
 
         return response()->json([
             'status' => true,
-            'message' => 'Available plate numbers retrieved successfully',
-            'plate_numbers' => $availablePlates,
+            'message' => 'Available car details retrieved successfully',
+            'cars' => $cars,
         ]);
     }
 }
