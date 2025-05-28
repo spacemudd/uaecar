@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Tabby\CheckoutController;
@@ -35,6 +36,8 @@ Route::prefix('cars')->group(function () {
 Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'store']);
     Route::post('/check-phone', [UserController::class, 'checkPhoneNumber']);
+    Route::middleware('auth:sanctum')->delete('/delete-account', [UserController::class, 'deleteAccount']);
 });
 
 Route::get('/reserve-car', [CarController::class, 'authenticate']);
+Route::get('/ads/latest', [AdController::class, 'getLatestAd']);
