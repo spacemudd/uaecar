@@ -14,7 +14,7 @@ class WhatsAppOtpController extends Controller
             'phone' => 'required|string',
         ]);
 
-        $phone = $request->input('phone'); // e.g., +9665XXXXXXXX
+        $phone = $request->input('phone'); // e.g., +9665XXXXX5XXX
         $otp = rand(100000, 999999); // توليد كود OTP
 
         // خزّنه مؤقتًا لمدة 5 دقائق
