@@ -68,16 +68,4 @@ public function deleteAccount(Request $request)
 }
 
 
-public function deleteAccount(Request $request)
-{
-    $user = $request->user(); // أو auth()->user() لو شغال بـ Sanctum
-
-    if ($user) {
-        $user->delete();
-        return response()->json(['message' => 'Account deleted successfully'], 200);
-    }
-
-    return response()->json(['message' => 'User not found'], 404);
-}
-
 }
