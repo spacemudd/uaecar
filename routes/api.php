@@ -31,6 +31,7 @@ Route::prefix('cars')->group(function () {
     Route::get('/invoices/{invoice_id}', [CarController::class, 'getInvoiceById']);
     Route::get('/ads/latest', [CarController::class, 'getLatestAd']);
     Route::get('/no-deposite',[CarController::class, 'getNoDepositCars']);
+    
 });
 Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'store']);
