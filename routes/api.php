@@ -29,11 +29,13 @@ Route::prefix('cars')->group(function () {
     Route::get('/payment/success/{booking_id}', [CarController::class, 'paymentSuccess'])->name('payment.success');
     Route::get('/invoices/user/{user_id}', [CarController::class, 'getInvoicesByUser']);
     Route::get('/invoices/{invoice_id}', [CarController::class, 'getInvoiceById']);
+    Route::get('/ads/latest', [CarController::class, 'getLatestAd']);
 });
-
+Route::get('/offers/no-deposite',[CarController::class, 'getNoDepositCars']);
 Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'store']);
     Route::post('/check-phone', [UserController::class, 'checkPhoneNumber']);
+    Route::middleware('auth:sanctum')->delete('/delete-account', [UserController::class, 'deleteAccount']);
 });
 
 Route::get('/reserve-car', [CarController::class, 'authenticate']);
