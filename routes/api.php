@@ -30,7 +30,6 @@ Route::prefix('cars')->group(function () {
     Route::get('/invoices/user/{user_id}', [CarController::class, 'getInvoicesByUser']);
     Route::get('/invoices/{invoice_id}', [CarController::class, 'getInvoiceById']);
     Route::get('/ads/latest', [CarController::class, 'getLatestAd']);
-    Route::get('/available-cars', [CarController::class, 'getAvailablePlateNumbers']);
 
     
 });
@@ -43,3 +42,4 @@ Route::prefix('users')->group(function () {
 Route::get('/reserve-car', [CarController::class, 'authenticate']);
 Route::get('/ads/latest', [AdController::class, 'getLatestAd']);
 Route::get('/no-deposite',[CarController::class, 'getNoDepositCars']);
+Route::get('/available-cars', [CarController::class, 'getAvailablePlateNumbers']);
