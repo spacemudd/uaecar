@@ -60,7 +60,7 @@ public function deleteAccount(Request $request)
     $user = $request->user(); // أو auth()->user() لو شغال بـ Sanctum
 
     if ($user) {
-        $user->delete();
+        $user->forceDelete();
         return response()->json(['message' => 'Account deleted successfully'], 200);
     }
 
